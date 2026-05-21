@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:p1="http://ms.gov.pl/ig2big/common" name="IG2BIG_checkStatus_out" targetNamespace="http://ms.gov.pl/ig2big/common" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation />
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="OP_IG2BIG_checkStatus_out" />
+  <wsdl:types>
+    <xsd:schema xmlns:p4="https://www.ig2big.org/ws/v1/types" xmlns="http://ms.gov.pl/ig2big/common" targetNamespace="http://ms.gov.pl/ig2big/common" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="https://www.ig2big.org/ws/v1/types" />
+      <xsd:element name="CheckStatus" type="p4:CheckStatus" />
+      <xsd:element name="CheckStatusResponse" type="p4:StatusAll" />
+    </xsd:schema>
+    <xsd:schema xmlns="https://www.ig2big.org/ws/v1/types" targetNamespace="https://www.ig2big.org/ws/v1/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:simpleType name="successProcessingEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">fa96cce2a9e411e68e3e000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="informationAdded" />
+          <xsd:enumeration value="informationUpdated" />
+          <xsd:enumeration value="informationDeleted" />
+          <xsd:enumeration value="informationBlocked" />
+          <xsd:enumeration value="informationUnblocked" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="operationErrorEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">2c1aa89da9e511e6b0a9000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="informationNotFound" />
+          <xsd:enumeration value="informationAlreadyExists" />
+          <xsd:enumeration value="noPermission" />
+          <xsd:enumeration value="informationAlreadyRestricted" />
+          <xsd:enumeration value="informationNotRestricted" />
+          <xsd:enumeration value="nonUniqueDebtorId" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="validationErrorEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">37a07b88a9e511e6b113000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="invalidValue" />
+          <xsd:enumeration value="noDependentElement" />
+          <xsd:enumeration value="invalidPesel" />
+          <xsd:enumeration value="invalidDate" />
+          <xsd:enumeration value="noMandatoryElement" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="authErrorEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">f1d3c6caa9e511e691aa000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="invalidCredentials" />
+          <xsd:enumeration value="blockedAccount" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">0d61d85ca9ac11e6a00a000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:minLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string32">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">7cf66d23782011e69ed1000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="32" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="packageStatusEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">f33b1631e88d11e68538000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="pending" />
+          <xsd:enumeration value="started" />
+          <xsd:enumeration value="processed" />
+          <xsd:enumeration value="failed" />
+          <xsd:enumeration value="[MS]error" />
+          <xsd:enumeration value="[MS]pending" />
+          <xsd:enumeration value="[MS]noPackageIDfound" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="processingErrorEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">07d94c00a9e511e69be8000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="systemError" />
+          <xsd:enumeration value="elementNotFoundError" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="OperationStatusEntry">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">7e173550a9af11e6a13b000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="operationId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">5140cdc7a9af11e6c76c025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="processingDateTime" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">514102e7a9af11e6c5b2025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="status" type="OperationStatus">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">514102e8a9af11e6b605025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="elementPath" type="string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">514102e9a9af11e6b9e3025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="dependentElementPath" type="string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">514102eaa9af11e6b08c025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="errorMessage" type="string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">514102eba9af11e68cbf025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Status">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">1930a585a9ee11e6c93f000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="operationStatus" type="OperationStatusEntry">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">26ef101ea9af11e6bc73025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="packageStatus" type="PackageStatus">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">26ef101fa9af11e69bbd025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CheckStatus">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">756b6ecdd13a11e6c37f000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="credentials" type="Credentials" />
+          <xsd:element name="packageId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">073a1d35a9ac11e6a4e5025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="operationId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">073a1d36a9ac11e6ba4e025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Credentials">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">21a64ca00f8711eaa760000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="big_id">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">aa42fbfbe8c311e69c06025041000001</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="IM" />
+                <xsd:enumeration value="KBIG" />
+                <xsd:enumeration value="ERIF" />
+                <xsd:enumeration value="KRD" />
+                <xsd:enumeration value="KIDT" />
+                <xsd:enumeration value="BNP" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="subscriberId" type="string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">d083b84aa9aa11e69e48025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="userId" type="string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">d083dedca9aa11e69518025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="password" type="string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">d083dedda9aa11e6ca22025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PackageStatus">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">63e5e709a9af11e6b0a1000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="packageId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">36ee3f3aa9af11e6a63d025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="packageStatus" type="packageStatusEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">36ee3f3ba9af11e6a7e7025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="operationStatus" type="OperationStatusEntry">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">36ee75f9a9af11e6c6e9025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="StatusAll">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">47410163a9e811e6a1ac000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="status">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">3364ed9ca9e811e692f1025041000001</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="big" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">3364ed9aa9e811e69a5b025041000001</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="status" type="Status">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">3364ed9ba9e811e6cb3c025041000001</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="OperationStatus">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">c055f61ae88e11e69e47000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="success" type="successProcessingEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">82716e64a9af11e696dd025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="processingError" type="processingErrorEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">8271ab91a9af11e6b969025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="authError" type="authErrorEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">8271ab92a9af11e6938f025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="operationError" type="operationErrorEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">8271ab93a9af11e69846025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="validationError" type="validationErrorEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">8271ab94a9af11e6b13d025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckStatus">
+    <wsdl:documentation />
+    <wsdl:part name="CheckStatus" element="p1:CheckStatus" />
+  </wsdl:message>
+  <wsdl:message name="CheckStatusResponse">
+    <wsdl:documentation />
+    <wsdl:part name="CheckStatusResponse" element="p1:CheckStatusResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IG2BIG_checkStatus_out">
+    <wsdl:documentation />
+    <wsdl:operation name="IG2BIG_checkStatus_out">
+      <wsdl:documentation />
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IG2BIG_checkStatus_out" />
+      </wsp:Policy>
+      <wsdl:input message="p1:CheckStatus" />
+      <wsdl:output message="p1:CheckStatusResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IG2BIG_checkStatus_outBinding" type="p1:IG2BIG_checkStatus_out">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <wsdl:operation name="IG2BIG_checkStatus_out">
+      <operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+      <wsdl:output>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IG2BIG_checkStatus_outService">
+    <wsdl:port name="HTTPS_Port" binding="p1:IG2BIG_checkStatus_outBinding">
+      <address location="https://sapwipl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=IG_SENDER_SYSTEMS_PRD&amp;receiverParty=&amp;receiverService=&amp;interface=IG2BIG_checkStatus_out&amp;interfaceNamespace=http%3A%2F%2Fms.gov.pl%2Fig2big%2Fcommon" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

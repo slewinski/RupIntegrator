@@ -1,0 +1,1517 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RupLancMetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BIG_Big">
+          <Key>
+            <PropertyRef Name="IdBig" />
+          </Key>
+          <Property Name="IdBig" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BIGID" Type="varchar" MaxLength="10" />
+          <Property Name="Obsluga" Type="bit" />
+          <Property Name="SubscriberId" Type="varchar" MaxLength="20" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="BIG_InfoOperation">
+          <Key>
+            <PropertyRef Name="IdBIG_InfoOperation" />
+          </Key>
+          <Property Name="IdBIG_InfoOperation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperType" Type="int" Nullable="false" />
+          <Property Name="IdBIGPackage" Type="int" Nullable="false" />
+          <Property Name="OperationId" Type="varchar" MaxLength="32" />
+          <Property Name="DebatorID" Type="varchar" MaxLength="32" />
+          <Property Name="Forename" Type="varchar" MaxLength="20" />
+          <Property Name="Surename" Type="varchar" MaxLength="30" />
+          <Property Name="Citizenship" Type="varchar" MaxLength="40" />
+          <Property Name="Pesel" Type="varchar" MaxLength="11" />
+          <Property Name="DocumentType" Type="varchar" MaxLength="30" />
+          <Property Name="DocumentNumber" Type="varchar" MaxLength="40" />
+          <Property Name="RA_Country" Type="varchar" MaxLength="3" />
+          <Property Name="RA_Postcode" Type="varchar" MaxLength="10" />
+          <Property Name="RA_City" Type="varchar" MaxLength="40" />
+          <Property Name="RA_Street" Type="varchar" MaxLength="50" />
+          <Property Name="RA_HouseNumber" Type="varchar" MaxLength="10" />
+          <Property Name="RA_LocalNumber" Type="varchar" MaxLength="20" />
+          <Property Name="CA_Country" Type="varchar" MaxLength="3" />
+          <Property Name="CA_Postcode" Type="varchar" MaxLength="10" />
+          <Property Name="CA_City" Type="varchar" MaxLength="40" />
+          <Property Name="CA_Street" Type="varchar" MaxLength="50" />
+          <Property Name="CA_HouseNumber" Type="varchar" MaxLength="10" />
+          <Property Name="CA_LocalNumber" Type="varchar" MaxLength="20" />
+          <Property Name="LiabilityId" Type="varchar" MaxLength="32" />
+          <Property Name="InstitutionDataShareRestricted" Type="bit" />
+          <Property Name="ShareSuspensionFinalDate" Type="datetime" />
+          <Property Name="LiabilityType" Type="varchar" MaxLength="30" />
+          <Property Name="Sygnatura" Type="varchar" MaxLength="50" />
+          <Property Name="AdjudicatingBody" Type="varchar" MaxLength="250" />
+          <Property Name="IssueDate" Type="datetime" />
+          <Property Name="OtherTitle" Type="varchar" MaxLength="250" />
+          <Property Name="Currency" Type="varchar" MaxLength="3" />
+          <Property Name="LiabilityAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ArrearsAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DisputedAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ArrearsRiseDate" Type="datetime" />
+          <Property Name="PaymentRequestDispatchDate" Type="datetime" />
+          <Property Name="KartaDl" Type="varchar" MaxLength="50" />
+          <Property Name="DataPrzypisu" Type="datetime" />
+          <Property Name="IdKsiega" Type="int" />
+        </EntityType>
+        <EntityType Name="BIG_Konfig">
+          <Key>
+            <PropertyRef Name="IdBIG_Konfig" />
+          </Key>
+          <Property Name="IdBIG_Konfig" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubmitEndpoint" Type="varchar" MaxLength="255" />
+          <Property Name="CheckRqEndpoint" Type="varchar" MaxLength="255" />
+          <Property Name="SubmitAuthUser" Type="varchar" MaxLength="255" />
+          <Property Name="SubmitAuthPasword" Type="varchar" MaxLength="255" />
+          <Property Name="CheckRqAuthUser" Type="varchar" MaxLength="255" />
+          <Property Name="CheckRqAuthPass" Type="varchar" MaxLength="255" />
+          <Property Name="SysPrefix" Type="varchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="BIG_Log">
+          <Key>
+            <PropertyRef Name="IdBIG_Log" />
+          </Key>
+          <Property Name="IdBIG_Log" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageFullId" Type="varchar" MaxLength="32" />
+          <Property Name="DataOper" Type="datetime" />
+          <Property Name="MsgText" Type="varchar(max)" />
+          <Property Name="TypKom" Type="int" />
+          <Property Name="ReqResp" Type="bit" />
+        </EntityType>
+        <EntityType Name="BIG_Oper_Status">
+          <Key>
+            <PropertyRef Name="IdBIG_Oper_status" />
+          </Key>
+          <Property Name="IdBIG_Oper_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBIG_Big" Type="int" Nullable="false" />
+          <Property Name="IdBIG_InfoOperation" Type="int" Nullable="false" />
+          <Property Name="idBIG_Package" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Info" Type="varchar" MaxLength="255" />
+          <Property Name="dSukces" Type="datetime" />
+          <Property Name="dProba" Type="datetime" />
+          <Property Name="UserName" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="BIG_Package">
+          <Key>
+            <PropertyRef Name="IdBIG_Package" />
+          </Key>
+          <Property Name="IdBIG_Package" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageFullId" Type="varchar" MaxLength="32" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="SentStatusInfo" Type="varchar" MaxLength="50" />
+          <Property Name="SentStatus" Type="int" />
+        </EntityType>
+        <EntityType Name="BIG_Package_User">
+          <Key>
+            <PropertyRef Name="IdBIG_Package_User" />
+          </Key>
+          <Property Name="IdBIG_Package_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBIG_User" Type="int" Nullable="false" />
+          <Property Name="IdBIG_Package" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BIG_User">
+          <Key>
+            <PropertyRef Name="IdBigUser" />
+          </Key>
+          <Property Name="IdBigUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="int" />
+          <Property Name="IdBIG" Type="int" Nullable="false" />
+          <Property Name="BigUserName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="BigUserPassword" Type="varchar" MaxLength="255" />
+          <Property Name="Aktywny" Type="bit" />
+          <Property Name="BigUserSha256" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="KnsKsiegi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="60" />
+          <Property Name="id_sadu" Type="int" />
+          <Property Name="sad" Type="varchar" MaxLength="100" />
+          <Property Name="wydzial" Type="varchar" MaxLength="100" />
+          <Property Name="kodSad" Type="varchar" MaxLength="4" />
+          <Property Name="numWydz" Type="varchar" MaxLength="10" />
+          <Property Name="oprKosztFiz" Type="varchar" MaxLength="4" />
+          <Property Name="oprKosztPraw" Type="varchar" MaxLength="4" />
+          <Property Name="oprGrzFiz" Type="varchar" MaxLength="4" />
+          <Property Name="oprGrzPraw" Type="varchar" MaxLength="4" />
+          <Property Name="rodzajPrzedmiotu" Type="varchar" MaxLength="4" />
+          <Property Name="Id_Ksiegi" Type="int" />
+          <Property Name="oprGrzSamoistna" Type="varchar" MaxLength="4" />
+          <Property Name="czyFPP" Type="int" />
+          <Property Name="czymies" Type="int" />
+          <Property Name="ksGrzFPPMap" Type="int" />
+        </EntityType>
+        <EntityType Name="Konfiguracja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typKns" Type="int" />
+          <Property Name="srvName" Type="varchar" MaxLength="100" />
+          <Property Name="DbName" Type="varchar" MaxLength="100" />
+          <Property Name="pwd" Type="varchar" MaxLength="100" />
+          <Property Name="logId" Type="varchar" MaxLength="100" />
+          <Property Name="WinLogon" Type="bit" />
+          <Property Name="JednostkaGospodarcza" Type="varchar" MaxLength="4" />
+          <Property Name="StartImportDate" Type="datetime" />
+          <Property Name="PrzypisFile" Type="varchar" MaxLength="255" />
+          <Property Name="OdpisFile" Type="varchar" MaxLength="255" />
+          <Property Name="srvAlias" Type="varchar" MaxLength="100" />
+          <Property Name="EndpointWS" Type="varchar" MaxLength="512" />
+          <Property Name="WSLogon" Type="varchar" MaxLength="100" />
+          <Property Name="WSpwd" Type="varchar" MaxLength="100" />
+          <Property Name="typImportSAP" Type="int" />
+          <Property Name="skipraty" Type="bit" />
+          <Property Name="StanowiskoFin" Type="varchar" MaxLength="4" />
+          <Property Name="ERPLogon" Type="varchar" MaxLength="100" />
+          <Property Name="defSad" Type="bit" />
+          <Property Name="dbversion" Type="varchar" MaxLength="30" />
+          <Property Name="czyautoks" Type="int" />
+          <Property Name="czyautoprzyp" Type="int" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="varchar" MaxLength="4" />
+          <Property Name="dplatnosci" Type="datetime" />
+          <Property Name="typDatyPlatn" Type="int" />
+          <Property Name="DataMiesStart" Type="datetime" />
+          <Property Name="Pfx" Type="varbinary(max)" />
+          <Property Name="Cer" Type="varbinary(max)" />
+          <Property Name="PfxPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SAPPwdExpPeriod" Type="int" />
+        </EntityType>
+        <EntityType Name="SAPSad">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Name="kod" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="sad" Type="varchar" MaxLength="100" />
+          <Property Name="miasto" Type="varchar" MaxLength="60" />
+          <Property Name="miastSad" Type="varchar" MaxLength="160" />
+          <Property Name="typSad" Type="varchar" MaxLength="2" />
+          <Property Name="JEGO" Type="char" MaxLength="4" />
+          <Property Name="WazneOd" Type="datetime" />
+          <Property Name="WazneDo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Pssword" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="role" Type="int" Nullable="false" />
+          <Property Name="LastPwdChngDate" Type="datetime" />
+          <Property Name="suspend" Type="bit" />
+          <Property Name="ChangePwd" Type="bit" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="PwdPeriodChange" Type="int" Nullable="false" />
+          <Property Name="MEPUser" Type="varchar" MaxLength="50" />
+          <Property Name="MEPPassword" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RupIntegrator_lan.dbo.vw_BIG_Dluznicy' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_BIG_Dluznicy">
+          <Key>
+            <PropertyRef Name="IdBIG_InfoOperation" />
+            <PropertyRef Name="OperType" />
+            <PropertyRef Name="IdBIGPackage" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="IdBIG_InfoOperation" Type="int" Nullable="false" />
+          <Property Name="OperType" Type="int" Nullable="false" />
+          <Property Name="IdBIGPackage" Type="int" Nullable="false" />
+          <Property Name="OperationId" Type="varchar" MaxLength="32" />
+          <Property Name="DebatorID" Type="varchar" MaxLength="32" />
+          <Property Name="Forename" Type="varchar" MaxLength="20" />
+          <Property Name="Surename" Type="varchar" MaxLength="30" />
+          <Property Name="Citizenship" Type="varchar" MaxLength="40" />
+          <Property Name="Pesel" Type="varchar" MaxLength="11" />
+          <Property Name="DocumentType" Type="varchar" MaxLength="30" />
+          <Property Name="DocumentNumber" Type="varchar" MaxLength="40" />
+          <Property Name="RA_Country" Type="varchar" MaxLength="3" />
+          <Property Name="RA_Postcode" Type="varchar" MaxLength="10" />
+          <Property Name="RA_City" Type="varchar" MaxLength="40" />
+          <Property Name="RA_Street" Type="varchar" MaxLength="50" />
+          <Property Name="RA_HouseNumber" Type="varchar" MaxLength="10" />
+          <Property Name="RA_LocalNumber" Type="varchar" MaxLength="20" />
+          <Property Name="CA_Country" Type="varchar" MaxLength="3" />
+          <Property Name="CA_Postcode" Type="varchar" MaxLength="10" />
+          <Property Name="CA_City" Type="varchar" MaxLength="40" />
+          <Property Name="CA_Street" Type="varchar" MaxLength="50" />
+          <Property Name="CA_HouseNumber" Type="varchar" MaxLength="10" />
+          <Property Name="CA_LocalNumber" Type="varchar" MaxLength="20" />
+          <Property Name="LiabilityId" Type="varchar" MaxLength="32" />
+          <Property Name="InstitutionDataShareRestricted" Type="bit" />
+          <Property Name="ShareSuspensionFinalDate" Type="datetime" />
+          <Property Name="LiabilityType" Type="varchar" MaxLength="30" />
+          <Property Name="Sygnatura" Type="varchar" MaxLength="50" />
+          <Property Name="AdjudicatingBody" Type="varchar" MaxLength="250" />
+          <Property Name="IssueDate" Type="datetime" />
+          <Property Name="OtherTitle" Type="varchar" MaxLength="250" />
+          <Property Name="Currency" Type="varchar" MaxLength="3" />
+          <Property Name="LiabilityAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ArrearsAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DisputedAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ArrearsRiseDate" Type="datetime" />
+          <Property Name="PaymentRequestDispatchDate" Type="datetime" />
+          <Property Name="KartaDl" Type="varchar" MaxLength="50" />
+          <Property Name="DataPrzypisu" Type="datetime" />
+          <Property Name="IdKsiega" Type="int" />
+          <Property Name="PackageFullId" Type="varchar" MaxLength="32" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="SentStatusInfo" Type="varchar" MaxLength="50" />
+          <Property Name="SentStatus" Type="int" />
+          <Property Name="KnsKsiega" Type="varchar" MaxLength="60" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="ileOK" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RupIntegrator_lan.dbo.vw_BIG_Operacje' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_BIG_Operacje">
+          <Key>
+            <PropertyRef Name="IdBIG_InfoOperation" />
+            <PropertyRef Name="OperType" />
+            <PropertyRef Name="IdBIGPackage" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="IdBIG_InfoOperation" Type="int" Nullable="false" />
+          <Property Name="OperType" Type="int" Nullable="false" />
+          <Property Name="IdBIGPackage" Type="int" Nullable="false" />
+          <Property Name="OperationId" Type="varchar" MaxLength="32" />
+          <Property Name="DebatorID" Type="varchar" MaxLength="32" />
+          <Property Name="Forename" Type="varchar" MaxLength="20" />
+          <Property Name="Surename" Type="varchar" MaxLength="30" />
+          <Property Name="Citizenship" Type="varchar" MaxLength="40" />
+          <Property Name="Pesel" Type="varchar" MaxLength="11" />
+          <Property Name="DocumentType" Type="varchar" MaxLength="30" />
+          <Property Name="DocumentNumber" Type="varchar" MaxLength="40" />
+          <Property Name="RA_Country" Type="varchar" MaxLength="3" />
+          <Property Name="RA_Postcode" Type="varchar" MaxLength="10" />
+          <Property Name="RA_City" Type="varchar" MaxLength="40" />
+          <Property Name="RA_Street" Type="varchar" MaxLength="50" />
+          <Property Name="RA_HouseNumber" Type="varchar" MaxLength="10" />
+          <Property Name="RA_LocalNumber" Type="varchar" MaxLength="20" />
+          <Property Name="CA_Country" Type="varchar" MaxLength="3" />
+          <Property Name="CA_Postcode" Type="varchar" MaxLength="10" />
+          <Property Name="CA_City" Type="varchar" MaxLength="40" />
+          <Property Name="CA_Street" Type="varchar" MaxLength="50" />
+          <Property Name="CA_HouseNumber" Type="varchar" MaxLength="10" />
+          <Property Name="CA_LocalNumber" Type="varchar" MaxLength="20" />
+          <Property Name="LiabilityId" Type="varchar" MaxLength="32" />
+          <Property Name="InstitutionDataShareRestricted" Type="bit" />
+          <Property Name="ShareSuspensionFinalDate" Type="datetime" />
+          <Property Name="LiabilityType" Type="varchar" MaxLength="30" />
+          <Property Name="Sygnatura" Type="varchar" MaxLength="50" />
+          <Property Name="AdjudicatingBody" Type="varchar" MaxLength="250" />
+          <Property Name="IssueDate" Type="datetime" />
+          <Property Name="OtherTitle" Type="varchar" MaxLength="250" />
+          <Property Name="Currency" Type="varchar" MaxLength="3" />
+          <Property Name="LiabilityAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ArrearsAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DisputedAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ArrearsRiseDate" Type="datetime" />
+          <Property Name="PaymentRequestDispatchDate" Type="datetime" />
+          <Property Name="KartaDl" Type="varchar" MaxLength="50" />
+          <Property Name="DataPrzypisu" Type="datetime" />
+          <Property Name="IdKsiega" Type="int" />
+          <Property Name="PackageFullId" Type="varchar" MaxLength="32" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="SentStatusInfo" Type="varchar" MaxLength="50" />
+          <Property Name="SentStatus" Type="int" />
+          <Property Name="KnsKsiega" Type="varchar" MaxLength="60" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="ileOK" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RupIntegrator_lan.dbo.vw_BIG_OperacjeToCheck' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_BIG_OperacjeToCheck">
+          <Key>
+            <PropertyRef Name="IdBIG_InfoOperation" />
+            <PropertyRef Name="IdBIG_Big" />
+            <PropertyRef Name="IdBIG_Oper_status" />
+          </Key>
+          <Property Name="IdBIG_InfoOperation" Type="int" Nullable="false" />
+          <Property Name="PackageFullId" Type="varchar" MaxLength="32" />
+          <Property Name="IdBIG_Big" Type="int" Nullable="false" />
+          <Property Name="IdBIG_Oper_status" Type="int" Nullable="false" />
+          <Property Name="OperationId" Type="varchar" MaxLength="32" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Info" Type="varchar" MaxLength="255" />
+          <Property Name="dSukces" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_BIG_InfoOperation_BIG_Package">
+          <End Role="BIG_Package" Type="Self.BIG_Package" Multiplicity="1" />
+          <End Role="BIG_InfoOperation" Type="Self.BIG_InfoOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Package">
+              <PropertyRef Name="IdBIG_Package" />
+            </Principal>
+            <Dependent Role="BIG_InfoOperation">
+              <PropertyRef Name="IdBIGPackage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BIG_Oper_Status_BIG_Big">
+          <End Role="BIG_Big" Type="Self.BIG_Big" Multiplicity="1" />
+          <End Role="BIG_Oper_Status" Type="Self.BIG_Oper_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Big">
+              <PropertyRef Name="IdBig" />
+            </Principal>
+            <Dependent Role="BIG_Oper_Status">
+              <PropertyRef Name="IdBIG_Big" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BIG_Oper_Status_BIG_InfoOperation">
+          <End Role="BIG_InfoOperation" Type="Self.BIG_InfoOperation" Multiplicity="1" />
+          <End Role="BIG_Oper_Status" Type="Self.BIG_Oper_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_InfoOperation">
+              <PropertyRef Name="IdBIG_InfoOperation" />
+            </Principal>
+            <Dependent Role="BIG_Oper_Status">
+              <PropertyRef Name="IdBIG_InfoOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BIG_Oper_Status_BIG_Package">
+          <End Role="BIG_Package" Type="Self.BIG_Package" Multiplicity="1" />
+          <End Role="BIG_Oper_Status" Type="Self.BIG_Oper_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Package">
+              <PropertyRef Name="IdBIG_Package" />
+            </Principal>
+            <Dependent Role="BIG_Oper_Status">
+              <PropertyRef Name="idBIG_Package" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BIG_Package_User_BIG_Package">
+          <End Role="BIG_User" Type="Self.BIG_User" Multiplicity="1" />
+          <End Role="BIG_Package_User" Type="Self.BIG_Package_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_User">
+              <PropertyRef Name="IdBigUser" />
+            </Principal>
+            <Dependent Role="BIG_Package_User">
+              <PropertyRef Name="IdBIG_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BIG_Package_User_BIG_Package1">
+          <End Role="BIG_Package" Type="Self.BIG_Package" Multiplicity="1" />
+          <End Role="BIG_Package_User" Type="Self.BIG_Package_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Package">
+              <PropertyRef Name="IdBIG_Package" />
+            </Principal>
+            <Dependent Role="BIG_Package_User">
+              <PropertyRef Name="IdBIG_Package" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BIG_User_BIG_Big">
+          <End Role="BIG_Big" Type="Self.BIG_Big" Multiplicity="1" />
+          <End Role="BIG_User" Type="Self.BIG_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Big">
+              <PropertyRef Name="IdBig" />
+            </Principal>
+            <Dependent Role="BIG_User">
+              <PropertyRef Name="IdBIG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_KNSToBIG_CR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sourcesrv" Type="varchar" Mode="In" />
+          <Parameter Name="dbname" Type="varchar" Mode="In" />
+          <Parameter Name="dzien" Type="datetime" Mode="In" />
+          <Parameter Name="ksiegi" Type="varchar" Mode="In" />
+          <Parameter Name="sygnmask" Type="varchar" Mode="In" />
+          <Parameter Name="kartadl" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="RupLancMetModelStoreContainer">
+          <EntitySet Name="BIG_Big" EntityType="Self.BIG_Big" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIG_InfoOperation" EntityType="Self.BIG_InfoOperation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIG_Konfig" EntityType="Self.BIG_Konfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIG_Log" EntityType="Self.BIG_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIG_Oper_Status" EntityType="Self.BIG_Oper_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIG_Package" EntityType="Self.BIG_Package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIG_Package_User" EntityType="Self.BIG_Package_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIG_User" EntityType="Self.BIG_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KnsKsiegi" EntityType="Self.KnsKsiegi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Konfiguracja" EntityType="Self.Konfiguracja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPSad" EntityType="Self.SAPSad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_BIG_Dluznicy" EntityType="Self.vw_BIG_Dluznicy" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vw_BIG_Dluznicy].[IdBIG_InfoOperation] AS [IdBIG_InfoOperation], 
+[vw_BIG_Dluznicy].[OperType] AS [OperType], 
+[vw_BIG_Dluznicy].[IdBIGPackage] AS [IdBIGPackage], 
+[vw_BIG_Dluznicy].[OperationId] AS [OperationId], 
+[vw_BIG_Dluznicy].[DebatorID] AS [DebatorID], 
+[vw_BIG_Dluznicy].[Forename] AS [Forename], 
+[vw_BIG_Dluznicy].[Surename] AS [Surename], 
+[vw_BIG_Dluznicy].[Citizenship] AS [Citizenship], 
+[vw_BIG_Dluznicy].[Pesel] AS [Pesel], 
+[vw_BIG_Dluznicy].[DocumentType] AS [DocumentType], 
+[vw_BIG_Dluznicy].[DocumentNumber] AS [DocumentNumber], 
+[vw_BIG_Dluznicy].[RA_Country] AS [RA_Country], 
+[vw_BIG_Dluznicy].[RA_Postcode] AS [RA_Postcode], 
+[vw_BIG_Dluznicy].[RA_City] AS [RA_City], 
+[vw_BIG_Dluznicy].[RA_Street] AS [RA_Street], 
+[vw_BIG_Dluznicy].[RA_HouseNumber] AS [RA_HouseNumber], 
+[vw_BIG_Dluznicy].[RA_LocalNumber] AS [RA_LocalNumber], 
+[vw_BIG_Dluznicy].[CA_Country] AS [CA_Country], 
+[vw_BIG_Dluznicy].[CA_Postcode] AS [CA_Postcode], 
+[vw_BIG_Dluznicy].[CA_City] AS [CA_City], 
+[vw_BIG_Dluznicy].[CA_Street] AS [CA_Street], 
+[vw_BIG_Dluznicy].[CA_HouseNumber] AS [CA_HouseNumber], 
+[vw_BIG_Dluznicy].[CA_LocalNumber] AS [CA_LocalNumber], 
+[vw_BIG_Dluznicy].[LiabilityId] AS [LiabilityId], 
+[vw_BIG_Dluznicy].[InstitutionDataShareRestricted] AS [InstitutionDataShareRestricted], 
+[vw_BIG_Dluznicy].[ShareSuspensionFinalDate] AS [ShareSuspensionFinalDate], 
+[vw_BIG_Dluznicy].[LiabilityType] AS [LiabilityType], 
+[vw_BIG_Dluznicy].[Sygnatura] AS [Sygnatura], 
+[vw_BIG_Dluznicy].[AdjudicatingBody] AS [AdjudicatingBody], 
+[vw_BIG_Dluznicy].[IssueDate] AS [IssueDate], 
+[vw_BIG_Dluznicy].[OtherTitle] AS [OtherTitle], 
+[vw_BIG_Dluznicy].[Currency] AS [Currency], 
+[vw_BIG_Dluznicy].[LiabilityAmount] AS [LiabilityAmount], 
+[vw_BIG_Dluznicy].[ArrearsAmount] AS [ArrearsAmount], 
+[vw_BIG_Dluznicy].[DisputedAmount] AS [DisputedAmount], 
+[vw_BIG_Dluznicy].[ArrearsRiseDate] AS [ArrearsRiseDate], 
+[vw_BIG_Dluznicy].[PaymentRequestDispatchDate] AS [PaymentRequestDispatchDate], 
+[vw_BIG_Dluznicy].[KartaDl] AS [KartaDl], 
+[vw_BIG_Dluznicy].[DataPrzypisu] AS [DataPrzypisu], 
+[vw_BIG_Dluznicy].[IdKsiega] AS [IdKsiega], 
+[vw_BIG_Dluznicy].[PackageFullId] AS [PackageFullId], 
+[vw_BIG_Dluznicy].[SentDate] AS [SentDate], 
+[vw_BIG_Dluznicy].[SentStatusInfo] AS [SentStatusInfo], 
+[vw_BIG_Dluznicy].[SentStatus] AS [SentStatus], 
+[vw_BIG_Dluznicy].[KnsKsiega] AS [KnsKsiega], 
+[vw_BIG_Dluznicy].[status] AS [status], 
+[vw_BIG_Dluznicy].[ileOK] AS [ileOK]
+FROM [dbo].[vw_BIG_Dluznicy] AS [vw_BIG_Dluznicy]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_BIG_Operacje" EntityType="Self.vw_BIG_Operacje" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vw_BIG_Operacje].[IdBIG_InfoOperation] AS [IdBIG_InfoOperation], 
+[vw_BIG_Operacje].[OperType] AS [OperType], 
+[vw_BIG_Operacje].[IdBIGPackage] AS [IdBIGPackage], 
+[vw_BIG_Operacje].[OperationId] AS [OperationId], 
+[vw_BIG_Operacje].[DebatorID] AS [DebatorID], 
+[vw_BIG_Operacje].[Forename] AS [Forename], 
+[vw_BIG_Operacje].[Surename] AS [Surename], 
+[vw_BIG_Operacje].[Citizenship] AS [Citizenship], 
+[vw_BIG_Operacje].[Pesel] AS [Pesel], 
+[vw_BIG_Operacje].[DocumentType] AS [DocumentType], 
+[vw_BIG_Operacje].[DocumentNumber] AS [DocumentNumber], 
+[vw_BIG_Operacje].[RA_Country] AS [RA_Country], 
+[vw_BIG_Operacje].[RA_Postcode] AS [RA_Postcode], 
+[vw_BIG_Operacje].[RA_City] AS [RA_City], 
+[vw_BIG_Operacje].[RA_Street] AS [RA_Street], 
+[vw_BIG_Operacje].[RA_HouseNumber] AS [RA_HouseNumber], 
+[vw_BIG_Operacje].[RA_LocalNumber] AS [RA_LocalNumber], 
+[vw_BIG_Operacje].[CA_Country] AS [CA_Country], 
+[vw_BIG_Operacje].[CA_Postcode] AS [CA_Postcode], 
+[vw_BIG_Operacje].[CA_City] AS [CA_City], 
+[vw_BIG_Operacje].[CA_Street] AS [CA_Street], 
+[vw_BIG_Operacje].[CA_HouseNumber] AS [CA_HouseNumber], 
+[vw_BIG_Operacje].[CA_LocalNumber] AS [CA_LocalNumber], 
+[vw_BIG_Operacje].[LiabilityId] AS [LiabilityId], 
+[vw_BIG_Operacje].[InstitutionDataShareRestricted] AS [InstitutionDataShareRestricted], 
+[vw_BIG_Operacje].[ShareSuspensionFinalDate] AS [ShareSuspensionFinalDate], 
+[vw_BIG_Operacje].[LiabilityType] AS [LiabilityType], 
+[vw_BIG_Operacje].[Sygnatura] AS [Sygnatura], 
+[vw_BIG_Operacje].[AdjudicatingBody] AS [AdjudicatingBody], 
+[vw_BIG_Operacje].[IssueDate] AS [IssueDate], 
+[vw_BIG_Operacje].[OtherTitle] AS [OtherTitle], 
+[vw_BIG_Operacje].[Currency] AS [Currency], 
+[vw_BIG_Operacje].[LiabilityAmount] AS [LiabilityAmount], 
+[vw_BIG_Operacje].[ArrearsAmount] AS [ArrearsAmount], 
+[vw_BIG_Operacje].[DisputedAmount] AS [DisputedAmount], 
+[vw_BIG_Operacje].[ArrearsRiseDate] AS [ArrearsRiseDate], 
+[vw_BIG_Operacje].[PaymentRequestDispatchDate] AS [PaymentRequestDispatchDate], 
+[vw_BIG_Operacje].[KartaDl] AS [KartaDl], 
+[vw_BIG_Operacje].[DataPrzypisu] AS [DataPrzypisu], 
+[vw_BIG_Operacje].[IdKsiega] AS [IdKsiega], 
+[vw_BIG_Operacje].[PackageFullId] AS [PackageFullId], 
+[vw_BIG_Operacje].[SentDate] AS [SentDate], 
+[vw_BIG_Operacje].[SentStatusInfo] AS [SentStatusInfo], 
+[vw_BIG_Operacje].[SentStatus] AS [SentStatus], 
+[vw_BIG_Operacje].[KnsKsiega] AS [KnsKsiega], 
+[vw_BIG_Operacje].[status] AS [status], 
+[vw_BIG_Operacje].[ileOK] AS [ileOK]
+FROM [dbo].[vw_BIG_Operacje] AS [vw_BIG_Operacje]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_BIG_OperacjeToCheck" EntityType="Self.vw_BIG_OperacjeToCheck" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vw_BIG_OperacjeToCheck].[IdBIG_InfoOperation] AS [IdBIG_InfoOperation], 
+[vw_BIG_OperacjeToCheck].[PackageFullId] AS [PackageFullId], 
+[vw_BIG_OperacjeToCheck].[IdBIG_Big] AS [IdBIG_Big], 
+[vw_BIG_OperacjeToCheck].[IdBIG_Oper_status] AS [IdBIG_Oper_status], 
+[vw_BIG_OperacjeToCheck].[OperationId] AS [OperationId], 
+[vw_BIG_OperacjeToCheck].[Status] AS [Status], 
+[vw_BIG_OperacjeToCheck].[Info] AS [Info], 
+[vw_BIG_OperacjeToCheck].[dSukces] AS [dSukces]
+FROM [dbo].[vw_BIG_OperacjeToCheck] AS [vw_BIG_OperacjeToCheck]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BIG_InfoOperation_BIG_Package" Association="Self.FK_BIG_InfoOperation_BIG_Package">
+            <End Role="BIG_Package" EntitySet="BIG_Package" />
+            <End Role="BIG_InfoOperation" EntitySet="BIG_InfoOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BIG_Oper_Status_BIG_Big" Association="Self.FK_BIG_Oper_Status_BIG_Big">
+            <End Role="BIG_Big" EntitySet="BIG_Big" />
+            <End Role="BIG_Oper_Status" EntitySet="BIG_Oper_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BIG_Oper_Status_BIG_InfoOperation" Association="Self.FK_BIG_Oper_Status_BIG_InfoOperation">
+            <End Role="BIG_InfoOperation" EntitySet="BIG_InfoOperation" />
+            <End Role="BIG_Oper_Status" EntitySet="BIG_Oper_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BIG_Oper_Status_BIG_Package" Association="Self.FK_BIG_Oper_Status_BIG_Package">
+            <End Role="BIG_Package" EntitySet="BIG_Package" />
+            <End Role="BIG_Oper_Status" EntitySet="BIG_Oper_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BIG_Package_User_BIG_Package" Association="Self.FK_BIG_Package_User_BIG_Package">
+            <End Role="BIG_User" EntitySet="BIG_User" />
+            <End Role="BIG_Package_User" EntitySet="BIG_Package_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BIG_Package_User_BIG_Package1" Association="Self.FK_BIG_Package_User_BIG_Package1">
+            <End Role="BIG_Package" EntitySet="BIG_Package" />
+            <End Role="BIG_Package_User" EntitySet="BIG_Package_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BIG_User_BIG_Big" Association="Self.FK_BIG_User_BIG_Big">
+            <End Role="BIG_Big" EntitySet="BIG_Big" />
+            <End Role="BIG_User" EntitySet="BIG_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RupLancMetModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="RupIntegratorEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="Konfiguracja" EntityType="RupLancMetModel.Konfiguracja" />
+          <EntitySet Name="User" EntityType="RupLancMetModel.User" />
+          <EntitySet Name="BIG_Package" EntityType="RupLancMetModel.BIG_Package" />
+          <EntitySet Name="BIG_Package_User" EntityType="RupLancMetModel.BIG_Package_User" />
+          <AssociationSet Name="FK_BIG_Package_User_BIG_Package1" Association="RupLancMetModel.FK_BIG_Package_User_BIG_Package1">
+            <End Role="BIG_Package" EntitySet="BIG_Package" />
+            <End Role="BIG_Package_User" EntitySet="BIG_Package_User" />
+          </AssociationSet>
+          <EntitySet Name="SAPSad" EntityType="RupLancMetModel.SAPSad" />
+          <EntitySet Name="BIG_Big" EntityType="RupLancMetModel.BIG_Big" />
+          <EntitySet Name="BIG_Konfig" EntityType="RupLancMetModel.BIG_Konfig" />
+          <EntitySet Name="BIG_Oper_Status" EntityType="RupLancMetModel.BIG_Oper_Status" />
+          <AssociationSet Name="FK_BIG_Oper_Status_BIG_Big" Association="RupLancMetModel.FK_BIG_Oper_Status_BIG_Big">
+            <End Role="BIG_Big" EntitySet="BIG_Big" />
+            <End Role="BIG_Oper_Status" EntitySet="BIG_Oper_Status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BIG_Oper_Status_BIG_Package" Association="RupLancMetModel.FK_BIG_Oper_Status_BIG_Package">
+            <End Role="BIG_Package" EntitySet="BIG_Package" />
+            <End Role="BIG_Oper_Status" EntitySet="BIG_Oper_Status" />
+          </AssociationSet>
+          <EntitySet Name="BIG_Log" EntityType="RupLancMetModel.BIG_Log" />
+          <EntitySet Name="BIG_InfoOperation" EntityType="RupLancMetModel.BIG_InfoOperation" />
+          <AssociationSet Name="FK_BIG_InfoOperation_BIG_Package" Association="RupLancMetModel.FK_BIG_InfoOperation_BIG_Package">
+            <End Role="BIG_Package" EntitySet="BIG_Package" />
+            <End Role="BIG_InfoOperation" EntitySet="BIG_InfoOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BIG_Oper_Status_BIG_InfoOperation" Association="RupLancMetModel.FK_BIG_Oper_Status_BIG_InfoOperation">
+            <End Role="BIG_InfoOperation" EntitySet="BIG_InfoOperation" />
+            <End Role="BIG_Oper_Status" EntitySet="BIG_Oper_Status" />
+          </AssociationSet>
+          <EntitySet Name="vw_BIG_Dluznicy" EntityType="RupLancMetModel.vw_BIG_Dluznicy" />
+          <EntitySet Name="vw_BIG_Operacje" EntityType="RupLancMetModel.vw_BIG_Operacje" />
+          <EntitySet Name="vw_BIG_OperacjeToCheck" EntityType="RupLancMetModel.vw_BIG_OperacjeToCheck" />
+          <EntitySet Name="BIG_User" EntityType="RupLancMetModel.BIG_User" />
+          <AssociationSet Name="FK_BIG_User_BIG_Big" Association="RupLancMetModel.FK_BIG_User_BIG_Big">
+            <End Role="BIG_Big" EntitySet="BIG_Big" />
+            <End Role="BIG_User" EntitySet="BIG_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BIG_Package_User_BIG_Package" Association="RupLancMetModel.FK_BIG_Package_User_BIG_Package">
+            <End Role="BIG_User" EntitySet="BIG_User" />
+            <End Role="BIG_Package_User" EntitySet="BIG_Package_User" />
+          </AssociationSet>
+          <EntitySet Name="KnsKsiegi" EntityType="RupLancMetModel.KnsKsiegi" />
+          </EntityContainer>
+        <EntityType Name="Konfiguracja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="typKns" />
+          <Property Type="String" Name="srvName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DbName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="pwd" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="logId" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="WinLogon" />
+          <Property Type="String" Name="JednostkaGospodarcza" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="StartImportDate" Precision="3" />
+          <Property Type="String" Name="PrzypisFile" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OdpisFile" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="srvAlias" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EndpointWS" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WSLogon" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WSpwd" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="typImportSAP" />
+          <Property Type="Boolean" Name="skipraty" />
+          <Property Type="String" Name="StanowiskoFin" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ERPLogon" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="defSad" />
+          <Property Type="String" Name="dbversion" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="czyautoks" />
+          <Property Type="Int32" Name="czyautoprzyp" />
+          <Property Type="DateTime" Name="dplatnosci" Precision="3" />
+          <Property Type="Int32" Name="typDatyPlatn" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DataMiesStart" Type="DateTime" Precision="3" />
+          <Property Name="Pfx" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Cer" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PfxPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SAPPwdExpPeriod" Type="Int32" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Pssword" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="role" Nullable="false" />
+          <Property Type="DateTime" Name="LastPwdChngDate" Precision="3" />
+          <Property Type="Boolean" Name="suspend" />
+          <Property Type="Boolean" Name="ChangePwd" />
+          <Property Type="String" Name="FirstName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="deleted" Nullable="false" />
+          <Property Type="DateTime" Name="CreationDate" Precision="3" />
+          <Property Type="DateTime" Name="DeleteDate" Precision="3" />
+          <Property Type="Int32" Name="PwdPeriodChange" Nullable="false" />
+          <Property Type="String" Name="MEPUser" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MEPPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BIG_Package">
+          <Key>
+            <PropertyRef Name="IdBIG_Package" />
+          </Key>
+          <Property Type="Int32" Name="IdBIG_Package" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="PackageFullId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="SentDate" Precision="3" />
+          <Property Type="String" Name="SentStatusInfo" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SentStatus" />
+          <NavigationProperty Name="BIG_Package_User" Relationship="RupLancMetModel.FK_BIG_Package_User_BIG_Package1" FromRole="BIG_Package" ToRole="BIG_Package_User" />
+          <NavigationProperty Name="BIG_Oper_Status" Relationship="RupLancMetModel.FK_BIG_Oper_Status_BIG_Package" FromRole="BIG_Package" ToRole="BIG_Oper_Status" />
+          <NavigationProperty Name="BIG_InfoOperation" Relationship="RupLancMetModel.FK_BIG_InfoOperation_BIG_Package" FromRole="BIG_Package" ToRole="BIG_InfoOperation" />
+        </EntityType>
+        <EntityType Name="BIG_Package_User">
+          <Key>
+            <PropertyRef Name="IdBIG_Package_User" />
+          </Key>
+          <Property Type="Int32" Name="IdBIG_Package_User" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="IdBIG_User" Nullable="false" />
+          <Property Type="Int32" Name="IdBIG_Package" Nullable="false" />
+          <NavigationProperty Name="BIG_Package" Relationship="RupLancMetModel.FK_BIG_Package_User_BIG_Package1" FromRole="BIG_Package_User" ToRole="BIG_Package" />
+          <NavigationProperty Name="BIG_User" Relationship="RupLancMetModel.FK_BIG_Package_User_BIG_Package" FromRole="BIG_Package_User" ToRole="BIG_User" />
+        </EntityType>
+        <Association Name="FK_BIG_Package_User_BIG_Package1">
+          <End Type="RupLancMetModel.BIG_Package" Role="BIG_Package" Multiplicity="1" />
+          <End Type="RupLancMetModel.BIG_Package_User" Role="BIG_Package_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Package">
+              <PropertyRef Name="IdBIG_Package" />
+            </Principal>
+            <Dependent Role="BIG_Package_User">
+              <PropertyRef Name="IdBIG_Package" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SAPSad">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Type="String" Name="kod" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="sad" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="miasto" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="miastSad" MaxLength="160" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="typSad" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="JEGO" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="WazneOd" Type="DateTime" Precision="3" />
+          <Property Name="WazneDo" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BIG_Big">
+          <Key>
+            <PropertyRef Name="IdBig" />
+          </Key>
+          <Property Type="Int32" Name="IdBig" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="BIGID" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Obsluga" />
+          <Property Type="String" Name="SubscriberId" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nazwa" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BIG_Oper_Status" Relationship="RupLancMetModel.FK_BIG_Oper_Status_BIG_Big" FromRole="BIG_Big" ToRole="BIG_Oper_Status" />
+          <NavigationProperty Name="BIG_User" Relationship="RupLancMetModel.FK_BIG_User_BIG_Big" FromRole="BIG_Big" ToRole="BIG_User" />
+        </EntityType>
+        <EntityType Name="BIG_Konfig">
+          <Key>
+            <PropertyRef Name="IdBIG_Konfig" />
+          </Key>
+          <Property Type="Int32" Name="IdBIG_Konfig" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="SubmitEndpoint" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CheckRqEndpoint" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SubmitAuthUser" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SubmitAuthPasword" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CheckRqAuthUser" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CheckRqAuthPass" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SysPrefix" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BIG_Oper_Status">
+          <Key>
+            <PropertyRef Name="IdBIG_Oper_status" />
+          </Key>
+          <Property Type="Int32" Name="IdBIG_Oper_status" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="IdBIG_Big" Nullable="false" />
+          <Property Type="Int32" Name="IdBIG_InfoOperation" Nullable="false" />
+          <Property Type="Int32" Name="idBIG_Package" Nullable="false" />
+          <Property Type="Int32" Name="Status" />
+          <Property Type="String" Name="Info" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="dSukces" Precision="3" />
+          <Property Type="DateTime" Name="dProba" Precision="3" />
+          <Property Type="String" Name="UserName" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="BIG_Big" Relationship="RupLancMetModel.FK_BIG_Oper_Status_BIG_Big" FromRole="BIG_Oper_Status" ToRole="BIG_Big" />
+          <NavigationProperty Name="BIG_Package" Relationship="RupLancMetModel.FK_BIG_Oper_Status_BIG_Package" FromRole="BIG_Oper_Status" ToRole="BIG_Package" />
+          <NavigationProperty Name="BIG_InfoOperation" Relationship="RupLancMetModel.FK_BIG_Oper_Status_BIG_InfoOperation" FromRole="BIG_Oper_Status" ToRole="BIG_InfoOperation" />
+        </EntityType>
+        <Association Name="FK_BIG_Oper_Status_BIG_Big">
+          <End Type="RupLancMetModel.BIG_Big" Role="BIG_Big" Multiplicity="1" />
+          <End Type="RupLancMetModel.BIG_Oper_Status" Role="BIG_Oper_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Big">
+              <PropertyRef Name="IdBig" />
+            </Principal>
+            <Dependent Role="BIG_Oper_Status">
+              <PropertyRef Name="IdBIG_Big" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BIG_Oper_Status_BIG_Package">
+          <End Type="RupLancMetModel.BIG_Package" Role="BIG_Package" Multiplicity="1" />
+          <End Type="RupLancMetModel.BIG_Oper_Status" Role="BIG_Oper_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Package">
+              <PropertyRef Name="IdBIG_Package" />
+            </Principal>
+            <Dependent Role="BIG_Oper_Status">
+              <PropertyRef Name="idBIG_Package" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BIG_Log">
+          <Key>
+            <PropertyRef Name="IdBIG_Log" />
+          </Key>
+          <Property Type="Int32" Name="IdBIG_Log" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="PackageFullId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataOper" Precision="3" />
+          <Property Type="String" Name="MsgText" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TypKom" />
+          <Property Type="Boolean" Name="ReqResp" />
+        </EntityType>
+        <EntityType Name="BIG_InfoOperation">
+          <Key>
+            <PropertyRef Name="IdBIG_InfoOperation" />
+          </Key>
+          <Property Type="Int32" Name="IdBIG_InfoOperation" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="OperType" Nullable="false" />
+          <Property Type="Int32" Name="IdBIGPackage" Nullable="false" />
+          <Property Type="String" Name="OperationId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DebatorID" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Forename" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Surename" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Citizenship" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Pesel" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DocumentType" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DocumentNumber" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_Country" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_Postcode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_City" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_Street" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_HouseNumber" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_LocalNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_Country" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_Postcode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_City" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_Street" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_HouseNumber" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_LocalNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LiabilityId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="InstitutionDataShareRestricted" />
+          <Property Type="DateTime" Name="ShareSuspensionFinalDate" Precision="3" />
+          <Property Type="String" Name="LiabilityType" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Sygnatura" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AdjudicatingBody" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="IssueDate" Precision="3" />
+          <Property Type="String" Name="OtherTitle" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Currency" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="LiabilityAmount" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ArrearsAmount" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="DisputedAmount" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="ArrearsRiseDate" Precision="3" />
+          <Property Type="DateTime" Name="PaymentRequestDispatchDate" Precision="3" />
+          <Property Type="String" Name="KartaDl" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataPrzypisu" Precision="3" />
+          <Property Type="Int32" Name="IdKsiega" />
+          <NavigationProperty Name="BIG_Package" Relationship="RupLancMetModel.FK_BIG_InfoOperation_BIG_Package" FromRole="BIG_InfoOperation" ToRole="BIG_Package" />
+          <NavigationProperty Name="BIG_Oper_Status" Relationship="RupLancMetModel.FK_BIG_Oper_Status_BIG_InfoOperation" FromRole="BIG_InfoOperation" ToRole="BIG_Oper_Status" />
+        </EntityType>
+        <Association Name="FK_BIG_InfoOperation_BIG_Package">
+          <End Type="RupLancMetModel.BIG_Package" Role="BIG_Package" Multiplicity="1" />
+          <End Type="RupLancMetModel.BIG_InfoOperation" Role="BIG_InfoOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Package">
+              <PropertyRef Name="IdBIG_Package" />
+            </Principal>
+            <Dependent Role="BIG_InfoOperation">
+              <PropertyRef Name="IdBIGPackage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BIG_Oper_Status_BIG_InfoOperation">
+          <End Type="RupLancMetModel.BIG_InfoOperation" Role="BIG_InfoOperation" Multiplicity="1" />
+          <End Type="RupLancMetModel.BIG_Oper_Status" Role="BIG_Oper_Status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_InfoOperation">
+              <PropertyRef Name="IdBIG_InfoOperation" />
+            </Principal>
+            <Dependent Role="BIG_Oper_Status">
+              <PropertyRef Name="IdBIG_InfoOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vw_BIG_Dluznicy">
+          <Key>
+            <PropertyRef Name="IdBIG_InfoOperation" />
+            <PropertyRef Name="OperType" />
+            <PropertyRef Name="IdBIGPackage" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Type="Int32" Name="IdBIG_InfoOperation" Nullable="false" />
+          <Property Type="Int32" Name="OperType" Nullable="false" />
+          <Property Type="Int32" Name="IdBIGPackage" Nullable="false" />
+          <Property Type="String" Name="OperationId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DebatorID" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Forename" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Surename" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Citizenship" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Pesel" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DocumentType" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DocumentNumber" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_Country" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_Postcode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_City" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_Street" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_HouseNumber" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_LocalNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_Country" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_Postcode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_City" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_Street" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_HouseNumber" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_LocalNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LiabilityId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="InstitutionDataShareRestricted" />
+          <Property Type="DateTime" Name="ShareSuspensionFinalDate" Precision="3" />
+          <Property Type="String" Name="LiabilityType" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Sygnatura" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AdjudicatingBody" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="IssueDate" Precision="3" />
+          <Property Type="String" Name="OtherTitle" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Currency" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="LiabilityAmount" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ArrearsAmount" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="DisputedAmount" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="ArrearsRiseDate" Precision="3" />
+          <Property Type="DateTime" Name="PaymentRequestDispatchDate" Precision="3" />
+          <Property Type="String" Name="KartaDl" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataPrzypisu" Precision="3" />
+          <Property Type="Int32" Name="IdKsiega" />
+          <Property Type="String" Name="PackageFullId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="SentDate" Precision="3" />
+          <Property Type="String" Name="SentStatusInfo" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SentStatus" />
+          <Property Type="String" Name="KnsKsiega" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="status" Nullable="false" />
+          <Property Type="Int32" Name="ileOK" />
+        </EntityType>
+        <EntityType Name="vw_BIG_Operacje">
+          <Key>
+            <PropertyRef Name="IdBIG_InfoOperation" />
+            <PropertyRef Name="OperType" />
+            <PropertyRef Name="IdBIGPackage" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Type="Int32" Name="IdBIG_InfoOperation" Nullable="false" />
+          <Property Type="Int32" Name="OperType" Nullable="false" />
+          <Property Type="Int32" Name="IdBIGPackage" Nullable="false" />
+          <Property Type="String" Name="OperationId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DebatorID" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Forename" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Surename" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Citizenship" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Pesel" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DocumentType" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DocumentNumber" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_Country" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_Postcode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_City" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_Street" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_HouseNumber" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RA_LocalNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_Country" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_Postcode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_City" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_Street" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_HouseNumber" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CA_LocalNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LiabilityId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="InstitutionDataShareRestricted" />
+          <Property Type="DateTime" Name="ShareSuspensionFinalDate" Precision="3" />
+          <Property Type="String" Name="LiabilityType" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Sygnatura" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AdjudicatingBody" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="IssueDate" Precision="3" />
+          <Property Type="String" Name="OtherTitle" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Currency" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="LiabilityAmount" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ArrearsAmount" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="DisputedAmount" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="ArrearsRiseDate" Precision="3" />
+          <Property Type="DateTime" Name="PaymentRequestDispatchDate" Precision="3" />
+          <Property Type="String" Name="KartaDl" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataPrzypisu" Precision="3" />
+          <Property Type="Int32" Name="IdKsiega" />
+          <Property Type="String" Name="PackageFullId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="SentDate" Precision="3" />
+          <Property Type="String" Name="SentStatusInfo" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SentStatus" />
+          <Property Type="String" Name="KnsKsiega" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="status" Nullable="false" />
+          <Property Type="Int32" Name="ileOK" />
+        </EntityType>
+        <EntityType Name="vw_BIG_OperacjeToCheck">
+          <Key>
+            <PropertyRef Name="IdBIG_InfoOperation" />
+            <PropertyRef Name="IdBIG_Big" />
+            <PropertyRef Name="IdBIG_Oper_status" />
+          </Key>
+          <Property Type="Int32" Name="IdBIG_InfoOperation" Nullable="false" />
+          <Property Type="String" Name="PackageFullId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdBIG_Big" Nullable="false" />
+          <Property Type="Int32" Name="IdBIG_Oper_status" Nullable="false" />
+          <Property Type="String" Name="OperationId" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Status" />
+          <Property Type="String" Name="Info" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="dSukces" Precision="3" />
+        </EntityType>
+        <EntityType Name="BIG_User">
+          <Key>
+            <PropertyRef Name="IdBigUser" />
+          </Key>
+          <Property Type="Int32" Name="IdBigUser" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="IdUser" />
+          <Property Type="Int32" Name="IdBIG" Nullable="false" />
+          <Property Type="String" Name="BigUserName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BigUserPassword" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Aktywny" />
+          <Property Type="String" Name="BigUserSha256" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BIG_Big" Relationship="RupLancMetModel.FK_BIG_User_BIG_Big" FromRole="BIG_User" ToRole="BIG_Big" />
+          <NavigationProperty Name="BIG_Package_User" Relationship="RupLancMetModel.FK_BIG_Package_User_BIG_Package" FromRole="BIG_User" ToRole="BIG_Package_User" />
+        </EntityType>
+        <Association Name="FK_BIG_User_BIG_Big">
+          <End Type="RupLancMetModel.BIG_Big" Role="BIG_Big" Multiplicity="1" />
+          <End Type="RupLancMetModel.BIG_User" Role="BIG_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_Big">
+              <PropertyRef Name="IdBig" />
+            </Principal>
+            <Dependent Role="BIG_User">
+              <PropertyRef Name="IdBIG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BIG_Package_User_BIG_Package">
+          <End Type="RupLancMetModel.BIG_User" Role="BIG_User" Multiplicity="1" />
+          <End Type="RupLancMetModel.BIG_Package_User" Role="BIG_Package_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIG_User">
+              <PropertyRef Name="IdBigUser" />
+            </Principal>
+            <Dependent Role="BIG_Package_User">
+              <PropertyRef Name="IdBIG_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="KnsKsiegi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwa" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="id_sadu" Type="Int32" />
+          <Property Name="sad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="wydzial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="kodSad" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="numWydz" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="oprKosztFiz" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="oprKosztPraw" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="oprGrzFiz" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="oprGrzPraw" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="rodzajPrzedmiotu" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Ksiegi" Type="Int32" />
+          <Property Name="oprGrzSamoistna" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="czyFPP" Type="Int32" />
+          <Property Name="czymies" Type="Int32" />
+          <Property Name="ksGrzFPPMap" Type="Int32" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RupLancMetModelStoreContainer" CdmEntityContainer="RupIntegratorEntities">
+          <EntitySetMapping Name="Konfiguracja">
+            <EntityTypeMapping TypeName="RupLancMetModel.Konfiguracja">
+              <MappingFragment StoreEntitySet="Konfiguracja">
+                <ScalarProperty Name="SAPPwdExpPeriod" ColumnName="SAPPwdExpPeriod" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="PfxPassword" ColumnName="PfxPassword" />
+                <ScalarProperty Name="Cer" ColumnName="Cer" />
+                <ScalarProperty Name="Pfx" ColumnName="Pfx" />
+                <ScalarProperty Name="DataMiesStart" ColumnName="DataMiesStart" />
+                <ScalarProperty Name="StanowiskoFianasoweWindyk" ColumnName="StanowiskoFianasoweWindyk" />
+                <ScalarProperty Name="typDatyPlatn" ColumnName="typDatyPlatn" />
+                <ScalarProperty Name="dplatnosci" ColumnName="dplatnosci" />
+                <ScalarProperty Name="czyautoprzyp" ColumnName="czyautoprzyp" />
+                <ScalarProperty Name="czyautoks" ColumnName="czyautoks" />
+                <ScalarProperty Name="dbversion" ColumnName="dbversion" />
+                <ScalarProperty Name="defSad" ColumnName="defSad" />
+                <ScalarProperty Name="ERPLogon" ColumnName="ERPLogon" />
+                <ScalarProperty Name="StanowiskoFin" ColumnName="StanowiskoFin" />
+                <ScalarProperty Name="skipraty" ColumnName="skipraty" />
+                <ScalarProperty Name="typImportSAP" ColumnName="typImportSAP" />
+                <ScalarProperty Name="WSpwd" ColumnName="WSpwd" />
+                <ScalarProperty Name="WSLogon" ColumnName="WSLogon" />
+                <ScalarProperty Name="EndpointWS" ColumnName="EndpointWS" />
+                <ScalarProperty Name="srvAlias" ColumnName="srvAlias" />
+                <ScalarProperty Name="OdpisFile" ColumnName="OdpisFile" />
+                <ScalarProperty Name="PrzypisFile" ColumnName="PrzypisFile" />
+                <ScalarProperty Name="StartImportDate" ColumnName="StartImportDate" />
+                <ScalarProperty Name="JednostkaGospodarcza" ColumnName="JednostkaGospodarcza" />
+                <ScalarProperty Name="WinLogon" ColumnName="WinLogon" />
+                <ScalarProperty Name="logId" ColumnName="logId" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="DbName" ColumnName="DbName" />
+                <ScalarProperty Name="srvName" ColumnName="srvName" />
+                <ScalarProperty Name="typKns" ColumnName="typKns" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="RupLancMetModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="MEPPassword" ColumnName="MEPPassword" />
+                <ScalarProperty Name="MEPUser" ColumnName="MEPUser" />
+                <ScalarProperty Name="PwdPeriodChange" ColumnName="PwdPeriodChange" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ChangePwd" ColumnName="ChangePwd" />
+                <ScalarProperty Name="suspend" ColumnName="suspend" />
+                <ScalarProperty Name="LastPwdChngDate" ColumnName="LastPwdChngDate" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="Pssword" ColumnName="Pssword" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIG_Package">
+            <EntityTypeMapping TypeName="RupLancMetModel.BIG_Package">
+              <MappingFragment StoreEntitySet="BIG_Package">
+                <ScalarProperty Name="SentStatus" ColumnName="SentStatus" />
+                <ScalarProperty Name="SentStatusInfo" ColumnName="SentStatusInfo" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="PackageFullId" ColumnName="PackageFullId" />
+                <ScalarProperty Name="IdBIG_Package" ColumnName="IdBIG_Package" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIG_Package_User">
+            <EntityTypeMapping TypeName="RupLancMetModel.BIG_Package_User">
+              <MappingFragment StoreEntitySet="BIG_Package_User">
+                <ScalarProperty Name="IdBIG_Package" ColumnName="IdBIG_Package" />
+                <ScalarProperty Name="IdBIG_User" ColumnName="IdBIG_User" />
+                <ScalarProperty Name="IdBIG_Package_User" ColumnName="IdBIG_Package_User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAPSad">
+            <EntityTypeMapping TypeName="RupLancMetModel.SAPSad">
+              <MappingFragment StoreEntitySet="SAPSad">
+                <ScalarProperty Name="WazneDo" ColumnName="WazneDo" />
+                <ScalarProperty Name="WazneOd" ColumnName="WazneOd" />
+                <ScalarProperty Name="JEGO" ColumnName="JEGO" />
+                <ScalarProperty Name="typSad" ColumnName="typSad" />
+                <ScalarProperty Name="miastSad" ColumnName="miastSad" />
+                <ScalarProperty Name="miasto" ColumnName="miasto" />
+                <ScalarProperty Name="sad" ColumnName="sad" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIG_Big">
+            <EntityTypeMapping TypeName="RupLancMetModel.BIG_Big">
+              <MappingFragment StoreEntitySet="BIG_Big">
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="SubscriberId" ColumnName="SubscriberId" />
+                <ScalarProperty Name="Obsluga" ColumnName="Obsluga" />
+                <ScalarProperty Name="BIGID" ColumnName="BIGID" />
+                <ScalarProperty Name="IdBig" ColumnName="IdBig" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIG_Konfig">
+            <EntityTypeMapping TypeName="RupLancMetModel.BIG_Konfig">
+              <MappingFragment StoreEntitySet="BIG_Konfig">
+                <ScalarProperty Name="SysPrefix" ColumnName="SysPrefix" />
+                <ScalarProperty Name="CheckRqAuthPass" ColumnName="CheckRqAuthPass" />
+                <ScalarProperty Name="CheckRqAuthUser" ColumnName="CheckRqAuthUser" />
+                <ScalarProperty Name="SubmitAuthPasword" ColumnName="SubmitAuthPasword" />
+                <ScalarProperty Name="SubmitAuthUser" ColumnName="SubmitAuthUser" />
+                <ScalarProperty Name="CheckRqEndpoint" ColumnName="CheckRqEndpoint" />
+                <ScalarProperty Name="SubmitEndpoint" ColumnName="SubmitEndpoint" />
+                <ScalarProperty Name="IdBIG_Konfig" ColumnName="IdBIG_Konfig" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIG_Oper_Status">
+            <EntityTypeMapping TypeName="RupLancMetModel.BIG_Oper_Status">
+              <MappingFragment StoreEntitySet="BIG_Oper_Status">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="dProba" ColumnName="dProba" />
+                <ScalarProperty Name="dSukces" ColumnName="dSukces" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="idBIG_Package" ColumnName="idBIG_Package" />
+                <ScalarProperty Name="IdBIG_InfoOperation" ColumnName="IdBIG_InfoOperation" />
+                <ScalarProperty Name="IdBIG_Big" ColumnName="IdBIG_Big" />
+                <ScalarProperty Name="IdBIG_Oper_status" ColumnName="IdBIG_Oper_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIG_Log">
+            <EntityTypeMapping TypeName="RupLancMetModel.BIG_Log">
+              <MappingFragment StoreEntitySet="BIG_Log">
+                <ScalarProperty Name="ReqResp" ColumnName="ReqResp" />
+                <ScalarProperty Name="TypKom" ColumnName="TypKom" />
+                <ScalarProperty Name="MsgText" ColumnName="MsgText" />
+                <ScalarProperty Name="DataOper" ColumnName="DataOper" />
+                <ScalarProperty Name="PackageFullId" ColumnName="PackageFullId" />
+                <ScalarProperty Name="IdBIG_Log" ColumnName="IdBIG_Log" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIG_InfoOperation">
+            <EntityTypeMapping TypeName="RupLancMetModel.BIG_InfoOperation">
+              <MappingFragment StoreEntitySet="BIG_InfoOperation">
+                <ScalarProperty Name="IdKsiega" ColumnName="IdKsiega" />
+                <ScalarProperty Name="DataPrzypisu" ColumnName="DataPrzypisu" />
+                <ScalarProperty Name="KartaDl" ColumnName="KartaDl" />
+                <ScalarProperty Name="PaymentRequestDispatchDate" ColumnName="PaymentRequestDispatchDate" />
+                <ScalarProperty Name="ArrearsRiseDate" ColumnName="ArrearsRiseDate" />
+                <ScalarProperty Name="DisputedAmount" ColumnName="DisputedAmount" />
+                <ScalarProperty Name="ArrearsAmount" ColumnName="ArrearsAmount" />
+                <ScalarProperty Name="LiabilityAmount" ColumnName="LiabilityAmount" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="OtherTitle" ColumnName="OtherTitle" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="AdjudicatingBody" ColumnName="AdjudicatingBody" />
+                <ScalarProperty Name="Sygnatura" ColumnName="Sygnatura" />
+                <ScalarProperty Name="LiabilityType" ColumnName="LiabilityType" />
+                <ScalarProperty Name="ShareSuspensionFinalDate" ColumnName="ShareSuspensionFinalDate" />
+                <ScalarProperty Name="InstitutionDataShareRestricted" ColumnName="InstitutionDataShareRestricted" />
+                <ScalarProperty Name="LiabilityId" ColumnName="LiabilityId" />
+                <ScalarProperty Name="CA_LocalNumber" ColumnName="CA_LocalNumber" />
+                <ScalarProperty Name="CA_HouseNumber" ColumnName="CA_HouseNumber" />
+                <ScalarProperty Name="CA_Street" ColumnName="CA_Street" />
+                <ScalarProperty Name="CA_City" ColumnName="CA_City" />
+                <ScalarProperty Name="CA_Postcode" ColumnName="CA_Postcode" />
+                <ScalarProperty Name="CA_Country" ColumnName="CA_Country" />
+                <ScalarProperty Name="RA_LocalNumber" ColumnName="RA_LocalNumber" />
+                <ScalarProperty Name="RA_HouseNumber" ColumnName="RA_HouseNumber" />
+                <ScalarProperty Name="RA_Street" ColumnName="RA_Street" />
+                <ScalarProperty Name="RA_City" ColumnName="RA_City" />
+                <ScalarProperty Name="RA_Postcode" ColumnName="RA_Postcode" />
+                <ScalarProperty Name="RA_Country" ColumnName="RA_Country" />
+                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="Pesel" ColumnName="Pesel" />
+                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+                <ScalarProperty Name="Surename" ColumnName="Surename" />
+                <ScalarProperty Name="Forename" ColumnName="Forename" />
+                <ScalarProperty Name="DebatorID" ColumnName="DebatorID" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="IdBIGPackage" ColumnName="IdBIGPackage" />
+                <ScalarProperty Name="OperType" ColumnName="OperType" />
+                <ScalarProperty Name="IdBIG_InfoOperation" ColumnName="IdBIG_InfoOperation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_BIG_Dluznicy">
+            <EntityTypeMapping TypeName="RupLancMetModel.vw_BIG_Dluznicy">
+              <MappingFragment StoreEntitySet="vw_BIG_Dluznicy">
+                <ScalarProperty Name="ileOK" ColumnName="ileOK" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="KnsKsiega" ColumnName="KnsKsiega" />
+                <ScalarProperty Name="SentStatus" ColumnName="SentStatus" />
+                <ScalarProperty Name="SentStatusInfo" ColumnName="SentStatusInfo" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="PackageFullId" ColumnName="PackageFullId" />
+                <ScalarProperty Name="IdKsiega" ColumnName="IdKsiega" />
+                <ScalarProperty Name="DataPrzypisu" ColumnName="DataPrzypisu" />
+                <ScalarProperty Name="KartaDl" ColumnName="KartaDl" />
+                <ScalarProperty Name="PaymentRequestDispatchDate" ColumnName="PaymentRequestDispatchDate" />
+                <ScalarProperty Name="ArrearsRiseDate" ColumnName="ArrearsRiseDate" />
+                <ScalarProperty Name="DisputedAmount" ColumnName="DisputedAmount" />
+                <ScalarProperty Name="ArrearsAmount" ColumnName="ArrearsAmount" />
+                <ScalarProperty Name="LiabilityAmount" ColumnName="LiabilityAmount" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="OtherTitle" ColumnName="OtherTitle" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="AdjudicatingBody" ColumnName="AdjudicatingBody" />
+                <ScalarProperty Name="Sygnatura" ColumnName="Sygnatura" />
+                <ScalarProperty Name="LiabilityType" ColumnName="LiabilityType" />
+                <ScalarProperty Name="ShareSuspensionFinalDate" ColumnName="ShareSuspensionFinalDate" />
+                <ScalarProperty Name="InstitutionDataShareRestricted" ColumnName="InstitutionDataShareRestricted" />
+                <ScalarProperty Name="LiabilityId" ColumnName="LiabilityId" />
+                <ScalarProperty Name="CA_LocalNumber" ColumnName="CA_LocalNumber" />
+                <ScalarProperty Name="CA_HouseNumber" ColumnName="CA_HouseNumber" />
+                <ScalarProperty Name="CA_Street" ColumnName="CA_Street" />
+                <ScalarProperty Name="CA_City" ColumnName="CA_City" />
+                <ScalarProperty Name="CA_Postcode" ColumnName="CA_Postcode" />
+                <ScalarProperty Name="CA_Country" ColumnName="CA_Country" />
+                <ScalarProperty Name="RA_LocalNumber" ColumnName="RA_LocalNumber" />
+                <ScalarProperty Name="RA_HouseNumber" ColumnName="RA_HouseNumber" />
+                <ScalarProperty Name="RA_Street" ColumnName="RA_Street" />
+                <ScalarProperty Name="RA_City" ColumnName="RA_City" />
+                <ScalarProperty Name="RA_Postcode" ColumnName="RA_Postcode" />
+                <ScalarProperty Name="RA_Country" ColumnName="RA_Country" />
+                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="Pesel" ColumnName="Pesel" />
+                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+                <ScalarProperty Name="Surename" ColumnName="Surename" />
+                <ScalarProperty Name="Forename" ColumnName="Forename" />
+                <ScalarProperty Name="DebatorID" ColumnName="DebatorID" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="IdBIGPackage" ColumnName="IdBIGPackage" />
+                <ScalarProperty Name="OperType" ColumnName="OperType" />
+                <ScalarProperty Name="IdBIG_InfoOperation" ColumnName="IdBIG_InfoOperation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_BIG_Operacje">
+            <EntityTypeMapping TypeName="RupLancMetModel.vw_BIG_Operacje">
+              <MappingFragment StoreEntitySet="vw_BIG_Operacje">
+                <ScalarProperty Name="ileOK" ColumnName="ileOK" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="KnsKsiega" ColumnName="KnsKsiega" />
+                <ScalarProperty Name="SentStatus" ColumnName="SentStatus" />
+                <ScalarProperty Name="SentStatusInfo" ColumnName="SentStatusInfo" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="PackageFullId" ColumnName="PackageFullId" />
+                <ScalarProperty Name="IdKsiega" ColumnName="IdKsiega" />
+                <ScalarProperty Name="DataPrzypisu" ColumnName="DataPrzypisu" />
+                <ScalarProperty Name="KartaDl" ColumnName="KartaDl" />
+                <ScalarProperty Name="PaymentRequestDispatchDate" ColumnName="PaymentRequestDispatchDate" />
+                <ScalarProperty Name="ArrearsRiseDate" ColumnName="ArrearsRiseDate" />
+                <ScalarProperty Name="DisputedAmount" ColumnName="DisputedAmount" />
+                <ScalarProperty Name="ArrearsAmount" ColumnName="ArrearsAmount" />
+                <ScalarProperty Name="LiabilityAmount" ColumnName="LiabilityAmount" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="OtherTitle" ColumnName="OtherTitle" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="AdjudicatingBody" ColumnName="AdjudicatingBody" />
+                <ScalarProperty Name="Sygnatura" ColumnName="Sygnatura" />
+                <ScalarProperty Name="LiabilityType" ColumnName="LiabilityType" />
+                <ScalarProperty Name="ShareSuspensionFinalDate" ColumnName="ShareSuspensionFinalDate" />
+                <ScalarProperty Name="InstitutionDataShareRestricted" ColumnName="InstitutionDataShareRestricted" />
+                <ScalarProperty Name="LiabilityId" ColumnName="LiabilityId" />
+                <ScalarProperty Name="CA_LocalNumber" ColumnName="CA_LocalNumber" />
+                <ScalarProperty Name="CA_HouseNumber" ColumnName="CA_HouseNumber" />
+                <ScalarProperty Name="CA_Street" ColumnName="CA_Street" />
+                <ScalarProperty Name="CA_City" ColumnName="CA_City" />
+                <ScalarProperty Name="CA_Postcode" ColumnName="CA_Postcode" />
+                <ScalarProperty Name="CA_Country" ColumnName="CA_Country" />
+                <ScalarProperty Name="RA_LocalNumber" ColumnName="RA_LocalNumber" />
+                <ScalarProperty Name="RA_HouseNumber" ColumnName="RA_HouseNumber" />
+                <ScalarProperty Name="RA_Street" ColumnName="RA_Street" />
+                <ScalarProperty Name="RA_City" ColumnName="RA_City" />
+                <ScalarProperty Name="RA_Postcode" ColumnName="RA_Postcode" />
+                <ScalarProperty Name="RA_Country" ColumnName="RA_Country" />
+                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="Pesel" ColumnName="Pesel" />
+                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+                <ScalarProperty Name="Surename" ColumnName="Surename" />
+                <ScalarProperty Name="Forename" ColumnName="Forename" />
+                <ScalarProperty Name="DebatorID" ColumnName="DebatorID" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="IdBIGPackage" ColumnName="IdBIGPackage" />
+                <ScalarProperty Name="OperType" ColumnName="OperType" />
+                <ScalarProperty Name="IdBIG_InfoOperation" ColumnName="IdBIG_InfoOperation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_BIG_OperacjeToCheck">
+            <EntityTypeMapping TypeName="RupLancMetModel.vw_BIG_OperacjeToCheck">
+              <MappingFragment StoreEntitySet="vw_BIG_OperacjeToCheck">
+                <ScalarProperty Name="dSukces" ColumnName="dSukces" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="IdBIG_Oper_status" ColumnName="IdBIG_Oper_status" />
+                <ScalarProperty Name="IdBIG_Big" ColumnName="IdBIG_Big" />
+                <ScalarProperty Name="PackageFullId" ColumnName="PackageFullId" />
+                <ScalarProperty Name="IdBIG_InfoOperation" ColumnName="IdBIG_InfoOperation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIG_User">
+            <EntityTypeMapping TypeName="RupLancMetModel.BIG_User">
+              <MappingFragment StoreEntitySet="BIG_User">
+                <ScalarProperty Name="BigUserSha256" ColumnName="BigUserSha256" />
+                <ScalarProperty Name="Aktywny" ColumnName="Aktywny" />
+                <ScalarProperty Name="BigUserPassword" ColumnName="BigUserPassword" />
+                <ScalarProperty Name="BigUserName" ColumnName="BigUserName" />
+                <ScalarProperty Name="IdBIG" ColumnName="IdBIG" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdBigUser" ColumnName="IdBigUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KnsKsiegi">
+            <EntityTypeMapping TypeName="RupLancMetModel.KnsKsiegi">
+              <MappingFragment StoreEntitySet="KnsKsiegi">
+                <ScalarProperty Name="ksGrzFPPMap" ColumnName="ksGrzFPPMap" />
+                <ScalarProperty Name="czymies" ColumnName="czymies" />
+                <ScalarProperty Name="czyFPP" ColumnName="czyFPP" />
+                <ScalarProperty Name="oprGrzSamoistna" ColumnName="oprGrzSamoistna" />
+                <ScalarProperty Name="Id_Ksiegi" ColumnName="Id_Ksiegi" />
+                <ScalarProperty Name="rodzajPrzedmiotu" ColumnName="rodzajPrzedmiotu" />
+                <ScalarProperty Name="oprGrzPraw" ColumnName="oprGrzPraw" />
+                <ScalarProperty Name="oprGrzFiz" ColumnName="oprGrzFiz" />
+                <ScalarProperty Name="oprKosztPraw" ColumnName="oprKosztPraw" />
+                <ScalarProperty Name="oprKosztFiz" ColumnName="oprKosztFiz" />
+                <ScalarProperty Name="numWydz" ColumnName="numWydz" />
+                <ScalarProperty Name="kodSad" ColumnName="kodSad" />
+                <ScalarProperty Name="wydzial" ColumnName="wydzial" />
+                <ScalarProperty Name="sad" ColumnName="sad" />
+                <ScalarProperty Name="id_sadu" ColumnName="id_sadu" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="False" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <edmx:Diagram Name="BIGModel" ZoomLevel="78">
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.Konfiguracja" Width="1.5" PointX="7.375" PointY="5.75" Height="5.8263151041666674" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.User" Width="1.5" PointX="3.375" PointY="0.75" Height="3.7109993489583317" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.BIG_Package" Width="1.5" PointX="7.125" PointY="17.375" Height="2.3648893229166674" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.BIG_Package_User" Width="1.5" PointX="13.875" PointY="12.5" Height="1.9802864583333388" />
+        <edmx:AssociationConnector Association="RupLancMetModel.FK_BIG_Package_User_BIG_Package1">
+          <edmx:ConnectorPoint PointX="7.875" PointY="17.375" />
+          <edmx:ConnectorPoint PointX="7.875" PointY="13.523793945312502" />
+          <edmx:ConnectorPoint PointX="12.291666666666666" PointY="13.523793945312502" />
+          <edmx:ConnectorPoint PointX="12.458333333333334" PointY="13.523793945312502" />
+          <edmx:ConnectorPoint PointX="13.875" PointY="13.523793945312502" />
+        </edmx:AssociationConnector>
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.SAPSad" Width="1.5" PointX="9.375" PointY="10.75" Height="2.1725878906250031" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.BIG_Big" Width="1.5" PointX="9.375" PointY="24.25" Height="2.1725878906250031" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.BIG_Konfig" Width="1.5" PointX="9.375" PointY="0.75" Height="2.5571907552083388" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.BIG_Oper_Status" Width="1.5" PointX="1.375" PointY="21.5" Height="3.3263964843750031" />
+        <edmx:AssociationConnector Association="RupLancMetModel.FK_BIG_Oper_Status_BIG_Big">
+          <edmx:ConnectorPoint PointX="9.375" PointY="24.5381982421875" />
+          <edmx:ConnectorPoint PointX="2.875" PointY="24.5381982421875" />
+        </edmx:AssociationConnector>
+        <edmx:AssociationConnector Association="RupLancMetModel.FK_BIG_Oper_Status_BIG_Package">
+          <edmx:ConnectorPoint PointX="7.875" PointY="19.932190755208335" />
+          <edmx:ConnectorPoint PointX="7.875" PointY="22.987846621093752" />
+          <edmx:ConnectorPoint PointX="2.875" PointY="22.987846621093752" />
+        </edmx:AssociationConnector>
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.BIG_Log" Width="1.5" PointX="11.375" PointY="0.75" Height="2.1725878906250031" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.BIG_InfoOperation" Width="1.5" PointX="9.375" PointY="14.125" Height="9.0954394531250031" />
+        <edmx:AssociationConnector Association="RupLancMetModel.FK_BIG_InfoOperation_BIG_Package">
+          <edmx:ConnectorPoint PointX="8.625" PointY="18.653595377604169" />
+          <edmx:ConnectorPoint PointX="9.375" PointY="18.653595377604169" />
+        </edmx:AssociationConnector>
+        <edmx:AssociationConnector Association="RupLancMetModel.FK_BIG_Oper_Status_BIG_InfoOperation">
+          <edmx:ConnectorPoint PointX="9.375" PointY="22.181423310546876" />
+          <edmx:ConnectorPoint PointX="7.958333333333333" PointY="22.181423310546876" />
+          <edmx:ConnectorPoint PointX="7.791666666666667" PointY="22.181423310546876" />
+          <edmx:ConnectorPoint PointX="2.875" PointY="22.181423310546876" />
+        </edmx:AssociationConnector>
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.vw_BIG_Dluznicy" Width="1.5" PointX="0.75" PointY="0.75" Height="10.056946614583332" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.vw_BIG_Operacje" Width="1.5" PointX="2.75" PointY="5.75" Height="10.056946614583332" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.vw_BIG_OperacjeToCheck" Width="1.5" PointX="4.75" PointY="5.75" Height="2.5571907552083388" />
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.BIG_User" Width="1.5" PointX="11.625" PointY="24" Height="2.749492187499996" />
+        <edmx:AssociationConnector Association="RupLancMetModel.FK_BIG_User_BIG_Big">
+          <edmx:ConnectorPoint PointX="10.875" PointY="25.432444661458334" />
+          <edmx:ConnectorPoint PointX="11.625" PointY="25.432444661458334" />
+        </edmx:AssociationConnector>
+        <edmx:AssociationConnector Association="RupLancMetModel.FK_BIG_Package_User_BIG_Package">
+          <edmx:ConnectorPoint PointX="12.375" PointY="24" />
+          <edmx:ConnectorPoint PointX="12.375" PointY="12.98064447265625" />
+          <edmx:ConnectorPoint PointX="13.875" PointY="12.98064447265625" />
+        </edmx:AssociationConnector>
+        <edmx:EntityTypeShape EntityType="RupLancMetModel.KnsKsiegi" Width="1.5" PointX="9.375" PointY="4.75" />
+        </edmx:Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

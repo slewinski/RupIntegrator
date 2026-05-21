@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:p1="http://ms.gov.pl/ig2big/common" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" name="IG2BIG_packageSubmitRequest_out" targetNamespace="http://ms.gov.pl/ig2big/common" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation />
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="OP_IG2BIG_packageSubmitRequest_out" />
+  <wsdl:types>
+    <xsd:schema xmlns="http://ms.gov.pl/ig2big/common" xmlns:p4="https://www.ig2big.org/ws/v1/types" targetNamespace="http://ms.gov.pl/ig2big/common" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="https://www.ig2big.org/ws/v1/types" />
+      <xsd:element name="packageSubmitResponse" type="p4:Confirmation" />
+      <xsd:element name="packageSubmitRequest" type="p4:Package" />
+    </xsd:schema>
+    <xsd:schema xmlns="https://www.ig2big.org/ws/v1/types" targetNamespace="https://www.ig2big.org/ws/v1/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:simpleType name="pesel">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">6b5df5ada9ab11e6a0d2000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:pattern value="\d*" />
+          <xsd:length value="11" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="documentTypeEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">255fa567a9ab11e6c152000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="drivingLicense" />
+          <xsd:enumeration value="idCard" />
+          <xsd:enumeration value="passport" />
+          <xsd:enumeration value="insurance" />
+          <xsd:enumeration value="other" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string250">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">c2788719782211e6a74f000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="250" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="countryEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">f7167afca9aa11e6c78d000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ABW" />
+          <xsd:enumeration value="AFG" />
+          <xsd:enumeration value="AGO" />
+          <xsd:enumeration value="AIA" />
+          <xsd:enumeration value="ALA" />
+          <xsd:enumeration value="ALB" />
+          <xsd:enumeration value="AND" />
+          <xsd:enumeration value="ARE" />
+          <xsd:enumeration value="ARG" />
+          <xsd:enumeration value="ARM" />
+          <xsd:enumeration value="ASM" />
+          <xsd:enumeration value="ATA" />
+          <xsd:enumeration value="ATF" />
+          <xsd:enumeration value="ATG" />
+          <xsd:enumeration value="AUS" />
+          <xsd:enumeration value="AUT" />
+          <xsd:enumeration value="AZE" />
+          <xsd:enumeration value="BDI" />
+          <xsd:enumeration value="BEL" />
+          <xsd:enumeration value="BEN" />
+          <xsd:enumeration value="BES" />
+          <xsd:enumeration value="BFA" />
+          <xsd:enumeration value="BGD" />
+          <xsd:enumeration value="BGR" />
+          <xsd:enumeration value="BHR" />
+          <xsd:enumeration value="BHS" />
+          <xsd:enumeration value="BIH" />
+          <xsd:enumeration value="BLM" />
+          <xsd:enumeration value="BLR" />
+          <xsd:enumeration value="BLZ" />
+          <xsd:enumeration value="BMU" />
+          <xsd:enumeration value="BOL" />
+          <xsd:enumeration value="BRA" />
+          <xsd:enumeration value="BRB" />
+          <xsd:enumeration value="BRN" />
+          <xsd:enumeration value="BTN" />
+          <xsd:enumeration value="BVT" />
+          <xsd:enumeration value="BWA" />
+          <xsd:enumeration value="CAF" />
+          <xsd:enumeration value="CAN" />
+          <xsd:enumeration value="CCK" />
+          <xsd:enumeration value="CHE" />
+          <xsd:enumeration value="CHL" />
+          <xsd:enumeration value="CHN" />
+          <xsd:enumeration value="CIV" />
+          <xsd:enumeration value="CMR" />
+          <xsd:enumeration value="COD" />
+          <xsd:enumeration value="COG" />
+          <xsd:enumeration value="COK" />
+          <xsd:enumeration value="COL" />
+          <xsd:enumeration value="COM" />
+          <xsd:enumeration value="CPV" />
+          <xsd:enumeration value="CRI" />
+          <xsd:enumeration value="CUB" />
+          <xsd:enumeration value="CUW" />
+          <xsd:enumeration value="CXR" />
+          <xsd:enumeration value="CYM" />
+          <xsd:enumeration value="CYP" />
+          <xsd:enumeration value="CZE" />
+          <xsd:enumeration value="DEU" />
+          <xsd:enumeration value="DJI" />
+          <xsd:enumeration value="DMA" />
+          <xsd:enumeration value="DNK" />
+          <xsd:enumeration value="DOM" />
+          <xsd:enumeration value="DZA" />
+          <xsd:enumeration value="ECU" />
+          <xsd:enumeration value="EGY" />
+          <xsd:enumeration value="ERI" />
+          <xsd:enumeration value="ESH" />
+          <xsd:enumeration value="ESP" />
+          <xsd:enumeration value="EST" />
+          <xsd:enumeration value="ETH" />
+          <xsd:enumeration value="FIN" />
+          <xsd:enumeration value="FJI" />
+          <xsd:enumeration value="FLK" />
+          <xsd:enumeration value="FRA" />
+          <xsd:enumeration value="FRO" />
+          <xsd:enumeration value="FSM" />
+          <xsd:enumeration value="GAB" />
+          <xsd:enumeration value="GBR" />
+          <xsd:enumeration value="GEO" />
+          <xsd:enumeration value="GGY" />
+          <xsd:enumeration value="GHA" />
+          <xsd:enumeration value="GIB" />
+          <xsd:enumeration value="GIN" />
+          <xsd:enumeration value="GLP" />
+          <xsd:enumeration value="GMB" />
+          <xsd:enumeration value="GNB" />
+          <xsd:enumeration value="GNQ" />
+          <xsd:enumeration value="GRC" />
+          <xsd:enumeration value="GRD" />
+          <xsd:enumeration value="GRL" />
+          <xsd:enumeration value="GTM" />
+          <xsd:enumeration value="GUF" />
+          <xsd:enumeration value="GUM" />
+          <xsd:enumeration value="GUY" />
+          <xsd:enumeration value="HKG" />
+          <xsd:enumeration value="HMD" />
+          <xsd:enumeration value="HND" />
+          <xsd:enumeration value="HRV" />
+          <xsd:enumeration value="HTI" />
+          <xsd:enumeration value="HUN" />
+          <xsd:enumeration value="IDN" />
+          <xsd:enumeration value="IMN" />
+          <xsd:enumeration value="IND" />
+          <xsd:enumeration value="IOT" />
+          <xsd:enumeration value="IRL" />
+          <xsd:enumeration value="IRN" />
+          <xsd:enumeration value="IRQ" />
+          <xsd:enumeration value="ISL" />
+          <xsd:enumeration value="ISR" />
+          <xsd:enumeration value="ITA" />
+          <xsd:enumeration value="JAM" />
+          <xsd:enumeration value="JEY" />
+          <xsd:enumeration value="JOR" />
+          <xsd:enumeration value="JPN" />
+          <xsd:enumeration value="KAZ" />
+          <xsd:enumeration value="KEN" />
+          <xsd:enumeration value="KGZ" />
+          <xsd:enumeration value="KHM" />
+          <xsd:enumeration value="KIR" />
+          <xsd:enumeration value="KNA" />
+          <xsd:enumeration value="KOR" />
+          <xsd:enumeration value="KWT" />
+          <xsd:enumeration value="LAO" />
+          <xsd:enumeration value="LBN" />
+          <xsd:enumeration value="LBR" />
+          <xsd:enumeration value="LBY" />
+          <xsd:enumeration value="LCA" />
+          <xsd:enumeration value="LIE" />
+          <xsd:enumeration value="LKA" />
+          <xsd:enumeration value="LSO" />
+          <xsd:enumeration value="LTU" />
+          <xsd:enumeration value="LUX" />
+          <xsd:enumeration value="LVA" />
+          <xsd:enumeration value="MAC" />
+          <xsd:enumeration value="MAF" />
+          <xsd:enumeration value="MAR" />
+          <xsd:enumeration value="MCO" />
+          <xsd:enumeration value="MDA" />
+          <xsd:enumeration value="MDG" />
+          <xsd:enumeration value="MDV" />
+          <xsd:enumeration value="MEX" />
+          <xsd:enumeration value="MHL" />
+          <xsd:enumeration value="MKD" />
+          <xsd:enumeration value="MLI" />
+          <xsd:enumeration value="MLT" />
+          <xsd:enumeration value="MMR" />
+          <xsd:enumeration value="MNE" />
+          <xsd:enumeration value="MNG" />
+          <xsd:enumeration value="MNP" />
+          <xsd:enumeration value="MOZ" />
+          <xsd:enumeration value="MRT" />
+          <xsd:enumeration value="MSR" />
+          <xsd:enumeration value="MTQ" />
+          <xsd:enumeration value="MUS" />
+          <xsd:enumeration value="MWI" />
+          <xsd:enumeration value="MYS" />
+          <xsd:enumeration value="MYT" />
+          <xsd:enumeration value="NAM" />
+          <xsd:enumeration value="NCL" />
+          <xsd:enumeration value="NER" />
+          <xsd:enumeration value="NFK" />
+          <xsd:enumeration value="NGA" />
+          <xsd:enumeration value="NIC" />
+          <xsd:enumeration value="NIU" />
+          <xsd:enumeration value="NLD" />
+          <xsd:enumeration value="NOR" />
+          <xsd:enumeration value="NPL" />
+          <xsd:enumeration value="NRU" />
+          <xsd:enumeration value="NZL" />
+          <xsd:enumeration value="OMN" />
+          <xsd:enumeration value="PAK" />
+          <xsd:enumeration value="PAN" />
+          <xsd:enumeration value="PCN" />
+          <xsd:enumeration value="PER" />
+          <xsd:enumeration value="PHL" />
+          <xsd:enumeration value="PLW" />
+          <xsd:enumeration value="PNG" />
+          <xsd:enumeration value="POL" />
+          <xsd:enumeration value="PRI" />
+          <xsd:enumeration value="PRK" />
+          <xsd:enumeration value="PRT" />
+          <xsd:enumeration value="PRY" />
+          <xsd:enumeration value="PSE" />
+          <xsd:enumeration value="PYF" />
+          <xsd:enumeration value="QAT" />
+          <xsd:enumeration value="REU" />
+          <xsd:enumeration value="ROU" />
+          <xsd:enumeration value="RUS" />
+          <xsd:enumeration value="RWA" />
+          <xsd:enumeration value="SAU" />
+          <xsd:enumeration value="SDN" />
+          <xsd:enumeration value="SEN" />
+          <xsd:enumeration value="SGP" />
+          <xsd:enumeration value="SGS" />
+          <xsd:enumeration value="SHN" />
+          <xsd:enumeration value="SJM" />
+          <xsd:enumeration value="SLB" />
+          <xsd:enumeration value="SLE" />
+          <xsd:enumeration value="SLV" />
+          <xsd:enumeration value="SMR" />
+          <xsd:enumeration value="SOM" />
+          <xsd:enumeration value="SPM" />
+          <xsd:enumeration value="SRB" />
+          <xsd:enumeration value="SSD" />
+          <xsd:enumeration value="STP" />
+          <xsd:enumeration value="SUR" />
+          <xsd:enumeration value="SVK" />
+          <xsd:enumeration value="SVN" />
+          <xsd:enumeration value="SWE" />
+          <xsd:enumeration value="SWZ" />
+          <xsd:enumeration value="SXM" />
+          <xsd:enumeration value="SYC" />
+          <xsd:enumeration value="SYR" />
+          <xsd:enumeration value="TCA" />
+          <xsd:enumeration value="TCD" />
+          <xsd:enumeration value="TGO" />
+          <xsd:enumeration value="THA" />
+          <xsd:enumeration value="TJK" />
+          <xsd:enumeration value="TKL" />
+          <xsd:enumeration value="TKM" />
+          <xsd:enumeration value="TLS" />
+          <xsd:enumeration value="TON" />
+          <xsd:enumeration value="TTO" />
+          <xsd:enumeration value="TUN" />
+          <xsd:enumeration value="TUR" />
+          <xsd:enumeration value="TUV" />
+          <xsd:enumeration value="TWN" />
+          <xsd:enumeration value="TZA" />
+          <xsd:enumeration value="UGA" />
+          <xsd:enumeration value="UKR" />
+          <xsd:enumeration value="UMI" />
+          <xsd:enumeration value="URY" />
+          <xsd:enumeration value="USA" />
+          <xsd:enumeration value="UZB" />
+          <xsd:enumeration value="VAT" />
+          <xsd:enumeration value="VCT" />
+          <xsd:enumeration value="VEN" />
+          <xsd:enumeration value="VGB" />
+          <xsd:enumeration value="VIR" />
+          <xsd:enumeration value="VNM" />
+          <xsd:enumeration value="VUT" />
+          <xsd:enumeration value="WLF" />
+          <xsd:enumeration value="WSM" />
+          <xsd:enumeration value="YEM" />
+          <xsd:enumeration value="ZAF" />
+          <xsd:enumeration value="ZMB" />
+          <xsd:enumeration value="ZWE" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="date">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">07a2f52da9ab11e6bb13000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:date">
+          <xsd:pattern value=".{10}" />
+          <xsd:minInclusive value="1945-01-01" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string10">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">251ca1e0782111e6c8ab000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string32">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">7cf66d23782011e69ed1000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="32" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string40">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">0f7579b7781e11e6843a000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string50">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">089044e5782111e6b63a000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string20">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">fbe71d35782011e69ed5000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="20" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string30">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">7d7a64e9782111e6a935000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="30" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="currencyEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">02474de0a9ab11e6c180000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="USD" />
+          <xsd:enumeration value="AUD" />
+          <xsd:enumeration value="CAD" />
+          <xsd:enumeration value="EUR" />
+          <xsd:enumeration value="HUF" />
+          <xsd:enumeration value="CHF" />
+          <xsd:enumeration value="GBP" />
+          <xsd:enumeration value="JPY" />
+          <xsd:enumeration value="CZK" />
+          <xsd:enumeration value="DKK" />
+          <xsd:enumeration value="EEK" />
+          <xsd:enumeration value="NOK" />
+          <xsd:enumeration value="SEK" />
+          <xsd:enumeration value="RUB" />
+          <xsd:enumeration value="PLN" />
+          <xsd:enumeration value="GRD" />
+          <xsd:enumeration value="PTE" />
+          <xsd:enumeration value="BEF" />
+          <xsd:enumeration value="FRF" />
+          <xsd:enumeration value="LUF" />
+          <xsd:enumeration value="IEP" />
+          <xsd:enumeration value="NLG" />
+          <xsd:enumeration value="ITL" />
+          <xsd:enumeration value="FIM" />
+          <xsd:enumeration value="DEM" />
+          <xsd:enumeration value="ESP" />
+          <xsd:enumeration value="ATS" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="liabilityTypeEnum">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">4cb7360fa9ab11e6ca37000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="fine" />
+          <xsd:enumeration value="compensation" />
+          <xsd:enumeration value="forfeit" />
+          <xsd:enumeration value="courtCosts" />
+          <xsd:enumeration value="monetaryPenalty" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="amount">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">ce3f3a1ba9a911e6bfa4000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:decimal">
+          <xsd:minInclusive value="0.01" />
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Empty">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">d6e5aa5f782111e69113000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="string">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">0d61d85ca9ac11e6a00a000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:token">
+          <xsd:minLength value="1" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="Confirmation">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">df96d08ec12111e69724000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="receptionDateTime" type="xsd:dateTime">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">93ced87b782311e69e25025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="AckStatus" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">63b59141782b11e6c1a5025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="AckMessage" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">63b59142782b11e6b908025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EconomicInformation">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">2afabb07a9ab11e68506000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="debtor" type="Debtor">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">ff4417fca9aa11e6cbe0025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="liability" type="Liability">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">ff444482a9aa11e69be0025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="LegalTitle">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">5d6193b078fa11e68760000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="enforceableTitle" type="EnforceableTitle">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">ff70384c782111e6c283025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="otherTitle" type="Empty">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">ff70384d782111e6b173025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Package">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">df315ceb975311e6af30000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="credentials" type="Credentials" />
+          <xsd:element name="packageSubmit" type="PackageSubmit" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Document">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">1f9a04dda9ab11e6a623000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="documentNumber" type="string40">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">f3d0ae87a9aa11e69296025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="documentType" type="documentTypeEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">f3d0d7aea9aa11e6bcd5025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ForeignCitizenIdentity">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">376a3b38a9ab11e6b270000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="document" type="Document">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">0b87d174a9ab11e69606025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PackageSubmit">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">d709ff6d781b11e6cc99000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="packageId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">159baf0a781c11e6c8db025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element maxOccurs="unbounded" name="operation" type="Operation">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">159baf0b781c11e6a90c025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Debtor">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">0d119a84a9ab11e685a1000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="debtorId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e1599f94a9aa11e69cd1025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="forename" type="string20">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e1599f95a9aa11e6c625025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="surename" type="string30">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e1599f96a9aa11e6ac58025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="debtorIdentity" type="DebtorIdentity">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e1599f97a9aa11e6b181025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="residenceAddress" type="Address">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e1599f98a9aa11e6ae9f025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="corespondenceAddress" type="Address">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e1599f99a9aa11e6abc8025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PolishCitizenIdentity">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">ba23306aa9ab11e6ce63000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="pesel" type="pesel">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">8e71503ba9ab11e6ad79025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="document" type="Document">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">8e71503ca9ab11e6b4e3025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="InformationSelector">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">3c18aa0aa9ab11e6a326000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="debtorId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">10639eb1a9ab11e68886025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="liabilityId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1063ce20a9ab11e6a731025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DebtorIdentity">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">cf8f104f78fa11e6a634000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="polishCitizenIdentity" type="PolishCitizenIdentity">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">830d72d4781d11e6a348025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="foreignCitizenIdentity" type="ForeignCitizenIdentity">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">830d72d5781d11e69e3a025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Liability">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">47999fd8a9ab11e695a9000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="liabilityId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be2778da9ab11e68e59025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="institutionDataShareRestricted" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be28773a9ab11e6bea2025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="shareSuspensionFinalDate" type="date">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be28774a9ab11e69313025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="liabilityType" type="liabilityTypeEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be28775a9ab11e68bec025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="legalTitle" type="LegalTitle">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be28776a9ab11e69c2c025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="currency" type="currencyEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be28777a9ab11e68aab025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="liabilityAmount" type="amount">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be28778a9ab11e68391025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="arrearsAmount" type="amount">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be28779a9ab11e6ad56025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="disputedAmount" type="amount">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be2877aa9ab11e6b070025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="arrearsRiseDate" type="date">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be2aa72a9ab11e699c5025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="paymentRequestDispatchDate" type="date">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1be2aa73a9ab11e6911a025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Credentials">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">e6496f31e8c311e682d3000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="big_id">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">aa42fbfbe8c311e69c06025041000001</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="IM" />
+                <xsd:enumeration value="KBIG" />
+                <xsd:enumeration value="ERIF" />
+                <xsd:enumeration value="KRD" />
+                <xsd:enumeration value="KIDT" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="subscriberId" type="string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">d083b84aa9aa11e69e48025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="userId" type="string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">d083dedca9aa11e69518025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="password" type="string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">d083dedda9aa11e6ca22025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Operation">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">2cb1624d78fa11e6a214000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="OperationId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1e7d3e97781d11e694c3025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="addInformation" type="EconomicInformation">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1e7d3e98781d11e69132025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="updateInformation" type="EconomicInformation">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1e7d3e99781d11e6ad0f025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="blockInformation" type="BlockInformation">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1e7d3e9a781d11e6b099025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="unblockInformation" type="InformationSelector">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1e7d3e9b781d11e6cebf025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="deleteInformation" type="InformationSelector">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">1e7d3e9c781d11e6a19b025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Address">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">e47ee56fa9aa11e6aafa000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="country" type="countryEnum">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">b8095785a9aa11e6c8b8025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="postcode" type="string10">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">b8098a7ba9aa11e6c6a4025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="city" type="string40">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">b8098a7ca9aa11e6ce59025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="street" type="string50">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">b8098a7da9aa11e68793025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="houseNumber" type="string10">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">b809a56aa9aa11e69b48025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="localNumber" type="string20">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">b809a56ba9aa11e6a542025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EnforceableTitle">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">325cbe07a9ab11e6ac38000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="enforceableTitleId" type="string50">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">06a488c0a9ab11e69345025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="adjudicatingBody" type="string250">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">06a488c1a9ab11e6ab4e025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="issueDate" type="date">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">06a49fdea9ab11e6c2d7025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="BlockInformation">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">1c740933781d11e6a24a000006d9f6a6</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="debtorId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">ab092c8f782011e6ce82025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="liabilityId" type="string32">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">ab092c90782011e6cfc4025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="shareSuspensionFinalDate" type="date">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">ab092c91782011e69733025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="packageSubmitRequest">
+    <wsdl:documentation />
+    <wsdl:part name="packageSubmitRequest" element="p1:packageSubmitRequest" />
+  </wsdl:message>
+  <wsdl:message name="packageSubmitResponse">
+    <wsdl:documentation />
+    <wsdl:part name="packageSubmitResponse" element="p1:packageSubmitResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IG2BIG_packageSubmitRequest_out">
+    <wsdl:documentation />
+    <wsdl:operation name="IG2BIG_packageSubmitRequest_out">
+      <wsdl:documentation />
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_IG2BIG_packageSubmitRequest_out" />
+      </wsp:Policy>
+      <wsdl:input message="p1:packageSubmitRequest" />
+      <wsdl:output message="p1:packageSubmitResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IG2BIG_packageSubmitRequest_outBinding" type="p1:IG2BIG_packageSubmitRequest_out">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <wsdl:operation name="IG2BIG_packageSubmitRequest_out">
+      <operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+      <wsdl:output>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IG2BIG_packageSubmitRequest_outService">
+    <wsdl:port name="HTTP_Port" binding="p1:IG2BIG_packageSubmitRequest_outBinding">
+      <address location="http://sapmodl01.zsrk.ms.gov.pl:51100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=IG_SENDER_SYSTEMS_DEV&amp;receiverParty=&amp;receiverService=&amp;interface=IG2BIG_packageSubmitRequest_out&amp;interfaceNamespace=http%3A%2F%2Fms.gov.pl%2Fig2big%2Fcommon" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+    <wsdl:port name="HTTPS_Port" binding="p1:IG2BIG_packageSubmitRequest_outBinding">
+      <address location="https://sapmodl01.zsrk.ms.gov.pl:51101/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=IG_SENDER_SYSTEMS_DEV&amp;receiverParty=&amp;receiverService=&amp;interface=IG2BIG_packageSubmitRequest_out&amp;interfaceNamespace=http%3A%2F%2Fms.gov.pl%2Fig2big%2Fcommon" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
