@@ -1,0 +1,4169 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:p2="http://ms.gov.pl/KNS2ZSRK" xmlns:p1="urn:kns:zsrk:Servce" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="SI_KNS_KNS2ZSRK_os" targetNamespace="urn:kns:zsrk:Servce">
+   <wsdl:documentation />
+   <wsp:UsingPolicy wsdl:required="true" />
+   <wsp:Policy wsu:Id="OP_DezaktywacjaPlanuRat" />
+   <wsp:Policy wsu:Id="OP_DodajPartnera" />
+   <wsp:Policy wsu:Id="OP_WeryfikacjaPlanuRat" />
+   <wsp:Policy wsu:Id="OP_UstalenieStanuDepozytowDluznika" />
+   <wsp:Policy wsu:Id="OP_StanRozrachunkowZKomornikiem" />
+   <wsp:Policy wsu:Id="OP_AktualizujKontoUmowy" />
+   <wsp:Policy wsu:Id="OP_TworzeniePlanuRat" />
+   <wsp:Policy wsu:Id="OP_DodajKontoUmowy" />
+   <wsp:Policy wsu:Id="OP_PokazDokumentZrodlowy" />
+   <wsp:Policy wsu:Id="OP_WyszukajSygnature" />
+   <wsp:Policy wsu:Id="OP_OdpisanieNaleznosci" />
+   <wsp:Policy wsu:Id="OP_ZmienStatusNaleznosci" />
+   <wsp:Policy wsu:Id="OP_ZmianaTerminuWymagalnosci" />
+   <wsp:Policy wsu:Id="OP_WyszukajPartnera" />
+   <wsp:Policy wsu:Id="OP_PokazWplatyNierozpoznane" />
+   <wsp:Policy wsu:Id="OP_WyszukajKontoUmowy" />
+   <wsp:Policy wsu:Id="OP_PokazZaksiegowaneWplaty" />
+   <wsp:Policy wsu:Id="OP_Ping" />
+   <wsp:Policy wsu:Id="OP_ZakwalifikujWplate" />
+   <wsp:Policy wsu:Id="OP_DodajNaleznosc" />
+   <wsp:Policy wsu:Id="OP_ZmianaTerminuOdroczeniaNaleznosci" />
+   <wsp:Policy wsu:Id="OP_KorygowaniePrzypisowOdpisow" />
+   <wsp:Policy wsu:Id="OP_AktualizujDanePartnera" />
+   <wsp:Policy wsu:Id="OP_StornoWplaty" />
+   <wsp:Policy wsu:Id="OP_PobierzRozrachunkiDlaDokumentu" />
+   <wsp:Policy wsu:Id="OP_DodajSygnature" />
+   <wsdl:types>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://ms.gov.pl/KNS2ZSRK" targetNamespace="http://ms.gov.pl/KNS2ZSRK">
+         <xsd:element name="PokazZaksiegowaneWplatyZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="DataKsiegowaniaOd">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Data ksiêgowania w dokumencie
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:pattern value="....-..-.." />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="DataKsiegowaniaDo">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Data ksiêgowania w dokumencie
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:pattern value="....-..-.." />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="ZmienStatusNaleznosciOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="DodajNaleznoscOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Naleznosci" type="NaleznosciTyp" />
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="PokazZaksiegowaneWplatyOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+                  <xsd:element name="Wplaty" type="TabelaZaksiegowaneWplatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="WyszukajSygnatureResponse">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="SygnaturyZnalezione" type="SygnaturyZnalezioneTyp" />
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="AktualizujKontoUmowyOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="DodajKontoUmowyOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="KontoUmowyOdpowiedz" type="DodajKontoUmowyOdpowiedzTyp" />
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="OdpisanieNaleznosciZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerDokumentuDoOdpisania">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="OdpisanieNaleznosci" type="OdpisanieNaleznosciTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="UstalenieStanuDepozytowDluznikaZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerPartnera">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer partnera handlowego
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="10" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="StanRozrachunkowZKomornikiemZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="SygnaturaSadowa">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Sygnatura s¹dowa
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="20" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="BezDokumentowWystornowanych" minOccurs="0">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Bez dokumentów wystornowanych
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="1" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="KomornikID" minOccurs="0">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer partnera handlowego
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="10" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="DodajKontoUmowyZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="KontoUmowy" type="DodajKontoUmowyZapytanieTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="PartnerOdpowiedz" type="PartnerOdpowiedzKomunikatTyp" />
+         <xsd:element name="ZakwalifikujWplateZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+                  <xsd:element name="ZakwalifikujWplate" type="StrukturaZakwalifikujWplateTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="PartnerZapytanie" type="PartnerZapytaniePelneTyp" />
+         <xsd:element name="WyszukajPartneraZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Partner" type="PartnerWyszukanieTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="PokazDokumentZrodlowyOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="WyszukajPartneraOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Partnerzy" type="PartnerzyWyszukaniOdpowiedzTyp" />
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="PokazWplatyNierozpoznaneZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+                  <xsd:element name="ParametryWplat" type="PokazWplatyNierozpoznaneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="ZmianaTerminuOdroczeniaNaleznosciZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerDokumentu">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="DataOdroczenia">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Data odroczenia terminu p³atnoœci nale¿noœci
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:pattern value="....-..-.." />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="AktualizujDanePartneraZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Partner" type="PartnerWyszukanieOdpowiedzTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="DodajSygnatureOdpowiedz" type="DodajSygnatureOdpowiedzTyp" />
+         <xsd:element name="DodajSygnatureZapytanie" type="DodajSygnatureZapytanieTyp" />
+         <xsd:element name="KorygowaniePrzypisowOdpisowOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="KorygowanieDokumentuOdpowiedz" type="KorygowaniePrzypisowOdpisowOdpowiedzTyp" />
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="DezaktywacjaPlanuRatOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="PobierzRozrachunkiDlaDokumentuZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="StanRozrachunkow" type="StanRozrachunkowZapytanieTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="WyszukajKontoUmowyZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="KontoUmowy" type="WyszukajKontoUmowyZapytanieTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="PobierzRozrachunkiDlaDokumentuOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="RozliczonePozycjeNaleznosci" type="ListaDokumentowTyp" />
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="StanRozrachunkowZKomornikiemOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+                  <xsd:element name="RozrachunkiZKomornikiem" type="TabelaRozrachunkowZKomornikiem" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="ZmianaTerminuWymagalnosciZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerDokumentu">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="DataWymagalnosci">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Data wymagalnoœci nale¿noœci
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:pattern value="....-..-.." />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="AktualizujKontoUmowyZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="AktualizujKontoUmowy" type="AktualizujKontoUmowyZapytanieTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="ZmianaTerminuOdroczeniaNaleznosciOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="OdpisanieNaleznosciOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerZaksiegowanegoDokumentu">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="NumerDokumentuRozliczeniaOdpisu">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="UstalenieStanuDepozytowDluznikaOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="DepozytDluznika" type="TabelaDepozytowDluznikaTyp" />
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="TworzeniePlanuRatOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerPlanuRat">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="ZmianaTerminuWymagalnosciOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="StornoWplatyOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerDokumentuRozrachunkow">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="WyszukajKontoUmowyOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="KontaUmowy" type="WyszukajKontaUmowyTyp" />
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="WeryfikacjaPlanuRatZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="WeryfikacjaPlanyRat" type="WeryfikacjaPlanuRatTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="ZmienStatusNaleznosciZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="ZmienStatusNaleznosci" type="ZmienStatusNaleznosciZapytanieTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="StornoWplatyZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerDokumentuRozrachunkow">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="PokazWplatyNierozpoznaneOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+                  <xsd:element name="WplatyNierozpoznane" type="TabelaWplatNierozpoznanychTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="TworzeniePlanuRatZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="KodWaluty">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Kod waluty
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="5" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="KluczUzgodnienia" minOccurs="0">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Klucz uzgodnienia dla ksiêgowoœci KG
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="TabelaPlanuRat" type="TabelaPlanuRatTyp" />
+                  <xsd:element name="TabelaDokumentowPlanuRat" type="TabelaDokumentowPlanuRatTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="WeryfikacjaPlanuRatOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerPlanuRat">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="KorygowaniePrzypisowOdpisowZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="KorygowanieDokumentu" type="KorygowanieDokumentuTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="WyszukajSygnatureZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="SygnaturaWyszukanie" type="SygnaturaWyszukanieTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="DodajNaleznoscZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Naleznosci" type="NaleznosciTyp" />
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="ZakwalifikujWplateOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="AktualizujDanePartneraOdpowiedz">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="Partnerzy" type="PartnerzyWyszukaniOdpowiedzTyp" />
+                  <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="DezaktywacjaPlanuRatZapytnie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerPlanuRat">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:element name="Ping" type="PingTyp" />
+         <xsd:element name="PokazDokumentZrodlowyZapytanie">
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:element name="NumerDokumentuStornowanego">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="NumerDokumentuZrodlowego">
+                     <xsd:annotation>
+                        <xsd:documentation>
+                        Numer dokumentu rozrachunków wg kont umów
+                        </xsd:documentation>
+                     </xsd:annotation>
+                     <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                           <xsd:maxLength value="12" />
+                        </xsd:restriction>
+                     </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+         <xsd:simpleType name="PingTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Pole w którym przesy³any jest TimeStamp z
+						systemu ERP
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:restriction base="xsd:string" />
+         </xsd:simpleType>
+         <xsd:complexType name="SygnaturaZnalezionaTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura do FM Z_GETSIGNATURE
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="IDPrzedmiotuUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz identyfik. przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="OznaczeniePrzedmiotuUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Oznaczenie przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="35" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="PartnerzyWyszukaniOdpowiedzTyp">
+            <xsd:sequence>
+               <xsd:element name="Partner" type="PartnerWyszukanieOdpowiedzTyp" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="TabelaDepozytowDluznikaTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela wyjœciowa FM Z_GETDEBTORDEPOSITS
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="DepozytDluznika" type="StrukturaDepozytowDluznikaTyp" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="PartnerZapytanieTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Parametry wejœciowe PH
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="TypPartnera">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Typ partnera handl.
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Imie">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Imiê partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Nazwisko">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwisko partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NazwaOrganizacji1" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa 1 organizacji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NazwaOrganizacji2" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa 2 organizacji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Ulica">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Ulica
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="60" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerDomu">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer domu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerMieszkania" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Uzupe³nienie do numeru domu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KodPocztowy">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kod pocztowy miasta
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Miejscowosc">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Miasto
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Kraj">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz kraju
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="3" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PESEL" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     PESEL
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="11" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NIP" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     NIP
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RBN" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     RBN nr
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="DokumentPlanuRatTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura dokumentów do twprzenie planu rat
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerDokumentuRozrachunkow">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="NaleznosciTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela wejsciowa do ksiêgowania
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="Naleznosc" type="NaleznoscTyp" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="PartnerWyszukanieOdpowiedzTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Parametry wejœciowe PH
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerPartnera">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera biznesowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="TypPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Typ partnera handl.
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Imie" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Imiê partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Nazwisko" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwisko partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NazwaOrganizacji1" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa 1 organizacji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NazwaOrganizacji2" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa 2 organizacji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Ulica" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Ulica
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="60" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerDomu" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer domu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerMieszkania" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Uzupe³nienie do numeru domu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KodPocztowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kod pocztowy miasta
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Miasto" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Miasto
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Kraj" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz kraju
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="3" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PESEL" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     PESEL
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="11" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NIP" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     NIP
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RBN" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     RBN nr
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="AktualizujKontoUmowyZapytanieTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wejœciowa KU
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerKontaUmowy">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPartnera">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera biznesowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="IDPrzedmiotuUmowy">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz identyfik. przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="SygnaturaZapytanieTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wejsciowa RFC
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="RodzajPrzedmiotuUmowy">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Rodzaj przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="JednostkaGospodarcza">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Jednostka gospodarcza
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerWydzialuISekcji">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer wydzia³u i sekcji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Repertorium">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Repertorium
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="6" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KolejnyNumerSprawy">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kolejny numer sprawy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="6" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Rok">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Rok
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RodzajSprawy">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Rodzaj sprawy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="5" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="IloscTomow">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Iloœæ tomów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="3" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PodrodzajSprawy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Podrodzaj sprawy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="SadFunkcjonalnyStanowiskoFinansowe" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     S¹d funkcjonalny/Stanowisko finansowe
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="16" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DaneDoWindykacjiJednostkaGospodarcza" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Dane do windykacji- Jednostka Gospodarcza
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DaneDoWindykacjiSadFunkcjonalnyStanowiskoFinansowe" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Dane do windykacja- S¹d funkcjonalny/Stanowisko finansowe
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="16" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="TabelaZaksiegowaneWplatyTyp">
+            <xsd:sequence>
+               <xsd:element name="Wplata" type="StrukturaZaksiegowanychWplatTyp" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="StrukturaWplatNierozpoznanych">
+            <xsd:annotation>
+               <xsd:documentation>
+               struktura FM Z_GETUNIDENTPAYMENTS
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NazwaPartiiPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Partia p³atnoœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPozycjiWPartiiPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer pozycji w partii p³atnoœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="6" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataKsiegowania" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data ksiêgowania w dokumencie
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Kwota" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kwota p³atnoœci w walucie transakcji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:decimal">
+                        <xsd:totalDigits value="13" />
+                        <xsd:fractionDigits value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="ZleceniodawcaPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa zleceniodawcy / osoby wystaw. czek /
+								w³aœciciela karty
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="60" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="TytulPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Tekst do zastosowania p³atnoœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="80" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="KomunikatTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wyjœciowa FM z pakietu ZKNSK1
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="IDKomunikatu" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klasa komunikatów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RodzajKomunikatu" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Typ komunikatu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerKomunikatu" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer komunikatu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="3" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Komunikat" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Tekstowa postaæ komunikatu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="240" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="DodajSygnatureOdpowiedzTyp">
+            <xsd:sequence>
+               <xsd:element name="SygnaturaOdpowiedz" type="SygnaturaOdpowiedzTyp" />
+               <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="TabelaWplatNierozpoznanychTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela wyjœciowa FM Z_GETUNIDENTPAYMENTS
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="WplataNierozpoznana" type="StrukturaWplatNierozpoznanych" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="StrukturaZakwalifikujWplateTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wejœciowa FM Z_ARRANGEPAYMENT
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NazwaPartiiPlatnosci">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Partia p³atnoœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPozycjiWPartiiPlatnosci">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer pozycji w partii p³atnoœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="6" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerDokumentuRozrachunkow">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Kwota">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kwota p³atnoœci w walucie transakcji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:decimal">
+                        <xsd:totalDigits value="13" />
+                        <xsd:fractionDigits value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="SygnaturyZnalezioneTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela wyjœciowa FM Z_GETSIGNATURE
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="Sygnatura" type="SygnaturaZnalezionaTyp" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="DokumentTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Lista dokumentów
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerDokumentuRozrachunkow" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PozycjaPowtorzeniaWDokumencie" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Pozycja powtórzenia w dokumencie rozrachunków
+								wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="3" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPozycjiWDokumencie" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer pozycji w dokumencie rozrachunków wg
+								kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PozycjaCzesciowaWDokumencie" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Pozycja czêœciowa dla rozliczenia czêœc. w
+								dokumencie
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="3" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KwotaWWalucieKrajowej" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kwota w walucie krajowej ze znakiem +/-
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:decimal">
+                        <xsd:totalDigits value="13" />
+                        <xsd:fractionDigits value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PowodRozliczenia" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Powód rozliczenia
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="PartnerWyszukanieTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Parametry wejœciowe PH
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera handlowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="TypPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Typ partnera handl.
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Imie" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Imiê partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Nazwisko" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwisko partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NazwaOrganizacji1" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa 1 organizacji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NazwaOrganizacji2" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa 2 organizacji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Ulica" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Ulica
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="60" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerDomu" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer domu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerMieszkania" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Uzupe³nienie do numeru domu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KodPocztowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kod pocztowy miasta
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Miasto" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Miasto
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Kraj" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz kraju
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="3" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PESEL" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     PESEL
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="11" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NIP" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     NIP
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RBN" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     RBN nr
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="IDPrzedmiotuUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz identyfik. przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="StrukturaPlanuRatTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura planu rat
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerRaty" minOccurs="0">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="TerminPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data p³atnoœci netto
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KwotaPlatnosci" minOccurs="0">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="18" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ParametryAdministracyjneTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Parametry administracyjne , wejœciowe PH
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="JednostkaGospodarcza">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Jednostka gospodarcza
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Uzytkownik">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     U¿ytkownik, który utworzy³ dany obiekt
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataWyslania">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data wys³ania komunikatu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="GodzinaWyslania">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Godzina wys³ania
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="..:..:.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="NaleznoscTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Dane wejœciowe do ksiêgowania
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="DataKsiegowania">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data ksiêgowania w dokumencie
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataDokumentu">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="JednostkaGospodarcza">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Jednostka gospodarcza
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="GlownaOperacja">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     G³ówna operacja poz. dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="CzesciowaOperacja">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Czêœc. operacja poz. dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KwotaNaleznosci">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="18" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataPlatnosciNetto">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data p³atnoœci netto
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PrzyczynaBlokPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Przyczyna blok. p³atnoœci dla p³atnoœci
+								automatycznej
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="TekstWyjasniajacy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Tekst wyjaœniaj¹cy dla pozycji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="50" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KluczUzgodnienia" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz uzgodnienia dla ksiêgowoœci KG
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="IDPrzedmiotuUmowy">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Sygnatura s¹dowa
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera handlowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RodzajDokumentu" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Rodzaj dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KodWaluty" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kod waluty
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="5" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerDokumentuRozrachunkow" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="DodajKontoUmowyOdpowiedzTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wyjœciowa dla kontraktu
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ListaDokumentowTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Lista dokumentów
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="Dokument" type="DokumentTyp" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="PartnerOdpowiedzTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Response
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera biznesowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PESEL" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Znacznik
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="WyszukajKontoUmowyOdpowiedzTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wyjœciowa FM GetContractAccount
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="TypKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Typ konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="OznaczenieKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Oznaczenie konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="35" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="StandardowaJednostkaGospodarcza" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Standardowa jednostka gospodarcza
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera handlowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Imie">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Imiê partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Nazwisko" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwisko partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="IDPrzedmiotuUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz identyfik. przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Sygnatura" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Sygnatura
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="SadFunkcjonalnyStanowiskoFinansowe" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     S¹d funkcjonalny/Stanowisko finansowe
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="16" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="KomunikatyTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela wyœciowa z FM pakietu ZKNSK1
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="Komunikat" type="KomunikatTyp" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="DodajKontoUmowyZapytanieTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wej KU RFC
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="TypKontaUmowy">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Typ konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="OznaczenieKontaUmowy">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Oznaczenie konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="35" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RelacjaPartneraHandlowego">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Relacja partnera handlowego do konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="JednostkaGospodarcza">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Jednostka gospodarcza
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="StandardowaJednostkaGospodarcza">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Standardowa jednostka gospodarcza
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPartnera">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera biznesowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="SadFunkcjonalnyStanowiskoFinansowe" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     S¹d funkcjonalny/Stanowisko finansowe
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="16" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="StrukturaRozrachunkowZKomornikiem">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wyjœciowa FM Z_GETADVMONEY
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerDokumentu">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DokumentWystornowany" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu storna
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RodzajDokumentu" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Rodzaj dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataDokumentu" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataKsiegowania" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data ksiêgowania w dokumencie
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera handlowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Nazwisko" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwisko partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Imie" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Imiê partnera handlowego (osoba)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Nazwa1" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa 1 organizacji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Nazwa2" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa 2 organizacji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="40" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PrzedmiotUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Sygnatura s¹dowa
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="GlownaOperacja">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     G³ówna operacja poz. dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="CzesciowaOperacja">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Czêœc. operacja poz. dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Kwota" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kwota w walucie krajowej ze znakiem +/-
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:decimal">
+                        <xsd:totalDigits value="13" />
+                        <xsd:fractionDigits value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="ZnacznikRozliczenia" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Status rozliczenia
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="OdpisanieNaleznosciTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Dane wejœciowe do ksiêgowania
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="DataKsiegowania">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data ksiêgowania w dokumencie
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataDokumentu">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="JednostkaGospodarcza">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Jednostka gospodarcza
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="GlownaOperacja">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     G³ówna operacja poz. dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="CzesciowaOperacja">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Czêœc. operacja poz. dokumentu
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KwotaNaleznosci">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="18" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataPlatnosciNetto" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data p³atnoœci netto
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PrzyczynaBlokPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Przyczyna blok. p³atnoœci dla p³atnoœci
+								automatycznej
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="TekstWyjasniajacy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Tekst wyjaœniaj¹cy dla pozycji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="50" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KluczUzgodnienia" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz uzgodnienia dla ksiêgowoœci KG
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="StanRozrachunkowZapytanieTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wejœciowa rozrachunków dla dokumentu
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerDokumentuRozrachunkow" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="SygnaturaOdpowiedzTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Dodaj sygnaturê Odpowiedz
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="IDPrzedmiotuUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz identyfik. przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="OznaczeniePrzedmiotuUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Oznaczenie przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="35" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="WeryfikacjaPlanuRatTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wejœciowa dla tworzenia planu rat
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerDokumentuRozrachunkow" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="KorygowanieDokumentuTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Korygowanie przypisów/odpisów struktura
+						wejœciowa
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerDokumentuRozrachunkow">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KluczUzgodnienia" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz uzgodnienia dla ksiêgowoœci KG
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="WyszukajKontaUmowyTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela wejœciowa FM GetContractAccount
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="KontoUmowy" type="WyszukajKontoUmowyOdpowiedzTyp" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="SygnaturaWyszukanieTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wejœciowa FM Z_GETSIGNATURE
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="JednostkaGospodarcza" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Jednostka gospodarcza
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerWydzialuISekcji" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer wydzia³u i sekcji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Repertorium" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Repertorium
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="6" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KolejnyNumerSprawy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kolejny numer sprawy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="6" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Rok" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Rok
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RodzajSprawy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Rodzaj sprawy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="5" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="IloscTomow" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Iloœæ tomów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="3" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PodrodzajSprawy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Podrodzaj sprawy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="4" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="IDPrzedmiotuUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz identyfik. przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="SadFunkcjonalnyStanowiskoFinansowe" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     S¹d funkcjonalny/Stanowisko finansowe
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="16" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="TabelaPlanuRatTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela z planem rat
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="PlanRat" type="StrukturaPlanuRatTyp" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="DodajSygnatureZapytanieTyp">
+            <xsd:sequence>
+               <xsd:element name="SygnaturaZapytanie" type="SygnaturaZapytanieTyp" />
+               <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="TabelaDokumentowPlanuRatTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela z dokumentami do tworzenia planu rat
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="DokumentPlanuRat" type="DokumentPlanuRatTyp" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="PokazWplatyNierozpoznaneTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wejsciowa FM Z_GETUNIDENTPAYMENTS
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="DataKsiegowaniaWyciaguOd" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data ksiêgowania w dokumencie
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataKsiegowaniaWyciaguDo" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Data ksiêgowania w dokumencie
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="ZleceniodawcaPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Nazwa zleceniodawcy / osoby wystaw. czek /
+								w³aœciciela karty
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="60" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="TytulPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Tekst do zastosowania p³atnoœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="80" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KwotaPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kwota p³atnoœci w walucie transakcji
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:decimal">
+                        <xsd:totalDigits value="13" />
+                        <xsd:fractionDigits value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataPoczatkowaPlatnosci" minOccurs="0">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="DataKoncowaPlatnosci" minOccurs="0">
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerRachunku" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     IBAN (miêdzynarodowy numer konta bankowego)
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="34" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ZmienStatusNaleznosciZapytanieTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Dane wejœciowe
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerDokumentuRozrachunkow">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="StanNaleznosci">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Stan nale¿noœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="1" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PoczatekStanuNaleznosci">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Pocz¹tek stanu nale¿noœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="....-..-.." />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Uzytkownik">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     U¿ytkownik, który utworzy³ dany obiekt
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="PartnerZapytaniePelneTyp">
+            <xsd:sequence>
+               <xsd:element name="Partner" type="PartnerZapytanieTyp" />
+               <xsd:element name="ParametryAdministracyjne" type="ParametryAdministracyjneTyp" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="StrukturaDepozytowDluznikaTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wyjœciowa FM Z_GETDEBTORDEPOSITS
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera handlowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="SygnaturaSadowa" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Sygnatura s¹dowa
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="OznaczeniePrzedmiotuUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Oznaczenie przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="35" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="Kwota" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kwota w walucie transakcji ze znakiem +/-
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:decimal">
+                        <xsd:totalDigits value="13" />
+                        <xsd:fractionDigits value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="StrukturaZaksiegowanychWplatTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela wyjœciowa FM Z_SHOWBOOKEDPAYMENTS
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="PartiaPlatnosci" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Partia p³atnoœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPozycjiWPartii" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer pozycji w partii p³atnoœci
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="\d+" />
+                        <xsd:maxLength value="6" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerDokumentu1" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerDokumentu2" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="KwotaCzesciowa" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Kwota czêœciowa odnosz¹ca siê do podanego
+								wyboru
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:decimal">
+                        <xsd:totalDigits value="13" />
+                        <xsd:fractionDigits value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera handlowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="PrzedmiotUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Sygnatura s¹dowa
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="WyszukajKontoUmowyZapytanieTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wejœciowa FM GetContractAccount
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="OznaczenieKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Oznaczenie konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="35" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="TypKontaUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Typ konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="RelacjaPartneraHandlowego" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Relacja partnera handlowego do konta umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="2" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="NumerPartnera" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer partnera handlowego
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="10" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="IDPrzedmiotuUmowy" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Klucz identyfik. przedmiotu umowy
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+               <xsd:element name="SadFunkcjonalnyStanowiskoFinansowe" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     S¹d funkcjonalny/Stanowisko finansowe
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="16" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="KorygowaniePrzypisowOdpisowOdpowiedzTyp">
+            <xsd:annotation>
+               <xsd:documentation>
+               Struktura wejœciowa rozrachunków dla dokumentu
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="NumerDokumentuRozrachunkow" minOccurs="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                     Numer dokumentu rozrachunków wg kont umów
+                     </xsd:documentation>
+                  </xsd:annotation>
+                  <xsd:simpleType>
+                     <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="12" />
+                     </xsd:restriction>
+                  </xsd:simpleType>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="PartnerOdpowiedzKomunikatTyp">
+            <xsd:sequence>
+               <xsd:element name="PartnerOdpowiedz" type="PartnerOdpowiedzTyp" />
+               <xsd:element name="Komunikaty" type="KomunikatyTyp" />
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="TabelaRozrachunkowZKomornikiem">
+            <xsd:annotation>
+               <xsd:documentation>
+               Tabela wyjœciowa FM Z_GETADVMONEY
+               </xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="RozrachunkekZKomornikiem" type="StrukturaRozrachunkowZKomornikiem" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+   <wsdl:message name="p2.DezaktywacjaPlanuRatRequest">
+      <wsdl:documentation />
+      <wsdl:part name="DezaktywacjaPlanuRatRequest" element="p2:DezaktywacjaPlanuRatZapytnie" />
+   </wsdl:message>
+   <wsdl:message name="p2.DezaktywacjaPlanuRatResponse">
+      <wsdl:documentation />
+      <wsdl:part name="DezaktywacjaPlanuRatResponse" element="p2:DezaktywacjaPlanuRatOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.DodajPartneraRequest">
+      <wsdl:documentation />
+      <wsdl:part name="PartnerRequest" element="p2:PartnerZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.DodajPartneraResponse">
+      <wsdl:documentation />
+      <wsdl:part name="PartnerResponse" element="p2:PartnerOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.WeryfikacjaPlanuRatRequest">
+      <wsdl:documentation />
+      <wsdl:part name="WeryfikacjaPlanuRatRequest" element="p2:WeryfikacjaPlanuRatZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.WeryfikacjaPlanuRatResponse">
+      <wsdl:documentation />
+      <wsdl:part name="WeryfikacjaPlanuRatResponse" element="p2:WeryfikacjaPlanuRatOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.UstalenieStanuDepozytowDluznikaRequest">
+      <wsdl:documentation />
+      <wsdl:part name="UstalenieStanuDepozytowDluznikaRequest" element="p2:UstalenieStanuDepozytowDluznikaZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.UstalenieStanuDepozytowDluznikaResponse">
+      <wsdl:documentation />
+      <wsdl:part name="UstalenieStanuDepozytowDluznikaResponse" element="p2:UstalenieStanuDepozytowDluznikaOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.StanRozrachunkowZKomornikiemRequest">
+      <wsdl:documentation />
+      <wsdl:part name="StanRozrachunkowZKomornikiemRequest" element="p2:StanRozrachunkowZKomornikiemZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.StanRozrachunkowZKomornikiemResponse">
+      <wsdl:documentation />
+      <wsdl:part name="StanRozrachunkowZKomornikiemResponse" element="p2:StanRozrachunkowZKomornikiemOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.AktualizujKontoUmowyRequest">
+      <wsdl:documentation />
+      <wsdl:part name="AktualizujKontoUmowyRequest" element="p2:AktualizujKontoUmowyZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.AktualizujKontoUmowyResponse">
+      <wsdl:documentation />
+      <wsdl:part name="AktualizujKontoUmowyResponse" element="p2:AktualizujKontoUmowyOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.TworzeniePlanuRatRequest">
+      <wsdl:documentation />
+      <wsdl:part name="TworzeniePlanuRatRequest" element="p2:TworzeniePlanuRatZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.TworzeniePlanuRatResponse">
+      <wsdl:documentation />
+      <wsdl:part name="TworzeniePlanuRatResponse" element="p2:TworzeniePlanuRatOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.DodajKontoUmowyRequest">
+      <wsdl:documentation />
+      <wsdl:part name="DodajKontoUmowyRequest" element="p2:DodajKontoUmowyZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.DodajKontoUmowyResponse">
+      <wsdl:documentation />
+      <wsdl:part name="DodajKontoUmowyResponse" element="p2:DodajKontoUmowyOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.PokazDokumentZrodlowyRequest">
+      <wsdl:documentation />
+      <wsdl:part name="PokazDokumentZrodlowyRequest" element="p2:PokazDokumentZrodlowyZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.PokazDokumentZrodlowyResponse">
+      <wsdl:documentation />
+      <wsdl:part name="PokazDokumentZrodlowyResponse" element="p2:PokazDokumentZrodlowyOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.WyszukajSygnatureRequest">
+      <wsdl:documentation />
+      <wsdl:part name="WyszukajSygnatureRequest" element="p2:WyszukajSygnatureZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.WyszukajSygnatureResponse">
+      <wsdl:documentation />
+      <wsdl:part name="WyszukajSygnatureResponse" element="p2:WyszukajSygnatureResponse" />
+   </wsdl:message>
+   <wsdl:message name="p2.OdpisanieNaleznosciRequest">
+      <wsdl:documentation />
+      <wsdl:part name="OdpisanieNaleznosciRequest" element="p2:OdpisanieNaleznosciZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.OdpisanieNaleznosciResponse">
+      <wsdl:documentation />
+      <wsdl:part name="OdpisanieNaleznosciResponse" element="p2:OdpisanieNaleznosciOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.ZmienStatusNaleznosciRequest">
+      <wsdl:documentation />
+      <wsdl:part name="ZmienStatusNaleznosciRequest" element="p2:ZmienStatusNaleznosciZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.ZmienStatusNaleznosciResponse">
+      <wsdl:documentation />
+      <wsdl:part name="ZmienStatusNaleznosciResponse" element="p2:ZmienStatusNaleznosciOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.ZmianaTerminuWymagalnosciRequest">
+      <wsdl:documentation />
+      <wsdl:part name="ZmianaTerminuWymagalnosciRequest" element="p2:ZmianaTerminuWymagalnosciZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.ZmianaTerminuWymagalnosciResponse">
+      <wsdl:documentation />
+      <wsdl:part name="ZmianaTerminuWymagalnosciResponse" element="p2:ZmianaTerminuWymagalnosciOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.WyszukajPartneraRequest">
+      <wsdl:documentation />
+      <wsdl:part name="WyszukajPartneraRequest" element="p2:WyszukajPartneraZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.WyszukajPartneraResponse">
+      <wsdl:documentation />
+      <wsdl:part name="WyszukajPartneraResponse" element="p2:WyszukajPartneraOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.PokazWplatyNierozpoznaneRequest">
+      <wsdl:documentation />
+      <wsdl:part name="PokazWplatyNierozpoznaneRequest" element="p2:PokazWplatyNierozpoznaneZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.PokazWplatyNierozpoznaneResponse">
+      <wsdl:documentation />
+      <wsdl:part name="PokazWplatyNierozpoznaneResponse" element="p2:PokazWplatyNierozpoznaneOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.WyszukajKontoUmowyRequest">
+      <wsdl:documentation />
+      <wsdl:part name="WyszukajKontoUmowyRequest" element="p2:WyszukajKontoUmowyZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.WyszukajKontoUmowyResponse">
+      <wsdl:documentation />
+      <wsdl:part name="WyszukajKontoUmowyResponse" element="p2:WyszukajKontoUmowyOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.PokazZaksiegowaneWplatyRequest">
+      <wsdl:documentation />
+      <wsdl:part name="PokazZaksiegowaneWplatyRequest" element="p2:PokazZaksiegowaneWplatyZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.PokazZaksiegowaneWplatyResponse">
+      <wsdl:documentation />
+      <wsdl:part name="PokazZaksiegowaneWplatyResponse" element="p2:PokazZaksiegowaneWplatyOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.PingRequest">
+      <wsdl:documentation />
+      <wsdl:part name="PingRequest" element="p2:Ping" />
+   </wsdl:message>
+   <wsdl:message name="p2.PingResponse">
+      <wsdl:documentation />
+      <wsdl:part name="PingResponse" element="p2:Ping" />
+   </wsdl:message>
+   <wsdl:message name="p2.ZakwalifikujWplateRequest">
+      <wsdl:documentation />
+      <wsdl:part name="ZakwalifikujWplateRequest" element="p2:ZakwalifikujWplateZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.ZakwalifikujWplateResponse">
+      <wsdl:documentation />
+      <wsdl:part name="ZakwalifikujWplateResponse" element="p2:ZakwalifikujWplateOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.DodajNaleznoscRequest">
+      <wsdl:documentation />
+      <wsdl:part name="DodajNaleznoscRequest" element="p2:DodajNaleznoscZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.DodajNaleznoscResponse">
+      <wsdl:documentation />
+      <wsdl:part name="DodajNaleznoscResponse" element="p2:DodajNaleznoscOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.ZmianaTerminuOdroczeniaNaleznosciRequest">
+      <wsdl:documentation />
+      <wsdl:part name="ZmianaTerminuOdroczeniaNaleznosciRequest" element="p2:ZmianaTerminuOdroczeniaNaleznosciZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.ZmianaTerminuOdroczeniaNaleznosciResponse">
+      <wsdl:documentation />
+      <wsdl:part name="ZmianaTerminuOdroczeniaNaleznosciResponse" element="p2:ZmianaTerminuOdroczeniaNaleznosciOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.KorygowaniePrzypisowOdpisowRequest">
+      <wsdl:documentation />
+      <wsdl:part name="KorygowaniePrzypisowOdpisowRequest" element="p2:KorygowaniePrzypisowOdpisowZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.KorygowaniePrzypisowOdpisowResponse">
+      <wsdl:documentation />
+      <wsdl:part name="KorygowaniePrzypisowOdpisowResponse" element="p2:KorygowaniePrzypisowOdpisowOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.AktualizujDanePartneraRequest">
+      <wsdl:documentation />
+      <wsdl:part name="AktualizujDanePartneraRequest" element="p2:AktualizujDanePartneraZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.AktualizujDanePartneraResponse">
+      <wsdl:documentation />
+      <wsdl:part name="AktualizujDanePartneraResponse" element="p2:AktualizujDanePartneraOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.StornoWplatyRequest">
+      <wsdl:documentation />
+      <wsdl:part name="StornoWplatyRequest" element="p2:StornoWplatyZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.StornoWplatyResponse">
+      <wsdl:documentation />
+      <wsdl:part name="StornoWplatyResponse" element="p2:StornoWplatyOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.PobierzRozrachunkiDlaDokumentuRequest">
+      <wsdl:documentation />
+      <wsdl:part name="PobierzRozrachunkiDlaDokumentuRequest" element="p2:PobierzRozrachunkiDlaDokumentuZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.PobierzRozrachunkiDlaDokumentuResponse">
+      <wsdl:documentation />
+      <wsdl:part name="PobierzRozrachunkiDlaDokumentuResponse" element="p2:PobierzRozrachunkiDlaDokumentuOdpowiedz" />
+   </wsdl:message>
+   <wsdl:message name="p2.DodajSygnatureRequest">
+      <wsdl:documentation />
+      <wsdl:part name="DodajSygnatureRequest" element="p2:DodajSygnatureZapytanie" />
+   </wsdl:message>
+   <wsdl:message name="p2.DodajSygnatureResponse">
+      <wsdl:documentation />
+      <wsdl:part name="DodajSygnatureResponse" element="p2:DodajSygnatureOdpowiedz" />
+   </wsdl:message>
+   <wsdl:portType name="SI_KNS_KNS2ZSRK_os">
+      <wsdl:documentation />
+      <wsdl:operation name="DezaktywacjaPlanuRat">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_DezaktywacjaPlanuRat" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.DezaktywacjaPlanuRatRequest" />
+         <wsdl:output message="p1:p2.DezaktywacjaPlanuRatResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="DodajPartnera">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_DodajPartnera" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.DodajPartneraRequest" />
+         <wsdl:output message="p1:p2.DodajPartneraResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="WeryfikacjaPlanuRat">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_WeryfikacjaPlanuRat" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.WeryfikacjaPlanuRatRequest" />
+         <wsdl:output message="p1:p2.WeryfikacjaPlanuRatResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="UstalenieStanuDepozytowDluznika">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_UstalenieStanuDepozytowDluznika" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.UstalenieStanuDepozytowDluznikaRequest" />
+         <wsdl:output message="p1:p2.UstalenieStanuDepozytowDluznikaResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="StanRozrachunkowZKomornikiem">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_StanRozrachunkowZKomornikiem" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.StanRozrachunkowZKomornikiemRequest" />
+         <wsdl:output message="p1:p2.StanRozrachunkowZKomornikiemResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="AktualizujKontoUmowy">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_AktualizujKontoUmowy" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.AktualizujKontoUmowyRequest" />
+         <wsdl:output message="p1:p2.AktualizujKontoUmowyResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="TworzeniePlanuRat">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_TworzeniePlanuRat" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.TworzeniePlanuRatRequest" />
+         <wsdl:output message="p1:p2.TworzeniePlanuRatResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="DodajKontoUmowy">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_DodajKontoUmowy" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.DodajKontoUmowyRequest" />
+         <wsdl:output message="p1:p2.DodajKontoUmowyResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="PokazDokumentZrodlowy">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_PokazDokumentZrodlowy" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.PokazDokumentZrodlowyRequest" />
+         <wsdl:output message="p1:p2.PokazDokumentZrodlowyResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="WyszukajSygnature">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_WyszukajSygnature" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.WyszukajSygnatureRequest" />
+         <wsdl:output message="p1:p2.WyszukajSygnatureResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="OdpisanieNaleznosci">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_OdpisanieNaleznosci" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.OdpisanieNaleznosciRequest" />
+         <wsdl:output message="p1:p2.OdpisanieNaleznosciResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="ZmienStatusNaleznosci">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_ZmienStatusNaleznosci" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.ZmienStatusNaleznosciRequest" />
+         <wsdl:output message="p1:p2.ZmienStatusNaleznosciResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="ZmianaTerminuWymagalnosci">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_ZmianaTerminuWymagalnosci" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.ZmianaTerminuWymagalnosciRequest" />
+         <wsdl:output message="p1:p2.ZmianaTerminuWymagalnosciResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="WyszukajPartnera">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_WyszukajPartnera" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.WyszukajPartneraRequest" />
+         <wsdl:output message="p1:p2.WyszukajPartneraResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="PokazWplatyNierozpoznane">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_PokazWplatyNierozpoznane" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.PokazWplatyNierozpoznaneRequest" />
+         <wsdl:output message="p1:p2.PokazWplatyNierozpoznaneResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="WyszukajKontoUmowy">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_WyszukajKontoUmowy" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.WyszukajKontoUmowyRequest" />
+         <wsdl:output message="p1:p2.WyszukajKontoUmowyResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="PokazZaksiegowaneWplaty">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_PokazZaksiegowaneWplaty" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.PokazZaksiegowaneWplatyRequest" />
+         <wsdl:output message="p1:p2.PokazZaksiegowaneWplatyResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="Ping">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_Ping" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.PingRequest" />
+         <wsdl:output message="p1:p2.PingResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="ZakwalifikujWplate">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_ZakwalifikujWplate" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.ZakwalifikujWplateRequest" />
+         <wsdl:output message="p1:p2.ZakwalifikujWplateResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="DodajNaleznosc">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_DodajNaleznosc" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.DodajNaleznoscRequest" />
+         <wsdl:output message="p1:p2.DodajNaleznoscResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="ZmianaTerminuOdroczeniaNaleznosci">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_ZmianaTerminuOdroczeniaNaleznosci" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.ZmianaTerminuOdroczeniaNaleznosciRequest" />
+         <wsdl:output message="p1:p2.ZmianaTerminuOdroczeniaNaleznosciResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="KorygowaniePrzypisowOdpisow">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_KorygowaniePrzypisowOdpisow" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.KorygowaniePrzypisowOdpisowRequest" />
+         <wsdl:output message="p1:p2.KorygowaniePrzypisowOdpisowResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="AktualizujDanePartnera">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_AktualizujDanePartnera" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.AktualizujDanePartneraRequest" />
+         <wsdl:output message="p1:p2.AktualizujDanePartneraResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="StornoWplaty">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_StornoWplaty" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.StornoWplatyRequest" />
+         <wsdl:output message="p1:p2.StornoWplatyResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="PobierzRozrachunkiDlaDokumentu">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_PobierzRozrachunkiDlaDokumentu" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.PobierzRozrachunkiDlaDokumentuRequest" />
+         <wsdl:output message="p1:p2.PobierzRozrachunkiDlaDokumentuResponse" />
+      </wsdl:operation>
+      <wsdl:operation name="DodajSygnature">
+         <wsdl:documentation />
+         <wsp:Policy>
+            <wsp:PolicyReference URI="#OP_DodajSygnature" />
+         </wsp:Policy>
+         <wsdl:input message="p1:p2.DodajSygnatureRequest" />
+         <wsdl:output message="p1:p2.DodajSygnatureResponse" />
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="SI_KNS_KNS2ZSRK_osBinding" type="p1:SI_KNS_KNS2ZSRK_os">
+      <soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+      <wsdl:operation name="DodajPartnera">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="DezaktywacjaPlanuRat">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="WeryfikacjaPlanuRat">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="StanRozrachunkowZKomornikiem">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="UstalenieStanuDepozytowDluznika">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="AktualizujKontoUmowy">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="TworzeniePlanuRat">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="DodajKontoUmowy">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="PokazDokumentZrodlowy">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="OdpisanieNaleznosci">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="WyszukajSygnature">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="ZmienStatusNaleznosci">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="ZmianaTerminuWymagalnosci">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="WyszukajPartnera">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="PokazWplatyNierozpoznane">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="WyszukajKontoUmowy">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="PokazZaksiegowaneWplaty">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="Ping">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="ZakwalifikujWplate">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="DodajNaleznosc">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="ZmianaTerminuOdroczeniaNaleznosci">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="KorygowaniePrzypisowOdpisow">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="AktualizujDanePartnera">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="StornoWplaty">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="PobierzRozrachunkiDlaDokumentu">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+      <wsdl:operation name="DodajSygnature">
+         <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+         <wsdl:input>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="ZMS_KNS_PRD_SI_KNS_KNS2ZSRK_os">
+      <wsdl:port name="HTTP_Port" binding="p1:SI_KNS_KNS2ZSRK_osBinding">
+         <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://sapmwd01.zsrk.local:8100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=ZMS_KNS_PRD&amp;receiverParty=&amp;receiverService=&amp;interface=SI_KNS_KNS2ZSRK_os&amp;interfaceNamespace=urn%3Akns%3Azsrk%3AServce" />
+      </wsdl:port>
+      <wsdl:port name="HTTPS_Port" binding="p1:SI_KNS_KNS2ZSRK_osBinding">
+         <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="https://sapmwd01.zsrk.local:56601/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=ZMS_KNS_PRD&amp;receiverParty=&amp;receiverService=&amp;interface=SI_KNS_KNS2ZSRK_os&amp;interfaceNamespace=urn%3Akns%3Azsrk%3AServce" />
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Distribution xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>2021.2.615.40</Version>
+  <Trial>false</Trial>
+  <Dependencies>
+    <Project>a60a582b-8448-4124-88be-47cbb0c2aef9</Project>
+    <Project>63b9a85d-fa15-42aa-bbd1-fe770becc2d9</Project>
+    <Project>48f69ec2-9700-4b83-b4f7-34dd95f0f700</Project>
+  </Dependencies>
+</Distribution>

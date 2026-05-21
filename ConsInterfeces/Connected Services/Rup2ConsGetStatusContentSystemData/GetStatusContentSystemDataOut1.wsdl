@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:p1="urn:ms.gov.pl:ISM:GetStatusContentSystemData" name="GetStatusContentSystemDataOut" targetNamespace="urn:ms.gov.pl:ISM:GetStatusContentSystemData" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation />
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="OP_GetStatusContentSystemDataOut" />
+  <wsdl:types>
+    <xsd:schema xmlns="urn:ms.gov.pl:ISM:Common" targetNamespace="urn:ms.gov.pl:ISM:Common" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:complexType name="GetStatusContentSystemDataRequest">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">2cadb7e445e811f09afa00000050cdbe</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Admin" type="Admin">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">ec62b9adf93811efa6d2025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="GUID">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">ec62b9aef93811efc02e025041000001</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ListaKomunikat">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">5eb7418bf93811efca3500000050cdbe</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="PozycjaKomunikat" type="PozycjaKomunikat" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetStatusContentSystemDataResponse">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">45fd94ebf93711efc64e00000050cdbe</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="ListaKomunikat" type="ListaKomunikat" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Admin">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="EN">Dane administracyjne dot. żądania</xsd:documentation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">b7cd941ef93611efccaa00000050cdbe</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="JednostkaGospodarcza">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e866300d3b8511ebab5d025041000001</xsd:appinfo>
+              <xsd:documentation>Numer jednostki gospodarczej (4 cyfry)</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:pattern value="^\d{4}$" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="IDKomunikatu" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e866300e3b8511ebae7d025041000001</xsd:appinfo>
+              <xsd:documentation>Identyfikacja komunikatu</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="IDSystemMerytorycznego" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e866300f3b8511eba995025041000001</xsd:appinfo>
+              <xsd:documentation>Identyfikacja systemu merytorycznego</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="UtworzonyData">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e86630103b8511ebbb15025041000001</xsd:appinfo>
+              <xsd:documentation>Data utworzenia komunikatu (format YYYYMMDD)</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:pattern value="^\d{8}$" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="UtworzonyGodz">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">e86630113b8511eba551025041000001</xsd:appinfo>
+              <xsd:documentation>Godzina utworzenia komunikatu (format HHMMSS)</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:pattern value="^\d{6}$" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Uzytkownik">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">5fbdeefa571211ebbbed025041000001</xsd:appinfo>
+              <xsd:documentation>Nazwa użytkownika na systemie ZSRK ERP FI</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:pattern value="^\w{1" />
+                <xsd:pattern value="12}$" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Haslo">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">5fbdeefb571211eba86d025041000001</xsd:appinfo>
+              <xsd:documentation>Zaszyfrowane hasło użytkownika</xsd:documentation>
+            </xsd:annotation>
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:pattern value="^[-A-Za-z0-9+\/]*={0" />
+                <xsd:pattern value="3}$" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PozycjaKomunikat">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">413b0d68f93811efacda00000050cdbe</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="TytulKomunikatu" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">4130211ef93811efb544025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="TrescKomunikatu" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">4130211ff93811ef94d2025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="NumerKlasyKomunikatu" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">41302120f93811efc098025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="NumerKomunikatu" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">41302121f93811efb224025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="TypKomunikatu" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">41302122f93811efa362025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Parametr1" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">41302123f93811ef8aae025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Parametr2" type="xsd:string">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">41302124f93811efab53025041000001</xsd:appinfo>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="Parametr3" type="xsd:string" />
+          <xsd:element minOccurs="0" name="Parametr4" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns:p4="urn:ms.gov.pl:ISM:Common" xmlns="urn:ms.gov.pl:ISM:GetStatusContentSystemData" targetNamespace="urn:ms.gov.pl:ISM:GetStatusContentSystemData" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="urn:ms.gov.pl:ISM:Common" />
+      <xsd:element name="GetStatusContentSystemDataRequest" type="p4:GetStatusContentSystemDataRequest" />
+      <xsd:element name="GetStatusContentSystemDataResponse" type="p4:GetStatusContentSystemDataResponse" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetStatusContentSystemDataRequest">
+    <wsdl:documentation />
+    <wsdl:part name="GetStatusContentSystemDataRequest" element="p1:GetStatusContentSystemDataRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetStatusContentSystemDataResponse">
+    <wsdl:documentation />
+    <wsdl:part name="GetStatusContentSystemDataResponse" element="p1:GetStatusContentSystemDataResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GetStatusContentSystemDataOut">
+    <wsdl:documentation />
+    <wsdl:operation name="GetStatusContentSystemDataOut">
+      <wsdl:documentation />
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_GetStatusContentSystemDataOut" />
+      </wsp:Policy>
+      <wsdl:input message="p1:GetStatusContentSystemDataRequest" />
+      <wsdl:output message="p1:GetStatusContentSystemDataResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GetStatusContentSystemDataOutBinding" type="p1:GetStatusContentSystemDataOut">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <wsdl:operation name="GetStatusContentSystemDataOut">
+      <operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+      <wsdl:output>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GetStatusContentSystemDataOutService">
+    <wsdl:port name="HTTP_Port" binding="p1:GetStatusContentSystemDataOutBinding">
+      <address location="http://sapwitl01.zsrk.ms.gov.pl:8100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=ISMSender&amp;receiverParty=&amp;receiverService=&amp;interface=GetStatusContentSystemDataOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AISM%3AGetStatusContentSystemData" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+    <wsdl:port name="HTTPS_Port" binding="p1:GetStatusContentSystemDataOutBinding">
+      <address location="https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=ISMSender&amp;receiverParty=&amp;receiverService=&amp;interface=GetStatusContentSystemDataOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AISM%3AGetStatusContentSystemData" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PostingDataPrepareOut" targetNamespace="urn:ms.gov.pl:EX2PSCD:PostingDataPrepare"
+    xmlns:p1="urn:ms.gov.pl:EX2PSCD:PostingDataPrepare"
+    xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:documentation/>
+    <wsp:UsingPolicy wsdl:required="true"/>
+    <wsp:Policy wsu:Id="OP_PostingDataPrepareOut"/>
+    <wsdl:types>
+        <xsd:schema targetNamespace="urn:ms.gov.pl:EX2PSCD:Common"
+            xmlns="urn:ms.gov.pl:EX2PSCD:Common"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:complexType name="PostingDataPrepareResponse">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">01f4337e5bea11eb92c1000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="JednostkaGospodarcza" type="xsd:string"/>
+                    <xsd:element name="IDZadanieKsiegowania" type="xsd:string"/>
+                    <xsd:element name="Komunikaty" type="Komunikaty"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Admin">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="EN">Dane administracyjne dot. żądania</xsd:documentation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">256562f8622711eb82c8000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="JednostkaGospodarcza">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e866300d3b8511ebab5d025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer jednostki gospodarczej (4 cyfry)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\d{4}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="IDKomunikatu" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e866300e3b8511ebae7d025041000001</xsd:appinfo>
+                            <xsd:documentation>Identyfikacja komunikatu</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="IDSystemMerytorycznego" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e866300f3b8511eba995025041000001</xsd:appinfo>
+                            <xsd:documentation>Identyfikacja systemu merytorycznego</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="UtworzonyData">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e86630103b8511ebbb15025041000001</xsd:appinfo>
+                            <xsd:documentation>Data utworzenia komunikatu (format YYYYMMDD)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\d{8}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="UtworzonyGodz">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e86630113b8511eba551025041000001</xsd:appinfo>
+                            <xsd:documentation>Godzina utworzenia komunikatu (format HHMMSS)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\d{6}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Uzytkownik">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">5fbdeefa571211ebbbed025041000001</xsd:appinfo>
+                            <xsd:documentation>Nazwa użytkownika na systemie ZSRK ERP FI</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\w{1"/>
+                                <xsd:pattern value="12}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Haslo">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">5fbdeefb571211eba86d025041000001</xsd:appinfo>
+                            <xsd:documentation>Zaszyfrowane hasło użytkownika</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^[-A-Za-z0-9+\/]*={0"/>
+                                <xsd:pattern value="3}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Partner">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">66aa57275bd711ebcd1e000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="IDPartnera" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">3542018f4f7811eb85c8025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer partnera biznesowego</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="TypPartnera" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">61943da24f7911ebc9b1025041000001</xsd:appinfo>
+                            <xsd:documentation>Typ partnera biznesowego</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Imie" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">61943da34f7911eb82c5025041000001</xsd:appinfo>
+                            <xsd:documentation>Imię</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Nazwisko" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">61943da44f7911eb8d1f025041000001</xsd:appinfo>
+                            <xsd:documentation>Nazwisko 1</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NazwaOrganizacji1" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">61943da54f7911eb8649025041000001</xsd:appinfo>
+                            <xsd:documentation>Nazwa organizacji 1</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NazwaOrganizacji2" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">61943da64f7911ebc21e025041000001</xsd:appinfo>
+                            <xsd:documentation>Nazwa organizacji 2</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NazwaOrganizacji3" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">61943da74f7911ebb1f1025041000001</xsd:appinfo>
+                            <xsd:documentation>Nazwa organizacji 3</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NazwaOrganizacji4" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">61943da84f7911eba10a025041000001</xsd:appinfo>
+                            <xsd:documentation>Nazwa organizacji 4</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="PESEL" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">61943da94f7911eb857f025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer PESEL</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NIP" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">61943daa4f7911eba6fb025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer NIP</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="KW_RBN" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">8afb81c04f7911eb817e025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="AdresPartner" type="AdresPartner" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">c3f43f8e4f9511eba476025041000001</xsd:appinfo>
+                            <xsd:documentation>Adres partnera biznesowego</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="RachunekBankowy" type="RachunekBankowy" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">fa97e7175bd311ebceae025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Komunikat">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">1d18ad44622711ebabf6000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="IDKomunikatu" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">a4c929653b8811ebb7d1025041000001</xsd:appinfo>
+                            <xsd:documentation>Identyfikator żądania</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="20"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="RodzajKomunikatu" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">a4c929663b8811ebbe05025041000001</xsd:appinfo>
+                            <xsd:documentation>Typ komunikatu</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="NumerKomunikatu" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">a4c929673b8811eba8c3025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer komunikatu</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\d{3}$"/>
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Komunikat" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">a4c929683b8811ebbab2025041000001</xsd:appinfo>
+                            <xsd:documentation>Tekstowa postać komunikatu</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="240"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="RachunekBankowy">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">879f53ce5bd311ebc567000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="Kraj" type="xsd:string"/>
+                    <xsd:element name="NumerBanku" type="xsd:string"/>
+                    <xsd:element name="KontoBankowe" type="xsd:string"/>
+                    <xsd:element name="KodKontrolny" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PostingDataPrepareRequest">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">003131515bea11ebccd0000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="Admin" type="Admin">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">aeb65b7f5cbc11eb98c6025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ZadanieKsiegowanie" type="ZadanieKsiegowanie">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">aeb65b805cbc11eba626025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ZadanieKsiegowanie">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">048263ab5bea11eb8096000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="ZadanieDokNaglowek" type="ZadanieDokNaglowek">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">7a624b255cbc11ebbfd8025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ZadaniePozycjaPH" type="ZadaniePozycjaPH">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">7a624b265cbc11ebb83d025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DanePlatnosci" type="Platnosc"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ZadanieDokNaglowek">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">dbe8a9bf5bdf11eba34c000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="RodzajDokument" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">dcb61f015bdf11eba249025041000001</xsd:appinfo>
+                            <xsd:documentation>Rodzaj dokumentu</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DataDokument" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">dcb61f025bdf11eba096025041000001</xsd:appinfo>
+                            <xsd:documentation>Data dokumentu</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DataKsiegowanie" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">dcb61f035bdf11ebb350025041000001</xsd:appinfo>
+                            <xsd:documentation>Data księgowania</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Waluta" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">dcb61f045bdf11ebcb71025041000001</xsd:appinfo>
+                            <xsd:documentation>Waluta dokumentu</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Referencja" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">dcb639185bdf11eb9f32025041000001</xsd:appinfo>
+                            <xsd:documentation>Pole referencyjne na dokumencie</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Komunikaty">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">cbc364503b8811ebb319000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="Komunikat" type="Komunikat" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Platnosc">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">0f8f01305cba11ebccb9000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="IDDokumentWplaty" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">11863a205cba11ebb3f3025041000001</xsd:appinfo>
+                            <xsd:documentation>ID dokumentu wpłaty</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="OdbiorcaPlatnosciAlter" type="Partner" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">11863a215cba11ebb946025041000001</xsd:appinfo>
+                            <xsd:documentation>Alternatywny odbiorca płatności</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="KontoUmowy">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">f38a8a355be811ebb567000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="TypKontoUmowy" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f4c661d65be811ebcffd025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="IDPartnera" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f4c661d75be811ebafb0025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Opis" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f4c661d85be811eb9a5f025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="JednostkaGospodarcza" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f4c661d95be811eb94a7025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="StanowiskoFinansowe" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f4c661da5be811ebcf87025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="RelacjaKonta" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f4c661db5be811ebcccf025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ZadaniePozycjaPH">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">05c5f1af5bea11ebc684000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="JednostkaGospodarcza" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">4fea4f1a5cbc11eb8de6025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="IDPartner" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">63c02ec45cbc11ebc79e025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DanePartnera" type="Partner" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">4fea4f1b5cbc11eb914d025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="IDKontoUmowy" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">63c02ec55cbc11eba3b4025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DaneKontoUmowy" type="KontoUmowy" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">4fea4f1c5cbc11eb8398025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="IDSygnatura" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">63c02ec65cbc11ebcba0025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="DaneSygnatura" type="Sygnatura" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">63c02ec75cbc11eb930c025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="OperacjaGl" type="xsd:string"/>
+                    <xsd:element name="OperacjaCz" type="xsd:string"/>
+                    <xsd:element name="Kwota" type="xsd:string"/>
+                    <xsd:element name="DataPlatnosci" type="xsd:string"/>
+                    <xsd:element name="FormaPlatnosci" type="xsd:string"/>
+                    <xsd:element name="Tekst" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="AdresPartner">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="EN">Adres partnera biznesowego</xsd:documentation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">2fbcec6c59a311eba9b5000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="Kraj" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">12fdacad4f7211eb83bc025041000001</xsd:appinfo>
+                            <xsd:documentation>Kraj</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Miasto" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">12fdacae4f7211ebad57025041000001</xsd:appinfo>
+                            <xsd:documentation>Miasto</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="KodPocztowy" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">12fdacaf4f7211eba581025041000001</xsd:appinfo>
+                            <xsd:documentation>Kod pocztowy</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Ulica" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">12fdacb04f7211eb9250025041000001</xsd:appinfo>
+                            <xsd:documentation>Ulica</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NumerDomu" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">12fdacb14f7211ebce52025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer domu1</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NumerDomu2" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">12fdacb24f7211ebbd3f025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer domu2</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Sygnatura">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">d69088685bf611eb9cc1000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="RodzajPrzedmiotu" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f02972d44f7211eb87bf025041000001</xsd:appinfo>
+                            <xsd:documentation>Rodzaj przedmiotu umowy</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="JednostkaGospodarcza" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f02972d54f7211ebbed1025041000001</xsd:appinfo>
+                            <xsd:documentation>Jednostka gospodarcza dla sygnatury</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="StanowiskoFinansowe" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">06cfcacf4f7311eba691025041000001</xsd:appinfo>
+                            <xsd:documentation>Stanowisko finansowe dla sygnatury</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NumerWydzialu" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e81810c34f7711ebb0af025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer wydziału</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Repertorium" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e81810c44f7711eb9f11025041000001</xsd:appinfo>
+                            <xsd:documentation>Repertorium</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NrSprawy" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e81810c54f7711ebb528025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer kolejny sprawy</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Rok" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e81810c64f7711eb94cd025041000001</xsd:appinfo>
+                            <xsd:documentation>Rok sprawy</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="RodzajSprawy" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e81810c74f7711ebc281025041000001</xsd:appinfo>
+                            <xsd:documentation>Rodzaj sprawy</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="PodrodzajSprawy" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e81810c84f7711eba714025041000001</xsd:appinfo>
+                            <xsd:documentation>Podrodzaj sprawy</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+        <xsd:schema targetNamespace="urn:ms.gov.pl:EX2PSCD:PostingDataPrepare"
+            xmlns:p1="urn:ms.gov.pl:EX2PSCD:Common"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="urn:ms.gov.pl:EX2PSCD:PostingDataPrepare">
+            <xsd:import namespace="urn:ms.gov.pl:EX2PSCD:Common"/>
+            <xsd:element name="PostingDataPrepareRequest" type="p1:PostingDataPrepareRequest"/>
+            <xsd:element name="PostingDataPrepareResponse" type="p1:PostingDataPrepareResponse"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="PostingDataPrepareRequest">
+        <wsdl:documentation/>
+        <wsdl:part name="PostingDataPrepareRequest" element="p1:PostingDataPrepareRequest"/>
+    </wsdl:message>
+    <wsdl:message name="PostingDataPrepareResponse">
+        <wsdl:documentation/>
+        <wsdl:part name="PostingDataPrepareResponse" element="p1:PostingDataPrepareResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="PostingDataPrepareOut">
+        <wsdl:documentation/>
+        <wsdl:operation name="PostingDataPrepareOut">
+            <wsdl:documentation/>
+            <wsp:Policy>
+                <wsp:PolicyReference URI="#OP_PostingDataPrepareOut"/>
+            </wsp:Policy>
+            <wsdl:input message="p1:PostingDataPrepareRequest"/>
+            <wsdl:output message="p1:PostingDataPrepareResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PostingDataPrepareOutBinding" type="p1:PostingDataPrepareOut">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"
+            xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+        <wsdl:operation name="PostingDataPrepareOut">
+            <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1"
+                xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            <wsdl:input>
+                <soap:body use="literal"
+                    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"
+                    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PostingDataPrepareOutService">
+        <wsdl:port name="HTTPS_Port" binding="p1:PostingDataPrepareOutBinding">
+            <soap:address location="https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=PostingDataPrepareOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3APostingDataPrepare"
+                xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

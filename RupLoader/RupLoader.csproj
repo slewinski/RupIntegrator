@@ -1,0 +1,700 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{63B9A85D-FA15-42AA-BBD1-FE770BECC2D9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RupLoader</RootNamespace>
+    <AssemblyName>RupLoader</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>E:\RUP-Wroclaw\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\data_transfer.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Demo|x86'">
+    <OutputPath>bin\x86\Demo\</OutputPath>
+    <DefineConstants>TRACE;DEMO</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\RupLoader.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>E6457D842EA9753B273D08455303992B9E9968E6</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>RupLoader_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader, Version=3.4.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>packages\ExcelDataReader.3.4.2\lib\net45\ExcelDataReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.4.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>packages\ExcelDataReader.DataSet.3.4.2\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\packages\log4net.2.0.13\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Quartz, Version=2.6.2.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>packages\Quartz.2.6.2\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Documents.SpreadsheetStreaming, Version=2021.2.614.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.Documents.SpreadsheetStreaming.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls, Version=2021.2.615.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.WinControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.GridView, Version=2021.2.615.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.WinControls.GridView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2021.2.615.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.WinControls.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Core, Version=2021.2.614.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.Windows.Documents.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Fixed, Version=2021.2.614.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.Windows.Documents.Fixed.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet, Version=2021.2.614.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.Windows.Documents.Spreadsheet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml, Version=2021.2.614.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf, Version=2021.2.614.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.Xls, Version=2021.2.614.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.Windows.Documents.Spreadsheet.FormatProviders.Xls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Zip, Version=2021.2.614.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\Telerik.Windows.Zip.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2021.2.615.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\TelerikCommon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikExport, Version=2021.2.615.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\lib\RCWF\2021.2.615.40\TelerikExport.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\RupFinder\RupFinder.cs">
+      <Link>RupFinder.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\RupFinder\RupFinder.designer.cs">
+      <Link>RupFinder.designer.cs</Link>
+      <DependentUpon>RupFinder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddJobItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddJobItem.Designer.cs">
+      <DependentUpon>AddJobItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlertForm.designer.cs">
+      <DependentUpon>AlertForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChngMEPPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChngMEPPwd.Designer.cs">
+      <DependentUpon>ChngMEPPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChngPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChngPwd.Designer.cs">
+      <DependentUpon>ChngPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorInfoRL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorInfoRL.Designer.cs">
+      <DependentUpon>ErrorInfoRL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Job.cs" />
+    <Compile Include="JobManager.cs" />
+    <Compile Include="Logon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logon.Designer.cs">
+      <DependentUpon>Logon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapSygnatura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MapSygnatura.Designer.cs">
+      <DependentUpon>MapSygnatura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewMapPartner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewMapPartner.Designer.cs">
+      <DependentUpon>NewMapPartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PozWyciagFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PozWyciagFilter.Designer.cs">
+      <DependentUpon>PozWyciagFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectUser.Designer.cs">
+      <DependentUpon>SelectUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SetPfxPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetPfxPwd.Designer.cs">
+      <DependentUpon>SetPfxPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserAccount.Designer.cs">
+      <DependentUpon>UserAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsrManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsrManager.Designer.cs">
+      <DependentUpon>UsrManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ZDOB_Analizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZDOB_Analizer.Designer.cs">
+      <DependentUpon>ZDOB_Analizer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Recognizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recognizer.Designer.cs">
+      <DependentUpon>Recognizer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Scheduler.cs" />
+    <Compile Include="SchedulerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchedulerForm.Designer.cs">
+      <DependentUpon>SchedulerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlowPartner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlowPartner.Designer.cs">
+      <DependentUpon>SlowPartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SlowSad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlowSad.Designer.cs">
+      <DependentUpon>SlowSad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KuratNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KuratNo.Designer.cs">
+      <DependentUpon>KuratNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapSadKurat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MapSadKurat.Designer.cs">
+      <DependentUpon>MapSadKurat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RyczaltyKuratorskie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RyczaltyKuratorskie.Designer.cs">
+      <DependentUpon>RyczaltyKuratorskie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RyczaltyService.cs" />
+    <Compile Include="SkryptyDB\AboutRupLoader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SkryptyDB\AboutRupLoader.Designer.cs">
+      <DependentUpon>AboutRupLoader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigDB.Designer.cs">
+      <DependentUpon>ConfigDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DocViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DocViewer.Designer.cs">
+      <DependentUpon>DocViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DokDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DokDetail.Designer.cs">
+      <DependentUpon>DokDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportPI.cs" />
+    <Compile Include="ExtraSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraSearch.Designer.cs">
+      <DependentUpon>ExtraSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileListener.cs" />
+    <Compile Include="Imports.cs" />
+    <Compile Include="KonfiguracjaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KonfiguracjaForm.Designer.cs">
+      <DependentUpon>KonfiguracjaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Localize.cs" />
+    <Compile Include="Pattern.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pattern.Designer.cs">
+      <DependentUpon>Pattern.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentService.cs" />
+    <Compile Include="RecognizeService.cs" />
+    <Compile Include="RupIntegratorModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RupIntegratorModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="RupLoaderMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RupLoaderMain.Designer.cs">
+      <DependentUpon>RupLoaderMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\SapPIService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="SlowKurat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SlowKurat.Designer.cs">
+      <DependentUpon>SlowKurat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SprDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SprDetails.Designer.cs">
+      <DependentUpon>SprDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="..\RupFinder\RupFinder.resx">
+      <Link>RupFinder.resx</Link>
+      <DependentUpon>RupFinder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddJobItem.resx">
+      <DependentUpon>AddJobItem.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlertForm.resx">
+      <DependentUpon>AlertForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChngMEPPwd.resx">
+      <DependentUpon>ChngMEPPwd.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChngPwd.resx">
+      <DependentUpon>ChngPwd.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorInfoRL.resx">
+      <DependentUpon>ErrorInfoRL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logon.resx">
+      <DependentUpon>Logon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapSygnatura.resx">
+      <DependentUpon>MapSygnatura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewMapPartner.resx">
+      <DependentUpon>NewMapPartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PozWyciagFilter.resx">
+      <DependentUpon>PozWyciagFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectUser.resx">
+      <DependentUpon>SelectUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetPfxPwd.resx">
+      <DependentUpon>SetPfxPwd.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserAccount.resx">
+      <DependentUpon>UserAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsrManager.resx">
+      <DependentUpon>UsrManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZDOB_Analizer.resx">
+      <DependentUpon>ZDOB_Analizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recognizer.resx">
+      <DependentUpon>Recognizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchedulerForm.resx">
+      <DependentUpon>SchedulerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlowPartner.resx">
+      <DependentUpon>SlowPartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlowSad.resx">
+      <DependentUpon>SlowSad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KuratNo.resx">
+      <DependentUpon>KuratNo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapSadKurat.resx">
+      <DependentUpon>MapSadKurat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RyczaltyKuratorskie.resx">
+      <DependentUpon>RyczaltyKuratorskie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkryptyDB\AboutRupLoader.resx">
+      <DependentUpon>AboutRupLoader.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigDB.resx">
+      <DependentUpon>ConfigDB.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DocViewer.resx">
+      <DependentUpon>DocViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DokDetail.resx">
+      <DependentUpon>DokDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtraSearch.resx">
+      <DependentUpon>ExtraSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KonfiguracjaForm.resx">
+      <DependentUpon>KonfiguracjaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pattern.resx">
+      <DependentUpon>Pattern.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="RupLoaderMain.resx">
+      <DependentUpon>RupLoaderMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SlowKurat.resx">
+      <DependentUpon>SlowKurat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SprDetails.resx">
+      <DependentUpon>SprDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\RupIntegratorEntities.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EntityDeploy Include="RupIntegratorModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RupIntegratorModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="RupLoader_TemporaryKey.pfx" />
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.AktualizujDanePartneraOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.AktualizujKontoUmowyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.DezaktywacjaPlanuRatOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.DodajKontoUmowyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.DodajNaleznoscOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.DodajSygnatureOdpowiedzTyp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.KorygowaniePrzypisowOdpisowOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.OdpisanieNaleznosciOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.PartnerOdpowiedzKomunikatTyp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.PobierzRozrachunkiDlaDokumentuOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.PokazDokumentZrodlowyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.PokazWplatyNierozpoznaneOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.PokazZaksiegowaneWplatyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.StanRozrachunkowZKomornikiemOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.StornoWplatyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.TworzeniePlanuRatOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.UstalenieStanuDepozytowDluznikaOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.WeryfikacjaPlanuRatOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.WyszukajKontoUmowyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.WyszukajPartneraOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.WyszukajSygnatureResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.ZakwalifikujWplateOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.ZmianaTerminuOdroczeniaNaleznosciOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.ZmianaTerminuWymagalnosciOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\RupLoader.SapPIService.ZmienStatusNaleznosciOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\SI_KNS_KNS2ZSRK_os1.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SapPIService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SapPIService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SapPIService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SapPIService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_transfer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConsImport\ConsImport.csproj">
+      <Project>{8F55FE60-ED9E-497B-A8AE-1A85592F154A}</Project>
+      <Name>ConsImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ex2PscdInterface\Ex2PscdInterface.csproj">
+      <Project>{d3d2a69c-5fef-4637-be6a-1065154dc3e1}</Project>
+      <Name>Ex2PscdInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MessageSignature\MessageSignature.csproj">
+      <Project>{8cd4f5d7-ac43-4fa3-9c9f-aabef3b98a0e}</Project>
+      <Name>MessageSignature</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SapPOHelper\SapPOHelper.csproj">
+      <Project>{efde74bf-af02-4f3a-a53b-87feadcf16ba}</Project>
+      <Name>SapPOHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SkryptyDB\sp_Rozpoznaj.sql" />
+    <Content Include="SkryptyDB\sp_RozpoznajCR.sql" />
+    <Content Include="SkryptyDB\sp_Search.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\EmptyLicensesLicx.1.1.0\build\EmptyLicensesLicx.targets" Condition="Exists('packages\EmptyLicensesLicx.1.1.0\build\EmptyLicensesLicx.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\EmptyLicensesLicx.1.1.0\build\EmptyLicensesLicx.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EmptyLicensesLicx.1.1.0\build\EmptyLicensesLicx.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

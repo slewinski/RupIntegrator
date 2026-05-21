@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configurationSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:schemas-microsoft-com:xml-wcfconfigurationsnapshot">
+  <behaviors />
+  <bindings>
+    <binding digest="System.ServiceModel.Configuration.BasicHttpBindingElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data name=&quot;GetCourtsOutBinding&quot;&gt;&lt;security mode=&quot;Transport&quot; /&gt;&lt;/Data&gt;" bindingType="basicHttpBinding" name="GetCourtsOutBinding" />
+    <binding digest="System.ServiceModel.Configuration.BasicHttpBindingElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data name=&quot;GetCourtsOutBinding1&quot; /&gt;" bindingType="basicHttpBinding" name="GetCourtsOutBinding1" />
+  </bindings>
+  <endpoints>
+    <endpoint normalizedDigest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;amp;senderService=DictionariesSOAPSender&amp;amp;receiverParty=&amp;amp;receiverService=&amp;amp;interface=GetCourtsOut&amp;amp;interfaceNamespace=urn%3Ams.gov.pl%3ADictionaries%3AFI&quot; binding=&quot;basicHttpBinding&quot; bindingConfiguration=&quot;GetCourtsOutBinding&quot; contract=&quot;Ex2PscdGetCourtsOutService.GetCourtsOut&quot; name=&quot;HTTPS_Port32&quot; /&gt;" digest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;amp;senderService=DictionariesSOAPSender&amp;amp;receiverParty=&amp;amp;receiverService=&amp;amp;interface=GetCourtsOut&amp;amp;interfaceNamespace=urn%3Ams.gov.pl%3ADictionaries%3AFI&quot; binding=&quot;basicHttpBinding&quot; bindingConfiguration=&quot;GetCourtsOutBinding&quot; contract=&quot;Ex2PscdGetCourtsOutService.GetCourtsOut&quot; name=&quot;HTTPS_Port32&quot; /&gt;" contractName="Ex2PscdGetCourtsOutService.GetCourtsOut" name="HTTPS_Port32" />
+  </endpoints>
+</configurationSnapshot>

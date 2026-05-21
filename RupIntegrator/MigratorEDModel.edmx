@@ -1,0 +1,2491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KnsMigratorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BankiKonfig">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Label" Type="varchar" MaxLength="100" />
+          <Property Name="ExePath" Type="varchar" MaxLength="255" />
+          <Property Name="Folder" Type="varchar" MaxLength="255" />
+          <Property Name="LastRunDate" Type="datetime" />
+          <Property Name="LastRunStatus" Type="int" />
+          <Property Name="Message" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ConsExternalDBConnectionConfig">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typDB" Type="int" />
+          <Property Name="rodzajDB" Type="int" />
+          <Property Name="srvName" Type="varchar" MaxLength="100" />
+          <Property Name="DbName" Type="varchar" MaxLength="100" />
+          <Property Name="pwd" Type="varchar" MaxLength="100" />
+          <Property Name="logId" Type="varchar" MaxLength="100" />
+          <Property Name="WinLogon" Type="bit" />
+          <Property Name="srvAlias" Type="varchar" MaxLength="100" />
+          <Property Name="sp_name" Type="varchar" MaxLength="100" />
+          <Property Name="SAPKnsId" Type="varchar" MaxLength="100" />
+          <Property Name="ConnectionName" Type="varchar" MaxLength="100" />
+          <Property Name="sp_param" Type="varchar" MaxLength="100" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="ConsJobItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="insertDate" Type="datetime" Nullable="false" />
+          <Property Name="startDate" Type="datetime" />
+          <Property Name="finishDate" Type="datetime" />
+          <Property Name="consExternalDBConnectionConfig_Id" Type="int" Nullable="false" />
+          <Property Name="status" Type="int" />
+          <Property Name="info" Type="varchar" MaxLength="1000" />
+          <Property Name="queryDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ConsKartaTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idKomunikatu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="idStronyWydzial" Type="int" />
+          <Property Name="idSprawyWydzial" Type="int" />
+          <Property Name="dImportu" Type="datetime" />
+          <Property Name="trescOdpowiedzi" Type="nvarchar" MaxLength="4000" />
+          <Property Name="payload" Type="nvarchar(max)" />
+          <Property Name="hash" Type="nvarchar" MaxLength="512" />
+          <Property Name="consJobItemId" Type="int" />
+        </EntityType>
+        <EntityType Name="Dluznik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FizPraw" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Imie" Type="varchar" MaxLength="40" />
+          <Property Name="Nazwisko" Type="varchar" MaxLength="40" />
+          <Property Name="Ulica" Type="varchar" MaxLength="60" />
+          <Property Name="NrDomu" Type="varchar" MaxLength="10" />
+          <Property Name="NrMieszkania" Type="varchar" MaxLength="10" />
+          <Property Name="KodPocztowy" Type="varchar" MaxLength="10" />
+          <Property Name="Miejscowosc" Type="varchar" MaxLength="40" />
+          <Property Name="KluczKraju" Type="varchar" MaxLength="2" />
+          <Property Name="Iban" Type="varchar" MaxLength="28" />
+          <Property Name="Nip" Type="varchar" MaxLength="10" />
+          <Property Name="Pesel" Type="varchar" MaxLength="11" />
+          <Property Name="RBN" Type="varchar" MaxLength="2" />
+          <Property Name="Sprawa_Id" Type="int" />
+          <Property Name="KnsDluz_Id" Type="int" />
+          <Property Name="SAPKontoPartnera" Type="varchar" MaxLength="50" />
+          <Property Name="IdSrcDane" Type="bigint" />
+          <Property Name="InsertedBy" Type="varchar" MaxLength="50" />
+          <Property Name="SentBy" Type="varchar" MaxLength="50" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="SentDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Dokument">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DataDokumentu" Type="datetime" />
+          <Property Name="DataKsiegowania" Type="datetime" />
+          <Property Name="grzSamoistna" Type="varchar" MaxLength="1" />
+          <Property Name="kwota" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OperacjaCzesciowa" Type="varchar" MaxLength="4" />
+          <Property Name="DataPlatnosci" Type="datetime" />
+          <Property Name="Stan" Type="varchar" MaxLength="1" />
+          <Property Name="Opis" Type="varchar" MaxLength="50" />
+          <Property Name="typFakt" Type="varchar" MaxLength="2" />
+          <Property Name="Sprawa_Id" Type="int" />
+          <Property Name="SrcSystemId" Type="int" />
+          <Property Name="SrcDocumentHash" Type="int" />
+          <Property Name="Document_Id" Type="int" />
+          <Property Name="DocGuid_Ref" Type="uniqueidentifier" />
+          <Property Name="SAPDocId" Type="varchar" MaxLength="100" />
+          <Property Name="KnsPozDzNal" Type="int" />
+          <Property Name="KnsRokDzNal" Type="int" />
+          <Property Name="KnsKsiegaDzNal" Type="int" />
+          <Property Name="Transfer_Id" Type="int" />
+          <Property Name="Dluznik_Id" Type="int" />
+          <Property Name="RataKwota1" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData1" Type="datetime" />
+          <Property Name="RataKwota2" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData2" Type="datetime" />
+          <Property Name="RataKwota3" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData3" Type="datetime" />
+          <Property Name="RataKwota4" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData4" Type="datetime" />
+          <Property Name="RataKwota5" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData5" Type="datetime" />
+          <Property Name="RataKwota6" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData6" Type="datetime" />
+          <Property Name="RataKwota7" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData7" Type="datetime" />
+          <Property Name="RataKwota8" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData8" Type="datetime" />
+          <Property Name="RataKwota9" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData9" Type="datetime" />
+          <Property Name="RataKwota10" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData10" Type="datetime" />
+          <Property Name="RataKwota11" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData11" Type="datetime" />
+          <Property Name="RataKwota12" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData12" Type="datetime" />
+          <Property Name="RataKwota13" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData13" Type="datetime" />
+          <Property Name="RataKwota14" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData14" Type="datetime" />
+          <Property Name="RataKwota15" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData15" Type="datetime" />
+          <Property Name="RataKwota16" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData16" Type="datetime" />
+          <Property Name="RataKwota17" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData17" Type="datetime" />
+          <Property Name="RataKwota18" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData18" Type="datetime" />
+          <Property Name="RataKwota19" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData19" Type="datetime" />
+          <Property Name="RataKwota20" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData20" Type="datetime" />
+          <Property Name="RataKwota21" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData21" Type="datetime" />
+          <Property Name="RataKwota22" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData22" Type="datetime" />
+          <Property Name="RataKwota23" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData23" Type="datetime" />
+          <Property Name="RataKwota24" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData24" Type="datetime" />
+          <Property Name="RataKwota25" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData25" Type="datetime" />
+          <Property Name="RataKwota26" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData26" Type="datetime" />
+          <Property Name="RataKwota27" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData27" Type="datetime" />
+          <Property Name="RataKwota28" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData28" Type="datetime" />
+          <Property Name="RataKwota29" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData29" Type="datetime" />
+          <Property Name="RataKwota30" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData30" Type="datetime" />
+          <Property Name="RataKwota31" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData31" Type="datetime" />
+          <Property Name="RataKwota32" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData32" Type="datetime" />
+          <Property Name="RataKwota33" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData33" Type="datetime" />
+          <Property Name="RataKwota34" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData34" Type="datetime" />
+          <Property Name="RataKwota35" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData35" Type="datetime" />
+          <Property Name="RataKwota36" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RataData36" Type="datetime" />
+          <Property Name="SAPRatyId" Type="varchar" MaxLength="20" />
+          <Property Name="SAPDocIdRef" Type="varchar" MaxLength="20" />
+          <Property Name="Info" Type="varchar" MaxLength="255" />
+          <Property Name="OperacjaGlowna" Type="varchar" MaxLength="4" />
+          <Property Name="SAPImportInfo" Type="varchar" MaxLength="1024" />
+          <Property Name="SAPImportStatus" Type="int" />
+          <Property Name="SAPImportDate" Type="datetime" />
+          <Property Name="SAPImportPonowne" Type="varchar" MaxLength="1" />
+          <Property Name="SAPRodzajDokumentu" Type="varchar" MaxLength="2" />
+          <Property Name="SAPKontoKG" Type="varchar" MaxLength="10" />
+          <Property Name="SAPWaluta" Type="varchar" MaxLength="3" />
+          <Property Name="SAPKluczUzgodnienia" Type="varchar" MaxLength="12" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="varchar" MaxLength="4" />
+          <Property Name="SAPCLDocId" Type="varchar" MaxLength="20" />
+          <Property Name="InsertedBy" Type="varchar" MaxLength="50" />
+          <Property Name="SentBy" Type="varchar" MaxLength="50" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="SAPIdDocOld" Type="varchar" MaxLength="20" />
+          <Property Name="uwagi" Type="varchar" MaxLength="250" />
+          <Property Name="referencja" Type="varchar" MaxLength="1024" />
+          <Property Name="tekst" Type="varchar" MaxLength="1024" />
+          <Property Name="IDZadanieKsiegowania" Type="varchar" MaxLength="30" />
+          <Property Name="DataStanu" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Ekstrakcja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Osoba fizyczna/Osoba prawna" Type="char" MaxLength="1" />
+          <Property Name="Imię/Nazwa1" Type="varchar" MaxLength="40" />
+          <Property Name="Nazwisko/ Nazwa2" Type="varchar" MaxLength="40" />
+          <Property Name="Ulica" Type="varchar" MaxLength="60" />
+          <Property Name="Nrdomu" Type="varchar" MaxLength="10" />
+          <Property Name="Nrmieszkania" Type="varchar" MaxLength="10" />
+          <Property Name="Kodpocztowy" Type="varchar" MaxLength="10" />
+          <Property Name="Miejscowość" Type="varchar" MaxLength="40" />
+          <Property Name="Kluczkraju" Type="varchar" MaxLength="2" />
+          <Property Name="IBAN" Type="varchar" MaxLength="28" />
+          <Property Name="NIP" Type="varchar" MaxLength="10" />
+          <Property Name="Pesel" Type="varchar" MaxLength="11" />
+          <Property Name="KwalifikatordoRBN" Type="varchar" MaxLength="2" />
+          <Property Name="Typkontaumowy" Type="varchar" MaxLength="2" />
+          <Property Name="Oznaczeniekontaumowy" Type="varchar" MaxLength="35" />
+          <Property Name="Relacjakonta" Type="varchar" MaxLength="2" />
+          <Property Name="GrupaJG" Type="varchar" MaxLength="4" />
+          <Property Name="StandardowaJG" Type="varchar" MaxLength="4" />
+          <Property Name="Rodzajprzedmiotuumowy" Type="varchar" MaxLength="4" />
+          <Property Name="JednostkaGospodarcza" Type="varchar" MaxLength="4" />
+          <Property Name="Nrwydziałuisekcji" Type="varchar" MaxLength="10" />
+          <Property Name="Repertorium" Type="varchar" MaxLength="6" />
+          <Property Name="NrSprawy" Type="varchar" MaxLength="6" />
+          <Property Name="Rok" Type="varchar" MaxLength="4" />
+          <Property Name="Rodzajsprawy" Type="varchar" MaxLength="5" />
+          <Property Name="Ilośćtomów" Type="varchar" MaxLength="3" />
+          <Property Name="Datadokumentu" Type="varchar" MaxLength="8" />
+          <Property Name="Dataksięgowania" Type="varchar" MaxLength="8" />
+          <Property Name="Rodzajdokumentu" Type="varchar" MaxLength="2" />
+          <Property Name="Waluta" Type="varchar" MaxLength="5" />
+          <Property Name="Kluczuzgodnienia" Type="varchar" MaxLength="12" />
+          <Property Name="JednostkaGospodarcza32" Type="varchar" MaxLength="4" />
+          <Property Name="Operacjagłówna" Type="varchar" MaxLength="4" />
+          <Property Name="Operacjaczęściowa" Type="varchar" MaxLength="4" />
+          <Property Name="KwotawPLN" Type="varchar" MaxLength="21" />
+          <Property Name="Datapłatności" Type="varchar" MaxLength="8" />
+          <Property Name="Stannależności" Type="char" MaxLength="1" />
+          <Property Name="KontoKG" Type="bigint" />
+          <Property Name="Opis" Type="varchar" MaxLength="50" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dokument_Id" Type="int" />
+          <Property Name="DocGuid" Type="uniqueidentifier" />
+          <Property Name="NumerPartnera" Type="varchar" MaxLength="20" />
+          <Property Name="NumerKontaUmowy" Type="varchar" MaxLength="20" />
+          <Property Name="NumerPrzedmiotuUmowy" Type="varchar" MaxLength="20" />
+          <Property Name="NumerDokumentu" Type="varchar" MaxLength="20" />
+          <Property Name="NumerDokumentuReferencyjnego" Type="varchar" MaxLength="20" />
+          <Property Name="NumerDokumentuPlanRat" Type="varchar" MaxLength="20" />
+          <Property Name="RataKwota1" Type="varchar" MaxLength="21" />
+          <Property Name="RataData1" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota2" Type="varchar" MaxLength="21" />
+          <Property Name="RataData2" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota3" Type="varchar" MaxLength="21" />
+          <Property Name="RataData3" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota4" Type="varchar" MaxLength="21" />
+          <Property Name="RataData4" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota5" Type="varchar" MaxLength="21" />
+          <Property Name="RataData5" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota6" Type="varchar" MaxLength="21" />
+          <Property Name="RataData6" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota7" Type="varchar" MaxLength="21" />
+          <Property Name="RataData7" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota8" Type="varchar" MaxLength="21" />
+          <Property Name="RataData8" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota9" Type="varchar" MaxLength="21" />
+          <Property Name="RataData9" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota10" Type="varchar" MaxLength="21" />
+          <Property Name="RataData10" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota11" Type="varchar" MaxLength="21" />
+          <Property Name="RataData11" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota12" Type="varchar" MaxLength="21" />
+          <Property Name="RataData12" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota13" Type="varchar" MaxLength="21" />
+          <Property Name="RataData13" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota14" Type="varchar" MaxLength="21" />
+          <Property Name="RataData14" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota15" Type="varchar" MaxLength="21" />
+          <Property Name="RataData15" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota16" Type="varchar" MaxLength="21" />
+          <Property Name="RataData16" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota17" Type="varchar" MaxLength="21" />
+          <Property Name="RataData17" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota18" Type="varchar" MaxLength="21" />
+          <Property Name="RataData18" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota19" Type="varchar" MaxLength="21" />
+          <Property Name="RataData19" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota20" Type="varchar" MaxLength="21" />
+          <Property Name="RataData20" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota21" Type="varchar" MaxLength="21" />
+          <Property Name="RataData21" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota22" Type="varchar" MaxLength="21" />
+          <Property Name="RataData22" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota23" Type="varchar" MaxLength="21" />
+          <Property Name="RataData23" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota24" Type="varchar" MaxLength="21" />
+          <Property Name="RataData24" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota25" Type="varchar" MaxLength="21" />
+          <Property Name="RataData25" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota26" Type="varchar" MaxLength="21" />
+          <Property Name="RataData26" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota27" Type="varchar" MaxLength="21" />
+          <Property Name="RataData27" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota28" Type="varchar" MaxLength="21" />
+          <Property Name="RataData28" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota29" Type="varchar" MaxLength="21" />
+          <Property Name="RataData29" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota30" Type="varchar" MaxLength="21" />
+          <Property Name="RataData30" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota31" Type="varchar" MaxLength="21" />
+          <Property Name="RataData31" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota32" Type="varchar" MaxLength="21" />
+          <Property Name="RataData32" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota33" Type="varchar" MaxLength="21" />
+          <Property Name="RataData33" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota34" Type="varchar" MaxLength="21" />
+          <Property Name="RataData34" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota35" Type="varchar" MaxLength="21" />
+          <Property Name="RataData35" Type="varchar" MaxLength="8" />
+          <Property Name="RataKwota36" Type="varchar" MaxLength="21" />
+          <Property Name="RataData36" Type="varchar" MaxLength="8" />
+          <Property Name="SygnaturaPoprzednia" Type="varchar" MaxLength="25" />
+          <Property Name="KodOperacji" Type="varchar" MaxLength="2" />
+          <Property Name="SAPImportPonowne" Type="varchar" MaxLength="1" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="StanowiskoFinansowePU" Type="varchar" MaxLength="4" />
+          <Property Name="StanowiskoFinansoweKU" Type="varchar" MaxLength="4" />
+          <Property Name="SAPKluczUzgodnienia" Type="varchar" MaxLength="12" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="varchar" MaxLength="4" />
+          <Property Name="JeGoWindyk" Type="varchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="KnsKomornik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Miasto" Type="varchar" MaxLength="50" />
+          <Property Name="Ulica" Type="varchar" MaxLength="50" />
+          <Property Name="NIP" Type="varchar" MaxLength="10" />
+          <Property Name="Komornik_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KnsKsiegi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="60" />
+          <Property Name="id_sadu" Type="int" />
+          <Property Name="sad" Type="varchar" MaxLength="100" />
+          <Property Name="wydzial" Type="varchar" MaxLength="100" />
+          <Property Name="kodSad" Type="varchar" MaxLength="4" />
+          <Property Name="numWydz" Type="varchar" MaxLength="10" />
+          <Property Name="oprKosztFiz" Type="varchar" MaxLength="4" />
+          <Property Name="oprKosztPraw" Type="varchar" MaxLength="4" />
+          <Property Name="oprGrzFiz" Type="varchar" MaxLength="4" />
+          <Property Name="oprGrzPraw" Type="varchar" MaxLength="4" />
+          <Property Name="rodzajPrzedmiotu" Type="varchar" MaxLength="4" />
+          <Property Name="Id_Ksiegi" Type="int" />
+          <Property Name="oprGrzSamoistna" Type="varchar" MaxLength="4" />
+          <Property Name="czyFPP" Type="int" />
+          <Property Name="czymies" Type="int" />
+          <Property Name="ksGrzFPPMap" Type="int" />
+        </EntityType>
+        <EntityType Name="KnsSad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sad_Id" Type="int" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="100" />
+          <Property Name="SAPSad_Id" Type="varchar" MaxLength="4" />
+          <Property Name="SAPWydz_Id" Type="varchar" MaxLength="10" />
+          <Property Name="SAPtypSad" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="KodMaskKonfig">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kraj" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Maska" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Konfiguracja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typKns" Type="int" />
+          <Property Name="srvName" Type="varchar" MaxLength="100" />
+          <Property Name="DbName" Type="varchar" MaxLength="100" />
+          <Property Name="pwd" Type="varchar" MaxLength="100" />
+          <Property Name="logId" Type="varchar" MaxLength="100" />
+          <Property Name="WinLogon" Type="bit" />
+          <Property Name="JednostkaGospodarcza" Type="varchar" MaxLength="4" />
+          <Property Name="StartImportDate" Type="datetime" />
+          <Property Name="PrzypisFile" Type="varchar" MaxLength="255" />
+          <Property Name="OdpisFile" Type="varchar" MaxLength="255" />
+          <Property Name="srvAlias" Type="varchar" MaxLength="100" />
+          <Property Name="EndpointWS" Type="varchar" MaxLength="512" />
+          <Property Name="WSLogon" Type="varchar" MaxLength="100" />
+          <Property Name="WSpwd" Type="varchar" MaxLength="100" />
+          <Property Name="typImportSAP" Type="int" />
+          <Property Name="skipraty" Type="bit" />
+          <Property Name="StanowiskoFin" Type="varchar" MaxLength="4" />
+          <Property Name="ERPLogon" Type="varchar" MaxLength="100" />
+          <Property Name="defSad" Type="bit" />
+          <Property Name="dbversion" Type="varchar" MaxLength="30" />
+          <Property Name="czyautoks" Type="int" />
+          <Property Name="czyautoprzyp" Type="int" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="varchar" MaxLength="4" />
+          <Property Name="dplatnosci" Type="datetime" />
+          <Property Name="typDatyPlatn" Type="int" />
+          <Property Name="DataMiesStart" Type="datetime" />
+          <Property Name="Pfx" Type="varbinary(max)" />
+          <Property Name="Cer" Type="varbinary(max)" />
+          <Property Name="PfxPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SAPPwdExpPeriod" Type="int" />
+        </EntityType>
+        <EntityType Name="SAPKodKraju">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kod" Type="varchar" MaxLength="2" />
+          <Property Name="kraj" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SAPKodyOpr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="kod" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="30" />
+          <Property Name="grzywnakoszty" Type="char" MaxLength="1" />
+          <Property Name="samoistna" Type="char" MaxLength="1" />
+          <Property Name="operacjaGlowna" Type="char" MaxLength="4" />
+          <Property Name="oznaczenieOpGlownej" Type="varchar" MaxLength="30" />
+          <Property Name="id" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SAPOpisPrzedmiotu">
+          <Key>
+            <PropertyRef Name="Symbol" />
+          </Key>
+          <Property Name="Symbol" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Opis" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SAPRBN">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Name="kod" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="opis" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SAPRepertorium">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SymbolRodzajPrzedmiotu" Type="varchar" MaxLength="4" />
+          <Property Name="typSad" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="SAPRodzajSprawy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kod" Type="varchar" MaxLength="5" />
+          <Property Name="opis" Type="varchar" MaxLength="30" />
+          <Property Name="repertorium" Type="varchar" MaxLength="10" />
+          <Property Name="typSad" Type="varchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="SAPSad">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Name="kod" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="sad" Type="varchar" MaxLength="100" />
+          <Property Name="miasto" Type="varchar" MaxLength="60" />
+          <Property Name="miastSad" Type="varchar" MaxLength="160" />
+          <Property Name="typSad" Type="varchar" MaxLength="2" />
+          <Property Name="JEGO" Type="char" MaxLength="4" />
+          <Property Name="WazneOd" Type="datetime" />
+          <Property Name="WazneDo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SAPStanNal">
+          <Key>
+            <PropertyRef Name="Kod" />
+          </Key>
+          <Property Name="Kod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Opis" Type="varchar" MaxLength="50" />
+          <Property Name="grzywnakoszty" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="SAPTomyAkt">
+          <Key>
+            <PropertyRef Name="Kod" />
+          </Key>
+          <Property Name="Kod" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Opis" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SAPWplaty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataKsiegowania" Type="datetime" />
+          <Property Name="DataOdczytu" Type="datetime" />
+          <Property Name="PartiaPlatnosci" Type="varchar" MaxLength="20" />
+          <Property Name="NumerPozycjiWPartii" Type="varchar" MaxLength="8" />
+          <Property Name="NumerDokumentu" Type="varchar" MaxLength="20" />
+          <Property Name="NumerDokumentuRozlicz" Type="varchar" MaxLength="20" />
+          <Property Name="Kwota" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NumerPartnera" Type="varchar" MaxLength="20" />
+          <Property Name="NumerKontaUmowy" Type="varchar" MaxLength="20" />
+          <Property Name="PrzedmiotUmowy" Type="varchar" MaxLength="20" />
+          <Property Name="TekstZastosowania" Type="varchar" MaxLength="255" />
+          <Property Name="IdPozycja" Type="int" />
+          <Property Name="DokumentStorno" Type="varchar" MaxLength="255" />
+          <Property Name="KartaDl" Type="varchar" MaxLength="100" />
+          <Property Name="Sygnatura" Type="varchar" MaxLength="100" />
+          <Property Name="Dluznik" Type="varchar" MaxLength="255" />
+          <Property Name="KosztyGrzywna" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="SAPWydzial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kodSad" Type="varchar" MaxLength="4" />
+          <Property Name="numer" Type="varchar" MaxLength="10" />
+          <Property Name="nazwa" Type="varchar" MaxLength="100" />
+          <Property Name="sadWydzial" Type="varchar" MaxLength="15" />
+          <Property Name="rodzajSprawy" Type="varchar" MaxLength="4" />
+          <Property Name="numerWydz" Type="int" />
+          <Property Name="MPK" Type="varchar" MaxLength="7" />
+        </EntityType>
+        <EntityType Name="ServiceEndpoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceId" Type="int" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Endpoint" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Sprawa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sygnatura" Type="varchar" MaxLength="100" />
+          <Property Name="Karta" Type="varchar" MaxLength="100" />
+          <Property Name="SAPSadId" Type="varchar" MaxLength="4" />
+          <Property Name="SAPWydział" Type="varchar" MaxLength="20" />
+          <Property Name="SAPRepertorium" Type="varchar" MaxLength="10" />
+          <Property Name="Numer" Type="int" />
+          <Property Name="Rok" Type="int" />
+          <Property Name="SAPRodzajPrzedmiotuUmowy" Type="varchar" MaxLength="4" />
+          <Property Name="SAPKontoUmowy" Type="varchar" MaxLength="20" />
+          <Property Name="DataWyroku" Type="datetime" />
+          <Property Name="DataPrawomocn" Type="datetime" />
+          <Property Name="DataWymagalnosci" Type="datetime" />
+          <Property Name="KnsSprawa_id" Type="int" />
+          <Property Name="KNSSadOrzek_id" Type="int" />
+          <Property Name="KnsSad" Type="varchar" MaxLength="100" />
+          <Property Name="KnsWydzial" Type="varchar" MaxLength="100" />
+          <Property Name="KnsWydz_Id" Type="int" />
+          <Property Name="wyklucz" Type="int" />
+          <Property Name="KnsKsiega" Type="int" />
+          <Property Name="SAPRodzajSprawy" Type="varchar" MaxLength="5" />
+          <Property Name="SAPTomyAkt" Type="varchar" MaxLength="3" />
+          <Property Name="KdNumer" Type="int" />
+          <Property Name="KdRok" Type="int" />
+          <Property Name="SAPPrzedmiotUmowy" Type="varchar" MaxLength="20" />
+          <Property Name="grzSamoistna" Type="varchar" MaxLength="1" />
+          <Property Name="SAPTypKontaUmowy" Type="varchar" MaxLength="2" />
+          <Property Name="SAPRelacjaKontaUmowy" Type="varchar" MaxLength="2" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="varchar" MaxLength="4" />
+          <Property Name="InsertedBy" Type="varchar" MaxLength="50" />
+          <Property Name="SentBy" Type="varchar" MaxLength="50" />
+          <Property Name="InsDate" Type="datetime" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="SapKontoUmowyOld" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SygnMap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SrcRep" Type="varchar" MaxLength="20" />
+          <Property Name="SrcWydz" Type="varchar" MaxLength="20" />
+          <Property Name="SrcSad" Type="varchar" MaxLength="4" />
+          <Property Name="DestWydz" Type="varchar" MaxLength="20" />
+          <Property Name="DestRep" Type="varchar" MaxLength="20" />
+          <Property Name="DestNr" Type="varchar" MaxLength="20" />
+          <Property Name="DestRok" Type="varchar" MaxLength="20" />
+          <Property Name="DestSad" Type="varchar" MaxLength="4" />
+          <Property Name="priorytet" Type="int" />
+        </EntityType>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataTransferu" Type="datetime" Nullable="false" />
+          <Property Name="rodzaj" Type="int" />
+          <Property Name="LFaktow" Type="int" />
+          <Property Name="DataOd" Type="datetime" />
+          <Property Name="DataDo" Type="datetime" />
+          <Property Name="Uwagi" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="SAPKluczUzgodnienia" Type="varchar" MaxLength="12" />
+          <Property Name="StanowiskoFinansoweWindyk" Type="varchar" MaxLength="4" />
+          <Property Name="Rok" Type="int" />
+          <Property Name="Miesiac" Type="int" />
+          <Property Name="Zaimportowane" Type="int" />
+          <Property Name="Bledne" Type="int" />
+          <Property Name="Kwota" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DataPOper" Type="datetime" />
+          <Property Name="DataOOper" Type="datetime" />
+          <Property Name="PackNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypTransferu">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Name="kod" Type="int" Nullable="false" />
+          <Property Name="opis" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Pssword" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="role" Type="int" Nullable="false" />
+          <Property Name="LastPwdChngDate" Type="datetime" />
+          <Property Name="suspend" Type="bit" />
+          <Property Name="ChangePwd" Type="bit" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="PwdPeriodChange" Type="int" Nullable="false" />
+          <Property Name="MEPUser" Type="varchar" MaxLength="50" />
+          <Property Name="MEPPassword" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WalidSaldo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Klucz" Type="uniqueidentifier" />
+          <Property Name="KartaDl" Type="varchar" MaxLength="50" />
+          <Property Name="Sygnatura" Type="varchar" MaxLength="50" />
+          <Property Name="Naleznosc" Type="varchar" MaxLength="20" />
+          <Property Name="Kwota" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Status" Type="varchar" MaxLength="255" />
+          <Property Name="OpGlowna" Type="varchar" MaxLength="4" />
+          <Property Name="OpCzesc" Type="varchar" MaxLength="4" />
+          <Property Name="DataKsiegowania" Type="datetime" />
+          <Property Name="Dluznik" Type="varchar" MaxLength="255" />
+          <Property Name="SprawaId" Type="int" />
+          <Property Name="Ksiega" Type="int" />
+          <Property Name="SAPKwota" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="KsiegaOpis" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Wplata">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SAPDocPRef" Type="varchar" MaxLength="20" />
+          <Property Name="SAPDokRozliczeniowy" Type="varchar" MaxLength="20" />
+          <Property Name="SAPRodzajDok" Type="varchar" MaxLength="10" />
+          <Property Name="DataRozlicz" Type="datetime" />
+          <Property Name="SAPDokRozliczany" Type="varchar" MaxLength="20" />
+          <Property Name="Kwota" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="tytulem" Type="varchar" MaxLength="255" />
+          <Property Name="Transfer_Id" Type="int" />
+          <Property Name="DataWplaty" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_ConsJobItem_ConsExternalDBConnectionConfig">
+          <End Role="ConsExternalDBConnectionConfig" Type="Self.ConsExternalDBConnectionConfig" Multiplicity="1" />
+          <End Role="ConsJobItem" Type="Self.ConsJobItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsExternalDBConnectionConfig">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsJobItem">
+              <PropertyRef Name="consExternalDBConnectionConfig_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dluznik_Sprawa">
+          <End Role="Sprawa" Type="Self.Sprawa" Multiplicity="0..1" />
+          <End Role="Dluznik" Type="Self.Dluznik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprawa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dluznik">
+              <PropertyRef Name="Sprawa_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dokument_Dluznik">
+          <End Role="Dluznik" Type="Self.Dluznik" Multiplicity="0..1" />
+          <End Role="Dokument" Type="Self.Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dluznik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="Dluznik_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dokument_Transfer">
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="0..1" />
+          <End Role="Dokument" Type="Self.Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="Transfer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ekstrakcja_Dokument">
+          <End Role="Dokument" Type="Self.Dokument" Multiplicity="0..1" />
+          <End Role="Ekstrakcja" Type="Self.Ekstrakcja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dokument">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ekstrakcja">
+              <PropertyRef Name="Dokument_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wplata_Transfer">
+          <End Role="Transfer" Type="Self.Transfer" Multiplicity="0..1" />
+          <End Role="Wplata" Type="Self.Wplata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wplata">
+              <PropertyRef Name="Transfer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KnsMigratorModelStoreContainer">
+          <EntitySet Name="BankiKonfig" EntityType="Self.BankiKonfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsExternalDBConnectionConfig" EntityType="Self.ConsExternalDBConnectionConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsJobItem" EntityType="Self.ConsJobItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsKartaTransfer" EntityType="Self.ConsKartaTransfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dluznik" EntityType="Self.Dluznik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dokument" EntityType="Self.Dokument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ekstrakcja" EntityType="Self.Ekstrakcja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KnsKomornik" EntityType="Self.KnsKomornik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KnsKsiegi" EntityType="Self.KnsKsiegi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KnsSad" EntityType="Self.KnsSad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KodMaskKonfig" EntityType="Self.KodMaskKonfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Konfiguracja" EntityType="Self.Konfiguracja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPKodKraju" EntityType="Self.SAPKodKraju" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPKodyOpr" EntityType="Self.SAPKodyOpr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPOpisPrzedmiotu" EntityType="Self.SAPOpisPrzedmiotu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPRBN" EntityType="Self.SAPRBN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPRepertorium" EntityType="Self.SAPRepertorium" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPRodzajSprawy" EntityType="Self.SAPRodzajSprawy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPSad" EntityType="Self.SAPSad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPStanNal" EntityType="Self.SAPStanNal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPTomyAkt" EntityType="Self.SAPTomyAkt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPWplaty" EntityType="Self.SAPWplaty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAPWydzial" EntityType="Self.SAPWydzial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceEndpoint" EntityType="Self.ServiceEndpoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sprawa" EntityType="Self.Sprawa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SygnMap" EntityType="Self.SygnMap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transfer" EntityType="Self.Transfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypTransferu" EntityType="Self.TypTransferu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WalidSaldo" EntityType="Self.WalidSaldo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wplata" EntityType="Self.Wplata" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ConsJobItem_ConsExternalDBConnectionConfig" Association="Self.FK_ConsJobItem_ConsExternalDBConnectionConfig">
+            <End Role="ConsExternalDBConnectionConfig" EntitySet="ConsExternalDBConnectionConfig" />
+            <End Role="ConsJobItem" EntitySet="ConsJobItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dluznik_Sprawa" Association="Self.FK_Dluznik_Sprawa">
+            <End Role="Sprawa" EntitySet="Sprawa" />
+            <End Role="Dluznik" EntitySet="Dluznik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dokument_Dluznik" Association="Self.FK_Dokument_Dluznik">
+            <End Role="Dluznik" EntitySet="Dluznik" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dokument_Transfer" Association="Self.FK_Dokument_Transfer">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ekstrakcja_Dokument" Association="Self.FK_Ekstrakcja_Dokument">
+            <End Role="Dokument" EntitySet="Dokument" />
+            <End Role="Ekstrakcja" EntitySet="Ekstrakcja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wplata_Transfer" Association="Self.FK_Wplata_Transfer">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="Wplata" EntitySet="Wplata" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KnsMigratorModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="KnsMigratorEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="KnsSad" EntityType="KnsMigratorModel.KnsSad" />
+          <EntitySet Name="SAPOpisPrzedmiotu" EntityType="KnsMigratorModel.SAPOpisPrzedmiotu" />
+          <EntitySet Name="SAPStanNal" EntityType="KnsMigratorModel.SAPStanNal" />
+          <EntitySet Name="SAPTomyAkt" EntityType="KnsMigratorModel.SAPTomyAkt" />
+          <EntitySet Name="SAPRodzajSprawy" EntityType="KnsMigratorModel.SAPRodzajSprawy" />
+          <EntitySet Name="SAPKodKraju" EntityType="KnsMigratorModel.SAPKodKraju" />
+          <EntitySet Name="TypTransferu" EntityType="KnsMigratorModel.TypTransferu" />
+          <EntitySet Name="SAPRBN" EntityType="KnsMigratorModel.SAPRBN" />
+          <EntitySet Name="SAPKodyOpr" EntityType="KnsMigratorModel.SAPKodyOpr" />
+          <EntitySet Name="Wplata" EntityType="KnsMigratorModel.Wplata" />
+          <EntitySet Name="BankiKonfig" EntityType="KnsMigratorModel.BankiKonfig" />
+          <EntitySet Name="KnsKomornik" EntityType="KnsMigratorModel.KnsKomornik" />
+          <EntitySet Name="WalidSaldo" EntityType="KnsMigratorModel.WalidSaldo" />
+          <EntitySet Name="SygnMap" EntityType="KnsMigratorModel.SygnMap" />
+          <EntitySet Name="Ekstrakcja" EntityType="KnsMigratorModel.Ekstrakcja" />
+          <EntitySet Name="SAPWplaty" EntityType="KnsMigratorModel.SAPWplaty" />
+          <EntitySet Name="SAPWydzial" EntityType="KnsMigratorModel.SAPWydzial" />
+          <EntitySet Name="Dluznik" EntityType="KnsMigratorModel.Dluznik" />
+          <EntitySet Name="Sprawa" EntityType="KnsMigratorModel.Sprawa" />
+          <AssociationSet Name="FK_Dluznik_Sprawa" Association="KnsMigratorModel.FK_Dluznik_Sprawa">
+            <End Role="Sprawa" EntitySet="Sprawa" />
+            <End Role="Dluznik" EntitySet="Dluznik" />
+          </AssociationSet>
+          <EntitySet Name="Dokument" EntityType="KnsMigratorModel.Dokument" />
+          <AssociationSet Name="FK_Dokument_Dluznik" Association="KnsMigratorModel.FK_Dokument_Dluznik">
+            <End Role="Dluznik" EntitySet="Dluznik" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Dokument_Sprawa" Association="KnsMigratorModel.FK_Dokument_Sprawa">
+            <End Role="Sprawa" EntitySet="Sprawa" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ekstrakcja_Dokument" Association="KnsMigratorModel.FK_Ekstrakcja_Dokument">
+            <End Role="Dokument" EntitySet="Dokument" />
+            <End Role="Ekstrakcja" EntitySet="Ekstrakcja" />
+          </AssociationSet>
+          <EntitySet Name="Transfer" EntityType="KnsMigratorModel.Transfer" />
+          <AssociationSet Name="FK_Dokument_Transfer" Association="KnsMigratorModel.FK_Dokument_Transfer">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wplata_Transfer" Association="KnsMigratorModel.FK_Wplata_Transfer">
+            <End Role="Transfer" EntitySet="Transfer" />
+            <End Role="Wplata" EntitySet="Wplata" />
+          </AssociationSet>
+          <EntitySet Name="KodMaskKonfig" EntityType="KnsMigratorModel.KodMaskKonfig" />
+          <EntitySet Name="User" EntityType="KnsMigratorModel.User" />
+          <EntitySet Name="ServiceEndpoint" EntityType="KnsMigratorModel.ServiceEndpoint" />
+          <EntitySet Name="SAPRepertorium" EntityType="KnsMigratorModel.SAPRepertorium" />
+          <EntitySet Name="SAPSad" EntityType="KnsMigratorModel.SAPSad" />
+          <EntitySet Name="Konfiguracja" EntityType="KnsMigratorModel.Konfiguracja" />
+          <EntitySet Name="KnsKsiegi" EntityType="KnsMigratorModel.KnsKsiegi" />
+          <EntitySet Name="ConsExternalDBConnectionConfig" EntityType="KnsMigratorModel.ConsExternalDBConnectionConfig" />
+          <EntitySet Name="ConsJobItem" EntityType="KnsMigratorModel.ConsJobItem" />
+          <EntitySet Name="ConsKartaTransfer" EntityType="KnsMigratorModel.ConsKartaTransfer" />
+          <AssociationSet Name="FK_ConsJobItem_ConsExternalDBConnectionConfig" Association="KnsMigratorModel.FK_ConsJobItem_ConsExternalDBConnectionConfig">
+            <End Role="ConsExternalDBConnectionConfig" EntitySet="ConsExternalDBConnectionConfig" />
+            <End Role="ConsJobItem" EntitySet="ConsJobItem" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="KnsSad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Sad_Id" Type="Int32" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="SAPSad_Id" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+          <Property Name="SAPWydz_Id" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Type="String" Name="SAPtypSad" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SAPOpisPrzedmiotu">
+          <Key>
+            <PropertyRef Name="Symbol" />
+          </Key>
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="false" />
+          <Property Name="Opis" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SAPStanNal">
+          <Key>
+            <PropertyRef Name="Kod" />
+          </Key>
+          <Property Name="Kod" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Opis" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="grzywnakoszty" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+        </EntityType>
+        <EntityType Name="SAPTomyAkt">
+          <Key>
+            <PropertyRef Name="Kod" />
+          </Key>
+          <Property Name="Kod" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="Opis" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SAPRodzajSprawy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="kod" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="opis" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="repertorium" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="typSad" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SAPKodKraju">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="kod" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="kraj" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TypTransferu">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Type="Int32" Name="kod" Nullable="false" />
+          <Property Type="String" Name="opis" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SAPRBN">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Type="String" Name="kod" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="opis" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SAPKodyOpr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="String" Name="kod" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="nazwa" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="grzywnakoszty" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="samoistna" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="operacjaGlowna" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="oznaczenieOpGlownej" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="id" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Wplata">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="SAPDocPRef" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPDokRozliczeniowy" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPRodzajDok" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataRozlicz" Nullable="true" Precision="3" />
+          <Property Type="String" Name="SAPDokRozliczany" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Kwota" Precision="18" Scale="2" />
+          <Property Type="String" Name="tytulem" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Transfer_Id" />
+          <Property Type="DateTime" Name="DataWplaty" Nullable="true" Precision="3" />
+          <NavigationProperty Name="Transfer" Relationship="KnsMigratorModel.FK_Wplata_Transfer" FromRole="Wplata" ToRole="Transfer" />
+        </EntityType>
+        <EntityType Name="BankiKonfig">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Label" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ExePath" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Folder" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="LastRunDate" Precision="3" />
+          <Property Type="Int32" Name="LastRunStatus" />
+          <Property Type="String" Name="Message" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="KnsKomornik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Nazwa" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Miasto" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Ulica" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NIP" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Komornik_id" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WalidSaldo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Guid" Name="Klucz" />
+          <Property Type="String" Name="KartaDl" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Sygnatura" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Naleznosc" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Kwota" Precision="12" Scale="2" />
+          <Property Type="String" Name="Status" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OpGlowna" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OpCzesc" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataKsiegowania" Precision="3" />
+          <Property Type="String" Name="Dluznik" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SprawaId" />
+          <Property Type="Int32" Name="Ksiega" />
+          <Property Type="Decimal" Name="SAPKwota" Precision="12" Scale="2" />
+          <Property Type="String" Name="KsiegaOpis" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SygnMap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="SrcRep" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SrcWydz" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SrcSad" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DestWydz" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DestRep" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DestNr" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DestRok" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DestSad" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="priorytet" />
+        </EntityType>
+        <EntityType Name="Ekstrakcja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="String" Name="Osoba_fizyczna_Osoba_prawna" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Imię_Nazwa1" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nazwisko__Nazwa2" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Ulica" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nrdomu" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nrmieszkania" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Kodpocztowy" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Miejscowość" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Kluczkraju" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="IBAN" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NIP" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Pesel" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KwalifikatordoRBN" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Typkontaumowy" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Oznaczeniekontaumowy" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Relacjakonta" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="GrupaJG" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="StandardowaJG" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Rodzajprzedmiotuumowy" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="JednostkaGospodarcza" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nrwydziałuisekcji" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Repertorium" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NrSprawy" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Rok" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Rodzajsprawy" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Ilośćtomów" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Datadokumentu" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Dataksięgowania" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Rodzajdokumentu" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Waluta" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Kluczuzgodnienia" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="JednostkaGospodarcza32" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Operacjagłówna" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Operacjaczęściowa" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KwotawPLN" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Datapłatności" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Stannależności" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int64" Name="KontoKG" />
+          <Property Type="String" Name="Opis" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Int32" Name="Dokument_Id" />
+          <Property Type="Guid" Name="DocGuid" />
+          <Property Type="String" Name="NumerPartnera" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumerKontaUmowy" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumerPrzedmiotuUmowy" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumerDokumentu" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumerDokumentuReferencyjnego" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumerDokumentuPlanRat" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota1" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData1" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota2" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData2" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota3" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData3" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota4" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData4" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota5" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData5" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota6" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData6" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota7" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData7" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota8" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData8" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota9" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData9" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota10" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData10" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota11" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData11" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota12" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData12" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota13" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData13" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota14" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData14" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota15" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData15" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota16" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData16" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota17" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData17" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota18" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData18" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota19" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData19" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota20" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData20" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota21" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData21" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota22" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData22" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota23" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData23" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota24" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData24" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota25" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData25" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota26" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData26" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota27" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData27" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota28" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData28" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota29" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData29" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota30" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData30" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota31" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData31" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota32" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData32" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota33" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData33" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota34" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData34" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota35" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData35" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataKwota36" MaxLength="21" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RataData36" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SygnaturaPoprzednia" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KodOperacji" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPImportPonowne" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="UserId" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <Property Type="String" Name="StanowiskoFinansowePU" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="StanowiskoFinansoweKU" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="JeGoWindyk" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="StanowiskoFianasoweWindyk" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Dokument" Relationship="KnsMigratorModel.FK_Ekstrakcja_Dokument" FromRole="Ekstrakcja" ToRole="Dokument" />
+          <Property Name="SAPKluczUzgodnienia" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SAPWplaty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="DateTime" Name="DataKsiegowania" Precision="3" />
+          <Property Type="DateTime" Name="DataOdczytu" Precision="3" />
+          <Property Type="String" Name="PartiaPlatnosci" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumerPozycjiWPartii" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumerDokumentu" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumerDokumentuRozlicz" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Kwota" Precision="18" Scale="2" />
+          <Property Type="String" Name="NumerPartnera" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NumerKontaUmowy" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PrzedmiotUmowy" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TekstZastosowania" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdPozycja" />
+          <Property Type="String" Name="DokumentStorno" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KartaDl" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Sygnatura" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Dluznik" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KosztyGrzywna" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SAPWydzial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="kodSad" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="numer" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nazwa" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="sadWydzial" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="rodzajSprawy" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="numerWydz" />
+          <Property Type="String" Name="MPK" MaxLength="7" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Dluznik">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="FizPraw" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="Imie" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nazwisko" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Ulica" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NrDomu" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NrMieszkania" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KodPocztowy" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Miejscowosc" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KluczKraju" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Iban" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nip" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Pesel" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RBN" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Sprawa_Id" />
+          <Property Type="Int32" Name="KnsDluz_Id" />
+          <Property Type="String" Name="SAPKontoPartnera" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="IdSrcDane" />
+          <Property Type="String" Name="InsertedBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SentBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="InsDate" Precision="3" />
+          <Property Type="DateTime" Name="SentDate" Precision="3" />
+          <NavigationProperty Name="Sprawa" Relationship="KnsMigratorModel.FK_Dluznik_Sprawa" FromRole="Dluznik" ToRole="Sprawa" />
+          <NavigationProperty Name="Dokument" Relationship="KnsMigratorModel.FK_Dokument_Dluznik" FromRole="Dluznik" ToRole="Dokument" />
+        </EntityType>
+        <EntityType Name="Sprawa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Sygnatura" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Karta" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPSadId" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPWydział" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPRepertorium" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Numer" />
+          <Property Type="Int32" Name="Rok" />
+          <Property Type="String" Name="SAPRodzajPrzedmiotuUmowy" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPKontoUmowy" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataWyroku" Precision="3" />
+          <Property Type="DateTime" Name="DataPrawomocn" Precision="3" />
+          <Property Type="DateTime" Name="DataWymagalnosci" Precision="3" />
+          <Property Type="Int32" Name="KnsSprawa_id" />
+          <Property Type="Int32" Name="KNSSadOrzek_id" />
+          <Property Type="String" Name="KnsSad" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KnsWydzial" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="KnsWydz_Id" />
+          <Property Type="Int32" Name="wyklucz" />
+          <Property Type="Int32" Name="KnsKsiega" />
+          <Property Type="String" Name="SAPRodzajSprawy" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPTomyAkt" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="KdNumer" />
+          <Property Type="Int32" Name="KdRok" />
+          <Property Type="String" Name="SAPPrzedmiotUmowy" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="grzSamoistna" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPTypKontaUmowy" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPRelacjaKontaUmowy" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InsertedBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SentBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="InsDate" Precision="3" />
+          <Property Type="DateTime" Name="SentDate" Precision="3" />
+          <NavigationProperty Name="Dluznik" Relationship="KnsMigratorModel.FK_Dluznik_Sprawa" FromRole="Sprawa" ToRole="Dluznik" />
+          <NavigationProperty Name="Dokument" Relationship="KnsMigratorModel.FK_Dokument_Sprawa" FromRole="Sprawa" ToRole="Dokument" />
+          <Property Name="SapKontoUmowyOld" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Dluznik_Sprawa">
+          <End Type="KnsMigratorModel.Sprawa" Role="Sprawa" Multiplicity="0..1" />
+          <End Type="KnsMigratorModel.Dluznik" Role="Dluznik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprawa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dluznik">
+              <PropertyRef Name="Sprawa_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Dokument">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Guid" Name="DocGuid" Nullable="false" />
+          <Property Type="DateTime" Name="DataDokumentu" Precision="3" />
+          <Property Type="DateTime" Name="DataKsiegowania" Precision="3" />
+          <Property Type="String" Name="grzSamoistna" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="kwota" Precision="18" Scale="2" />
+          <Property Type="String" Name="OperacjaCzesciowa" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataPlatnosci" Precision="3" />
+          <Property Type="String" Name="Stan" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Opis" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="typFakt" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Sprawa_Id" />
+          <Property Type="Int32" Name="SrcSystemId" />
+          <Property Type="Int32" Name="SrcDocumentHash" />
+          <Property Type="Int32" Name="Document_Id" />
+          <Property Type="Guid" Name="DocGuid_Ref" />
+          <Property Type="String" Name="SAPDocId" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="KnsPozDzNal" />
+          <Property Type="Int32" Name="KnsRokDzNal" />
+          <Property Type="Int32" Name="KnsKsiegaDzNal" />
+          <Property Type="Int32" Name="Transfer_Id" />
+          <Property Type="Int32" Name="Dluznik_Id" />
+          <Property Type="Decimal" Name="RataKwota1" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData1" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota2" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData2" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota3" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData3" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota4" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData4" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota5" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData5" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota6" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData6" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota7" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData7" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota8" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData8" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota9" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData9" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota10" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData10" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota11" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData11" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota12" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData12" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota13" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData13" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota14" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData14" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota15" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData15" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota16" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData16" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota17" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData17" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota18" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData18" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota19" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData19" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota20" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData20" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota21" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData21" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota22" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData22" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota23" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData23" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota24" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData24" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota25" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData25" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota26" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData26" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota27" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData27" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota28" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData28" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota29" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData29" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota30" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData30" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota31" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData31" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota32" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData32" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota33" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData33" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota34" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData34" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota35" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData35" Precision="3" />
+          <Property Type="Decimal" Name="RataKwota36" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="RataData36" Precision="3" />
+          <Property Type="String" Name="SAPRatyId" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPDocIdRef" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Info" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OperacjaGlowna" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPImportInfo" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SAPImportStatus" />
+          <Property Type="DateTime" Name="SAPImportDate" Precision="3" />
+          <Property Type="String" Name="SAPImportPonowne" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPRodzajDokumentu" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPKontoKG" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPWaluta" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPKluczUzgodnienia" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAPCLDocId" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="InsertedBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SentBy" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="InsDate" Precision="3" />
+          <Property Type="DateTime" Name="SentDate" Precision="3" />
+          <NavigationProperty Name="Dluznik" Relationship="KnsMigratorModel.FK_Dokument_Dluznik" FromRole="Dokument" ToRole="Dluznik" />
+          <NavigationProperty Name="Sprawa" Relationship="KnsMigratorModel.FK_Dokument_Sprawa" FromRole="Dokument" ToRole="Sprawa" />
+          <NavigationProperty Name="Ekstrakcja" Relationship="KnsMigratorModel.FK_Ekstrakcja_Dokument" FromRole="Dokument" ToRole="Ekstrakcja" />
+          <NavigationProperty Name="Transfer" Relationship="KnsMigratorModel.FK_Dokument_Transfer" FromRole="Dokument" ToRole="Transfer" />
+          <Property Name="SAPIdDocOld" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="uwagi" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="referencja" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="tekst" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="IDZadanieKsiegowania" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DataStanu" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Dokument_Dluznik">
+          <End Type="KnsMigratorModel.Dluznik" Role="Dluznik" Multiplicity="0..1" />
+          <End Type="KnsMigratorModel.Dokument" Role="Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dluznik">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="Dluznik_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Dokument_Sprawa">
+          <End Type="KnsMigratorModel.Sprawa" Role="Sprawa" Multiplicity="0..1" />
+          <End Type="KnsMigratorModel.Dokument" Role="Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprawa">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="Sprawa_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ekstrakcja_Dokument">
+          <End Type="KnsMigratorModel.Dokument" Role="Dokument" Multiplicity="0..1" />
+          <End Type="KnsMigratorModel.Ekstrakcja" Role="Ekstrakcja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dokument">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ekstrakcja">
+              <PropertyRef Name="Dokument_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Transfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="DataTransferu" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="rodzaj" Type="Int32" />
+          <Property Name="LFaktow" Type="Int32" />
+          <Property Name="DataOd" Type="DateTime" Precision="3" />
+          <Property Name="DataDo" Type="DateTime" Precision="3" />
+          <Property Name="Uwagi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="SAPKluczUzgodnienia" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Rok" Type="Int32" />
+          <Property Name="Miesiac" Type="Int32" />
+          <Property Name="Zaimportowane" Type="Int32" />
+          <Property Name="Bledne" Type="Int32" />
+          <Property Name="Kwota" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DataPOper" Type="DateTime" Precision="3" />
+          <Property Name="DataOOper" Type="DateTime" Precision="3" />
+          <Property Name="PackNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dokument" Relationship="KnsMigratorModel.FK_Dokument_Transfer" FromRole="Transfer" ToRole="Dokument" />
+          <NavigationProperty Name="Wplata" Relationship="KnsMigratorModel.FK_Wplata_Transfer" FromRole="Transfer" ToRole="Wplata" />
+          <Property Name="StanowiskoFinansoweWindyk" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Dokument_Transfer">
+          <End Type="KnsMigratorModel.Transfer" Role="Transfer" Multiplicity="0..1" />
+          <End Type="KnsMigratorModel.Dokument" Role="Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="Transfer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wplata_Transfer">
+          <End Type="KnsMigratorModel.Transfer" Role="Transfer" Multiplicity="0..1" />
+          <End Type="KnsMigratorModel.Wplata" Role="Wplata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transfer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wplata">
+              <PropertyRef Name="Transfer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="KodMaskKonfig">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Kraj" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Maska" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Pssword" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Int32" Nullable="false" />
+          <Property Name="LastPwdChngDate" Type="DateTime" Precision="3" />
+          <Property Name="suspend" Type="Boolean" />
+          <Property Name="ChangePwd" Type="Boolean" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="PwdPeriodChange" Type="Int32" Nullable="false" />
+          <Property Name="MEPUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MEPPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ServiceEndpoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceId" Type="Int32" />
+          <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Endpoint" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SAPRepertorium">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SymbolRodzajPrzedmiotu" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="typSad" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SAPSad">
+          <Key>
+            <PropertyRef Name="kod" />
+          </Key>
+          <Property Name="kod" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="sad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="miasto" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="miastSad" Type="String" MaxLength="160" FixedLength="false" Unicode="false" />
+          <Property Name="typSad" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="JEGO" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="WazneOd" Type="DateTime" Precision="3" />
+          <Property Name="WazneDo" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Konfiguracja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typKns" Type="Int32" />
+          <Property Name="srvName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DbName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pwd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="logId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WinLogon" Type="Boolean" />
+          <Property Name="JednostkaGospodarcza" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="StartImportDate" Type="DateTime" Precision="3" />
+          <Property Name="PrzypisFile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OdpisFile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="srvAlias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EndpointWS" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="WSLogon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WSpwd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="typImportSAP" Type="Int32" />
+          <Property Name="skipraty" Type="Boolean" />
+          <Property Name="StanowiskoFin" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="ERPLogon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="defSad" Type="Boolean" />
+          <Property Name="dbversion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="czyautoks" Type="Int32" />
+          <Property Name="czyautoprzyp" Type="Int32" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="dplatnosci" Type="DateTime" Precision="3" />
+          <Property Name="typDatyPlatn" Type="Int32" />
+          <Property Name="DataMiesStart" Type="DateTime" Precision="3" />
+          <Property Name="Pfx" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Cer" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PfxPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SAPPwdExpPeriod" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KnsKsiegi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazwa" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="id_sadu" Type="Int32" />
+          <Property Name="sad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="wydzial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="kodSad" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="numWydz" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="oprKosztFiz" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="oprKosztPraw" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="oprGrzFiz" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="oprGrzPraw" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="rodzajPrzedmiotu" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Ksiegi" Type="Int32" />
+          <Property Name="oprGrzSamoistna" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="czyFPP" Type="Int32" />
+          <Property Name="czymies" Type="Int32" />
+          <Property Name="ksGrzFPPMap" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ConsExternalDBConnectionConfig">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typDB" Type="Int32" />
+          <Property Name="rodzajDB" Type="Int32" />
+          <Property Name="srvName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DbName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pwd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="logId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WinLogon" Type="Boolean" />
+          <Property Name="srvAlias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="sp_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SAPKnsId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConnectionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="sp_param" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="ConsJobItem" Relationship="KnsMigratorModel.FK_ConsJobItem_ConsExternalDBConnectionConfig" FromRole="ConsExternalDBConnectionConfig" ToRole="ConsJobItem" />
+        </EntityType>
+        <EntityType Name="ConsJobItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="insertDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="startDate" Type="DateTime" Precision="3" />
+          <Property Name="finishDate" Type="DateTime" Precision="3" />
+          <Property Name="consExternalDBConnectionConfig_Id" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="info" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="queryDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ConsExternalDBConnectionConfig" Relationship="KnsMigratorModel.FK_ConsJobItem_ConsExternalDBConnectionConfig" FromRole="ConsJobItem" ToRole="ConsExternalDBConnectionConfig" />
+        </EntityType>
+        <EntityType Name="ConsKartaTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idKomunikatu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="idStronyWydzial" Type="Int32" />
+          <Property Name="idSprawyWydzial" Type="Int32" />
+          <Property Name="dImportu" Type="DateTime" Precision="3" />
+          <Property Name="trescOdpowiedzi" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="payload" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hash" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="consJobItemId" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_ConsJobItem_ConsExternalDBConnectionConfig">
+          <End Type="KnsMigratorModel.ConsExternalDBConnectionConfig" Role="ConsExternalDBConnectionConfig" Multiplicity="1" />
+          <End Type="KnsMigratorModel.ConsJobItem" Role="ConsJobItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsExternalDBConnectionConfig">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsJobItem">
+              <PropertyRef Name="consExternalDBConnectionConfig_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KnsMigratorModelStoreContainer" CdmEntityContainer="KnsMigratorEntities">
+          <EntitySetMapping Name="KnsSad"><EntityTypeMapping TypeName="KnsMigratorModel.KnsSad"><MappingFragment StoreEntitySet="KnsSad">
+            <ScalarProperty Name="SAPtypSad" ColumnName="SAPtypSad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Sad_Id" ColumnName="Sad_Id" />
+            <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+            <ScalarProperty Name="SAPSad_Id" ColumnName="SAPSad_Id" />
+            <ScalarProperty Name="SAPWydz_Id" ColumnName="SAPWydz_Id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SAPOpisPrzedmiotu"><EntityTypeMapping TypeName="KnsMigratorModel.SAPOpisPrzedmiotu"><MappingFragment StoreEntitySet="SAPOpisPrzedmiotu">
+            <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+            <ScalarProperty Name="Opis" ColumnName="Opis" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SAPStanNal"><EntityTypeMapping TypeName="KnsMigratorModel.SAPStanNal"><MappingFragment StoreEntitySet="SAPStanNal">
+            <ScalarProperty Name="Kod" ColumnName="Kod" />
+            <ScalarProperty Name="Opis" ColumnName="Opis" />
+            <ScalarProperty Name="grzywnakoszty" ColumnName="grzywnakoszty" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SAPTomyAkt"><EntityTypeMapping TypeName="KnsMigratorModel.SAPTomyAkt"><MappingFragment StoreEntitySet="SAPTomyAkt">
+            <ScalarProperty Name="Kod" ColumnName="Kod" />
+            <ScalarProperty Name="Opis" ColumnName="Opis" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SAPRodzajSprawy">
+            <EntityTypeMapping TypeName="KnsMigratorModel.SAPRodzajSprawy">
+              <MappingFragment StoreEntitySet="SAPRodzajSprawy">
+                <ScalarProperty Name="typSad" ColumnName="typSad" />
+                <ScalarProperty Name="repertorium" ColumnName="repertorium" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAPKodKraju">
+            <EntityTypeMapping TypeName="KnsMigratorModel.SAPKodKraju">
+              <MappingFragment StoreEntitySet="SAPKodKraju">
+                <ScalarProperty Name="kraj" ColumnName="kraj" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypTransferu">
+            <EntityTypeMapping TypeName="KnsMigratorModel.TypTransferu">
+              <MappingFragment StoreEntitySet="TypTransferu">
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAPRBN">
+            <EntityTypeMapping TypeName="KnsMigratorModel.SAPRBN">
+              <MappingFragment StoreEntitySet="SAPRBN">
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAPKodyOpr">
+            <EntityTypeMapping TypeName="KnsMigratorModel.SAPKodyOpr">
+              <MappingFragment StoreEntitySet="SAPKodyOpr">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="oznaczenieOpGlownej" ColumnName="oznaczenieOpGlownej" />
+                <ScalarProperty Name="operacjaGlowna" ColumnName="operacjaGlowna" />
+                <ScalarProperty Name="samoistna" ColumnName="samoistna" />
+                <ScalarProperty Name="grzywnakoszty" ColumnName="grzywnakoszty" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wplata">
+            <EntityTypeMapping TypeName="KnsMigratorModel.Wplata">
+              <MappingFragment StoreEntitySet="Wplata">
+                <ScalarProperty Name="DataWplaty" ColumnName="DataWplaty" />
+                <ScalarProperty Name="Transfer_Id" ColumnName="Transfer_Id" />
+                <ScalarProperty Name="tytulem" ColumnName="tytulem" />
+                <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+                <ScalarProperty Name="SAPDokRozliczany" ColumnName="SAPDokRozliczany" />
+                <ScalarProperty Name="DataRozlicz" ColumnName="DataRozlicz" />
+                <ScalarProperty Name="SAPRodzajDok" ColumnName="SAPRodzajDok" />
+                <ScalarProperty Name="SAPDokRozliczeniowy" ColumnName="SAPDokRozliczeniowy" />
+                <ScalarProperty Name="SAPDocPRef" ColumnName="SAPDocPRef" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankiKonfig">
+            <EntityTypeMapping TypeName="KnsMigratorModel.BankiKonfig">
+              <MappingFragment StoreEntitySet="BankiKonfig">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="LastRunStatus" ColumnName="LastRunStatus" />
+                <ScalarProperty Name="LastRunDate" ColumnName="LastRunDate" />
+                <ScalarProperty Name="Folder" ColumnName="Folder" />
+                <ScalarProperty Name="ExePath" ColumnName="ExePath" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KnsKomornik">
+            <EntityTypeMapping TypeName="KnsMigratorModel.KnsKomornik">
+              <MappingFragment StoreEntitySet="KnsKomornik">
+                <ScalarProperty Name="Komornik_id" ColumnName="Komornik_id" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WalidSaldo">
+            <EntityTypeMapping TypeName="KnsMigratorModel.WalidSaldo">
+              <MappingFragment StoreEntitySet="WalidSaldo">
+                <ScalarProperty Name="KsiegaOpis" ColumnName="KsiegaOpis" />
+                <ScalarProperty Name="SAPKwota" ColumnName="SAPKwota" />
+                <ScalarProperty Name="Ksiega" ColumnName="Ksiega" />
+                <ScalarProperty Name="SprawaId" ColumnName="SprawaId" />
+                <ScalarProperty Name="Dluznik" ColumnName="Dluznik" />
+                <ScalarProperty Name="DataKsiegowania" ColumnName="DataKsiegowania" />
+                <ScalarProperty Name="OpCzesc" ColumnName="OpCzesc" />
+                <ScalarProperty Name="OpGlowna" ColumnName="OpGlowna" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+                <ScalarProperty Name="Naleznosc" ColumnName="Naleznosc" />
+                <ScalarProperty Name="Sygnatura" ColumnName="Sygnatura" />
+                <ScalarProperty Name="KartaDl" ColumnName="KartaDl" />
+                <ScalarProperty Name="Klucz" ColumnName="Klucz" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SygnMap">
+            <EntityTypeMapping TypeName="KnsMigratorModel.SygnMap">
+              <MappingFragment StoreEntitySet="SygnMap">
+                <ScalarProperty Name="priorytet" ColumnName="priorytet" />
+                <ScalarProperty Name="DestSad" ColumnName="DestSad" />
+                <ScalarProperty Name="DestRok" ColumnName="DestRok" />
+                <ScalarProperty Name="DestNr" ColumnName="DestNr" />
+                <ScalarProperty Name="DestRep" ColumnName="DestRep" />
+                <ScalarProperty Name="DestWydz" ColumnName="DestWydz" />
+                <ScalarProperty Name="SrcSad" ColumnName="SrcSad" />
+                <ScalarProperty Name="SrcWydz" ColumnName="SrcWydz" />
+                <ScalarProperty Name="SrcRep" ColumnName="SrcRep" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ekstrakcja">
+            <EntityTypeMapping TypeName="KnsMigratorModel.Ekstrakcja">
+              <MappingFragment StoreEntitySet="Ekstrakcja">
+                <ScalarProperty Name="SAPKluczUzgodnienia" ColumnName="SAPKluczUzgodnienia" />
+                <ScalarProperty Name="StanowiskoFianasoweWindyk" ColumnName="StanowiskoFianasoweWindyk" />
+                <ScalarProperty Name="JeGoWindyk" ColumnName="JeGoWindyk" />
+                <ScalarProperty Name="StanowiskoFinansoweKU" ColumnName="StanowiskoFinansoweKU" />
+                <ScalarProperty Name="StanowiskoFinansowePU" ColumnName="StanowiskoFinansowePU" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SAPImportPonowne" ColumnName="SAPImportPonowne" />
+                <ScalarProperty Name="KodOperacji" ColumnName="KodOperacji" />
+                <ScalarProperty Name="SygnaturaPoprzednia" ColumnName="SygnaturaPoprzednia" />
+                <ScalarProperty Name="RataData36" ColumnName="RataData36" />
+                <ScalarProperty Name="RataKwota36" ColumnName="RataKwota36" />
+                <ScalarProperty Name="RataData35" ColumnName="RataData35" />
+                <ScalarProperty Name="RataKwota35" ColumnName="RataKwota35" />
+                <ScalarProperty Name="RataData34" ColumnName="RataData34" />
+                <ScalarProperty Name="RataKwota34" ColumnName="RataKwota34" />
+                <ScalarProperty Name="RataData33" ColumnName="RataData33" />
+                <ScalarProperty Name="RataKwota33" ColumnName="RataKwota33" />
+                <ScalarProperty Name="RataData32" ColumnName="RataData32" />
+                <ScalarProperty Name="RataKwota32" ColumnName="RataKwota32" />
+                <ScalarProperty Name="RataData31" ColumnName="RataData31" />
+                <ScalarProperty Name="RataKwota31" ColumnName="RataKwota31" />
+                <ScalarProperty Name="RataData30" ColumnName="RataData30" />
+                <ScalarProperty Name="RataKwota30" ColumnName="RataKwota30" />
+                <ScalarProperty Name="RataData29" ColumnName="RataData29" />
+                <ScalarProperty Name="RataKwota29" ColumnName="RataKwota29" />
+                <ScalarProperty Name="RataData28" ColumnName="RataData28" />
+                <ScalarProperty Name="RataKwota28" ColumnName="RataKwota28" />
+                <ScalarProperty Name="RataData27" ColumnName="RataData27" />
+                <ScalarProperty Name="RataKwota27" ColumnName="RataKwota27" />
+                <ScalarProperty Name="RataData26" ColumnName="RataData26" />
+                <ScalarProperty Name="RataKwota26" ColumnName="RataKwota26" />
+                <ScalarProperty Name="RataData25" ColumnName="RataData25" />
+                <ScalarProperty Name="RataKwota25" ColumnName="RataKwota25" />
+                <ScalarProperty Name="RataData24" ColumnName="RataData24" />
+                <ScalarProperty Name="RataKwota24" ColumnName="RataKwota24" />
+                <ScalarProperty Name="RataData23" ColumnName="RataData23" />
+                <ScalarProperty Name="RataKwota23" ColumnName="RataKwota23" />
+                <ScalarProperty Name="RataData22" ColumnName="RataData22" />
+                <ScalarProperty Name="RataKwota22" ColumnName="RataKwota22" />
+                <ScalarProperty Name="RataData21" ColumnName="RataData21" />
+                <ScalarProperty Name="RataKwota21" ColumnName="RataKwota21" />
+                <ScalarProperty Name="RataData20" ColumnName="RataData20" />
+                <ScalarProperty Name="RataKwota20" ColumnName="RataKwota20" />
+                <ScalarProperty Name="RataData19" ColumnName="RataData19" />
+                <ScalarProperty Name="RataKwota19" ColumnName="RataKwota19" />
+                <ScalarProperty Name="RataData18" ColumnName="RataData18" />
+                <ScalarProperty Name="RataKwota18" ColumnName="RataKwota18" />
+                <ScalarProperty Name="RataData17" ColumnName="RataData17" />
+                <ScalarProperty Name="RataKwota17" ColumnName="RataKwota17" />
+                <ScalarProperty Name="RataData16" ColumnName="RataData16" />
+                <ScalarProperty Name="RataKwota16" ColumnName="RataKwota16" />
+                <ScalarProperty Name="RataData15" ColumnName="RataData15" />
+                <ScalarProperty Name="RataKwota15" ColumnName="RataKwota15" />
+                <ScalarProperty Name="RataData14" ColumnName="RataData14" />
+                <ScalarProperty Name="RataKwota14" ColumnName="RataKwota14" />
+                <ScalarProperty Name="RataData13" ColumnName="RataData13" />
+                <ScalarProperty Name="RataKwota13" ColumnName="RataKwota13" />
+                <ScalarProperty Name="RataData12" ColumnName="RataData12" />
+                <ScalarProperty Name="RataKwota12" ColumnName="RataKwota12" />
+                <ScalarProperty Name="RataData11" ColumnName="RataData11" />
+                <ScalarProperty Name="RataKwota11" ColumnName="RataKwota11" />
+                <ScalarProperty Name="RataData10" ColumnName="RataData10" />
+                <ScalarProperty Name="RataKwota10" ColumnName="RataKwota10" />
+                <ScalarProperty Name="RataData9" ColumnName="RataData9" />
+                <ScalarProperty Name="RataKwota9" ColumnName="RataKwota9" />
+                <ScalarProperty Name="RataData8" ColumnName="RataData8" />
+                <ScalarProperty Name="RataKwota8" ColumnName="RataKwota8" />
+                <ScalarProperty Name="RataData7" ColumnName="RataData7" />
+                <ScalarProperty Name="RataKwota7" ColumnName="RataKwota7" />
+                <ScalarProperty Name="RataData6" ColumnName="RataData6" />
+                <ScalarProperty Name="RataKwota6" ColumnName="RataKwota6" />
+                <ScalarProperty Name="RataData5" ColumnName="RataData5" />
+                <ScalarProperty Name="RataKwota5" ColumnName="RataKwota5" />
+                <ScalarProperty Name="RataData4" ColumnName="RataData4" />
+                <ScalarProperty Name="RataKwota4" ColumnName="RataKwota4" />
+                <ScalarProperty Name="RataData3" ColumnName="RataData3" />
+                <ScalarProperty Name="RataKwota3" ColumnName="RataKwota3" />
+                <ScalarProperty Name="RataData2" ColumnName="RataData2" />
+                <ScalarProperty Name="RataKwota2" ColumnName="RataKwota2" />
+                <ScalarProperty Name="RataData1" ColumnName="RataData1" />
+                <ScalarProperty Name="RataKwota1" ColumnName="RataKwota1" />
+                <ScalarProperty Name="NumerDokumentuPlanRat" ColumnName="NumerDokumentuPlanRat" />
+                <ScalarProperty Name="NumerDokumentuReferencyjnego" ColumnName="NumerDokumentuReferencyjnego" />
+                <ScalarProperty Name="NumerDokumentu" ColumnName="NumerDokumentu" />
+                <ScalarProperty Name="NumerPrzedmiotuUmowy" ColumnName="NumerPrzedmiotuUmowy" />
+                <ScalarProperty Name="NumerKontaUmowy" ColumnName="NumerKontaUmowy" />
+                <ScalarProperty Name="NumerPartnera" ColumnName="NumerPartnera" />
+                <ScalarProperty Name="DocGuid" ColumnName="DocGuid" />
+                <ScalarProperty Name="Dokument_Id" ColumnName="Dokument_Id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="KontoKG" ColumnName="KontoKG" />
+                <ScalarProperty Name="Stannależności" ColumnName="Stannależności" />
+                <ScalarProperty Name="Datapłatności" ColumnName="Datapłatności" />
+                <ScalarProperty Name="KwotawPLN" ColumnName="KwotawPLN" />
+                <ScalarProperty Name="Operacjaczęściowa" ColumnName="Operacjaczęściowa" />
+                <ScalarProperty Name="Operacjagłówna" ColumnName="Operacjagłówna" />
+                <ScalarProperty Name="JednostkaGospodarcza32" ColumnName="JednostkaGospodarcza32" />
+                <ScalarProperty Name="Kluczuzgodnienia" ColumnName="Kluczuzgodnienia" />
+                <ScalarProperty Name="Waluta" ColumnName="Waluta" />
+                <ScalarProperty Name="Rodzajdokumentu" ColumnName="Rodzajdokumentu" />
+                <ScalarProperty Name="Dataksięgowania" ColumnName="Dataksięgowania" />
+                <ScalarProperty Name="Datadokumentu" ColumnName="Datadokumentu" />
+                <ScalarProperty Name="Ilośćtomów" ColumnName="Ilośćtomów" />
+                <ScalarProperty Name="Rodzajsprawy" ColumnName="Rodzajsprawy" />
+                <ScalarProperty Name="Rok" ColumnName="Rok" />
+                <ScalarProperty Name="NrSprawy" ColumnName="NrSprawy" />
+                <ScalarProperty Name="Repertorium" ColumnName="Repertorium" />
+                <ScalarProperty Name="Nrwydziałuisekcji" ColumnName="Nrwydziałuisekcji" />
+                <ScalarProperty Name="JednostkaGospodarcza" ColumnName="JednostkaGospodarcza" />
+                <ScalarProperty Name="Rodzajprzedmiotuumowy" ColumnName="Rodzajprzedmiotuumowy" />
+                <ScalarProperty Name="StandardowaJG" ColumnName="StandardowaJG" />
+                <ScalarProperty Name="GrupaJG" ColumnName="GrupaJG" />
+                <ScalarProperty Name="Relacjakonta" ColumnName="Relacjakonta" />
+                <ScalarProperty Name="Oznaczeniekontaumowy" ColumnName="Oznaczeniekontaumowy" />
+                <ScalarProperty Name="Typkontaumowy" ColumnName="Typkontaumowy" />
+                <ScalarProperty Name="KwalifikatordoRBN" ColumnName="KwalifikatordoRBN" />
+                <ScalarProperty Name="Pesel" ColumnName="Pesel" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="Kluczkraju" ColumnName="Kluczkraju" />
+                <ScalarProperty Name="Miejscowość" ColumnName="Miejscowość" />
+                <ScalarProperty Name="Kodpocztowy" ColumnName="Kodpocztowy" />
+                <ScalarProperty Name="Nrmieszkania" ColumnName="Nrmieszkania" />
+                <ScalarProperty Name="Nrdomu" ColumnName="Nrdomu" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Nazwisko__Nazwa2" ColumnName="Nazwisko/ Nazwa2" />
+                <ScalarProperty Name="Imię_Nazwa1" ColumnName="Imię/Nazwa1" />
+                <ScalarProperty Name="Osoba_fizyczna_Osoba_prawna" ColumnName="Osoba fizyczna/Osoba prawna" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAPWplaty">
+            <EntityTypeMapping TypeName="KnsMigratorModel.SAPWplaty">
+              <MappingFragment StoreEntitySet="SAPWplaty">
+                <ScalarProperty Name="KosztyGrzywna" ColumnName="KosztyGrzywna" />
+                <ScalarProperty Name="Dluznik" ColumnName="Dluznik" />
+                <ScalarProperty Name="Sygnatura" ColumnName="Sygnatura" />
+                <ScalarProperty Name="KartaDl" ColumnName="KartaDl" />
+                <ScalarProperty Name="DokumentStorno" ColumnName="DokumentStorno" />
+                <ScalarProperty Name="IdPozycja" ColumnName="IdPozycja" />
+                <ScalarProperty Name="TekstZastosowania" ColumnName="TekstZastosowania" />
+                <ScalarProperty Name="PrzedmiotUmowy" ColumnName="PrzedmiotUmowy" />
+                <ScalarProperty Name="NumerKontaUmowy" ColumnName="NumerKontaUmowy" />
+                <ScalarProperty Name="NumerPartnera" ColumnName="NumerPartnera" />
+                <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+                <ScalarProperty Name="NumerDokumentuRozlicz" ColumnName="NumerDokumentuRozlicz" />
+                <ScalarProperty Name="NumerDokumentu" ColumnName="NumerDokumentu" />
+                <ScalarProperty Name="NumerPozycjiWPartii" ColumnName="NumerPozycjiWPartii" />
+                <ScalarProperty Name="PartiaPlatnosci" ColumnName="PartiaPlatnosci" />
+                <ScalarProperty Name="DataOdczytu" ColumnName="DataOdczytu" />
+                <ScalarProperty Name="DataKsiegowania" ColumnName="DataKsiegowania" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAPWydzial">
+            <EntityTypeMapping TypeName="KnsMigratorModel.SAPWydzial">
+              <MappingFragment StoreEntitySet="SAPWydzial">
+                <ScalarProperty Name="MPK" ColumnName="MPK" />
+                <ScalarProperty Name="numerWydz" ColumnName="numerWydz" />
+                <ScalarProperty Name="rodzajSprawy" ColumnName="rodzajSprawy" />
+                <ScalarProperty Name="sadWydzial" ColumnName="sadWydzial" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="numer" ColumnName="numer" />
+                <ScalarProperty Name="kodSad" ColumnName="kodSad" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dluznik">
+            <EntityTypeMapping TypeName="KnsMigratorModel.Dluznik">
+              <MappingFragment StoreEntitySet="Dluznik">
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="SentBy" ColumnName="SentBy" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="IdSrcDane" ColumnName="IdSrcDane" />
+                <ScalarProperty Name="SAPKontoPartnera" ColumnName="SAPKontoPartnera" />
+                <ScalarProperty Name="KnsDluz_Id" ColumnName="KnsDluz_Id" />
+                <ScalarProperty Name="Sprawa_Id" ColumnName="Sprawa_Id" />
+                <ScalarProperty Name="RBN" ColumnName="RBN" />
+                <ScalarProperty Name="Pesel" ColumnName="Pesel" />
+                <ScalarProperty Name="Nip" ColumnName="Nip" />
+                <ScalarProperty Name="Iban" ColumnName="Iban" />
+                <ScalarProperty Name="KluczKraju" ColumnName="KluczKraju" />
+                <ScalarProperty Name="Miejscowosc" ColumnName="Miejscowosc" />
+                <ScalarProperty Name="KodPocztowy" ColumnName="KodPocztowy" />
+                <ScalarProperty Name="NrMieszkania" ColumnName="NrMieszkania" />
+                <ScalarProperty Name="NrDomu" ColumnName="NrDomu" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="FizPraw" ColumnName="FizPraw" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sprawa">
+            <EntityTypeMapping TypeName="KnsMigratorModel.Sprawa">
+              <MappingFragment StoreEntitySet="Sprawa">
+                <ScalarProperty Name="StanowiskoFianasoweWindyk" ColumnName="StanowiskoFianasoweWindyk" />
+                <ScalarProperty Name="SapKontoUmowyOld" ColumnName="SapKontoUmowyOld" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="SentBy" ColumnName="SentBy" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="SAPRelacjaKontaUmowy" ColumnName="SAPRelacjaKontaUmowy" />
+                <ScalarProperty Name="SAPTypKontaUmowy" ColumnName="SAPTypKontaUmowy" />
+                <ScalarProperty Name="grzSamoistna" ColumnName="grzSamoistna" />
+                <ScalarProperty Name="SAPPrzedmiotUmowy" ColumnName="SAPPrzedmiotUmowy" />
+                <ScalarProperty Name="KdRok" ColumnName="KdRok" />
+                <ScalarProperty Name="KdNumer" ColumnName="KdNumer" />
+                <ScalarProperty Name="SAPTomyAkt" ColumnName="SAPTomyAkt" />
+                <ScalarProperty Name="SAPRodzajSprawy" ColumnName="SAPRodzajSprawy" />
+                <ScalarProperty Name="KnsKsiega" ColumnName="KnsKsiega" />
+                <ScalarProperty Name="wyklucz" ColumnName="wyklucz" />
+                <ScalarProperty Name="KnsWydz_Id" ColumnName="KnsWydz_Id" />
+                <ScalarProperty Name="KnsWydzial" ColumnName="KnsWydzial" />
+                <ScalarProperty Name="KnsSad" ColumnName="KnsSad" />
+                <ScalarProperty Name="KNSSadOrzek_id" ColumnName="KNSSadOrzek_id" />
+                <ScalarProperty Name="KnsSprawa_id" ColumnName="KnsSprawa_id" />
+                <ScalarProperty Name="DataWymagalnosci" ColumnName="DataWymagalnosci" />
+                <ScalarProperty Name="DataPrawomocn" ColumnName="DataPrawomocn" />
+                <ScalarProperty Name="DataWyroku" ColumnName="DataWyroku" />
+                <ScalarProperty Name="SAPKontoUmowy" ColumnName="SAPKontoUmowy" />
+                <ScalarProperty Name="SAPRodzajPrzedmiotuUmowy" ColumnName="SAPRodzajPrzedmiotuUmowy" />
+                <ScalarProperty Name="Rok" ColumnName="Rok" />
+                <ScalarProperty Name="Numer" ColumnName="Numer" />
+                <ScalarProperty Name="SAPRepertorium" ColumnName="SAPRepertorium" />
+                <ScalarProperty Name="SAPWydział" ColumnName="SAPWydział" />
+                <ScalarProperty Name="SAPSadId" ColumnName="SAPSadId" />
+                <ScalarProperty Name="Karta" ColumnName="Karta" />
+                <ScalarProperty Name="Sygnatura" ColumnName="Sygnatura" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dokument">
+            <EntityTypeMapping TypeName="KnsMigratorModel.Dokument">
+              <MappingFragment StoreEntitySet="Dokument">
+                <ScalarProperty Name="StanowiskoFianasoweWindyk" ColumnName="StanowiskoFianasoweWindyk" />
+                <ScalarProperty Name="tekst" ColumnName="tekst" />
+                <ScalarProperty Name="referencja" ColumnName="referencja" />
+                <ScalarProperty Name="IDZadanieKsiegowania" ColumnName="IDZadanieKsiegowania" />
+                <ScalarProperty Name="DataStanu" ColumnName="DataStanu" />
+                <ScalarProperty Name="uwagi" ColumnName="uwagi" />
+                <ScalarProperty Name="SAPIdDocOld" ColumnName="SAPIdDocOld" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="InsDate" ColumnName="InsDate" />
+                <ScalarProperty Name="SentBy" ColumnName="SentBy" />
+                <ScalarProperty Name="InsertedBy" ColumnName="InsertedBy" />
+                <ScalarProperty Name="SAPCLDocId" ColumnName="SAPCLDocId" />
+                <ScalarProperty Name="SAPKluczUzgodnienia" ColumnName="SAPKluczUzgodnienia" />
+                <ScalarProperty Name="SAPWaluta" ColumnName="SAPWaluta" />
+                <ScalarProperty Name="SAPKontoKG" ColumnName="SAPKontoKG" />
+                <ScalarProperty Name="SAPRodzajDokumentu" ColumnName="SAPRodzajDokumentu" />
+                <ScalarProperty Name="SAPImportPonowne" ColumnName="SAPImportPonowne" />
+                <ScalarProperty Name="SAPImportDate" ColumnName="SAPImportDate" />
+                <ScalarProperty Name="SAPImportStatus" ColumnName="SAPImportStatus" />
+                <ScalarProperty Name="SAPImportInfo" ColumnName="SAPImportInfo" />
+                <ScalarProperty Name="OperacjaGlowna" ColumnName="OperacjaGlowna" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="SAPDocIdRef" ColumnName="SAPDocIdRef" />
+                <ScalarProperty Name="SAPRatyId" ColumnName="SAPRatyId" />
+                <ScalarProperty Name="RataData36" ColumnName="RataData36" />
+                <ScalarProperty Name="RataKwota36" ColumnName="RataKwota36" />
+                <ScalarProperty Name="RataData35" ColumnName="RataData35" />
+                <ScalarProperty Name="RataKwota35" ColumnName="RataKwota35" />
+                <ScalarProperty Name="RataData34" ColumnName="RataData34" />
+                <ScalarProperty Name="RataKwota34" ColumnName="RataKwota34" />
+                <ScalarProperty Name="RataData33" ColumnName="RataData33" />
+                <ScalarProperty Name="RataKwota33" ColumnName="RataKwota33" />
+                <ScalarProperty Name="RataData32" ColumnName="RataData32" />
+                <ScalarProperty Name="RataKwota32" ColumnName="RataKwota32" />
+                <ScalarProperty Name="RataData31" ColumnName="RataData31" />
+                <ScalarProperty Name="RataKwota31" ColumnName="RataKwota31" />
+                <ScalarProperty Name="RataData30" ColumnName="RataData30" />
+                <ScalarProperty Name="RataKwota30" ColumnName="RataKwota30" />
+                <ScalarProperty Name="RataData29" ColumnName="RataData29" />
+                <ScalarProperty Name="RataKwota29" ColumnName="RataKwota29" />
+                <ScalarProperty Name="RataData28" ColumnName="RataData28" />
+                <ScalarProperty Name="RataKwota28" ColumnName="RataKwota28" />
+                <ScalarProperty Name="RataData27" ColumnName="RataData27" />
+                <ScalarProperty Name="RataKwota27" ColumnName="RataKwota27" />
+                <ScalarProperty Name="RataData26" ColumnName="RataData26" />
+                <ScalarProperty Name="RataKwota26" ColumnName="RataKwota26" />
+                <ScalarProperty Name="RataData25" ColumnName="RataData25" />
+                <ScalarProperty Name="RataKwota25" ColumnName="RataKwota25" />
+                <ScalarProperty Name="RataData24" ColumnName="RataData24" />
+                <ScalarProperty Name="RataKwota24" ColumnName="RataKwota24" />
+                <ScalarProperty Name="RataData23" ColumnName="RataData23" />
+                <ScalarProperty Name="RataKwota23" ColumnName="RataKwota23" />
+                <ScalarProperty Name="RataData22" ColumnName="RataData22" />
+                <ScalarProperty Name="RataKwota22" ColumnName="RataKwota22" />
+                <ScalarProperty Name="RataData21" ColumnName="RataData21" />
+                <ScalarProperty Name="RataKwota21" ColumnName="RataKwota21" />
+                <ScalarProperty Name="RataData20" ColumnName="RataData20" />
+                <ScalarProperty Name="RataKwota20" ColumnName="RataKwota20" />
+                <ScalarProperty Name="RataData19" ColumnName="RataData19" />
+                <ScalarProperty Name="RataKwota19" ColumnName="RataKwota19" />
+                <ScalarProperty Name="RataData18" ColumnName="RataData18" />
+                <ScalarProperty Name="RataKwota18" ColumnName="RataKwota18" />
+                <ScalarProperty Name="RataData17" ColumnName="RataData17" />
+                <ScalarProperty Name="RataKwota17" ColumnName="RataKwota17" />
+                <ScalarProperty Name="RataData16" ColumnName="RataData16" />
+                <ScalarProperty Name="RataKwota16" ColumnName="RataKwota16" />
+                <ScalarProperty Name="RataData15" ColumnName="RataData15" />
+                <ScalarProperty Name="RataKwota15" ColumnName="RataKwota15" />
+                <ScalarProperty Name="RataData14" ColumnName="RataData14" />
+                <ScalarProperty Name="RataKwota14" ColumnName="RataKwota14" />
+                <ScalarProperty Name="RataData13" ColumnName="RataData13" />
+                <ScalarProperty Name="RataKwota13" ColumnName="RataKwota13" />
+                <ScalarProperty Name="RataData12" ColumnName="RataData12" />
+                <ScalarProperty Name="RataKwota12" ColumnName="RataKwota12" />
+                <ScalarProperty Name="RataData11" ColumnName="RataData11" />
+                <ScalarProperty Name="RataKwota11" ColumnName="RataKwota11" />
+                <ScalarProperty Name="RataData10" ColumnName="RataData10" />
+                <ScalarProperty Name="RataKwota10" ColumnName="RataKwota10" />
+                <ScalarProperty Name="RataData9" ColumnName="RataData9" />
+                <ScalarProperty Name="RataKwota9" ColumnName="RataKwota9" />
+                <ScalarProperty Name="RataData8" ColumnName="RataData8" />
+                <ScalarProperty Name="RataKwota8" ColumnName="RataKwota8" />
+                <ScalarProperty Name="RataData7" ColumnName="RataData7" />
+                <ScalarProperty Name="RataKwota7" ColumnName="RataKwota7" />
+                <ScalarProperty Name="RataData6" ColumnName="RataData6" />
+                <ScalarProperty Name="RataKwota6" ColumnName="RataKwota6" />
+                <ScalarProperty Name="RataData5" ColumnName="RataData5" />
+                <ScalarProperty Name="RataKwota5" ColumnName="RataKwota5" />
+                <ScalarProperty Name="RataData4" ColumnName="RataData4" />
+                <ScalarProperty Name="RataKwota4" ColumnName="RataKwota4" />
+                <ScalarProperty Name="RataData3" ColumnName="RataData3" />
+                <ScalarProperty Name="RataKwota3" ColumnName="RataKwota3" />
+                <ScalarProperty Name="RataData2" ColumnName="RataData2" />
+                <ScalarProperty Name="RataKwota2" ColumnName="RataKwota2" />
+                <ScalarProperty Name="RataData1" ColumnName="RataData1" />
+                <ScalarProperty Name="RataKwota1" ColumnName="RataKwota1" />
+                <ScalarProperty Name="Dluznik_Id" ColumnName="Dluznik_Id" />
+                <ScalarProperty Name="Transfer_Id" ColumnName="Transfer_Id" />
+                <ScalarProperty Name="KnsKsiegaDzNal" ColumnName="KnsKsiegaDzNal" />
+                <ScalarProperty Name="KnsRokDzNal" ColumnName="KnsRokDzNal" />
+                <ScalarProperty Name="KnsPozDzNal" ColumnName="KnsPozDzNal" />
+                <ScalarProperty Name="SAPDocId" ColumnName="SAPDocId" />
+                <ScalarProperty Name="DocGuid_Ref" ColumnName="DocGuid_Ref" />
+                <ScalarProperty Name="Document_Id" ColumnName="Document_Id" />
+                <ScalarProperty Name="SrcDocumentHash" ColumnName="SrcDocumentHash" />
+                <ScalarProperty Name="SrcSystemId" ColumnName="SrcSystemId" />
+                <ScalarProperty Name="Sprawa_Id" ColumnName="Sprawa_Id" />
+                <ScalarProperty Name="typFakt" ColumnName="typFakt" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Stan" ColumnName="Stan" />
+                <ScalarProperty Name="DataPlatnosci" ColumnName="DataPlatnosci" />
+                <ScalarProperty Name="OperacjaCzesciowa" ColumnName="OperacjaCzesciowa" />
+                <ScalarProperty Name="kwota" ColumnName="kwota" />
+                <ScalarProperty Name="grzSamoistna" ColumnName="grzSamoistna" />
+                <ScalarProperty Name="DataKsiegowania" ColumnName="DataKsiegowania" />
+                <ScalarProperty Name="DataDokumentu" ColumnName="DataDokumentu" />
+                <ScalarProperty Name="DocGuid" ColumnName="DocGuid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transfer">
+            <EntityTypeMapping TypeName="KnsMigratorModel.Transfer">
+              <MappingFragment StoreEntitySet="Transfer">
+                <ScalarProperty Name="StanowiskoFinansoweWindyk" ColumnName="StanowiskoFinansoweWindyk" />
+                <ScalarProperty Name="PackNo" ColumnName="PackNo" />
+                <ScalarProperty Name="DataOOper" ColumnName="DataOOper" />
+                <ScalarProperty Name="DataPOper" ColumnName="DataPOper" />
+                <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+                <ScalarProperty Name="Bledne" ColumnName="Bledne" />
+                <ScalarProperty Name="Zaimportowane" ColumnName="Zaimportowane" />
+                <ScalarProperty Name="Miesiac" ColumnName="Miesiac" />
+                <ScalarProperty Name="Rok" ColumnName="Rok" />
+                <ScalarProperty Name="SAPKluczUzgodnienia" ColumnName="SAPKluczUzgodnienia" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Uwagi" ColumnName="Uwagi" />
+                <ScalarProperty Name="DataDo" ColumnName="DataDo" />
+                <ScalarProperty Name="DataOd" ColumnName="DataOd" />
+                <ScalarProperty Name="LFaktow" ColumnName="LFaktow" />
+                <ScalarProperty Name="rodzaj" ColumnName="rodzaj" />
+                <ScalarProperty Name="DataTransferu" ColumnName="DataTransferu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KodMaskKonfig">
+            <EntityTypeMapping TypeName="KnsMigratorModel.KodMaskKonfig">
+              <MappingFragment StoreEntitySet="KodMaskKonfig">
+                <ScalarProperty Name="Maska" ColumnName="Maska" />
+                <ScalarProperty Name="Kraj" ColumnName="Kraj" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="KnsMigratorModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="MEPPassword" ColumnName="MEPPassword" />
+                <ScalarProperty Name="MEPUser" ColumnName="MEPUser" />
+                <ScalarProperty Name="PwdPeriodChange" ColumnName="PwdPeriodChange" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ChangePwd" ColumnName="ChangePwd" />
+                <ScalarProperty Name="suspend" ColumnName="suspend" />
+                <ScalarProperty Name="LastPwdChngDate" ColumnName="LastPwdChngDate" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="Pssword" ColumnName="Pssword" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceEndpoint">
+            <EntityTypeMapping TypeName="KnsMigratorModel.ServiceEndpoint">
+              <MappingFragment StoreEntitySet="ServiceEndpoint">
+                <ScalarProperty Name="Endpoint" ColumnName="Endpoint" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAPRepertorium">
+            <EntityTypeMapping TypeName="KnsMigratorModel.SAPRepertorium">
+              <MappingFragment StoreEntitySet="SAPRepertorium">
+                <ScalarProperty Name="typSad" ColumnName="typSad" />
+                <ScalarProperty Name="SymbolRodzajPrzedmiotu" ColumnName="SymbolRodzajPrzedmiotu" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAPSad">
+            <EntityTypeMapping TypeName="KnsMigratorModel.SAPSad">
+              <MappingFragment StoreEntitySet="SAPSad">
+                <ScalarProperty Name="WazneDo" ColumnName="WazneDo" />
+                <ScalarProperty Name="WazneOd" ColumnName="WazneOd" />
+                <ScalarProperty Name="JEGO" ColumnName="JEGO" />
+                <ScalarProperty Name="typSad" ColumnName="typSad" />
+                <ScalarProperty Name="miastSad" ColumnName="miastSad" />
+                <ScalarProperty Name="miasto" ColumnName="miasto" />
+                <ScalarProperty Name="sad" ColumnName="sad" />
+                <ScalarProperty Name="kod" ColumnName="kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Konfiguracja">
+            <EntityTypeMapping TypeName="KnsMigratorModel.Konfiguracja">
+              <MappingFragment StoreEntitySet="Konfiguracja">
+                <ScalarProperty Name="SAPPwdExpPeriod" ColumnName="SAPPwdExpPeriod" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="PfxPassword" ColumnName="PfxPassword" />
+                <ScalarProperty Name="Cer" ColumnName="Cer" />
+                <ScalarProperty Name="Pfx" ColumnName="Pfx" />
+                <ScalarProperty Name="DataMiesStart" ColumnName="DataMiesStart" />
+                <ScalarProperty Name="typDatyPlatn" ColumnName="typDatyPlatn" />
+                <ScalarProperty Name="dplatnosci" ColumnName="dplatnosci" />
+                <ScalarProperty Name="StanowiskoFianasoweWindyk" ColumnName="StanowiskoFianasoweWindyk" />
+                <ScalarProperty Name="czyautoprzyp" ColumnName="czyautoprzyp" />
+                <ScalarProperty Name="czyautoks" ColumnName="czyautoks" />
+                <ScalarProperty Name="dbversion" ColumnName="dbversion" />
+                <ScalarProperty Name="defSad" ColumnName="defSad" />
+                <ScalarProperty Name="ERPLogon" ColumnName="ERPLogon" />
+                <ScalarProperty Name="StanowiskoFin" ColumnName="StanowiskoFin" />
+                <ScalarProperty Name="skipraty" ColumnName="skipraty" />
+                <ScalarProperty Name="typImportSAP" ColumnName="typImportSAP" />
+                <ScalarProperty Name="WSpwd" ColumnName="WSpwd" />
+                <ScalarProperty Name="WSLogon" ColumnName="WSLogon" />
+                <ScalarProperty Name="EndpointWS" ColumnName="EndpointWS" />
+                <ScalarProperty Name="srvAlias" ColumnName="srvAlias" />
+                <ScalarProperty Name="OdpisFile" ColumnName="OdpisFile" />
+                <ScalarProperty Name="PrzypisFile" ColumnName="PrzypisFile" />
+                <ScalarProperty Name="StartImportDate" ColumnName="StartImportDate" />
+                <ScalarProperty Name="JednostkaGospodarcza" ColumnName="JednostkaGospodarcza" />
+                <ScalarProperty Name="WinLogon" ColumnName="WinLogon" />
+                <ScalarProperty Name="logId" ColumnName="logId" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="DbName" ColumnName="DbName" />
+                <ScalarProperty Name="srvName" ColumnName="srvName" />
+                <ScalarProperty Name="typKns" ColumnName="typKns" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KnsKsiegi">
+            <EntityTypeMapping TypeName="KnsMigratorModel.KnsKsiegi">
+              <MappingFragment StoreEntitySet="KnsKsiegi">
+                <ScalarProperty Name="ksGrzFPPMap" ColumnName="ksGrzFPPMap" />
+                <ScalarProperty Name="czymies" ColumnName="czymies" />
+                <ScalarProperty Name="czyFPP" ColumnName="czyFPP" />
+                <ScalarProperty Name="oprGrzSamoistna" ColumnName="oprGrzSamoistna" />
+                <ScalarProperty Name="Id_Ksiegi" ColumnName="Id_Ksiegi" />
+                <ScalarProperty Name="rodzajPrzedmiotu" ColumnName="rodzajPrzedmiotu" />
+                <ScalarProperty Name="oprGrzPraw" ColumnName="oprGrzPraw" />
+                <ScalarProperty Name="oprGrzFiz" ColumnName="oprGrzFiz" />
+                <ScalarProperty Name="oprKosztPraw" ColumnName="oprKosztPraw" />
+                <ScalarProperty Name="oprKosztFiz" ColumnName="oprKosztFiz" />
+                <ScalarProperty Name="numWydz" ColumnName="numWydz" />
+                <ScalarProperty Name="kodSad" ColumnName="kodSad" />
+                <ScalarProperty Name="wydzial" ColumnName="wydzial" />
+                <ScalarProperty Name="sad" ColumnName="sad" />
+                <ScalarProperty Name="id_sadu" ColumnName="id_sadu" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsExternalDBConnectionConfig">
+            <EntityTypeMapping TypeName="KnsMigratorModel.ConsExternalDBConnectionConfig">
+              <MappingFragment StoreEntitySet="ConsExternalDBConnectionConfig">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="sp_param" ColumnName="sp_param" />
+                <ScalarProperty Name="ConnectionName" ColumnName="ConnectionName" />
+                <ScalarProperty Name="SAPKnsId" ColumnName="SAPKnsId" />
+                <ScalarProperty Name="sp_name" ColumnName="sp_name" />
+                <ScalarProperty Name="srvAlias" ColumnName="srvAlias" />
+                <ScalarProperty Name="WinLogon" ColumnName="WinLogon" />
+                <ScalarProperty Name="logId" ColumnName="logId" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="DbName" ColumnName="DbName" />
+                <ScalarProperty Name="srvName" ColumnName="srvName" />
+                <ScalarProperty Name="rodzajDB" ColumnName="rodzajDB" />
+                <ScalarProperty Name="typDB" ColumnName="typDB" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsJobItem">
+            <EntityTypeMapping TypeName="KnsMigratorModel.ConsJobItem">
+              <MappingFragment StoreEntitySet="ConsJobItem">
+                <ScalarProperty Name="queryDate" ColumnName="queryDate" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="consExternalDBConnectionConfig_Id" ColumnName="consExternalDBConnectionConfig_Id" />
+                <ScalarProperty Name="finishDate" ColumnName="finishDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="insertDate" ColumnName="insertDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsKartaTransfer">
+            <EntityTypeMapping TypeName="KnsMigratorModel.ConsKartaTransfer">
+              <MappingFragment StoreEntitySet="ConsKartaTransfer">
+                <ScalarProperty Name="consJobItemId" ColumnName="consJobItemId" />
+                <ScalarProperty Name="hash" ColumnName="hash" />
+                <ScalarProperty Name="payload" ColumnName="payload" />
+                <ScalarProperty Name="trescOdpowiedzi" ColumnName="trescOdpowiedzi" />
+                <ScalarProperty Name="dImportu" ColumnName="dImportu" />
+                <ScalarProperty Name="idSprawyWydzial" ColumnName="idSprawyWydzial" />
+                <ScalarProperty Name="idStronyWydzial" ColumnName="idStronyWydzial" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="idKomunikatu" ColumnName="idKomunikatu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="False" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <edmx:Diagram Name="MigratorEDModel" ZoomLevel="86">
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.KnsSad" Width="1.5" PointX="0.75" PointY="2.875" Height="1.0187792968749996" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPOpisPrzedmiotu" Width="1.5" PointX="0.75" PointY="5.875" Height="1.4033821614583353" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPStanNal" Width="1.5" PointX="9.75" PointY="8.875" Height="1.5956835937500031" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPTomyAkt" Width="1.5" PointX="9.75" PointY="11.875" Height="1.4033821614583388" IsExpanded="true" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPRodzajSprawy" Width="1.5" PointX="11.75" PointY="2.875" Height="1.9802864583333388" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPKodKraju" Width="1.5" PointX="11.75" PointY="5.875" Height="1.5956835937500031" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.TypTransferu" Width="1.5" PointX="11.75" PointY="8.875" Height="1.4033821614583282" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPRBN" Width="1.5" PointX="11.75" PointY="11.875" Height="1.4033821614583246" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPKodyOpr" Width="1.5" PointX="9.75" PointY="14.875" Height="2.3648893229166674" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.Wplata" Width="1.5" PointX="5.25" PointY="0.75" Height="3.1340950520833246" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.BankiKonfig" Width="1.5" PointX="11.75" PointY="14.875" Height="2.3648893229166674" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.KnsKomornik" Width="1.5" PointX="13.75" PointY="2.875" Height="2.1725878906250102" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.WalidSaldo" Width="1.5" PointX="13.75" PointY="5.875" Height="3.9033007812500102" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SygnMap" Width="1.5" PointX="13.75" PointY="10.875" Height="2.9417936197916674" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.Ekstrakcja" Width="1.5" PointX="7.5" PointY="4.25" Height="26.017965494791675" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPWplaty" Width="1.5" PointX="13.75" PointY="14.875" Height="4.48020507812501" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPWydzial" Width="1.5" PointX="15.75" PointY="2.875" Height="2.5571907552083246" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.Dluznik" Width="1.5" PointX="3" PointY="14.5" Height="5.63401367187501" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.Sprawa" Width="1.5" PointX="0.75" PointY="13.375" Height="7.364726562499996" />
+        <edmx:AssociationConnector Association="KnsMigratorModel.FK_Dluznik_Sprawa">
+          <edmx:ConnectorPoint PointX="14.25" PointY="25.442006835937498" />
+          <edmx:ConnectorPoint PointX="15" PointY="25.442006835937498" />
+        </edmx:AssociationConnector>
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.Dokument" Width="1.5" PointX="5.25" PointY="5.5" Height="23.133444010416667" />
+        <edmx:AssociationConnector Association="KnsMigratorModel.FK_Dokument_Dluznik">
+          <edmx:ConnectorPoint PointX="16.5" PointY="25.442006835937505" />
+          <edmx:ConnectorPoint PointX="19.25" PointY="25.442006835937505" />
+        </edmx:AssociationConnector>
+        <edmx:AssociationConnector Association="KnsMigratorModel.FK_Dokument_Sprawa">
+          <edmx:ConnectorPoint PointX="14.25" PointY="28.814270833333339" />
+          <edmx:ConnectorPoint PointX="19.25" PointY="28.814270833333339" />
+        </edmx:AssociationConnector>
+        <edmx:AssociationConnector Association="KnsMigratorModel.FK_Ekstrakcja_Dokument">
+          <edmx:ConnectorPoint PointX="20" PointY="31.633444010416671" />
+          <edmx:ConnectorPoint PointX="20" PointY="52.383982747395834" />
+          <edmx:ConnectorPoint PointX="21.5" PointY="52.383982747395834" />
+        </edmx:AssociationConnector>
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.Transfer" Width="1.5" PointX="3" PointY="8.875" />
+        <edmx:AssociationConnector Association="KnsMigratorModel.FK_Dokument_Transfer" />
+        <edmx:AssociationConnector Association="KnsMigratorModel.FK_Wplata_Transfer" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.KodMaskKonfig" Width="1.5" PointX="15.75" PointY="11.875" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.User" Width="1.5" PointX="9.75" PointY="18.875" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.ServiceEndpoint" Width="1.5" PointX="18.375" PointY="0.75" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPRepertorium" Width="1.5" PointX="7.375" PointY="0.75" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.SAPSad" Width="1.5" PointX="18.375" PointY="3.75" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.Konfiguracja" Width="1.5" PointX="16.375" PointY="14.75" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.KnsKsiegi" Width="1.5" PointX="18.375" PointY="7.75" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.ConsExternalDBConnectionConfig" Width="1.5" PointX="18.375" PointY="13.75" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.ConsJobItem" Width="1.5" PointX="20.625" PointY="14.375" />
+        <edmx:EntityTypeShape EntityType="KnsMigratorModel.ConsKartaTransfer" Width="1.5" PointX="18.375" PointY="18.75" />
+        <edmx:AssociationConnector Association="KnsMigratorModel.FK_ConsJobItem_ConsExternalDBConnectionConfig" />
+      </edmx:Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

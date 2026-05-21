@@ -1,0 +1,1009 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D3D2A69C-5FEF-4637-BE6A-1065154DC3E1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ex2PscdInterface</RootNamespace>
+    <AssemblyName>Ex2PscdInterface</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connected Services\Ex2PscdGetCaseRegistryTypesOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdGetCourtsOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdGetDepartmentsOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdManageAccountOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPaymentListQueryInService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Ex2PscdHelper.cs" />
+    <Compile Include="Connected Services\Ex2PscdContractAccountCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdContractAccountQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdContractAccountRelationCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdContractAccountUpdateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdContractObjectCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdContractObjectQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDebtorDepositListQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDepartmentDictionaryQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDepositListQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDepositListQueryOut\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDocumentBailiffListQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDocumentCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDocumentDebtStateUpdateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDocumentListQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDocumentReductionDebtOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDocumentReferenceUpdateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDocumentReverseCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdDocumentUpdateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdInstalmentPlanCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdInstalmentPlanCreateOut\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdInstalmentPlanDeactivateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdInstalmentPlanVerifyOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPartnerCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPartnerQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPartnerUpdateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPaymentCancellationCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPaymentClarificationCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPaymentClarificationsQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPaymentClarificationZDOBCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPaymentReservationCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPostingDataPrepareOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdPostingStatusQueryOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\Ex2PscdRelationCreateOutService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Connected Services\Ex2PscdContractAccountCreateOutService\ContractAccountCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdContractAccountCreateOutService\Ex2PscdInterface.Ex2PscdContractAccountCreateOutService.ContractAccountCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractAccountCreateOutService\Ex2PscdInterface.Ex2PscdContractAccountCreateOutService.ContractAccountCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractAccountQueryOutService\ContractAccountQueryOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdContractAccountQueryOutService\Ex2PscdInterface.Ex2PscdContractAccountQueryOutService.ContractAccountQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractAccountQueryOutService\Ex2PscdInterface.Ex2PscdContractAccountQueryOutService.ContractAccountQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractAccountRelationCreateOutService\ContractAccountRelationCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdContractAccountRelationCreateOutService\Ex2PscdInterface.Ex2PscdContractAccountRelationCreateOutService.ContractAccountRelationCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractAccountRelationCreateOutService\Ex2PscdInterface.Ex2PscdContractAccountRelationCreateOutService.ContractAccountRelationCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractAccountUpdateOutService\ContractAccountUpdateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdContractAccountUpdateOutService\Ex2PscdInterface.Ex2PscdContractAccountUpdateOutService.ContractAccountUpdateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractAccountUpdateOutService\Ex2PscdInterface.Ex2PscdContractAccountUpdateOutService.ContractAccountUpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractObjectCreateOutService\ContractObjectCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdContractObjectCreateOutService\Ex2PscdInterface.Ex2PscdContractObjectCreateOutService.ContractObjectCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractObjectCreateOutService\Ex2PscdInterface.Ex2PscdContractObjectCreateOutService.ContractObjectCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractObjectQueryOutService\ContractObjectQueryOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdContractObjectQueryOutService\Ex2PscdInterface.Ex2PscdContractObjectQueryOutService.ContractObjectQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdContractObjectQueryOutService\Ex2PscdInterface.Ex2PscdContractObjectQueryOutService.ContractObjectQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDebtorDepositListQueryOutService\DebtorDepositListQueryOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDebtorDepositListQueryOutService\Ex2PscdInterface.Ex2PscdDebtorDepositListQueryOutService.DebtorDepositListQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDebtorDepositListQueryOutService\Ex2PscdInterface.Ex2PscdDebtorDepositListQueryOutService.DebtorDepositListQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDepartmentDictionaryQueryOutService\DepartmentDictionaryQueryOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDepartmentDictionaryQueryOutService\Ex2PscdInterface.Ex2PscdDepartmentDictionaryQueryOutService.DepartmentDictionaryQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDepartmentDictionaryQueryOutService\Ex2PscdInterface.Ex2PscdDepartmentDictionaryQueryOutService.DepartmentDictionaryQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOutService\DepositListQueryOut1.wsdl" />
+    <None Include="Connected Services\Ex2PscdDepositListQueryOutService\Ex2PscdInterface.Ex2PscdDepositListQueryOutService.DepositListQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOutService\Ex2PscdInterface.Ex2PscdDepositListQueryOutService.DepositListQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOut\DepositListQueryOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDepositListQueryOut\Ex2PscdInterface.Ex2PscdDepositListQueryOut.DepositListQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOut\Ex2PscdInterface.Ex2PscdDepositListQueryOut.DepositListQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentBailiffListQueryOutService\DocumentBailiffListQueryOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDocumentBailiffListQueryOutService\Ex2PscdInterface.Ex2PscdDocumentBailiffListQueryOutService.DocumentBailiffListQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentBailiffListQueryOutService\Ex2PscdInterface.Ex2PscdDocumentBailiffListQueryOutService.DocumentBailiffListQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentCreateOutService\DocumentCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDocumentCreateOutService\Ex2PscdInterface.Ex2PscdDocumentCreateOutService.DocumentCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentCreateOutService\Ex2PscdInterface.Ex2PscdDocumentCreateOutService.DocumentCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentDebtStateUpdateOutService\DocumentDebtStateUpdateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDocumentDebtStateUpdateOutService\Ex2PscdInterface.Ex2PscdDocumentDebtStateUpdateOutService.DocumentDebtStateUpdateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentDebtStateUpdateOutService\Ex2PscdInterface.Ex2PscdDocumentDebtStateUpdateOutService.DocumentDebtStateUpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentListQueryOutService\DocumentListQueryOut1.wsdl" />
+    <None Include="Connected Services\Ex2PscdDocumentListQueryOutService\Ex2PscdInterface.Ex2PscdDocumentListQueryOutService.DocumentListQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentListQueryOutService\Ex2PscdInterface.Ex2PscdDocumentListQueryOutService.DocumentListQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentReductionDebtOutService\DocumentReductionDebtOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDocumentReductionDebtOutService\Ex2PscdInterface.Ex2PscdDocumentReductionDebtOutService.DocumentReductionDebtOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentReductionDebtOutService\Ex2PscdInterface.Ex2PscdDocumentReductionDebtOutService.DocumentReductionDebtResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentReferenceUpdateOutService\DocumentReferenceUpdateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDocumentReferenceUpdateOutService\Ex2PscdInterface.Ex2PscdDocumentReferenceUpdateOutService.DocumentReferenceUpdateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentReferenceUpdateOutService\Ex2PscdInterface.Ex2PscdDocumentReferenceUpdateOutService.DocumentReferenceUpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentReverseCreateOutService\DocumentReverseCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDocumentReverseCreateOutService\Ex2PscdInterface.Ex2PscdDocumentReverseCreateOutService.DocumentReverseCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentReverseCreateOutService\Ex2PscdInterface.Ex2PscdDocumentReverseCreateOutService.DocumentReverseCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentUpdateOutService\DocumentUpdateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdDocumentUpdateOutService\Ex2PscdInterface.Ex2PscdDocumentUpdateOutService.DocumentUpdateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdDocumentUpdateOutService\Ex2PscdInterface.Ex2PscdDocumentUpdateOutService.DocumentUpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdGetCaseRegistryTypesOutService\Ex2PscdInterface.Ex2PscdGetCaseRegistryTypesOutService.CaseRegistryTypeData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdGetCaseRegistryTypesOutService\Ex2PscdInterface.Ex2PscdGetCaseRegistryTypesOutService.GetCaseRegistryTypesOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdGetCaseRegistryTypesOutService\GetCaseRegistryTypesOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdGetCourtsOutService\Ex2PscdInterface.Ex2PscdGetCourtsOutService.CourtData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdGetCourtsOutService\Ex2PscdInterface.Ex2PscdGetCourtsOutService.GetCourtsOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdGetCourtsOutService\GetCourtsOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdGetDepartmentsOutService\Ex2PscdInterface.Ex2PscdGetDepartmentsOutService.DepartmentData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdGetDepartmentsOutService\Ex2PscdInterface.Ex2PscdGetDepartmentsOutService.GetDepartmentsOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdGetDepartmentsOutService\GetDepartmentsOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOutService\Ex2PscdInterface.Ex2PscdInstalmentPlanCreateOutService.InstalmentPlanCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOutService\Ex2PscdInterface.Ex2PscdInstalmentPlanCreateOutService.InstalmentPlanCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOutService\InstalmentPlanCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOut\Ex2PscdInterface.Ex2PscdInstalmentPlanCreateOut.InstalmentPlanCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOut\Ex2PscdInterface.Ex2PscdInstalmentPlanCreateOut.InstalmentPlanCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOut\InstalmentPlanCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdInstalmentPlanDeactivateOutService\Ex2PscdInterface.Ex2PscdInstalmentPlanDeactivateOutService.InstalmentPlanDeactivateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanDeactivateOutService\Ex2PscdInterface.Ex2PscdInstalmentPlanDeactivateOutService.InstalmentPlanDeactivateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanDeactivateOutService\InstalmentPlanDeactivateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdInstalmentPlanVerifyOutService\Ex2PscdInterface.Ex2PscdInstalmentPlanVerifyOutService.InstalmentPlanVerifyOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanVerifyOutService\Ex2PscdInterface.Ex2PscdInstalmentPlanVerifyOutService.InstalmentPlanVerifyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanVerifyOutService\InstalmentPlanVerifyOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdManageAccountOutService\Ex2PscdInterface.Ex2PscdManageAccountOutService.ManageAccountOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdManageAccountOutService\Ex2PscdInterface.Ex2PscdManageAccountOutService.ManageAccountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdManageAccountOutService\ManageAccountOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdPartnerCreateOutService\Ex2PscdInterface.Ex2PscdPartnerCreateOutService.PartnerCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPartnerCreateOutService\Ex2PscdInterface.Ex2PscdPartnerCreateOutService.PartnerCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPartnerCreateOutService\PartnerCreateOut1.wsdl" />
+    <None Include="Connected Services\Ex2PscdPartnerQueryOutService\Ex2PscdInterface.Ex2PscdPartnerQueryOutService.PartnerQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPartnerQueryOutService\Ex2PscdInterface.Ex2PscdPartnerQueryOutService.PartnerQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPartnerQueryOutService\PartnerQueryOut1.wsdl" />
+    <None Include="Connected Services\Ex2PscdPartnerUpdateOutService\Ex2PscdInterface.Ex2PscdPartnerUpdateOutService.PartnerUpdateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPartnerUpdateOutService\Ex2PscdInterface.Ex2PscdPartnerUpdateOutService.PartnerUpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPartnerUpdateOutService\PartnerUpdateOut1.wsdl" />
+    <None Include="Connected Services\Ex2PscdPaymentCancellationCreateOutService\Ex2PscdInterface.Ex2PscdPaymentCancellationCreateOutService.PaymentCancellationCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentCancellationCreateOutService\Ex2PscdInterface.Ex2PscdPaymentCancellationCreateOutService.PaymentCancellationCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentCancellationCreateOutService\PaymentCancellationCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdPaymentClarificationCreateOutService\Ex2PscdInterface.Ex2PscdPaymentClarificationCreateOutService.PaymentClarificationCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationCreateOutService\Ex2PscdInterface.Ex2PscdPaymentClarificationCreateOutService.PaymentClarificationCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationCreateOutService\PaymentClarificationCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdPaymentClarificationsQueryOutService\Ex2PscdInterface.Ex2PscdPaymentClarificationsQueryOutService.PaymentClarificationsQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationsQueryOutService\Ex2PscdInterface.Ex2PscdPaymentClarificationsQueryOutService.PaymentClarificationsQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationsQueryOutService\PaymentClarificationsQueryOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdPaymentClarificationZDOBCreateOutService\Ex2PscdInterface.Ex2PscdPaymentClarificationZDOBCreateOutService.PaymentClarificationZDOBCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationZDOBCreateOutService\Ex2PscdInterface.Ex2PscdPaymentClarificationZDOBCreateOutService.PaymentClarificationZDOBCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationZDOBCreateOutService\PaymentClarificationZDOBCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdPaymentListQueryInService\Ex2PscdInterface.Ex2PscdPaymentListQueryInService.PaymentListQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentListQueryInService\Ex2PscdInterface.Ex2PscdPaymentListQueryInService.PaymentListQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentListQueryInService\PaymentListQueryOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdPaymentReservationCreateOutService\Ex2PscdInterface.Ex2PscdPaymentReservationCreateOutService.PaymentReservationCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentReservationCreateOutService\Ex2PscdInterface.Ex2PscdPaymentReservationCreateOutService.PaymentReservationCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPaymentReservationCreateOutService\PaymentReservationCreateOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdPostingDataPrepareOutService\Ex2PscdInterface.Ex2PscdPostingDataPrepareOutService.PostingDataPrepareOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPostingDataPrepareOutService\Ex2PscdInterface.Ex2PscdPostingDataPrepareOutService.PostingDataPrepareResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPostingDataPrepareOutService\PostingDataPrepareOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdPostingStatusQueryOutService\Ex2PscdInterface.Ex2PscdPostingStatusQueryOutService.PostingStatusQueryOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPostingStatusQueryOutService\Ex2PscdInterface.Ex2PscdPostingStatusQueryOutService.PostingStatusQueryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdPostingStatusQueryOutService\PostingStatusQueryOut.wsdl" />
+    <None Include="Connected Services\Ex2PscdRelationCreateOutService\Ex2PscdInterface.Ex2PscdRelationCreateOutService.RelationCreateOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdRelationCreateOutService\Ex2PscdInterface.Ex2PscdRelationCreateOutService.RelationCreateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\Ex2PscdRelationCreateOutService\RelationCreateOut.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdContractAccountCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdContractAccountQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdContractAccountRelationCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdContractAccountUpdateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdContractObjectCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdContractObjectQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDebtorDepositListQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDepartmentDictionaryQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDepositListQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDepositListQueryOut\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDocumentBailiffListQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDocumentCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDocumentDebtStateUpdateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDocumentListQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDocumentReductionDebtOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDocumentReferenceUpdateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDocumentReverseCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdDocumentUpdateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdGetCaseRegistryTypesOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdGetCourtsOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdGetDepartmentsOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdInstalmentPlanCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdInstalmentPlanCreateOut\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdInstalmentPlanDeactivateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdInstalmentPlanVerifyOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdManageAccountOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPartnerCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPartnerQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPartnerUpdateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPaymentCancellationCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPaymentClarificationCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPaymentClarificationsQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPaymentClarificationZDOBCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPaymentListQueryInService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPaymentReservationCreateOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPostingDataPrepareOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdPostingStatusQueryOutService\" />
+    <WCFMetadataStorage Include="Connected Services\Ex2PscdRelationCreateOutService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountRelationCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountRelationCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountRelationCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountUpdateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountUpdateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractAccountUpdateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractObjectCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractObjectCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractObjectCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractObjectQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractObjectQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdContractObjectQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDebtorDepositListQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDebtorDepositListQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDebtorDepositListQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDepartmentDictionaryQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDepartmentDictionaryQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDepartmentDictionaryQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOut\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOut\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOut\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDepositListQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentBailiffListQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentBailiffListQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentBailiffListQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentDebtStateUpdateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentDebtStateUpdateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentDebtStateUpdateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentListQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentListQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentListQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentReductionDebtOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentReductionDebtOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentReductionDebtOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentReferenceUpdateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentReferenceUpdateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentReferenceUpdateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentReverseCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentReverseCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentReverseCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentUpdateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentUpdateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdDocumentUpdateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOut\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOut\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOut\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanDeactivateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanDeactivateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanDeactivateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanVerifyOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanVerifyOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdInstalmentPlanVerifyOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPartnerCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPartnerCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPartnerCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPartnerQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPartnerQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPartnerQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPartnerUpdateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPartnerUpdateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPartnerUpdateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentCancellationCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentCancellationCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentCancellationCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationsQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationsQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationsQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationZDOBCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationZDOBCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentClarificationZDOBCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentReservationCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentReservationCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentReservationCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPostingDataPrepareOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPostingDataPrepareOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPostingDataPrepareOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPostingStatusQueryOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPostingStatusQueryOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPostingStatusQueryOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdRelationCreateOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdRelationCreateOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdRelationCreateOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentListQueryInService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentListQueryInService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdPaymentListQueryInService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdGetCourtsOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdGetCourtsOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdGetCourtsOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdGetDepartmentsOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdGetDepartmentsOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdGetDepartmentsOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdGetCaseRegistryTypesOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdGetCaseRegistryTypesOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdGetCaseRegistryTypesOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdManageAccountOutService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdManageAccountOutService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\Ex2PscdManageAccountOutService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

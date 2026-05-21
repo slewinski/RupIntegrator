@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PostingStatusQueryOut" targetNamespace="urn:ms.gov.pl:EX2PSCD:PostingStatusQuery"
+    xmlns:p1="urn:ms.gov.pl:EX2PSCD:PostingStatusQuery"
+    xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:documentation/>
+    <wsp:UsingPolicy wsdl:required="true"/>
+    <wsp:Policy wsu:Id="OP_PostingStatusQueryOut"/>
+    <wsdl:types>
+        <xsd:schema targetNamespace="urn:ms.gov.pl:EX2PSCD:PostingStatusQuery"
+            xmlns="urn:ms.gov.pl:EX2PSCD:PostingStatusQuery"
+            xmlns:p6="urn:ms.gov.pl:EX2PSCD:Common"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="urn:ms.gov.pl:EX2PSCD:Common"/>
+            <xsd:element name="PostingStatusQueryRequest" type="p6:PostingStatusQueryRequest"/>
+            <xsd:element name="PostingStatusQueryResponse" type="p6:PostingStatusQueryResponse"/>
+        </xsd:schema>
+        <xsd:schema targetNamespace="urn:ms.gov.pl:EX2PSCD:Common"
+            xmlns="urn:ms.gov.pl:EX2PSCD:Common"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:complexType name="DaneZadanieKsiegowanie">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">89add2e85bdd11eb8fe9000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="IDDaneZadanie" type="IDDaneZadanie">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">b84d3dfa5bdd11eb9c57025041000001</xsd:appinfo>
+                            <xsd:documentation>Dane identyfikacyjne żądania księgowania</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="NotatkaZadanie" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">8a8bf4cb5bdd11eb89e6025041000001</xsd:appinfo>
+                            <xsd:documentation>Notatka żądania</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="StatusZadanie" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">8a8bf4cc5bdd11eb9e0c025041000001</xsd:appinfo>
+                            <xsd:documentation>Informacja dla żadania zaksięgowania dokumentu</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PostingStatusQueryResponse">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">9531b76d5bdd11ebcbef000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="DaneZadanieKsiegowanie" type="DaneZadanieKsiegowanie">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">bb270a115bdd11ebccb4025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="Komunikaty" type="Komunikaty">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">bb270a125bdd11eb96c6025041000001</xsd:appinfo>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Komunikaty">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">cbc364503b8811ebb319000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="Komunikat" type="Komunikat" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Admin">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="EN">Dane administracyjne dot. żądania</xsd:documentation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">256562f8622711eb82c8000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="JednostkaGospodarcza">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e866300d3b8511ebab5d025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer jednostki gospodarczej (4 cyfry)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\d{4}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="IDKomunikatu" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e866300e3b8511ebae7d025041000001</xsd:appinfo>
+                            <xsd:documentation>Identyfikacja komunikatu</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="IDSystemMerytorycznego" type="xsd:string">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e866300f3b8511eba995025041000001</xsd:appinfo>
+                            <xsd:documentation>Identyfikacja systemu merytorycznego</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="UtworzonyData">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e86630103b8511ebbb15025041000001</xsd:appinfo>
+                            <xsd:documentation>Data utworzenia komunikatu (format YYYYMMDD)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\d{8}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="UtworzonyGodz">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">e86630113b8511eba551025041000001</xsd:appinfo>
+                            <xsd:documentation>Godzina utworzenia komunikatu (format HHMMSS)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\d{6}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Uzytkownik">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">5fbdeefa571211ebbbed025041000001</xsd:appinfo>
+                            <xsd:documentation>Nazwa użytkownika na systemie ZSRK ERP FI</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\w{1"/>
+                                <xsd:pattern value="12}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Haslo">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">5fbdeefb571211eba86d025041000001</xsd:appinfo>
+                            <xsd:documentation>Zaszyfrowane hasło użytkownika</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^[-A-Za-z0-9+\/]*={0"/>
+                                <xsd:pattern value="3}$"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="IDDaneZadanie">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">843b5f475bdd11eb998d000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="IDZadanieKsiegowania" type="xsd:string"/>
+                    <xsd:element name="IDPartner" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="IDKontoUmowy" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="IDSygnatura" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="IDDokument" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="IDPartnerOdbiorcaPlat" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Komunikat">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">1d18ad44622711ebabf6000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="IDKomunikatu" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">a4c929653b8811ebb7d1025041000001</xsd:appinfo>
+                            <xsd:documentation>Identyfikator żądania</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="20"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="RodzajKomunikatu" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">a4c929663b8811ebbe05025041000001</xsd:appinfo>
+                            <xsd:documentation>Typ komunikatu</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="NumerKomunikatu" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">a4c929673b8811eba8c3025041000001</xsd:appinfo>
+                            <xsd:documentation>Numer komunikatu</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:pattern value="^\d{3}$"/>
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="Komunikat" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">a4c929683b8811ebbab2025041000001</xsd:appinfo>
+                            <xsd:documentation>Tekstowa postać komunikatu</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="240"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="PostingStatusQueryRequest">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">070e86575bdd11eb8601000006d9f6a6</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="Admin" type="Admin"/>
+                    <xsd:element name="JednostkaGospodarcza" type="xsd:string"/>
+                    <xsd:element name="IDZadanieKsiegowania" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="PostingStatusQueryRequest">
+        <wsdl:documentation/>
+        <wsdl:part name="PostingStatusQueryRequest" element="p1:PostingStatusQueryRequest"/>
+    </wsdl:message>
+    <wsdl:message name="PostingStatusQueryResponse">
+        <wsdl:documentation/>
+        <wsdl:part name="PostingStatusQueryResponse" element="p1:PostingStatusQueryResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="PostingStatusQueryOut">
+        <wsdl:documentation/>
+        <wsdl:operation name="PostingStatusQueryOut">
+            <wsdl:documentation/>
+            <wsp:Policy>
+                <wsp:PolicyReference URI="#OP_PostingStatusQueryOut"/>
+            </wsp:Policy>
+            <wsdl:input message="p1:PostingStatusQueryRequest"/>
+            <wsdl:output message="p1:PostingStatusQueryResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PostingStatusQueryOutBinding" type="p1:PostingStatusQueryOut">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"
+            xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+        <wsdl:operation name="PostingStatusQueryOut">
+            <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1"
+                xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            <wsdl:input>
+                <soap:body use="literal"
+                    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"
+                    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PostingStatusQueryOutService">
+        <wsdl:port name="HTTPS_Port" binding="p1:PostingStatusQueryOutBinding">
+            <soap:address location="https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=PostingStatusQueryOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3APostingStatusQuery"
+                xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

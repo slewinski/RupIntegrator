@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RupDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ConsExternalDBConnectionConfig">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typDB" Type="int" />
+          <Property Name="rodzajDB" Type="int" />
+          <Property Name="srvName" Type="varchar" MaxLength="100" />
+          <Property Name="DbName" Type="varchar" MaxLength="100" />
+          <Property Name="pwd" Type="varchar" MaxLength="100" />
+          <Property Name="logId" Type="varchar" MaxLength="100" />
+          <Property Name="WinLogon" Type="bit" />
+          <Property Name="srvAlias" Type="varchar" MaxLength="100" />
+          <Property Name="sp_name" Type="varchar" MaxLength="100" />
+          <Property Name="SAPKnsId" Type="varchar" MaxLength="100" />
+          <Property Name="ConnectionName" Type="varchar" MaxLength="100" />
+          <Property Name="sp_param" Type="varchar" MaxLength="100" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="ConsJobItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="insertDate" Type="datetime" Nullable="false" />
+          <Property Name="startDate" Type="datetime" />
+          <Property Name="finishDate" Type="datetime" />
+          <Property Name="consExternalDBConnectionConfig_Id" Type="int" Nullable="false" />
+          <Property Name="status" Type="int" />
+          <Property Name="info" Type="varchar" MaxLength="1000" />
+          <Property Name="queryDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ConsKartaTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idKomunikatu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="idStronyWydzial" Type="int" />
+          <Property Name="idSprawyWydzial" Type="int" />
+          <Property Name="dImportu" Type="datetime" />
+          <Property Name="trescOdpowiedzi" Type="nvarchar" MaxLength="4000" />
+          <Property Name="payload" Type="nvarchar(max)" />
+          <Property Name="hash" Type="nvarchar" MaxLength="512" />
+          <Property Name="consJobItemId" Type="int" />
+        </EntityType>
+        <EntityType Name="Konfiguracja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typKns" Type="int" />
+          <Property Name="srvName" Type="varchar" MaxLength="100" />
+          <Property Name="DbName" Type="varchar" MaxLength="100" />
+          <Property Name="pwd" Type="varchar" MaxLength="100" />
+          <Property Name="logId" Type="varchar" MaxLength="100" />
+          <Property Name="WinLogon" Type="bit" />
+          <Property Name="JednostkaGospodarcza" Type="varchar" MaxLength="4" />
+          <Property Name="StartImportDate" Type="datetime" />
+          <Property Name="PrzypisFile" Type="varchar" MaxLength="255" />
+          <Property Name="OdpisFile" Type="varchar" MaxLength="255" />
+          <Property Name="srvAlias" Type="varchar" MaxLength="100" />
+          <Property Name="EndpointWS" Type="varchar" MaxLength="512" />
+          <Property Name="WSLogon" Type="varchar" MaxLength="100" />
+          <Property Name="WSpwd" Type="varchar" MaxLength="100" />
+          <Property Name="typImportSAP" Type="int" />
+          <Property Name="skipraty" Type="bit" />
+          <Property Name="StanowiskoFin" Type="varchar" MaxLength="4" />
+          <Property Name="ERPLogon" Type="varchar" MaxLength="100" />
+          <Property Name="defSad" Type="bit" />
+          <Property Name="dbversion" Type="varchar" MaxLength="30" />
+          <Property Name="czyautoks" Type="int" />
+          <Property Name="czyautoprzyp" Type="int" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="varchar" MaxLength="4" />
+          <Property Name="dplatnosci" Type="datetime" />
+          <Property Name="typDatyPlatn" Type="int" />
+          <Property Name="DataMiesStart" Type="datetime" />
+          <Property Name="Pfx" Type="varbinary(max)" />
+          <Property Name="Cer" Type="varbinary(max)" />
+          <Property Name="PfxPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SAPPwdExpPeriod" Type="int" />
+        </EntityType>
+        <EntityType Name="ServiceEndpoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceId" Type="int" />
+          <Property Name="ServiceName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Endpoint" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Pssword" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="role" Type="int" Nullable="false" />
+          <Property Name="LastPwdChngDate" Type="datetime" />
+          <Property Name="suspend" Type="bit" />
+          <Property Name="ChangePwd" Type="bit" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" MaxLength="100" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="PwdPeriodChange" Type="int" Nullable="false" />
+          <Property Name="MEPUser" Type="varchar" MaxLength="50" />
+          <Property Name="MEPPassword" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_ConsJobItem_ConsExternalDBConnectionConfig">
+          <End Role="ConsExternalDBConnectionConfig" Type="Self.ConsExternalDBConnectionConfig" Multiplicity="1" />
+          <End Role="ConsJobItem" Type="Self.ConsJobItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsExternalDBConnectionConfig">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsJobItem">
+              <PropertyRef Name="consExternalDBConnectionConfig_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsKartaTransfer_ConsJobItem">
+          <End Role="ConsJobItem" Type="Self.ConsJobItem" Multiplicity="0..1" />
+          <End Role="ConsKartaTransfer" Type="Self.ConsKartaTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsJobItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsKartaTransfer">
+              <PropertyRef Name="consJobItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RupDBModelStoreContainer">
+          <EntitySet Name="ConsExternalDBConnectionConfig" EntityType="Self.ConsExternalDBConnectionConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsJobItem" EntityType="Self.ConsJobItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsKartaTransfer" EntityType="Self.ConsKartaTransfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Konfiguracja" EntityType="Self.Konfiguracja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceEndpoint" EntityType="Self.ServiceEndpoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ConsJobItem_ConsExternalDBConnectionConfig" Association="Self.FK_ConsJobItem_ConsExternalDBConnectionConfig">
+            <End Role="ConsExternalDBConnectionConfig" EntitySet="ConsExternalDBConnectionConfig" />
+            <End Role="ConsJobItem" EntitySet="ConsJobItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsKartaTransfer_ConsJobItem" Association="Self.FK_ConsKartaTransfer_ConsJobItem">
+            <End Role="ConsJobItem" EntitySet="ConsJobItem" />
+            <End Role="ConsKartaTransfer" EntitySet="ConsKartaTransfer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RupDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Konfiguracja">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typKns" Type="Int32" />
+          <Property Name="srvName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DbName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pwd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="logId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WinLogon" Type="Boolean" />
+          <Property Name="JednostkaGospodarcza" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="StartImportDate" Type="DateTime" Precision="3" />
+          <Property Name="PrzypisFile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OdpisFile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="srvAlias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EndpointWS" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="WSLogon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WSpwd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="typImportSAP" Type="Int32" />
+          <Property Name="skipraty" Type="Boolean" />
+          <Property Name="StanowiskoFin" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="ERPLogon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="defSad" Type="Boolean" />
+          <Property Name="dbversion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="czyautoks" Type="Int32" />
+          <Property Name="czyautoprzyp" Type="Int32" />
+          <Property Name="StanowiskoFianasoweWindyk" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="dplatnosci" Type="DateTime" Precision="3" />
+          <Property Name="typDatyPlatn" Type="Int32" />
+          <Property Name="DataMiesStart" Type="DateTime" Precision="3" />
+          <Property Name="Pfx" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Cer" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PfxPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SAPPwdExpPeriod" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="RupDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Konfiguracja" EntityType="Self.Konfiguracja" />
+          <EntitySet Name="ServiceEndpoint" EntityType="RupDBModel.ServiceEndpoint" />
+          <EntitySet Name="ConsExternalDBConnectionConfig" EntityType="RupDBModel.ConsExternalDBConnectionConfig" />
+          <EntitySet Name="ConsJobItem" EntityType="RupDBModel.ConsJobItem" />
+          <AssociationSet Name="FK_ConsJobItem_ConsExternalDBConnectionConfig" Association="RupDBModel.FK_ConsJobItem_ConsExternalDBConnectionConfig">
+            <End Role="ConsExternalDBConnectionConfig" EntitySet="ConsExternalDBConnectionConfig" />
+            <End Role="ConsJobItem" EntitySet="ConsJobItem" />
+          </AssociationSet>
+          <EntitySet Name="ConsKartaTransfer" EntityType="RupDBModel.ConsKartaTransfer" />
+          <AssociationSet Name="FK_ConsKartaTransfer_ConsJobItem" Association="RupDBModel.FK_ConsKartaTransfer_ConsJobItem">
+            <End Role="ConsJobItem" EntitySet="ConsJobItem" />
+            <End Role="ConsKartaTransfer" EntitySet="ConsKartaTransfer" />
+          </AssociationSet>
+          <EntitySet Name="User" EntityType="RupDBModel.User" />
+        </EntityContainer>
+        <EntityType Name="ServiceEndpoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceId" Type="Int32" />
+          <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Endpoint" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ConsExternalDBConnectionConfig">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typDB" Type="Int32" />
+          <Property Name="rodzajDB" Type="Int32" />
+          <Property Name="srvName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DbName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pwd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="logId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WinLogon" Type="Boolean" />
+          <Property Name="srvAlias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="sp_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SAPKnsId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConnectionName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="sp_param" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="ConsJobItem" Relationship="RupDBModel.FK_ConsJobItem_ConsExternalDBConnectionConfig" FromRole="ConsExternalDBConnectionConfig" ToRole="ConsJobItem" />
+        </EntityType>
+        <EntityType Name="ConsJobItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="insertDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="startDate" Type="DateTime" Precision="3" />
+          <Property Name="finishDate" Type="DateTime" Precision="3" />
+          <Property Name="consExternalDBConnectionConfig_Id" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="info" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="queryDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ConsExternalDBConnectionConfig" Relationship="RupDBModel.FK_ConsJobItem_ConsExternalDBConnectionConfig" FromRole="ConsJobItem" ToRole="ConsExternalDBConnectionConfig" />
+          <NavigationProperty Name="ConsKartaTransfer" Relationship="RupDBModel.FK_ConsKartaTransfer_ConsJobItem" FromRole="ConsJobItem" ToRole="ConsKartaTransfer" />
+        </EntityType>
+        <Association Name="FK_ConsJobItem_ConsExternalDBConnectionConfig">
+          <End Type="RupDBModel.ConsExternalDBConnectionConfig" Role="ConsExternalDBConnectionConfig" Multiplicity="1" />
+          <End Type="RupDBModel.ConsJobItem" Role="ConsJobItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsExternalDBConnectionConfig">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConsJobItem">
+              <PropertyRef Name="consExternalDBConnectionConfig_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ConsKartaTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idKomunikatu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="idStronyWydzial" Type="Int32" />
+          <Property Name="idSprawyWydzial" Type="Int32" />
+          <Property Name="dImportu" Type="DateTime" Precision="3" />
+          <Property Name="trescOdpowiedzi" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="payload" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hash" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="consJobItemId" Type="Int32" />
+          <NavigationProperty Name="ConsJobItem" Relationship="RupDBModel.FK_ConsKartaTransfer_ConsJobItem" FromRole="ConsKartaTransfer" ToRole="ConsJobItem" />
+        </EntityType>
+        <Association Name="FK_ConsKartaTransfer_ConsJobItem">
+          <End Type="RupDBModel.ConsJobItem" Role="ConsJobItem" Multiplicity="0..1" />
+          <End Type="RupDBModel.ConsKartaTransfer" Role="ConsKartaTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsJobItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsKartaTransfer">
+              <PropertyRef Name="consJobItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Pssword" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Int32" Nullable="false" />
+          <Property Name="LastPwdChngDate" Type="DateTime" Precision="3" />
+          <Property Name="suspend" Type="Boolean" />
+          <Property Name="ChangePwd" Type="Boolean" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="PwdPeriodChange" Type="Int32" Nullable="false" />
+          <Property Name="MEPUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MEPPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RupDBModelStoreContainer" CdmEntityContainer="RupDBEntities">
+          <EntitySetMapping Name="Konfiguracja">
+            <EntityTypeMapping TypeName="RupDBModel.Konfiguracja">
+              <MappingFragment StoreEntitySet="Konfiguracja">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="typKns" ColumnName="typKns" />
+                <ScalarProperty Name="srvName" ColumnName="srvName" />
+                <ScalarProperty Name="DbName" ColumnName="DbName" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="logId" ColumnName="logId" />
+                <ScalarProperty Name="WinLogon" ColumnName="WinLogon" />
+                <ScalarProperty Name="JednostkaGospodarcza" ColumnName="JednostkaGospodarcza" />
+                <ScalarProperty Name="StartImportDate" ColumnName="StartImportDate" />
+                <ScalarProperty Name="PrzypisFile" ColumnName="PrzypisFile" />
+                <ScalarProperty Name="OdpisFile" ColumnName="OdpisFile" />
+                <ScalarProperty Name="srvAlias" ColumnName="srvAlias" />
+                <ScalarProperty Name="EndpointWS" ColumnName="EndpointWS" />
+                <ScalarProperty Name="WSLogon" ColumnName="WSLogon" />
+                <ScalarProperty Name="WSpwd" ColumnName="WSpwd" />
+                <ScalarProperty Name="typImportSAP" ColumnName="typImportSAP" />
+                <ScalarProperty Name="skipraty" ColumnName="skipraty" />
+                <ScalarProperty Name="StanowiskoFin" ColumnName="StanowiskoFin" />
+                <ScalarProperty Name="ERPLogon" ColumnName="ERPLogon" />
+                <ScalarProperty Name="defSad" ColumnName="defSad" />
+                <ScalarProperty Name="dbversion" ColumnName="dbversion" />
+                <ScalarProperty Name="czyautoks" ColumnName="czyautoks" />
+                <ScalarProperty Name="czyautoprzyp" ColumnName="czyautoprzyp" />
+                <ScalarProperty Name="StanowiskoFianasoweWindyk" ColumnName="StanowiskoFianasoweWindyk" />
+                <ScalarProperty Name="dplatnosci" ColumnName="dplatnosci" />
+                <ScalarProperty Name="typDatyPlatn" ColumnName="typDatyPlatn" />
+                <ScalarProperty Name="DataMiesStart" ColumnName="DataMiesStart" />
+                <ScalarProperty Name="Pfx" ColumnName="Pfx" />
+                <ScalarProperty Name="Cer" ColumnName="Cer" />
+                <ScalarProperty Name="PfxPassword" ColumnName="PfxPassword" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="SAPPwdExpPeriod" ColumnName="SAPPwdExpPeriod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceEndpoint">
+            <EntityTypeMapping TypeName="RupDBModel.ServiceEndpoint">
+              <MappingFragment StoreEntitySet="ServiceEndpoint">
+                <ScalarProperty Name="Endpoint" ColumnName="Endpoint" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsExternalDBConnectionConfig">
+            <EntityTypeMapping TypeName="RupDBModel.ConsExternalDBConnectionConfig">
+              <MappingFragment StoreEntitySet="ConsExternalDBConnectionConfig">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="sp_param" ColumnName="sp_param" />
+                <ScalarProperty Name="ConnectionName" ColumnName="ConnectionName" />
+                <ScalarProperty Name="SAPKnsId" ColumnName="SAPKnsId" />
+                <ScalarProperty Name="sp_name" ColumnName="sp_name" />
+                <ScalarProperty Name="srvAlias" ColumnName="srvAlias" />
+                <ScalarProperty Name="WinLogon" ColumnName="WinLogon" />
+                <ScalarProperty Name="logId" ColumnName="logId" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="DbName" ColumnName="DbName" />
+                <ScalarProperty Name="srvName" ColumnName="srvName" />
+                <ScalarProperty Name="rodzajDB" ColumnName="rodzajDB" />
+                <ScalarProperty Name="typDB" ColumnName="typDB" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsJobItem">
+            <EntityTypeMapping TypeName="RupDBModel.ConsJobItem">
+              <MappingFragment StoreEntitySet="ConsJobItem">
+                <ScalarProperty Name="queryDate" ColumnName="queryDate" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="consExternalDBConnectionConfig_Id" ColumnName="consExternalDBConnectionConfig_Id" />
+                <ScalarProperty Name="finishDate" ColumnName="finishDate" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="insertDate" ColumnName="insertDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsKartaTransfer">
+            <EntityTypeMapping TypeName="RupDBModel.ConsKartaTransfer">
+              <MappingFragment StoreEntitySet="ConsKartaTransfer">
+                <ScalarProperty Name="consJobItemId" ColumnName="consJobItemId" />
+                <ScalarProperty Name="hash" ColumnName="hash" />
+                <ScalarProperty Name="payload" ColumnName="payload" />
+                <ScalarProperty Name="trescOdpowiedzi" ColumnName="trescOdpowiedzi" />
+                <ScalarProperty Name="dImportu" ColumnName="dImportu" />
+                <ScalarProperty Name="idSprawyWydzial" ColumnName="idSprawyWydzial" />
+                <ScalarProperty Name="idStronyWydzial" ColumnName="idStronyWydzial" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="idKomunikatu" ColumnName="idKomunikatu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="RupDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="MEPPassword" ColumnName="MEPPassword" />
+                <ScalarProperty Name="MEPUser" ColumnName="MEPUser" />
+                <ScalarProperty Name="PwdPeriodChange" ColumnName="PwdPeriodChange" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ChangePwd" ColumnName="ChangePwd" />
+                <ScalarProperty Name="suspend" ColumnName="suspend" />
+                <ScalarProperty Name="LastPwdChngDate" ColumnName="LastPwdChngDate" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="Pssword" ColumnName="Pssword" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

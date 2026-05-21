@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="configuration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="configSections">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sectionGroup">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="section">
+                      <xs:complexType>
+                        <xs:attribute name="name" type="xs:string" use="required" />
+                        <xs:attribute name="type" type="xs:string" use="required" />
+                        <xs:attribute name="requirePermission" type="xs:boolean" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="type" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="connectionStrings">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="add">
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="connectionString" type="xs:string" use="required" />
+                  <xs:attribute name="providerName" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="startup">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="supportedRuntime">
+                <xs:complexType>
+                  <xs:attribute name="version" type="xs:string" use="required" />
+                  <xs:attribute name="sku" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="system.serviceModel">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="bindings">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="basicHttpBinding">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element maxOccurs="unbounded" name="binding">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="readerQuotas">
+                                  <xs:complexType>
+                                    <xs:attribute name="maxDepth" type="xs:unsignedByte" use="required" />
+                                    <xs:attribute name="maxStringContentLength" type="xs:unsignedShort" use="required" />
+                                    <xs:attribute name="maxArrayLength" type="xs:unsignedShort" use="required" />
+                                    <xs:attribute name="maxBytesPerRead" type="xs:unsignedShort" use="required" />
+                                    <xs:attribute name="maxNameTableCharCount" type="xs:unsignedShort" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="security">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="transport">
+                                        <xs:complexType>
+                                          <xs:attribute name="clientCredentialType" type="xs:string" use="required" />
+                                          <xs:attribute name="proxyCredentialType" type="xs:string" use="required" />
+                                          <xs:attribute name="realm" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="message">
+                                        <xs:complexType>
+                                          <xs:attribute name="clientCredentialType" type="xs:string" use="required" />
+                                          <xs:attribute name="algorithmSuite" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="mode" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="name" type="xs:string" use="required" />
+                              <xs:attribute name="closeTimeout" type="xs:time" use="required" />
+                              <xs:attribute name="openTimeout" type="xs:time" use="required" />
+                              <xs:attribute name="receiveTimeout" type="xs:time" use="required" />
+                              <xs:attribute name="sendTimeout" type="xs:time" use="required" />
+                              <xs:attribute name="allowCookies" type="xs:boolean" use="required" />
+                              <xs:attribute name="bypassProxyOnLocal" type="xs:boolean" use="required" />
+                              <xs:attribute name="hostNameComparisonMode" type="xs:string" use="required" />
+                              <xs:attribute name="maxBufferPoolSize" type="xs:unsignedInt" use="required" />
+                              <xs:attribute name="maxBufferSize" type="xs:unsignedInt" use="required" />
+                              <xs:attribute name="maxReceivedMessageSize" type="xs:unsignedInt" use="required" />
+                              <xs:attribute name="textEncoding" type="xs:string" use="required" />
+                              <xs:attribute name="transferMode" type="xs:string" use="required" />
+                              <xs:attribute name="useDefaultWebProxy" type="xs:boolean" use="required" />
+                              <xs:attribute name="messageEncoding" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="customBinding">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="binding">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="textMessageEncoding">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="readerQuotas">
+                                        <xs:complexType>
+                                          <xs:attribute name="maxDepth" type="xs:unsignedInt" use="required" />
+                                          <xs:attribute name="maxStringContentLength" type="xs:unsignedInt" use="required" />
+                                          <xs:attribute name="maxArrayLength" type="xs:unsignedInt" use="required" />
+                                          <xs:attribute name="maxBytesPerRead" type="xs:unsignedInt" use="required" />
+                                          <xs:attribute name="maxNameTableCharCount" type="xs:unsignedInt" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="maxReadPoolSize" type="xs:unsignedByte" use="required" />
+                                    <xs:attribute name="maxWritePoolSize" type="xs:unsignedByte" use="required" />
+                                    <xs:attribute name="messageVersion" type="xs:string" use="required" />
+                                    <xs:attribute name="writeEncoding" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="httpTransport">
+                                  <xs:complexType>
+                                    <xs:attribute name="authenticationScheme" type="xs:string" use="required" />
+                                    <xs:attribute name="bypassProxyOnLocal" type="xs:boolean" use="required" />
+                                    <xs:attribute name="hostNameComparisonMode" type="xs:string" use="required" />
+                                    <xs:attribute name="keepAliveEnabled" type="xs:boolean" use="required" />
+                                    <xs:attribute name="maxBufferSize" type="xs:unsignedInt" use="required" />
+                                    <xs:attribute name="proxyAuthenticationScheme" type="xs:string" use="required" />
+                                    <xs:attribute name="realm" type="xs:string" use="required" />
+                                    <xs:attribute name="useDefaultWebProxy" type="xs:boolean" use="required" />
+                                    <xs:attribute name="maxReceivedMessageSize" type="xs:unsignedInt" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="name" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="client">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="endpoint">
+                      <xs:complexType>
+                        <xs:attribute name="address" type="xs:string" use="required" />
+                        <xs:attribute name="binding" type="xs:string" use="required" />
+                        <xs:attribute name="bindingConfiguration" type="xs:string" use="required" />
+                        <xs:attribute name="contract" type="xs:string" use="required" />
+                        <xs:attribute name="name" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="applicationSettings">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="KnsMigrator.Properties.Settings">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="setting">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="value" type="xs:string" />
+                        </xs:sequence>
+                        <xs:attribute name="name" type="xs:string" use="required" />
+                        <xs:attribute name="serializeAs" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

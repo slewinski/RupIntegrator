@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<configuration>
+    <configSections>
+    </configSections>
+    <connectionStrings>
+        <add name="RupLoader.Properties.Settings.RupDB" connectionString="Data Source=tcp:10.11.194.170,62138;Initial Catalog=RupIntegrator;User ID=rup;Password=123123Qaz"/>
+        <add name="RupIntegratorEntities" connectionString="metadata=res://*/RupIntegratorModel.csdl|res://*/RupIntegratorModel.ssdl|res://*/RupIntegratorModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=XPROGLEX;initial catalog=RupLancMet ;User Id=sa;Password=sa;multipleactiveresultsets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient"/>
+    </connectionStrings>
+<startup><supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2"/></startup><system.serviceModel>
+    <bindings>
+        <basicHttpBinding>
+            <binding name="SI_KNS_KNS2ZSRK_osBinding" closeTimeout="00:01:00" openTimeout="00:01:00" receiveTimeout="00:10:00" sendTimeout="00:01:00" allowCookies="false" bypassProxyOnLocal="false" hostNameComparisonMode="StrongWildcard" maxBufferSize="65536" maxBufferPoolSize="524288" maxReceivedMessageSize="65536" messageEncoding="Text" textEncoding="utf-8" transferMode="Buffered" useDefaultWebProxy="true">
+                <readerQuotas maxDepth="32" maxStringContentLength="8192" maxArrayLength="16384" maxBytesPerRead="4096" maxNameTableCharCount="16384"/>
+                <security mode="None">
+                    <transport clientCredentialType="None" proxyCredentialType="None" realm=""/>
+                    <message clientCredentialType="UserName" algorithmSuite="Default"/>
+                </security>
+            </binding>
+            <binding name="SI_KNS_KNS2ZSRK_osBinding1" closeTimeout="00:01:00" openTimeout="00:01:00" receiveTimeout="00:10:00" sendTimeout="00:01:00" allowCookies="false" bypassProxyOnLocal="false" hostNameComparisonMode="StrongWildcard" maxBufferSize="65536" maxBufferPoolSize="524288" maxReceivedMessageSize="65536" messageEncoding="Text" textEncoding="utf-8" transferMode="Buffered" useDefaultWebProxy="true">
+                <readerQuotas maxDepth="32" maxStringContentLength="8192" maxArrayLength="16384" maxBytesPerRead="4096" maxNameTableCharCount="16384"/>
+                <security mode="Transport">
+                    <transport clientCredentialType="None" proxyCredentialType="None" realm=""/>
+                    <message clientCredentialType="UserName" algorithmSuite="Default"/>
+                </security>
+            </binding>
+        </basicHttpBinding>
+        <customBinding>
+            <binding name="CustomHttpTransportBinding">
+                <textMessageEncoding maxReadPoolSize="64" maxWritePoolSize="16" messageVersion="Soap11" writeEncoding="utf-8">
+                    <readerQuotas maxDepth="10000000" maxStringContentLength="10000000" maxArrayLength="67108864" maxBytesPerRead="65536" maxNameTableCharCount="100000"/>
+                </textMessageEncoding>
+                <httpTransport authenticationScheme="Basic" bypassProxyOnLocal="false" hostNameComparisonMode="StrongWildcard" keepAliveEnabled="false" proxyAuthenticationScheme="Basic" realm="XISOAPApps" useDefaultWebProxy="true"/>
+            </binding>
+        </customBinding>
+    </bindings>
+    <client>
+        <endpoint address="http://sapmitl01.zsrk.ms.gov.pl:56300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=ZMS_KNS_TST&amp;receiverParty=&amp;receiverService=&amp;interface=SI_KNS_KNS2ZSRK_os&amp;interfaceNamespace=urn%3Akns%3Azsrk%3AServce" binding="customBinding" bindingConfiguration="CustomHttpTransportBinding" contract="SapPIService.SI_KNS_KNS2ZSRK_os" name="HTTP_Port"/>
+        <endpoint address="http://sapmitl01.zsrk.ms.gov.pl:56300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=ZMS_KNS_TST&amp;receiverParty=&amp;receiverService=&amp;interface=SI_KNS_KNS2ZSRK_os&amp;interfaceNamespace=urn%3Akns%3Azsrk%3AServce" binding="basicHttpBinding" bindingConfiguration="SI_KNS_KNS2ZSRK_osBinding" contract="SapPIService.SI_KNS_KNS2ZSRK_os" name="HTTP_Port1"/>
+        <endpoint address="https://sapmitl01.zsrk.ms.gov.pl:56301/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=ZMS_KNS_TST&amp;receiverParty=&amp;receiverService=&amp;interface=SI_KNS_KNS2ZSRK_os&amp;interfaceNamespace=urn%3Akns%3Azsrk%3AServce" binding="basicHttpBinding" bindingConfiguration="SI_KNS_KNS2ZSRK_osBinding1" contract="SapPIService.SI_KNS_KNS2ZSRK_os" name="HTTPS_Port"/>
+    </client>
+  </system.serviceModel>
+</configuration>

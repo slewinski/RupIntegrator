@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:p1="urn:ms.gov.pl:Dictionaries:FI" name="GetCaseRegistryTypesOut" targetNamespace="urn:ms.gov.pl:Dictionaries:FI" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation />
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="OP_GetCaseRegistryTypesOut" />
+  <wsdl:types>
+    <xsd:schema xmlns="urn:ms.gov.pl:Dictionaries:FI" targetNamespace="urn:ms.gov.pl:Dictionaries:FI" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="GetCaseRegistryTypesRequest" type="p1:GetCaseRegistryTypesRequest" />
+      <xsd:element name="GetCaseRegistryTypesResponse" type="p1:GetCaseRegistryTypesResponse" />
+      <xsd:complexType name="GetCaseRegistryTypesResponse">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">3a8f011c061911ef817000000050cdbe</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="CaseRegistryTypes" type="p1:CaseRegistryTypeData" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CaseRegistryTypeData">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">2c177cfc061911efa28200000050cdbe</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="Repertorium">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="20" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="Pokaz" type="xsd:boolean" />
+          <xsd:element name="PokazEplatnosci" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSR" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSO" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieS2" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSA" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSCYW" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSGOS" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSKAR" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSPPR" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSROD" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSUBE" type="xsd:boolean" />
+          <xsd:element name="ZastosowanieSRES" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="DomyslnyRodzajSR">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="5" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="DomyslnyRodzajSO">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="5" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="DomyslnyRodzajS2">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="5" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="DomyslnyRodzajSA">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:maxLength value="5" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetCaseRegistryTypesRequest">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">8ff33762061811ef946b00000050cdbe</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="RodzajSprawy">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="SCYW" />
+                <xsd:enumeration value="SGOS" />
+                <xsd:enumeration value="SKAR" />
+                <xsd:enumeration value="SPPR" />
+                <xsd:enumeration value="SROD" />
+                <xsd:enumeration value="SUBE" />
+                <xsd:enumeration value="SRES" />
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCaseRegistryTypesRequest">
+    <wsdl:documentation />
+    <wsdl:part name="GetCaseRegistryTypesRequest" element="p1:GetCaseRegistryTypesRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetCaseRegistryTypesResponse">
+    <wsdl:documentation />
+    <wsdl:part name="GetCaseRegistryTypesResponse" element="p1:GetCaseRegistryTypesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GetCaseRegistryTypesOut">
+    <wsdl:documentation />
+    <wsdl:operation name="GetCaseRegistryTypesOut">
+      <wsdl:documentation />
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_GetCaseRegistryTypesOut" />
+      </wsp:Policy>
+      <wsdl:input message="p1:GetCaseRegistryTypesRequest" />
+      <wsdl:output message="p1:GetCaseRegistryTypesResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GetCaseRegistryTypesOutBinding" type="p1:GetCaseRegistryTypesOut">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <wsdl:operation name="GetCaseRegistryTypesOut">
+      <operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <wsdl:input>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:input>
+      <wsdl:output>
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GetCaseRegistryTypesOutService">
+    <wsdl:port name="HTTPS_Port" binding="p1:GetCaseRegistryTypesOutBinding">
+      <address location="https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=DictionariesSOAPSender&amp;receiverParty=&amp;receiverService=&amp;interface=GetCaseRegistryTypesOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3ADictionaries%3AFI" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{48F69EC2-9700-4B83-B4F7-34DD95F0F700}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KnsMigrator</RootNamespace>
+    <AssemblyName>RUPIntegrator</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>E:\KnsMigrator\Deploy\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>\\localhost\e%24\test\</InstallUrl>
+    <ProductName>KnsIntegrator</ProductName>
+    <PublisherName>CompLex</PublisherName>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>move.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>AC2FF94D3843F0AF8A9E189ECD63C2E0E19CA088</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>KnsMigrator_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.WinControls">
+      <HintPath>..\..\X-Releases\2011 1116 Q3\Telerik.WinControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.GridView, Version=2012.3.1211.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.RadDock, Version=2012.3.1211.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.WinControls.UI">
+      <HintPath>..\..\X-Releases\2011 1116 Q3\Telerik.WinControls.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI.Design">
+      <HintPath>..\..\X-Releases\2011 1116 Q3\Telerik.WinControls.UI.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikCommon">
+      <HintPath>..\..\X-Releases\2011 1116 Q3\TelerikCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="TelerikData, Version=2012.3.1211.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutRupIntegrator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutRupIntegrator.Designer.cs">
+      <DependentUpon>AboutRupIntegrator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddBank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddBank.Designer.cs">
+      <DependentUpon>AddBank.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckBoxHeaderCell.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChngPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChngPwd.Designer.cs">
+      <DependentUpon>ChngPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GetDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GetDate.Designer.cs">
+      <DependentUpon>GetDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Import.cs" />
+    <Compile Include="Konfiguracja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KonwertWyc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KonwertWyc.Designer.cs">
+      <DependentUpon>KonwertWyc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Localize.cs" />
+    <Compile Include="Logon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logon.Designer.cs">
+      <DependentUpon>Logon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MigratorEDModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MigratorEDModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MigrForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MigrForm.Designer.cs">
+      <DependentUpon>MigrForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgresForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgresForm.Designer.cs">
+      <DependentUpon>ProgresForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SapPIHelper.cs" />
+    <Compile Include="Service References\RupIntegratorWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SapPIService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Slowniki.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SprawdzSalda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SprawdzSalda.Designer.cs">
+      <DependentUpon>SprawdzSalda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TransferDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransferDialog.Designer.cs">
+      <DependentUpon>TransferDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserAccount.Designer.cs">
+      <DependentUpon>UserAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="UsersManagement.cs" />
+    <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="AboutRupIntegrator.resx">
+      <DependentUpon>AboutRupIntegrator.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddBank.resx">
+      <DependentUpon>AddBank.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChngPwd.resx">
+      <DependentUpon>ChngPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GetDate.resx">
+      <DependentUpon>GetDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KonwertWyc.resx">
+      <DependentUpon>KonwertWyc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logon.resx">
+      <DependentUpon>Logon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MigrForm.resx">
+      <DependentUpon>MigrForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProgresForm.resx">
+      <DependentUpon>ProgresForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SprawdzSalda.resx">
+      <DependentUpon>SprawdzSalda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransferDialog.resx">
+      <DependentUpon>TransferDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserAccount.resx">
+      <DependentUpon>UserAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="MigratorEDModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MigratorEDModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="KnsMigrator_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\BankiKonfig.datasource" />
+    <None Include="Properties\DataSources\DBModel.Dluznik.datasource" />
+    <None Include="Properties\DataSources\DBModel.Fakt.datasource" />
+    <None Include="Properties\DataSources\DBModel.KnsKsiegi.datasource" />
+    <None Include="Properties\DataSources\DBModel.KnsSad.datasource" />
+    <None Include="Properties\DataSources\DBModel.Main.datasource" />
+    <None Include="Properties\DataSources\DBModel.Naleznosc.datasource" />
+    <None Include="Properties\DataSources\DBModel.SAPOpisPrzedmiotu.datasource" />
+    <None Include="Properties\DataSources\DBModel.SAPRepertorium.datasource" />
+    <None Include="Properties\DataSources\DBModel.Sprawa.datasource" />
+    <None Include="Properties\DataSources\DBModel.Transfer.datasource" />
+    <None Include="Properties\DataSources\DBModel.TypOsoba.datasource" />
+    <None Include="Properties\DataSources\Dokument.datasource" />
+    <None Include="Properties\DataSources\Ekstrakcja.datasource" />
+    <None Include="Properties\DataSources\Fakt.datasource" />
+    <None Include="Properties\DataSources\KnsKomornik.datasource" />
+    <None Include="Properties\DataSources\KnsKsiegi.datasource" />
+    <None Include="Properties\DataSources\KnsMigratorEntities.datasource" />
+    <None Include="Properties\DataSources\KnsMigratorEntities1.datasource" />
+    <None Include="Properties\DataSources\Main.datasource" />
+    <None Include="Properties\DataSources\Transfer.datasource" />
+    <None Include="Properties\DataSources\User.datasource" />
+    <None Include="Properties\DataSources\Wplata.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Service References\RupIntegratorWS\KNS.wsdl" />
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.AktualizujDanePartneraOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.AktualizujKontoUmowyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.DezaktywacjaPlanuRatOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.DodajKontoUmowyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.DodajNaleznoscOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.DodajSygnatureOdpowiedzTyp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.KorygowaniePrzypisowOdpisowOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.OdpisanieNaleznosciOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.PartnerOdpowiedzKomunikatTyp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.PobierzRozrachunkiDlaDokumentuOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.PokazDokumentZrodlowyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.PokazWplatyNierozpoznaneOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.PokazZaksiegowaneWplatyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.StanRozrachunkowZKomornikiemOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.StornoWplatyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.TworzeniePlanuRatOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.UstalenieStanuDepozytowDluznikaOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.WeryfikacjaPlanuRatOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.WyszukajKontoUmowyOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.WyszukajPartneraOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.WyszukajSygnatureResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.ZakwalifikujWplateOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.ZmianaTerminuOdroczeniaNaleznosciOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.ZmianaTerminuWymagalnosciOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\KnsMigrator.SapPIService.ZmienStatusNaleznosciOdpowiedz.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SapPIService\SI_KNS_KNS2ZSRK_os.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="move.ico" />
+    <Content Include="Scripts\Alter Konfiguracja.sql" />
+    <Content Include="Scripts\RupIntegratorDB.sql" />
+    <Content Include="Scripts\WalidSaldo.sql" />
+    <None Include="Service References\SapPIService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SapPIService\configuration.svcinfo" />
+    <None Include="Service References\SapPIService\configuration91.svcinfo" />
+    <None Include="Service References\RupIntegratorWS\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\RupIntegratorWS\configuration.svcinfo" />
+    <None Include="Service References\RupIntegratorWS\configuration91.svcinfo" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\New document.png" />
+    <None Include="Resources\Good mark.png" />
+    <None Include="Resources\Bad mark.png" />
+    <None Include="Resources\BadMark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 3.5 SP2</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\RupIntegratorWS\" />
+    <WCFMetadataStorage Include="Service References\SapPIService\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
