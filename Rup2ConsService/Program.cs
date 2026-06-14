@@ -34,7 +34,7 @@ namespace Rup2ConsService
             {
                 try
                 {
-                    
+                    log.Info("Wywołanie metody Pop");
                     worker.Pop(); // Wywołanie metody
                     Thread.Sleep(10); // Przykładowy czas oczekiwania między kolejnymi wywołaniami
                 }

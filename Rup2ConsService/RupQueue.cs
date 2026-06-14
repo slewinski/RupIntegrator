@@ -36,12 +36,16 @@ namespace Rup2ConsService
             List<ConsExternalDBConnectionConfig> dbConfigLst = null;
             try
             {
+                log.Debug("Połączenie z bazą danych");
+
                 using (RupDBEntities db = new RupDBEntities())
                 {
+                    log.Debug("Szukanie zadań");
                     var job = db.ConsJobItem.Where(a => a.status == (int)ConsJobStatus.New).OrderBy(a => a.Id).FirstOrDefault();
                     if (job != null)
                     {
-#if DEBUG
+#if DEBUG            
+                    log.Debug("Znaleziono zadanie, odczyt połączeń");
                     dbConfigLst = db.ConsExternalDBConnectionConfig.Where(a => a.isActive == true).ToList();
 
 #else
@@ -50,14 +54,17 @@ namespace Rup2ConsService
 #endif
 
                         confsNumber = dbConfigLst != null ? dbConfigLst.Count : 0;
-
+                        log.Debug("Pętla po aktywnych połączeniach");
                         foreach (ConsExternalDBConnectionConfig dbConfig in dbConfigLst)
                         {
 
                             ConsImportFromDB import = new ConsImportFromDB();
                             List<ConsImportData> lst = import.GetDataFromDB(dbConfig, new DateTime(2026, 1, 1), DateTime.Today.AddDays(1));
+                            log.Debug("Znaleziono połączeń " + (lst != null ? lst.Count : 0).ToString());
                             foreach (ConsImportData item in lst)
                             {
+                                log.Debug("Procedowanie zaimportowanych danych");
+
                                 ConsKartaTransfer karta = new ConsKartaTransfer();
                                 karta.dImportu = DateTime.Now;
                                 karta.idKomunikatu = Guid.NewGuid().ToString();
@@ -101,6 +108,7 @@ namespace Rup2ConsService
                     }
                     else //utworzenie zadań
                     {
+                        log.Debug("Tworzenie zadań");
                         List<ConsExternalDBConnectionConfig> lst = db.ConsExternalDBConnectionConfig.Where(a => a.isActive == true).ToList();
                         if (lst != null)
                         {

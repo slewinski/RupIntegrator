@@ -29,7 +29,7 @@ namespace KnsMigrator
             string pwd = Utils.Encrypt(this.tbPassword.Text,EncryptPhase);
             string user = this.tbUsername.Text;
 
-            // pwd = Utils.Decrypt(this.tbPassword.Text, EncryptPhase);
+            pwd = Utils.Decrypt(this.tbPassword.Text, EncryptPhase);
 
             UserProfile.Username = this.tbUsername.Text;
             int id = (from u in this.Context.User where u.Username == user && u.Pssword == pwd && u.deleted == false && u.suspend == false select u.Id).FirstOrDefault();
