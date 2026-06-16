@@ -72,7 +72,7 @@ namespace ConsImport
             DataTable mainTable = ds.Tables[0];
             DataTable addressTable = ds.Tables.Count > 1 ? ds.Tables[1] : null;
             DataTable orzeczeniaTable = ds.Tables.Count > 2 ? ds.Tables[2] : null;
-
+            DataTable zdarzeniaTable = ds.Tables.Count > 3 ? ds.Tables[3] : null;
             // testowy zapis orzeczenia do pliku
             /*
             if (orzeczeniaTable != null && orzeczeniaTable.Rows.Count > 0)
@@ -258,6 +258,72 @@ namespace ConsImport
                 }
 
                 return name;
+            };
+
+            Func<DataRow, string, string> AttachmentContent = (r, columnName) =>
+            {
+                if (!HasColumn(r, columnName))
+                    return String.Empty;
+
+                object value = r[columnName];
+
+                if (value == null || value == DBNull.Value)
+                    return String.Empty;
+
+                if (value is byte[])
+                {
+                    byte[] raw = (byte[])value;
+
+                    try
+                    {
+                        return ToBase64(Utils.DecompressMsWord(raw));
+                    }
+                    catch
+                    {
+                        return Convert.ToBase64String(raw);
+                    }
+                }
+
+                return Convert.ToString(value);
+            };
+
+            Func<DataRow, int, PozycjaPoleKonfigurowalne[]> BuildPolaKonfigurowalne = (r, max) =>
+            {
+                return Enumerable.Range(1, max)
+                    .Select(n =>
+                    {
+                        string nazwa = S(r, "PozycjaPoleKonfigurowalneNazwa" + n);
+
+                        if (String.IsNullOrWhiteSpace(nazwa))
+                            return null;
+
+                        bool isDateField =
+                            nazwa == "DATA_ORZ" ||
+                            nazwa == "DATA_UPR" ||
+                            nazwa == "DATA_SKIEROWANIA" ||
+                            nazwa == "DATA_PRZED_KS" ||
+                            nazwa == "DATA_PRZED_GR" ||
+                            nazwa == "DATA_KOLEJNA" ||
+                            nazwa == "DATA_REJESTRACJI_KO" ||
+                            nazwa == "DATA_ZALATWIENIA" ||
+                            nazwa == "DATA_WYKO"||
+                            nazwa == "DATA_WYKONANIA";
+
+                        string wartosc = isDateField
+                            ? DateS(r, "PozycjaPoleKonfigurowalneWartosc" + n)
+                            : S(r, "PozycjaPoleKonfigurowalneWartosc" + n);
+
+                        if (String.IsNullOrWhiteSpace(wartosc))
+                            return null;
+
+                        return new PozycjaPoleKonfigurowalne
+                        {
+                            Nazwa = nazwa,
+                            Wartosc = wartosc
+                        };
+                    })
+                    .Where(x => x != null)
+                    .ToArray();
             };
 
             Func<string, string> CountryCode = value =>
@@ -528,39 +594,37 @@ namespace ConsImport
                       }
                   };
                     }
+                    var polaKonfigurowalne = BuildPolaKonfigurowalne(row, 10);
 
-                    var polaKonfigurowalne = Enumerable.Range(1, 10)
-                    .Select(n =>
+                    var dodatkoweZdarzenia = new List<PozycjaDaneZdarzenia>();
+
+                    if (zdarzeniaTable != null)
                     {
-                        string nazwa = S(row, "PozycjaPoleKonfigurowalneNazwa" + n);
+                        string identyfikatorWyroku = S(row, "IdentyfikatorWyrokuZSystemuZewnetrznego");
 
-                        if (String.IsNullOrWhiteSpace(nazwa))
-                            return null;
+                        dodatkoweZdarzenia = zdarzeniaTable.AsEnumerable()
+                            .Where(z => HasColumn(z, "id_sprawy") && I(z, "id_sprawy") == idSprawy)
+                            .Select(z =>
+                            {
+                                string zalacznikNazwaZdarzenia = S(z, "ZalacznikNazwa");
+                                string zalacznikZawartoscZdarzenia = AttachmentContent(z, "ZalacznikZawartosc");
 
-                        bool isDateField =
-                            nazwa == "DATA_ORZ" ||
-                            nazwa == "DATA_UPR" ||
-                            nazwa == "DATA_SKIEROWANIA" ||
-                            nazwa == "DATA_PRZED_KS" ||
-                            nazwa == "DATA_PRZED_GR" ||
-                            nazwa == "DATA_KOLEJNA";
-
-                        string wartosc = isDateField
-                            ? DateS(row, "PozycjaPoleKonfigurowalneWartosc" + n)
-                            : S(row, "PozycjaPoleKonfigurowalneWartosc" + n);
-
-                        // 🔥 KLUCZOWE: jeśli brak wartości → NIE TWORZYMY elementu
-                        if (String.IsNullOrWhiteSpace(wartosc))
-                            return null;
-
-                        return new PozycjaPoleKonfigurowalne
-                        {
-                            Nazwa = nazwa,
-                            Wartosc = wartosc
-                        };
-                    })
-                    .Where(x => x != null)
-                    .ToArray();
+                                return new PozycjaDaneZdarzenia
+                                {
+                                    DataZdarzenia = DateS(z, "DataZdarzenia"),
+                                    DataKsiegowania = DateS(z, "DataZdarzenia"),
+                                    IdentyfikatorWyrokuZSystemuZewnetrznego = !String.IsNullOrWhiteSpace(S(z, "IdentyfikatorWyrokuZSystemuZewnetrznego")) ? S(z, "IdentyfikatorWyrokuZSystemuZewnetrznego") : identyfikatorWyroku,
+                                    TypZdarzenia = S(z, "TypZdarzenia"),
+                                    ZalacznikNazwa = String.IsNullOrWhiteSpace(zalacznikNazwaZdarzenia) ? null : SafeAttachmentName(zalacznikNazwaZdarzenia),
+                                    ZalacznikZawartosc = String.IsNullOrWhiteSpace(zalacznikZawartoscZdarzenia) ? null : zalacznikZawartoscZdarzenia,
+                                    ListaDaneFinansowe = new PozycjaDaneFinansowe[0],
+                                    ListaPlanRatalny = new PozycjaPlanRatalny[0],
+                                    ListaParametryRat = new PozycjaParametryRat[0],
+                                    ListaPolaKonfigurowalne = BuildPolaKonfigurowalne(z, 14)
+                                };
+                            })
+                            .ToList();
+                    }
 
                     var request = new ImportContentSystemDataRequest
                     {
@@ -613,270 +677,267 @@ namespace ConsImport
                         },
 
                         ListaDaneZdarzen = new[]
+        {
+            new PozycjaDaneZdarzenia
+            {
+                DataZdarzenia = DateS(row, "DataKartyZdarzenia"),
+                DataKsiegowania = DateS(row, "DataKartyZdarzenia"),
+                IdentyfikatorWyrokuZSystemuZewnetrznego = S(row, "IdentyfikatorWyrokuZSystemuZewnetrznego"),
+                TypZdarzenia = S(row, "TypZdarzenia"),
+                ZalacznikNazwa = zalacznikNazwa,
+                ZalacznikZawartosc = zalacznikZawartosc,
+        
+                ListaDaneFinansowe = group
+                .SelectMany(r =>
+                    {
+                        var lista = new List<PozycjaDaneFinansowe>();
+        
+                        Action<string> AddFinanse = suffix =>
                         {
-                      new PozycjaDaneZdarzenia
-                      {
-                          DataZdarzenia = DateS(row, "DataKartyZdarzenia"),
-                          DataKsiegowania = DateS(row, "DataKartyZdarzenia"),
-                          IdentyfikatorWyrokuZSystemuZewnetrznego = S(row, "IdentyfikatorWyrokuZSystemuZewnetrznego"),
-                          TypZdarzenia = S(row, "TypZdarzenia"),
-                          ZalacznikNazwa = zalacznikNazwa,
-                          ZalacznikZawartosc = zalacznikZawartosc,
-
-                          ListaDaneFinansowe = group
-                            .SelectMany(r =>
+                            decimal kwota = D(r, "PozycjaDaneFinansoweKwota" + suffix);
+        
+                            if (kwota <= 0)
+                                return;
+        
+                            string data = DateS(r, "PozycjaDaneFinansoweData" + suffix);
+                            string typ = S(r, "PozycjaDaneFinansoweTyp" + suffix);
+                            string nazwa = S(r, "PozycjaDaneFinansoweNazwa" + suffix);
+                            string ilosc = S(r, "PozycjaDaneFinansoweIlosc" + suffix);
+                            string numer = S(r, "PozycjaDaneFinansoweNumerDokumentu" + suffix);
+                            string pozycja = S(r, "PozycjaDaneFinansowePozycjaDokumentu" + suffix);
+                            string operacjaGlowna = S(r, "OperacjaGlowna" + suffix);
+                            string operacjaCzesciowa = S(r, "OperacjaCzesciowa" + suffix);
+                            decimal kwotaSkladnika = D(r, "PozycjaDaneFinansoweKwotaSkladnika" + suffix);
+        
+                            if (String.IsNullOrWhiteSpace(data) ||
+                                String.IsNullOrWhiteSpace(typ) ||
+                                String.IsNullOrWhiteSpace(nazwa) ||
+                                String.IsNullOrWhiteSpace(operacjaGlowna) ||
+                                String.IsNullOrWhiteSpace(operacjaCzesciowa))
                             {
-                                var lista = new List<PozycjaDaneFinansowe>();
-                        
-                                Action<string> AddFinanse = suffix =>
+                                return;
+                            }
+        
+                            lista.Add(new PozycjaDaneFinansowe
+                            {
+                                Data = data,
+                                Typ = typ,
+                                Nazwa = nazwa,
+                                Ilosc = ilosc,
+                                OperacjaGlowna = operacjaGlowna,
+                                OperacjaCzesciowa = operacjaCzesciowa,
+                                Kwota = kwota,
+                                KwotaSkladnika = kwotaSkladnika,
+                                PozycjaDokumentu = pozycja.Length > 0 ? pozycja : null,
+                                NumerDokumentu = numer.Length > 0 ? numer : null
+                            });
+                        };
+        
+                        AddFinanse("Koszty");
+                        AddFinanse("FPPSP");
+                        AddFinanse("FPPNAW");
+                        AddFinanse("PK");
+                        AddFinanse("KPNawSP");
+                        AddFinanse("Grzywna");
+        
+                        return lista;
+                    })
+                    .ToArray(),
+        
+                            ListaPlanRatalny = new PozycjaPlanRatalny[0],
+                            ListaParametryRat = new PozycjaParametryRat[0],
+                            ListaPolaKonfigurowalne = polaKonfigurowalne
+                        }
+                                }
+                                .Concat(dodatkoweZdarzenia)
+                                .ToArray()
+                            };
+                            if (String.IsNullOrWhiteSpace(request.DaneSygnaturyAkt.RepertoriumSygnaturaArchiwalna))
+                                request.DaneSygnaturyAkt.RepertoriumSygnaturaArchiwalna = null;
+        
+                            if (String.IsNullOrWhiteSpace(request.DaneSygnaturyAkt.KolejnyNumerSprawySygnaturaArchiwalna))
+                                request.DaneSygnaturyAkt.KolejnyNumerSprawySygnaturaArchiwalna = null;
+        
+                            if (String.IsNullOrWhiteSpace(request.DaneSygnaturyAkt.RokSygnaturaArchiwalna))
+                                request.DaneSygnaturyAkt.RokSygnaturaArchiwalna = null;
+        
+                            // stabilizacja
+                            /*
+                            foreach (var p in request.ListaDanePartneraBiznesowego ?? new PozycjaDanePartneraBiznesowego[0])
+                            {
+                                p.PartnerHandlowyPanstwoUrodzenia = "PL";
+                                p.PartnerHandlowyObywatelstwo = "PL";
+        
+                                p.PartnerSprawy = false;
+                                p.PartnerSprawySpecified = true;
+        
+                                p.PartnerKarty = false;
+                                p.PartnerKartySpecified = true;
+        
+                                if (String.IsNullOrWhiteSpace(p.Skorowidz))
+                                    p.Skorowidz = "Pozostali";
+        
+                                if (p.PartnerHandlowyAdresy != null)
                                 {
-                                    decimal kwota = D(r, "PozycjaDaneFinansoweKwota" + suffix);
-                        
-                                    if (kwota <= 0)
-                                        return;
-                        
-                                    string data = DateS(r, "PozycjaDaneFinansoweData" + suffix);
-                                    string typ = S(r, "PozycjaDaneFinansoweTyp" + suffix);
-
-                                    string nazwa = S(r, "PozycjaDaneFinansoweNazwa" + suffix);
-                                    string ilosc = S(r, "PozycjaDaneFinansoweIlosc" + suffix);
-                                    string numer = S(r, "PozycjaDaneFinansoweNumerDokumentu" + suffix);
-                                    string pozycja = S(r, "PozycjaDaneFinansowePozycjaDokumentu" + suffix);
-                                    
-                                    string operacjaGlowna = S(r, "OperacjaGlowna" + suffix);
-                                    string operacjaCzesciowa = S(r, "OperacjaCzesciowa" + suffix);
-                                    decimal kwotaSkladnika = D(r, "PozycjaDaneFinansoweKwotaSkladnika" + suffix);
-                        
-                                    if (String.IsNullOrWhiteSpace(data) ||
-                                        String.IsNullOrWhiteSpace(typ) ||
-                                        String.IsNullOrWhiteSpace(nazwa) ||
-                                        String.IsNullOrWhiteSpace(operacjaGlowna) ||
-                                        String.IsNullOrWhiteSpace(operacjaCzesciowa))
+                                    p.PartnerHandlowyAdresy = p.PartnerHandlowyAdresy
+                                        .Where(a => a != null && a.Rodzaj == "Koresp.")
+                                        .ToArray();
+        
+                                    if (p.PartnerHandlowyAdresy.Length == 0)
                                     {
-                                        return;
+                                        p.PartnerHandlowyAdresy = new[]
+                                        {
+                          new Adres
+                          {
+                              Rodzaj = "Koresp.",
+                              KluczKraju = "PL",
+                              Miasto = "Piast",
+                              KodPocztowy = "98-332",
+                              Ulica = "Poloninska",
+                              NumerDomu = "25",
+                              Region = "PKR"
+                          }
+                      };
                                     }
-                        
-                                    lista.Add(new PozycjaDaneFinansowe
+        
+                                    foreach (var a in p.PartnerHandlowyAdresy)
                                     {
-                                        Data = data,
-                                        Typ = typ,
-                                        Nazwa = nazwa,
-                                        Ilosc = ilosc ,
-                                        OperacjaGlowna = operacjaGlowna,
-                                        OperacjaCzesciowa = operacjaCzesciowa,
-                                        Kwota = kwota,
-                                        KwotaSkladnika = kwotaSkladnika,
-                                        PozycjaDokumentu = pozycja.Length> 0 ? pozycja:null,
-                                        NumerDokumentu = numer.Length> 0 ? numer : null
-                                    });
-                                };
-                        
-                                // Kolejność celowo: zobowiązania dodatkowe/koszty przed grzywną.
-                                AddFinanse("Koszty");
-                                AddFinanse("FPPSP");
-                                AddFinanse("FPPNAW");
-                                AddFinanse("PK");
-                                AddFinanse("KPNawSP");
-                                AddFinanse("Grzywna");
-                        
-                                return lista;
-                            })
-                            .ToArray(),
-
-
-
-                          ListaPlanRatalny = new PozycjaPlanRatalny[0],
-                          ListaParametryRat = new PozycjaParametryRat[0],
-                          ListaPolaKonfigurowalne = polaKonfigurowalne
-                      }
-                        }
-                    };
-                    if (String.IsNullOrWhiteSpace(request.DaneSygnaturyAkt.RepertoriumSygnaturaArchiwalna))
-                        request.DaneSygnaturyAkt.RepertoriumSygnaturaArchiwalna = null;
-
-                    if (String.IsNullOrWhiteSpace(request.DaneSygnaturyAkt.KolejnyNumerSprawySygnaturaArchiwalna))
-                        request.DaneSygnaturyAkt.KolejnyNumerSprawySygnaturaArchiwalna = null;
-
-                    if (String.IsNullOrWhiteSpace(request.DaneSygnaturyAkt.RokSygnaturaArchiwalna))
-                        request.DaneSygnaturyAkt.RokSygnaturaArchiwalna = null;
-
-                    // stabilizacja
-                    /*
-                    foreach (var p in request.ListaDanePartneraBiznesowego ?? new PozycjaDanePartneraBiznesowego[0])
-                    {
-                        p.PartnerHandlowyPanstwoUrodzenia = "PL";
-                        p.PartnerHandlowyObywatelstwo = "PL";
-
-                        p.PartnerSprawy = false;
-                        p.PartnerSprawySpecified = true;
-
-                        p.PartnerKarty = false;
-                        p.PartnerKartySpecified = true;
-
-                        if (String.IsNullOrWhiteSpace(p.Skorowidz))
-                            p.Skorowidz = "Pozostali";
-
-                        if (p.PartnerHandlowyAdresy != null)
-                        {
-                            p.PartnerHandlowyAdresy = p.PartnerHandlowyAdresy
-                                .Where(a => a != null && a.Rodzaj == "Koresp.")
-                                .ToArray();
-
-                            if (p.PartnerHandlowyAdresy.Length == 0)
-                            {
-                                p.PartnerHandlowyAdresy = new[]
+                                        a.Rodzaj = "Koresp.";
+                                        a.KluczKraju = "PL";
+        
+                                        if (String.IsNullOrWhiteSpace(a.Region))
+                                            a.Region = "PKR";
+                                    }
+                                }
+        
+                                if (p.PartnerHandlowyDokumentTozsamosci != null)
                                 {
-                  new Adres
-                  {
-                      Rodzaj = "Koresp.",
-                      KluczKraju = "PL",
-                      Miasto = "Piast",
-                      KodPocztowy = "98-332",
-                      Ulica = "Poloninska",
-                      NumerDomu = "25",
-                      Region = "PKR"
-                  }
-              };
+                                    foreach (var d in p.PartnerHandlowyDokumentTozsamosci)
+                                    {
+                                        if (String.IsNullOrWhiteSpace(d.Typ))
+                                            d.Typ = "Dowod osobisty";
+        
+                                        if (String.IsNullOrWhiteSpace(d.Numer))
+                                            d.Numer = "TEMP123";
+        
+                                        if (String.IsNullOrWhiteSpace(d.Wydal))
+                                            d.Wydal = "Urzad";
+        
+                                        d.DataWydania = "20200101";
+                                        d.DataWaznosciOd = "20200101";
+                                        d.DataWaznosciDo = "20300101";
+                                        d.Kraj = "PL";
+                                        d.Region = "DSL";
+                                    }
+                                }
                             }
-
-                            foreach (var a in p.PartnerHandlowyAdresy)
+                             
+                            foreach (var z in request.ListaDaneZdarzen ?? new PozycjaDaneZdarzenia[0])
                             {
-                                a.Rodzaj = "Koresp.";
-                                a.KluczKraju = "PL";
-
-                                if (String.IsNullOrWhiteSpace(a.Region))
-                                    a.Region = "PKR";
+                                if (String.IsNullOrWhiteSpace(z.DataZdarzenia))
+                                    z.DataZdarzenia = "20260101";
+        
+                                if (String.IsNullOrWhiteSpace(z.DataKsiegowania))
+                                    z.DataKsiegowania = z.DataZdarzenia;
+        
+                                if (z.ListaDaneFinansowe != null)
+                                {
+                                    foreach (var f in z.ListaDaneFinansowe)
+                                    {
+                                        if (String.IsNullOrWhiteSpace(f.Data))
+                                            f.Data = z.DataZdarzenia;
+        
+                                        if (String.IsNullOrWhiteSpace(f.Typ))
+                                            f.Typ = "WYROK";
+        
+                                        if (String.IsNullOrWhiteSpace(f.Nazwa))
+                                            f.Nazwa = "Wezwanie";
+        
+                                        if (String.IsNullOrWhiteSpace(f.Ilosc))
+                                            f.Ilosc = "1";
+        
+                                        // Na potrzeby testu walidacji szyny — wartości jak w requestach, które przechodzą.
+                                        if (String.IsNullOrWhiteSpace(f.OperacjaGlowna))
+                                            f.OperacjaGlowna = "N010";
+        
+                                        if (String.IsNullOrWhiteSpace(f.OperacjaCzesciowa))
+                                            f.OperacjaCzesciowa = "0020";
+                                    }
+                                }
+        
+                                if (z.ListaPolaKonfigurowalne != null)
+                                {
+                                    z.ListaPolaKonfigurowalne = z.ListaPolaKonfigurowalne
+                                        .Where(p =>
+                                            p != null &&
+                                            !String.IsNullOrWhiteSpace(p.Nazwa) &&
+                                            !String.IsNullOrWhiteSpace(p.Wartosc))
+                                        .ToArray();
+                                }
+        
+                                if (z.ListaPlanRatalny == null)
+                                    z.ListaPlanRatalny = new PozycjaPlanRatalny[0];
+        
+                                if (z.ListaParametryRat == null)
+                                    z.ListaParametryRat = new PozycjaParametryRat[0];
                             }
-                        }
-
-                        if (p.PartnerHandlowyDokumentTozsamosci != null)
-                        {
-                            foreach (var d in p.PartnerHandlowyDokumentTozsamosci)
+                            */
+        
+        
+        
+                            //request.DaneSygnaturyAkt.RepertoriumSygnaturaArchiwalna = null;
+                            //request.DaneSygnaturyAkt.KolejnyNumerSprawySygnaturaArchiwalna = null;
+                            //request.DaneSygnaturyAkt.RokSygnaturaArchiwalna = null;
+                            //request.DaneSygnaturyAkt.JednostkaGospodarczaWindykacja = null;
+                            //request.DaneSygnaturyAkt.StanowiskoFinansoweWindykacja = null;
+                            //request.DaneSygnaturyAkt.KodOkreguKW = null;
+                            //request.DaneSygnaturyAkt.KontrolkaSygnaturyKW = null;
+        
+                            /*
+                            foreach (var p in request.ListaDanePartneraBiznesowego)
                             {
-                                if (String.IsNullOrWhiteSpace(d.Typ))
-                                    d.Typ = "Dowod osobisty";
-
-                                if (String.IsNullOrWhiteSpace(d.Numer))
-                                    d.Numer = "TEMP123";
-
-                                if (String.IsNullOrWhiteSpace(d.Wydal))
-                                    d.Wydal = "Urzad";
-
-                                d.DataWydania = "20200101";
-                                d.DataWaznosciOd = "20200101";
-                                d.DataWaznosciDo = "20300101";
-                                d.Kraj = "PL";
-                                d.Region = "DSL";
+                                p.PartnerHandlowyDrugieImie = null;
+                                p.PartnerHandlowyNazwa1 = null;
+                                p.PartnerHandlowyNazwa2 = null;
+                                p.PartnerHandlowyNazwa3 = null;
+                                p.PartnerHandlowyNazwa4 = null;
+                                p.PartnerHandlowyRegon = null;
+                                p.PartnerHandlowyNip = null;
+                                p.PartnerHandlowyInneObywatelstwa = null;
+                                p.PartnerHandlowyStatusZatrudnienia = null;
+                                p.PartnerHandlowyWyksztalcenie = null;
+                                p.PartnerHandlowyWykonywanieFunkcji = null;
+                                p.PartnerHandlowyPobytZakladKarny = null;
+                                p.PartnerHandlowyObronca = null;
+                                p.Krs = null;
+                                p.NumerNadrzednegoPartneraSystemuZewnetrznego = null;
                             }
+        
+                            foreach (var p in request.ListaDanePartneraBiznesowego)
+                            {
+                                if (p.PartnerHandlowyDokumentTozsamosci != null)
+                                {
+                                    foreach (var d in p.PartnerHandlowyDokumentTozsamosci)
+                                    {
+                                        d.Typ = "Dowod osobisty";
+                                        d.Wydal = "Urzad Miasta Tychy";
+                                    }
+                                }
+                            }
+                            */
+                            // koniec stabilizacji
+        
+        
+        
+                            result.Add(new ConsImportData
+                            {
+                                IdSprawy = idSprawy,
+                                IdStrony = idStrony,
+                                status = ConsImportStatus.Prepared,
+                                importContentSystemDataRequest = request
+                            });
                         }
                     }
-                     
-                    foreach (var z in request.ListaDaneZdarzen ?? new PozycjaDaneZdarzenia[0])
-                    {
-                        if (String.IsNullOrWhiteSpace(z.DataZdarzenia))
-                            z.DataZdarzenia = "20260101";
-
-                        if (String.IsNullOrWhiteSpace(z.DataKsiegowania))
-                            z.DataKsiegowania = z.DataZdarzenia;
-
-                        if (z.ListaDaneFinansowe != null)
-                        {
-                            foreach (var f in z.ListaDaneFinansowe)
-                            {
-                                if (String.IsNullOrWhiteSpace(f.Data))
-                                    f.Data = z.DataZdarzenia;
-
-                                if (String.IsNullOrWhiteSpace(f.Typ))
-                                    f.Typ = "WYROK";
-
-                                if (String.IsNullOrWhiteSpace(f.Nazwa))
-                                    f.Nazwa = "Wezwanie";
-
-                                if (String.IsNullOrWhiteSpace(f.Ilosc))
-                                    f.Ilosc = "1";
-
-                                // Na potrzeby testu walidacji szyny — wartości jak w requestach, które przechodzą.
-                                if (String.IsNullOrWhiteSpace(f.OperacjaGlowna))
-                                    f.OperacjaGlowna = "N010";
-
-                                if (String.IsNullOrWhiteSpace(f.OperacjaCzesciowa))
-                                    f.OperacjaCzesciowa = "0020";
-                            }
-                        }
-
-                        if (z.ListaPolaKonfigurowalne != null)
-                        {
-                            z.ListaPolaKonfigurowalne = z.ListaPolaKonfigurowalne
-                                .Where(p =>
-                                    p != null &&
-                                    !String.IsNullOrWhiteSpace(p.Nazwa) &&
-                                    !String.IsNullOrWhiteSpace(p.Wartosc))
-                                .ToArray();
-                        }
-
-                        if (z.ListaPlanRatalny == null)
-                            z.ListaPlanRatalny = new PozycjaPlanRatalny[0];
-
-                        if (z.ListaParametryRat == null)
-                            z.ListaParametryRat = new PozycjaParametryRat[0];
-                    }
-                    */
-
-
-
-                    //request.DaneSygnaturyAkt.RepertoriumSygnaturaArchiwalna = null;
-                    //request.DaneSygnaturyAkt.KolejnyNumerSprawySygnaturaArchiwalna = null;
-                    //request.DaneSygnaturyAkt.RokSygnaturaArchiwalna = null;
-                    //request.DaneSygnaturyAkt.JednostkaGospodarczaWindykacja = null;
-                    //request.DaneSygnaturyAkt.StanowiskoFinansoweWindykacja = null;
-                    //request.DaneSygnaturyAkt.KodOkreguKW = null;
-                    //request.DaneSygnaturyAkt.KontrolkaSygnaturyKW = null;
-
-                    /*
-                    foreach (var p in request.ListaDanePartneraBiznesowego)
-                    {
-                        p.PartnerHandlowyDrugieImie = null;
-                        p.PartnerHandlowyNazwa1 = null;
-                        p.PartnerHandlowyNazwa2 = null;
-                        p.PartnerHandlowyNazwa3 = null;
-                        p.PartnerHandlowyNazwa4 = null;
-                        p.PartnerHandlowyRegon = null;
-                        p.PartnerHandlowyNip = null;
-                        p.PartnerHandlowyInneObywatelstwa = null;
-                        p.PartnerHandlowyStatusZatrudnienia = null;
-                        p.PartnerHandlowyWyksztalcenie = null;
-                        p.PartnerHandlowyWykonywanieFunkcji = null;
-                        p.PartnerHandlowyPobytZakladKarny = null;
-                        p.PartnerHandlowyObronca = null;
-                        p.Krs = null;
-                        p.NumerNadrzednegoPartneraSystemuZewnetrznego = null;
-                    }
-
-                    foreach (var p in request.ListaDanePartneraBiznesowego)
-                    {
-                        if (p.PartnerHandlowyDokumentTozsamosci != null)
-                        {
-                            foreach (var d in p.PartnerHandlowyDokumentTozsamosci)
-                            {
-                                d.Typ = "Dowod osobisty";
-                                d.Wydal = "Urzad Miasta Tychy";
-                            }
-                        }
-                    }
-                    */
-                    // koniec stabilizacji
-
-
-
-                    result.Add(new ConsImportData
-                    {
-                        IdSprawy = idSprawy,
-                        IdStrony = idStrony,
-                        status = ConsImportStatus.Prepared,
-                        importContentSystemDataRequest = request
-                    });
-                }
-            }
 
             return result;
         }
