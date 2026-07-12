@@ -2759,6 +2759,54 @@ namespace KnsMigrator
             }
         }
 
+        private void rbTestWSEx2PSCD_Click(object sender, EventArgs e)
+        {
+            User usr = null;
+            SelectUser su = new SelectUser();
+            if (su.ShowDialog() == DialogResult.OK)
+            {
+                usr = su.SelectedUser;
+            }
+            else return;
+
+            updateKonfig();
+            setSAPConnectionParams(usr);
+            PartnerQuery arg = new PartnerQuery();
+            arg.TypPartnera = "1";
+            arg.PESEL = "94050395939";
+            PartnerQueryRequest queryPartner = new PartnerQueryRequest();
+            queryPartner.Partner = arg;
+            try
+            {
+                PartnerQueryResponse resp = (PartnerQueryResponse)(ZSRKRequestHelper.CallSAPMethod("PartnerQueryOut", queryPartner));
+                if (resp.Komunikaty != null && resp.Komunikaty.ToList().Count > 0)
+                {
+                    string s = string.Empty;
+                    foreach (Ex2PscdInterface.Ex2PscdPartnerQueryOutService.Komunikat k in resp.Komunikaty)
+                    {
+                        s += "\n\r" + (k.IDKomunikatu + " " + k.NumerKomunikatu + " " + k.Komunikat1 + " " + k.RodzajKomunikatu).Trim();
+
+
+                    }
+                    if (!String.IsNullOrWhiteSpace(s))
+                        MessageBox.Show(s);
+                    else
+                        MessageBox.Show("Połączenie z systemem ZSRK przebiegło pomyślnie");
+
+
+                }
+                else
+                    MessageBox.Show(ZSRKRequestHelper.GetErrorMessage(), "Błąd podczas połączenia z Ex2PSCD");
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ZSRKRequestHelper.GetErrorMessage() + ex.Message, "Błąd podczas próby połączenia z Ex2PSCD");
+
+            }
+        }
+
+
         private void ExportOdpis()
         {
             int Id;
@@ -2815,26 +2863,37 @@ namespace KnsMigrator
 
                             if (row.Cells["SAPDocId"].Value != null && !String.IsNullOrEmpty(row.Cells["SAPDocId"].Value.ToString().Trim())) continue;
                             // .ToString().Trim())) { row.Cells["Blad"].Value += ";Brak dokumentu przypisu lub salda"; continue; }
-
+                            log.Debug("Krok 1");
                             if (row.Cells["SAPDocIdRef"].Value == null || String.IsNullOrEmpty(row.Cells["SAPDocIdRef"].Value.ToString().Trim()))
                             { row.Cells["Blad"].Value = "Brak dokumentu przypisu lub salda;" + row.Cells["Blad"].Value; continue; }
-
+                            log.Debug("Krok 2");
                             string typop = (row.Cells["typFakt"].Value).ToString().Trim().ToUpper();
                             if (typop == "KO" || typop == "GO")
                             {
                                 string err;
                                 decimal kwt;
 
+                                log.Debug("Krok 3");
                                 kwt = Convert.ToDecimal(row.Cells["kwota"].Value);
 
                                 int retcode = 0;
                                 // Weryfikacja czy można odpisaćnależność
                                 DocumentListQueryRequest doc2query = new DocumentListQueryRequest();
                                 doc2query.IdDanePSCD = new IdDanePSCDZapytanie();
-                                doc2query.IdDanePSCD.IDDokument = row.Cells["SAPDocIdRef"].Value.ToString();
-                                doc2query.IdDanePSCD.IDKontoUmowy = row.Cells["SAPKontoUmowy"].Value.ToString();
-                                doc2query.IdDanePSCD.IDPartner = row.Cells["SAPKontoPartnera"].Value.ToString();
-                                doc2query.IdDanePSCD.IDSygnatura = row.Cells["SAPPrzedmiotUmowy"].Value.ToString();
+
+
+                                if (row.Cells["OperacjaGlowna"].Value != null && ((row.Cells["OperacjaGlowna"].Value as string).StartsWith("F") || (row.Cells["OperacjaGlowna"].Value as string).StartsWith("N")))
+                                {
+                                    doc2query.IdDanePSCD.TypKontoUmowy = "F1";
+                                }
+                                else
+                                {
+                                    doc2query.IdDanePSCD.TypKontoUmowy = "KN";
+                                }
+                                doc2query.IdDanePSCD.IDDokument = row.Cells["SAPDocIdRef"].Value == null ? null : row.Cells["SAPDocIdRef"].Value.ToString();
+                                doc2query.IdDanePSCD.IDKontoUmowy = row.Cells["SAPKontoUmowy"].Value == null ? null :  row.Cells["SAPKontoUmowy"].Value.ToString();
+                                doc2query.IdDanePSCD.IDPartner = row.Cells["SAPKontoPartnera"].Value == null ? null:  row.Cells["SAPKontoPartnera"].Value.ToString();
+                                doc2query.IdDanePSCD.IDSygnatura = row.Cells["SAPPrzedmiotUmowy"].Value == null ? null:  row.Cells["SAPPrzedmiotUmowy"].Value.ToString();
                                 doc2query.IdDanePSCD.JednostkaGospodarcza = konfig.JednostkaGospodarcza;
 
 
@@ -2978,8 +3037,7 @@ namespace KnsMigrator
 
             ExportData(1);// eksport tylko danych podstawowywch 
         }
-
-
+     
 
         private void rmiRunOdpis_Click(object sender, EventArgs e)
         {

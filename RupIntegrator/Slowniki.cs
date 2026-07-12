@@ -196,9 +196,10 @@ namespace KnsMigrator
             this.RodzajPrzedmiotuDataSource.DataSource = thecontext.KnsKsiegi.ToList();
             this.rgvKsiegi.DataSource = this.RodzajPrzedmiotuDataSource; //.Mains;
             Dictionary<int, string> wyklucz = new Dictionary<int, string>();
+            wyklucz.Add(4, "Świadczenie/Nawiązka.SP");
             wyklucz.Add(3, "Naprawienie szkody");
             wyklucz.Add(2, "Przepadek korzyści");
-            wyklucz.Add(1, "Świdaczenie/Nawiązka.FPP");
+            wyklucz.Add(1, "Świadczenie/Nawiązka.FPP");
             wyklucz.Add(0, "KNS");
 
             GridViewComboBoxColumn wykluczColumn = (GridViewComboBoxColumn)this.rgvKsiegi.Columns["czyFPP"];
@@ -2774,34 +2775,66 @@ namespace KnsMigrator
             
             if (UserInfo.role != 1) // jeśli nie admin
             {
-                 Konfiguracja knf = this.thecontext.Konfiguracja.FirstOrDefault();
-                if (knf.SAPPwdExpPeriod > 0)
+                try
                 {
-                    setSAPConnectionParams();
-                    if (ChngSAPPwd.VerifySAPPwdExpire(knf.SAPPwdExpPeriod.Value))
+                    Konfiguracja knf = this.thecontext.Konfiguracja.FirstOrDefault();
+                    if (knf.SAPPwdExpPeriod > 0)
                     {
-                        ChangeSAPPwd changeSAPPwd = new ChangeSAPPwd();
-                        if (changeSAPPwd.ShowDialog() == DialogResult.OK) {
-                            using (KnsMigratorEntities context = new KnsMigratorEntities())
-                            {
-                                User usr = context.User.Where(a => a.Id == UserProfile.UserID).FirstOrDefault();
-                                usr.MEPPassword = Utils.Encrypt(changeSAPPwd.NewPassword, EncryptPhase);
-                                context.SaveChanges();
-                                MessageBox.Show("Hasło do ZSRK/MEP zostało zmienione. Używaj go również podczas logowania do systemu ZSRK", " Potwierdzenie zmiany hasła");
-                                UserInfo.MEPPassword = usr.MEPPassword;
-                                setSAPConnectionParams();
+                        try
+                        {
+                            setSAPConnectionParams();
+                        }
+                        catch (Exception ex)
+                        {
+                            log.Error(ex);
+                            MessageBox.Show("Błąd podczas weryfikacji hasła MEP. Ustawienie parametrów połączenia z ZSRK \r\n" + ex.Message);
+                        }
+                        bool werStatus = false;
+                        try
+                        {
+                            werStatus = ChngSAPPwd.VerifySAPPwdExpire(knf.SAPPwdExpPeriod.Value);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.Error(ex);
+                            MessageBox.Show("Błąd wywołania metody weryfikacji czasu ważności hasła \r\n" + ex.Message);
 
-                            }
-                          
-                           
 
                         }
-                      
+                        if (werStatus)
+                        {
+                            ChangeSAPPwd changeSAPPwd = new ChangeSAPPwd();
+                            if (changeSAPPwd.ShowDialog() == DialogResult.OK)
+                            {
+                                using (KnsMigratorEntities context = new KnsMigratorEntities())
+                                {
+                                    User usr = context.User.Where(a => a.Id == UserProfile.UserID).FirstOrDefault();
+                                    usr.MEPPassword = Utils.Encrypt(changeSAPPwd.NewPassword, EncryptPhase);
+                                    context.SaveChanges();
+                                    MessageBox.Show("Hasło do ZSRK/MEP zostało zmienione. Używaj go również podczas logowania do systemu ZSRK", " Potwierdzenie zmiany hasła");
+                                    UserInfo.MEPPassword = usr.MEPPassword;
+                                    setSAPConnectionParams();
+
+                                }
+
+
+
+                            }
+
+                        }
+
+
                     }
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex);
+                    MessageBox.Show("Błąd podczas weryfikacji hasła MEP. Sprawdź połączenie z ZSRK \r\n" + ex.Message);
+
+
                 }
 
             }
-
 
         }
 

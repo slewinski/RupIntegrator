@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D6EC103D-433D-4621-BD63-D798371F822C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ConsImporterService</RootNamespace>
+    <AssemblyName>ConsImporterService</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\RupIntegrator\packages\log4net.2.0.13\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConsImportService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ConsImportService.Designer.cs">
+      <DependentUpon>ConsImportService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportConsRequests.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cons2RupModel\Cons2RupModel.csproj">
+      <Project>{72bdc17b-4452-4eed-a90d-31ebf8c01595}</Project>
+      <Name>Cons2RupModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConsImport\ConsImport.csproj">
+      <Project>{8f55fe60-ed9e-497b-a8ae-1a85592f154a}</Project>
+      <Name>ConsImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConsInterfeces\ConsInterfeces.csproj">
+      <Project>{d42f2abc-dd26-421f-8401-29ef8d2003b1}</Project>
+      <Name>ConsInterfeces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MessageSignature\MessageSignature.csproj">
+      <Project>{8CD4F5D7-AC43-4FA3-9C9F-AABEF3B98A0E}</Project>
+      <Name>MessageSignature</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RupDatabase\RupDatabase.csproj">
+      <Project>{D9C860EE-5727-42B2-BDC0-F6F54364F39C}</Project>
+      <Name>RupDatabase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SapPOHelper\SapPOHelper.csproj">
+      <Project>{EFDE74BF-AF02-4F3A-A53B-87FEADCF16BA}</Project>
+      <Name>SapPOHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

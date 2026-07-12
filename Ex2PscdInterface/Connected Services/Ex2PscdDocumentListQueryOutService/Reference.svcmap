@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="55c21d58-6a9b-4181-8966-0d26817d45cf" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="d3587d7a-e8ce-436b-b048-5f482cbc8835" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="e:\RUP-Wroclaw\ex2pscd\wsdl\New\DocumentListQueryOutService.wsdl" Protocol="file" SourceId="1" />
+    <MetadataSource Address="e:\RUP-Wroclaw\Wsdl\DocumentListQueryOutService.wsdl" Protocol="file" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DocumentListQueryOut1.wsdl" MetadataType="Wsdl" ID="3d2dcaf4-1ac5-4e15-8889-aac863ebc110" SourceId="1" SourceUrl="file:///e:/RUP-Wroclaw/ex2pscd/wsdl/New/DocumentListQueryOutService.wsdl" />
+    <MetadataFile FileName="DocumentListQueryOut1.wsdl" MetadataType="Wsdl" ID="79f0a824-4d1e-40c8-b334-b801d510cdf2" SourceId="1" SourceUrl="file:///e:/RUP-Wroclaw/Wsdl/DocumentListQueryOutService.wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

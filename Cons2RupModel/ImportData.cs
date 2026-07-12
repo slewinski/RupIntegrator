@@ -19,14 +19,17 @@ namespace Cons2RupModel
 
     public enum ConsImportStatus
     {
-        Prepared,
-        InTransfer,
-        Submited,
-        Pending,
-        FailedImport,
-        FailedFiinal,
-        Done
+        Prepared = 0,
+        Pending = 1,
+        Done = 2,
+        Error = 3,
+
+        /// <summary>
+        /// Komunikat został już wcześniej zapisany i nie podlega wysłaniu do SAP.
+        /// </summary>
+        Duplicate = 4
     }
+
 
     public enum ConsJobStatus
     { 

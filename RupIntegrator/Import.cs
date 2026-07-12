@@ -2521,6 +2521,8 @@ Kwota
                                 doc.OperacjaGlowna = "FPP0";
                             else if (knsks.czyFPP == 2)
                                 doc.OperacjaGlowna = "N033";
+                            else if (knsks.czyFPP == 4)
+                                doc.OperacjaGlowna = "N010";
                             else
                                 doc.OperacjaGlowna = "N010";
                             /*
@@ -2549,6 +2551,11 @@ Kwota
                             } else if (knsks.czyFPP == 2)
                             {
                                 doc.OperacjaCzesciowa = "0001";
+                            }
+                            else if (knsks.czyFPP == 4) // nawiązka na rzecz Skarbu Państwa
+                            {
+                                doc.OperacjaCzesciowa = "0140"; 
+
                             }
                             else
                                 switch (spr.SAPRodzajPrzedmiotuUmowy)
@@ -3682,6 +3689,8 @@ Kwota
                                 doc.OperacjaGlowna = "FPP0";
                             else if (knsks.czyFPP == 2)
                                 doc.OperacjaGlowna = "N033";
+                            else if (knsks.czyFPP == 4)
+                                doc.OperacjaGlowna = "N010";
                             else
                                 doc.OperacjaGlowna = "N010";
 
@@ -3727,6 +3736,8 @@ Kwota
                                     doc.OperacjaCzesciowa = (Konfig.typKns == 2) ? "0010" : "0011";
                                 else if (knsks.czyFPP == 2)
                                     doc.OperacjaCzesciowa = "0001";
+                                else if (knsks.czyFPP == 4)
+                                    doc.OperacjaCzesciowa = "0140";
                                 else
                                     switch (spr.SAPRodzajPrzedmiotuUmowy)
                                     {
@@ -3827,6 +3838,8 @@ Kwota
                                 dock.OperacjaGlowna = "FPP0";
                             else if (knsks.czyFPP == 2)
                                 dock.OperacjaGlowna = "N033";
+                            else if (knsks.czyFPP == 4)
+                                dock.OperacjaGlowna = "N010";
                             else
                             {
                                 if (dock.DataKsiegowania.Value.Year >= 2017)
@@ -5337,26 +5350,35 @@ Kwota
             }
         }
 
-        private Dictionary<string, decimal> findPrzypis(List<Sprawa> lspr, Sprawa spr, int typ, decimal kwt)
+        private Dictionary<string, decimal> findPrzypis(List<Sprawa> lspr, Sprawa spr, int typ, decimal kwt, string defTypKontaUmowy = "KN")
         {
 
             List<Dokument> dx;
             List<Dokument> dokAllTmp;
             List<Dokument> dokAll;
             Dictionary<string, decimal> retValue = new Dictionary<string, decimal>();
-
-            dokAllTmp = new List<Dokument>();
-            foreach (Sprawa s in lspr)
+            try
             {
-                dokAllTmp.AddRange(s.Dokument);
-
+                log.Debug("Dane : spr id " + spr.ToString() + "  typ " + typ.ToString() + "Kwota " + kwt.ToString());
+                }
+            catch { 
             }
+            dokAllTmp = new List<Dokument>();
+            if (lspr != null)
+            {
+                
+                foreach (Sprawa s in lspr)
+                {
+                    log.Debug("Sprawy " + s.Karta + " " + s.SAPKontoUmowy);
+                    dokAllTmp.AddRange(s.Dokument);
 
+                }
+            }
 
             dokAll = new List<Dokument>();
             foreach (Dokument dd in dokAllTmp)
             {
-
+                log.Debug("Dodano dokument" + dd.SAPDocId + " " + dd.typFakt);
                 if (!String.IsNullOrWhiteSpace(dd.SAPDocId))
                     dokAll.Add(dd);
 
@@ -5384,12 +5406,15 @@ Kwota
                 }
                 if (tmp != null && tmp.Count == 1)
                 {
+                    
                     Dokument df = tmp.FirstOrDefault();
+                    log.Debug("ZNaleziono przypis " + df.SAPDocId + " " + df.typFakt);
                     retValue.Add(df.SAPDocId, kwt);
                     int id_sprawy = df.Sprawa_Id.Value;
                     spr = lspr.Where(a => a.Id == id_sprawy).FirstOrDefault();
                     return retValue;
                 }
+                log.Debug("Nie ZNaleziono przypisu lub więcej przypisów " );
 
 
 
@@ -5399,35 +5424,49 @@ Kwota
 
             foreach (Dokument d in dokAll)
             {
+                log.Debug(" Jest kilka przypisów ");
+                try
+                {
+                    log.Debug("Przetwarzanie dokumentu " + d.SAPDocId + " " + d.typFakt + " ref " + d.SAPDocIdRef + " " + d.id.ToString());
+                }
+                catch { }
                 if (typ == 1 && (d.typFakt == "GS" || d.typFakt == "GP"))
                 {
                     if (!String.IsNullOrWhiteSpace(d.SAPDocId))
                     {
                         // czy jest dokument odposi
-
+                        log.Debug("Wszukiwanie dokumentu dla sprawy id " + (spr.Id != null ? spr.Id.ToString():"" ));
                         List<Dokument> lstdok = Context.Dokument.Where(c => c.SAPDocIdRef == d.SAPDocId && c.Sprawa_Id == spr.Id).ToList();
+                        log.Debug("Wszukiwanie dokumentu OK");
                         if ((lstdok == null || lstdok.Count == 0) && d.kwota == kwt)
                         {
-
+                            log.Debug("Wyszukano  ");
                             retValue.Add(d.SAPDocId, kwt);
-                            spr = d.Sprawa;
+                            log.Debug("Wyszukano  - zwrócenie wartości");
+                            //spr = d.Sprawa;
+
                             return retValue;
 
                         }
+                        log.Debug("Lista zawiera więcej wartości");
                     }
 
 
 
                 }
+
                 if (typ == 0 && (d.typFakt == "KS" || d.typFakt == "KP"))
                 {
                     if (!String.IsNullOrWhiteSpace(d.SAPDocId))
                     {
+                        log.Debug(" Koszty Wszukiwanie dokumentu dla sprawy id " + (spr.Id != null ? spr.Id.ToString() : ""));
+
                         List<Dokument> lstdok = Context.Dokument.Where(c => c.SAPDocIdRef == d.SAPDocId && c.Sprawa_Id == spr.Id).ToList();
                         if ((lstdok == null || lstdok.Count == 0) && d.kwota == kwt)
                         {
                             retValue.Add(d.SAPDocId, kwt);
-                            spr = d.Sprawa;
+                            log.Debug("KOszty Wyszukano  - zwrócenie wartości");
+                            //spr = d.Sprawa;
                             return retValue;
                         }
                     }
@@ -5440,6 +5479,7 @@ Kwota
 
             }
             // 
+            log.Debug(" Nie znaleziono jednego przypisu ");
             dx = null;
             if (typ == 1)
             {
@@ -5454,22 +5494,23 @@ Kwota
                 dx = dokAll.Where(c => (c.typFakt == "KP" || c.typFakt == "KS") && (c.SAPDocId != null) && (c.OperacjaCzesciowa != "0030" && c.OperacjaCzesciowa != "0060")).OrderByDescending(c => c.id).ToList();
 
             }
-
+            log.Debug(" Nie znaleziono jednego przypisu 2 ");
             if (dx != null)
             {
-                List<string> lst = new List<string>();
+                log.Debug(" Będzie szukanie w SAP'ie ");
+                Dictionary<string,string> lst = new Dictionary<string, string>();
+                List<string> lstTypKonta = new List<string>();
                 bool foundItem;
                 decimal sum = 0;
                 KeyValuePair<string, decimal> item = new KeyValuePair<string, decimal>();
                 foreach (Dokument dy in dx)
                 {
-
-                    lst.Add(dy.SAPDocId);
-
+                    log.Debug ("Przygotowanie listy dokumentów do sprawdzenia w SAP" + dy.SAPDocId + " " + dy.typFakt + " " + dy.OperacjaGlowna + " " + dy.OperacjaCzesciowa + " typ konta umowy " + (dy.Sprawa != null ? dy.Sprawa.SAPTypKontaUmowy:" Brak sprawy dla dokumentu !!!!"));
+                    lst.Add(dy.SAPDocId,dy.Sprawa.SAPTypKontaUmowy);
                 }
                 if (lst.Any())
                 {
-                    Dictionary<string, decimal> lstPozo = getSaldoSAP(lst,Konfig.JednostkaGospodarcza);
+                    Dictionary<string, decimal> lstPozo = getSaldoSAP(lst,Konfig.JednostkaGospodarcza, defTypKontaUmowy);
 
 
                     if (lstPozo != null)
@@ -5631,7 +5672,7 @@ Kwota
         }
 
 
-        public Dictionary<string, decimal> getSaldoSAP(List<String> docNo, string jednostkaGospodacza)
+        public Dictionary<string, decimal> getSaldoSAP(Dictionary<String, String> docNo, string jednostkaGospodacza, string defTypKonaUmowy = "KN")
         {
 
 
@@ -5639,15 +5680,17 @@ Kwota
             Cursor.Current = Cursors.WaitCursor;
             Dictionary<string, decimal> retVal = new Dictionary<string, decimal>();
 
+            
 
            DocumentListQueryResponse ans;
-           foreach (string doc in docNo)
+           foreach (var doc in docNo)
             { 
 
             try
             {
+                log.Debug(" Pobieranie rozrachunków z SAP " + doc.Key + " konto umowy typ " + (doc.Value ?? ""));
 
-                ans = ZSRKRequestHelper.PobierzRozrachunki(doc, jednostkaGospodacza);
+                ans = ZSRKRequestHelper.PobierzRozrachunki(doc.Key,String.IsNullOrWhiteSpace(doc.Value) ? defTypKonaUmowy : doc.Value, jednostkaGospodacza);
             }
             catch (Exception ex)
             {
@@ -6052,16 +6095,21 @@ Kwota
                                 doc.OperacjaGlowna = "FPP0";
                             else if (ksiega.czyFPP == 2)
                                 doc.OperacjaGlowna = "N034";
+                            else if (ksiega.czyFPP == 4)
+                            {
+                                doc.OperacjaGlowna = "N020";
+                                doc.OperacjaCzesciowa = "0140";
+                            }
                             else
                                 if (dtr["zrodlo"].ToString() == "przedawnienie")
-                                {
-                                    doc.OperacjaGlowna = "N021";
-                                    stepNo = 106;
-                                }
-                                else if (dtr["ns1"].ToString() == "5c")
-                                    doc.OperacjaGlowna = "N030";
-                                else
-                                    doc.OperacjaGlowna = "N020";
+                            {
+                                doc.OperacjaGlowna = "N021";
+                                stepNo = 106;
+                            }
+                            else if (dtr["ns1"].ToString() == "5c")
+                                doc.OperacjaGlowna = "N030";
+                            else
+                                doc.OperacjaGlowna = "N020";
                             stepNo = 107;
 
 
@@ -6173,8 +6221,9 @@ Kwota
                                 doc.OperacjaCzesciowa = "0080";
                             stepNo = 118;
                             if (ksiega.czyFPP == 1)
-                                doc.OperacjaCzesciowa = (Konfig.typKns == 2) ? "0020" : "0021"; 
-
+                                doc.OperacjaCzesciowa = (Konfig.typKns == 2) ? "0020" : "0021";
+                            if (ksiega.czyFPP == 4)
+                                doc.OperacjaCzesciowa = "0140";
                             doc.kwota = Convert.ToDecimal(dtr["grzywna_odpis"].ToString().Replace(".", ","), CultureInfo.GetCultureInfo("pl-PL"));
                             doc2Hash += doc.kwota.ToString();
                             doc.typFakt = "GO";
@@ -6183,9 +6232,10 @@ Kwota
                             if (String.IsNullOrEmpty(doc.Info)) doc.Info = null;
                         }
                         stepNo = 120;
-                        if (Convert.ToDecimal(dtr["koszty_odpis"].ToString().Replace(".", ","), CultureInfo.GetCultureInfo("pl-PL")) > 0)
+                        if (Convert.ToDecimal(dtr["koszty_odpis"].ToString().Replace(".", ",").Replace(" ",""), CultureInfo.GetCultureInfo("pl-PL")) > 0)
                         {
-                            lstValKs = findPrzypis(lspr,spr, 0,  Convert.ToDecimal(dtr["koszty_odpis"].ToString().Replace(".", ","), CultureInfo.GetCultureInfo("pl-PL")));  
+                            stepNo = 1200;
+                            lstValKs = findPrzypis(lspr,spr, 0,  Convert.ToDecimal(dtr["koszty_odpis"].ToString().Replace(".", ","), CultureInfo.GetCultureInfo("pl-PL")), ksiega.czyFPP > 0 ? "F1" : "KN");  
                             stepNo = 121;
                             dock = new Dokument();
                             dock.SAPImportStatus = 0;
@@ -6514,11 +6564,14 @@ Kwota
                     msg = " Błąd przy pozycji dziennika " + currentdtr["Pozycja"].ToString() + "/" + currentdtr["Rok"];
                 if (RunMode.silentMode)
                 {
-                    Utils.LogWriter(msg + ex.Message + "  " + (ex.InnerException != null ? ex.InnerException.Message : "" ) + " Krok = " + stepNo.ToString());
+                    Utils.LogWriter(msg + ex.Message + "  " + (ex.InnerException != null ? ex.InnerException.Message : "") + " Krok = " + stepNo.ToString());
                     errorStatus = true;
                 }
                 else
+                {
+                    log.Error("Błąd podczas importu odpisu", ex);
                     MessageBox.Show(msg + ex.Message + "  " + (ex.InnerException != null ? ex.InnerException.Message : "") + " Krok = " + stepNo.ToString());
+                }
             }
             finally
             {

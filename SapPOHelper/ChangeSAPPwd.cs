@@ -57,7 +57,7 @@ namespace SapPOHelper
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Błąd zapisu");
+                MessageBox.Show("Błąd zapisu podczas zmiany hasła MEP");
                 this.DialogResult = DialogResult.None;
                 return;
             }

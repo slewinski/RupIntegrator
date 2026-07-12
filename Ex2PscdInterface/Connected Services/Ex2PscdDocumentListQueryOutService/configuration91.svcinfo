@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="tYQtozACMLnu14ITbVzcKBixptej84ta1hfzDvanhgU=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="4HtRuLRXpF+izdFAg372m5enDMT/u/yxRIwo4C62ob4=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="DocumentListQueryOutBinding">
+    <bindingConfiguration bindingType="basicHttpBinding" name="DocumentListQueryOutBinding2">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>DocumentListQueryOutBinding</serializedValue>
+          <serializedValue>DocumentListQueryOutBinding2</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -110,10 +110,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="basicHttpBinding" name="DocumentListQueryOutBinding1">
+    <bindingConfiguration bindingType="basicHttpBinding" name="DocumentListQueryOutBinding3">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>DocumentListQueryOutBinding1</serializedValue>
+          <serializedValue>DocumentListQueryOutBinding3</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -221,10 +221,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="HTTP_Port4" contract="Ex2PscdDocumentListQueryOutService.DocumentListQueryOut" bindingType="basicHttpBinding" address="http://sapwipl01.zsrk.ms.gov.pl:8100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=DocumentListQueryOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3ADocumentListQuery" bindingConfiguration="DocumentListQueryOutBinding">
+    <endpoint name="HTTP_Port6" contract="Ex2PscdDocumentListQueryOutService.DocumentListQueryOut" bindingType="basicHttpBinding" address="http://sapwitl01.zsrk.ms.gov.pl:8100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=DocumentListQueryOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3ADocumentListQuery" bindingConfiguration="DocumentListQueryOutBinding2">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://sapwipl01.zsrk.ms.gov.pl:8100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=DocumentListQueryOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3ADocumentListQuery</serializedValue>
+          <serializedValue>http://sapwitl01.zsrk.ms.gov.pl:8100/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=DocumentListQueryOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3ADocumentListQuery</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -233,7 +233,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>DocumentListQueryOutBinding</serializedValue>
+          <serializedValue>DocumentListQueryOutBinding2</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>Ex2PscdDocumentListQueryOutService.DocumentListQueryOut</serializedValue>
@@ -296,7 +296,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>HTTP_Port4</serializedValue>
+          <serializedValue>HTTP_Port6</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -306,10 +306,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="HTTPS_Port12" contract="Ex2PscdDocumentListQueryOutService.DocumentListQueryOut" bindingType="basicHttpBinding" address="https://sapwipl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=DocumentListQueryOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3ADocumentListQuery" bindingConfiguration="DocumentListQueryOutBinding1">
+    <endpoint name="HTTPS_Port36" contract="Ex2PscdDocumentListQueryOutService.DocumentListQueryOut" bindingType="basicHttpBinding" address="https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=DocumentListQueryOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3ADocumentListQuery" bindingConfiguration="DocumentListQueryOutBinding3">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://sapwipl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=DocumentListQueryOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3ADocumentListQuery</serializedValue>
+          <serializedValue>https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=EX2PSCDSender&amp;receiverParty=&amp;receiverService=&amp;interface=DocumentListQueryOut&amp;interfaceNamespace=urn%3Ams.gov.pl%3AEX2PSCD%3ADocumentListQuery</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -318,7 +318,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>DocumentListQueryOutBinding1</serializedValue>
+          <serializedValue>DocumentListQueryOutBinding3</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>Ex2PscdDocumentListQueryOutService.DocumentListQueryOut</serializedValue>
@@ -381,7 +381,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>HTTPS_Port12</serializedValue>
+          <serializedValue>HTTPS_Port36</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

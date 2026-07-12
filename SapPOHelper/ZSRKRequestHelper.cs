@@ -1423,20 +1423,22 @@ namespace SapPOHelper
 
             try
             {
+                log.Debug("Pobieranie rozrachunków dla dokumentu " + doc.IdDanePSCD.IDDokument + " typ konta " + doc.IdDanePSCD.TypKontoUmowy);
                 return (DocumentListQueryResponse)CallSAPMethod("DocumentListQueryOut", doc);
 
             }
             catch (Exception ex)
             {
-
+                log.Error("Błąd podczas pobierania rozrachunków dla dokumentu " + doc.IdDanePSCD.IDDokument + " typ konta " + doc.IdDanePSCD.TypKontoUmowy,ex);
                 addErrMsg("Błąd podczas pobierania rozrachunków dla dokumentu", ex);
                 return null;
             }
 
         }
 
-        public static DocumentListQueryResponse PobierzRozrachunki(string doc, string jednGosp )
+        public static DocumentListQueryResponse PobierzRozrachunki(string doc,string typKonta, string jednGosp )
         {
+            
             DocumentListQueryRequest dr;
             dr = new DocumentListQueryRequest();
             dr.PozDoWyj = new PozDoWyj();
@@ -1446,6 +1448,10 @@ namespace SapPOHelper
             dr.IdDanePSCD = new IdDanePSCDZapytanie();
             dr.IdDanePSCD.JednostkaGospodarcza = jednGosp;    
             dr.IdDanePSCD.IDDokument = doc;
+            dr.IdDanePSCD.TypKontoUmowy = typKonta;
+
+
+
 
 
             try
