@@ -134,7 +134,7 @@ namespace ConsImport
             };
 
             Func<DataRow, string, string> S = (row, name) =>
-                HasColumn(row, name) ? Clean(Convert.ToString(row[name])) : String.Empty;
+                HasColumn(row, name) ?  Convert.ToString(row[name]) : String.Empty;
 
             Func<DataRow, string[], string> SAny = (row, names) =>
             {
@@ -242,7 +242,7 @@ namespace ConsImport
             };
             Func<string, string> SafeAttachmentName = name =>
             {
-                name = Clean(name);
+                //name = Clean(name);
 
                 if (String.IsNullOrWhiteSpace(name))
                     return "orzeczenie.doc";
