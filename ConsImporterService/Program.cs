@@ -3,27 +3,39 @@ using System.ServiceProcess;
 
 namespace ConsImporterService
 {
-    static class Program
+    internal static class Program
     {
-        static void Main()
+        private static void Main()
         {
 #if DEBUG
+            try
+            {
+                Console.WriteLine(
+                    "Uruchomienie ConsImporterService w trybie DEBUG.");
 
-            Console.WriteLine("DEBUG MODE");
-            Console.WriteLine();
+                var service =
+                    new ConsImportService();
 
-            var service = new ConsImportService();
+                service.DebugRunOnce();
 
-            service.DebugRun();
+                Console.WriteLine();
+                Console.WriteLine(
+                    "Import zakończony. Naciśnij ENTER...");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Wystąpił błąd:");
+                Console.WriteLine(ex);
+            }
 
-            Console.WriteLine();
-            Console.WriteLine("Koniec. Naciśnij ENTER...");
             Console.ReadLine();
-
 #else
-
-            ServiceBase.Run(new ConsImportService());
-
+            ServiceBase.Run(
+                new ServiceBase[]
+                {
+                    new ConsImportService()
+                });
 #endif
         }
     }

@@ -43,15 +43,13 @@ namespace ConsImporterService
 
         private static readonly DateTime DefaultStartDate = new DateTime(2010, 1, 1);
 
-        private readonly string _userName;
+        
         private readonly string _connectionString;
 
-        public ImportConsRequests(string userName)
+        public ImportConsRequests()
         {
-            if (String.IsNullOrWhiteSpace(userName))
-                throw new ArgumentException("Nazwa użytkownika nie może być pusta.", "userName");
+         
 
-            _userName = userName;
             _connectionString = ConfigurationManager
                 .ConnectionStrings["RupIntegrator.Properties.Settings.RupDB"]
                 .ConnectionString;
@@ -148,7 +146,7 @@ namespace ConsImporterService
                             finishDate = rangeEnd,
                             consExternalDBConnectionConfig_Id = connectionId,
                             status = JobStatusNew,
-                            info = "Utworzono zadanie przez: " + _userName
+                            info = "Utworzono zadanie "
                         };
 
                         context.ConsJobItem.Add(job);
@@ -240,7 +238,7 @@ namespace ConsImporterService
 
                 job.status = JobStatusInProgress;
                 job.queryDate = DateTime.Now;
-                job.info = "Rozpoczęto pobieranie danych przez: " + _userName;
+                job.info = "Rozpoczęto pobieranie danych ";
                 context.SaveChanges();
             }
 
@@ -397,7 +395,7 @@ namespace ConsImporterService
 
                 job.status = JobStatusDone;
                 job.info = "Pobieranie zakończone. Zapisano zadań transferu do SAP: " +
-                    createdCount + ". Użytkownik: " + _userName;
+                    createdCount;
                 context.SaveChanges();
             }
         }

@@ -825,8 +825,9 @@ namespace SapPOHelper
                         ((ManageAccountRequest)Args).Admin = obj;
                         try
                         {
+                            if (((ManageAccountRequest)Args).NoweHaslo != null)
+                                ((ManageAccountRequest)Args).NoweHaslo =  SignatureHelper.SignMessageId(obj.IDKomunikatu, ((ManageAccountRequest)Args).NoweHaslo);
 
-                            ((ManageAccountRequest)Args).NoweHaslo =  SignatureHelper.SignMessageId(obj.IDKomunikatu, ((ManageAccountRequest)Args).NoweHaslo);
                             return theClient.ManageAccountOut((ManageAccountRequest)Args);
 
                         }

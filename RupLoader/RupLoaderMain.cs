@@ -249,6 +249,7 @@ namespace RupLoader
                 rmPredykcja.Visibility = Telerik.WinControls.ElementVisibility.Visible;
                 rmRyczalty.Visibility = Telerik.WinControls.ElementVisibility.Visible;
                 rmUserMgr.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
+                rmIDBRebuild.Visibility = Telerik.WinControls.ElementVisibility.Collapsed;
             }
 
             this.verifySAPPwd();
@@ -359,5 +360,14 @@ namespace RupLoader
             }
 
         }
+
+        private void rmIDBRebuild_Click(object sender, EventArgs e)
+        {
+            Utils.rebuildDbScript();
+            
+        }
+
+        // Add the missing method to fix CS0103
+       
     }
 }

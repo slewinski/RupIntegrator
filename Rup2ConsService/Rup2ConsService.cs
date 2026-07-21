@@ -1,131 +1,199 @@
-﻿
-
-using log4net.Config;
-using log4net;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-//using AsposeLIcences;
 
 namespace Rup2ConsService
 {
     public partial class Rup2ConsService : ServiceBase
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog log =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private CancellationTokenSource _cts;
+        private CancellationTokenSource _cancellationTokenSource;
+        private readonly List<Task> _workerTasks = new List<Task>();
+
         private int _threadCount;
-        private int _idleDelay = 1000; // Czas oczekiwania w milisekundach, gdy nie ma zadań do przetworzenia
-        private int _delay = 200; // Czas oczekiwania w milisekundach między kolejnymi sprawdzeniami kolejki
-        private string username = string.Empty;
+        private int _idleDelayMilliseconds;
+        private int _stopTimeoutSeconds;
+        private int _stalePendingMinutes;
+
         public Rup2ConsService()
         {
             InitializeComponent();
-            this.ServiceName = "Rup2ConsService";
+            ServiceName = "Rup2ConsService";
         }
 
         protected override void OnStart(string[] args)
         {
-            log.Info("Service  CaseFileBuilder started.");
-            // ustawienie aby dwa pierwsze procki zostały dla systemu operacyjnego.
-            var process = Process.GetCurrentProcess();
-            //int cpuCount = Environment.ProcessorCount;
-            //
-            //long affinityMask = 0;
-            //
-            //// Buduj maskę z wyłączeniem CPU 0 i 1
-            //for (int i = 2; i < cpuCount; i++)
-            //{
-            //    affinityMask |= 1L << i;
-            //}
-
-            // Ustaw affinity
-            //process.ProcessorAffinity = (IntPtr)affinityMask;
-            
-            var userName = ConfigurationManager.AppSettings["UserName"];
-
-            _cts = new CancellationTokenSource();
-            try
-            {
-                _threadCount = int.TryParse(ConfigurationManager.AppSettings["ThreadCount"], out int count) ? count : 5;
-            }
-            catch
-            {
-                _threadCount = 1;
-            }
-            try
-            {
-                _idleDelay = int.TryParse(ConfigurationManager.AppSettings["IdleDelay"], out int count) ? count : 1000;
-            }
-            catch
-            {
-                _idleDelay = 1000;
-            }
-            try
-            {
-                _delay = int.TryParse(ConfigurationManager.AppSettings["Delay"], out int count) ? count : 200;
-            }
-            catch
-            {
-                _delay = 200;
-            }
-
-            try
-            {
-                userName = ConfigurationManager.AppSettings["UserName"];
-            }
-            catch
-            {
-                log.Error("Brak nazwy uzytkownika Rup Integrator. Uzupełnij zbiór.config");
-            }
-
-            EventLog.WriteEntry("Service started with: " + _threadCount + " threads, " + _delay + " delay (ms), " + _idleDelay + " idle delay ( ms)");
-
-            //AsposePdfLicenseManager.EnsureLicense();
-            //AsposeWordsLicenseManager.EnsureLicense();
-
-            for (int i = 0; i < _threadCount; i++)
-            {
-                Thread.Sleep(500); // Krótkie opóźnienie między uruchomieniami wątków
-                Task.Run(() => RunWorker(_cts.Token));
-            }
-        }
-
-        private void RunWorker(CancellationToken token)
-        {
-            //  var worker = new CaseFileUpdater.CaseFileQueueService(); // Obiekt z zewnętrznej klasy
-            username = ConfigurationManager.AppSettings["MockKartaFilePath"];
-            var worker = new   RupQueue (username); // Obiekt z zewnętrznej klasy
-            while (!token.IsCancellationRequested)
-            {
-                try
-                {
-
-                    worker.Pop(); // Wywołanie metody wstrzymanie procesu jest w procedurze pop.
-
-                }
-                catch (Exception ex)
-                {
-                    EventLog.WriteEntry("Error: " + ex.Message + " " + ex.ToString(), EventLogEntryType.Error);
-                }
-            }
+            StartWorkers();
         }
 
         protected override void OnStop()
         {
-            _cts.Cancel();
-            EventLog.WriteEntry("Service stopped.");
+            StopWorkers();
+        }
+
+        public void DebugRun()
+        {
+            StartWorkers();
+
+            Console.WriteLine("Usługa działa w trybie konsolowym.");
+            Console.WriteLine("Naciśnij ENTER, aby zakończyć.");
+            Console.ReadLine();
+
+            StopWorkers();
+        }
+        /// <summary>
+        /// Jednorazowo przetwarza wskazany rekord ConsKartaTransfer.
+        /// Nie uruchamia pętli workerów.
+        /// </summary>
+        /// 
+        public bool RunSingleTransfer(int transferId)
+        {
+            if (transferId <= 0)
+                throw new ArgumentOutOfRangeException("transferId");
+
+            log.Info(
+                "Uruchomiono jednorazowe przetwarzanie transferu Id=" +
+                transferId + ".");
+
+            string userName =
+                ConfigurationManager.AppSettings["UserName"];
+
+            SapConsClientConfiguration.Initialize(userName);
+
+            int idleDelayMilliseconds =
+                GetPositiveIntSetting(
+                    "IdleDelayMilliseconds",
+                    1000);
+
+            var worker =
+                new ConsTransferWorker(idleDelayMilliseconds);
+
+            bool processed =
+                worker.ProcessSingleTransfer(transferId);
+
+            if (processed)
+            {
+                log.Info(
+                    "Zakończono jednorazowe przetwarzanie transferu Id=" +
+                    transferId + ".");
+            }
+            else
+            {
+                log.Warn(
+                    "Nie wykonano jednorazowego transferu Id=" +
+                    transferId + ".");
+            }
+
+            return processed;
+        }
+        private void StartWorkers()
+        {
+            log.Info("Uruchamianie usługi transferu Zaimportowanych danych do CONS/SAP.");
+
+            _threadCount = GetPositiveIntSetting("ThreadCount", 5);
+            _idleDelayMilliseconds = GetPositiveIntSetting("IdleDelayMilliseconds", 1000);
+            _stopTimeoutSeconds = GetPositiveIntSetting("StopTimeoutSeconds", 60);
+            _stalePendingMinutes = GetPositiveIntSetting("StalePendingMinutes", 30);
+
+            string userName = ConfigurationManager.AppSettings["UserName"];
+            SapConsClientConfiguration.Initialize(userName);
+
+            int recovered = ConsTransferWorker.RecoverStalePendingTransfers(
+                _stalePendingMinutes);
+
+            if (recovered > 0)
+                log.Warn("Przywrócono do kolejki transferów: " + recovered + ".");
+
+            _cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = _cancellationTokenSource.Token;
+
+            for (int workerNumber = 1; workerNumber <= _threadCount; workerNumber++)
+            {
+                int capturedWorkerNumber = workerNumber;
+
+                Task task = Task.Factory.StartNew(
+                    () => RunWorker(capturedWorkerNumber, token),
+                    token,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default);
+
+                _workerTasks.Add(task);
+            }
+
+            log.Info(
+                "Uruchomiono " + _threadCount +
+                " workerów transferu CONS do SAP.");
+        }
+
+        private void RunWorker(int workerNumber, CancellationToken token)
+        {
+            log.Info("Worker " + workerNumber + " uruchomiony.");
+
+            try
+            {
+                var worker = new ConsTransferWorker(_idleDelayMilliseconds);
+                worker.Run(token);
+            }
+            catch (Exception ex)
+            {
+                log.Error("Worker " + workerNumber + " zakończył się błędem.", ex);
+            }
+            finally
+            {
+                log.Info("Worker " + workerNumber + " zatrzymany.");
+            }
+        }
+
+        private void StopWorkers()
+        {
+            log.Info("Zatrzymywanie usługi transferu CONS do SAP.");
+
+            if (_cancellationTokenSource == null)
+                return;
+
+            _cancellationTokenSource.Cancel();
+
+            try
+            {
+                bool completed = Task.WaitAll(
+                    _workerTasks.ToArray(),
+                    TimeSpan.FromSeconds(_stopTimeoutSeconds));
+
+                if (!completed)
+                {
+                    log.Warn(
+                        "Nie wszystkie workery zakończyły pracę w czasie " +
+                        _stopTimeoutSeconds + " sekund.");
+                }
+            }
+            catch (AggregateException ex)
+            {
+                log.Error("Błąd podczas zatrzymywania workerów.", ex.Flatten());
+            }
+            finally
+            {
+                _workerTasks.Clear();
+                _cancellationTokenSource.Dispose();
+                _cancellationTokenSource = null;
+            }
+
+            log.Info("Usługa transferu CONS do SAP została zatrzymana.");
+        }
+
+        private static int GetPositiveIntSetting(string key, int defaultValue)
+        {
+            string text = ConfigurationManager.AppSettings[key];
+            int value;
+
+            if (!Int32.TryParse(text, out value) || value <= 0)
+                return defaultValue;
+
+            return value;
         }
     }
-
 }
-

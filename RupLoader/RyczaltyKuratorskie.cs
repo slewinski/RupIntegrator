@@ -22,7 +22,8 @@ namespace RupLoader
     public partial class RyczaltyKuratorskie : Form
     {
 
-       // private SapPIHelper sapPi;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        // private SapPIHelper sapPi;
 
         private BindingSource konfigDataSource = new BindingSource();
 
@@ -81,6 +82,7 @@ namespace RupLoader
 
              }
               setSAPConnectionParams();
+            log.Debug("Ryczałty kuratorskie uruchomione");
 
             RadGridLocalizationProvider.CurrentProvider = new PolishRadGridLocalizationProvider();
           
@@ -359,6 +361,7 @@ namespace RupLoader
                 }
                 catch (Exception ex)
                 {
+                    log.Error("Błąd walidacji partnerów " + therow.Sygnatura, ex);
                     MessageBox.Show(ex.Message + (ex.InnerException != null ? " " + ex.InnerException : "") + therow != null ? " " + therow.Sygnatura : "");
                     return;
 
@@ -494,6 +497,7 @@ namespace RupLoader
                 
                 catch (Exception ex)
                 {
+                    log.Error("Błąd walidacji sygnatur " + step.ToString() + " " + therow.Sygnatura, ex);
                     MessageBox.Show("Błąd walidacji sygnatur " + step.ToString());
                     MessageBox.Show(ex.Message + (ex.InnerException != null ? " " + ex.InnerException : "") + (therow != null ? " " + therow.Sygnatura : "") );
                     return;
@@ -604,6 +608,7 @@ namespace RupLoader
                 } // try
                 catch (Exception ex)
                 {
+                    log.Error("Błąd walidacji sygnatur w ZSRK " + therow.Sygnatura, ex);
                     MessageBox.Show(ex.Message + (ex.InnerException != null ? " " + ex.InnerException : "") + (therow != null ?   " " +therow.Sygnatura :""));
                     return;
 
@@ -703,6 +708,7 @@ namespace RupLoader
             }
             catch (Exception ex)
             {
+                log.Error("Błąd eksportu do Excela " + ptr.Sygnatura, ex);
                 MessageBox.Show(ex.Message + (ex.InnerException != null ? " " + ex.InnerException : "") + " Sygn:" + ptr.Sygnatura);
                 return;
 
@@ -732,7 +738,7 @@ namespace RupLoader
             }
             catch (Exception ex)
             {
-
+                                log.Error("Błąd eksportu do Excela " + ptr.Sygnatura, ex);
                 MessageBox.Show("Bład podczas ekzportu do Ms Excel: " + ex.Message);
 
             }
@@ -956,7 +962,7 @@ namespace RupLoader
             }
 
             catch (Exception ex)
-            {
+            {   log.Error("Błąd walidacji sygnatur w ZSRK " + therow.Sygnatura, ex);
                 MessageBox.Show(ex.Message + (ex.InnerException != null ? " " + ex.InnerException : "") + therow != null ? " " + therow.Sygnatura : "");
                 return;
 

@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsTransferWorker.cs" />
     <Compile Include="Rup2ConsService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -79,7 +80,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RupQueue.cs" />
+    <Compile Include="SapConsClientConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

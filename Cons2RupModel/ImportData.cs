@@ -23,10 +23,6 @@ namespace Cons2RupModel
         Pending = 1,
         Done = 2,
         Error = 3,
-
-        /// <summary>
-        /// Komunikat został już wcześniej zapisany i nie podlega wysłaniu do SAP.
-        /// </summary>
         Duplicate = 4
     }
 

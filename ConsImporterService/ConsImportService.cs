@@ -12,7 +12,7 @@ namespace ConsImporterService
             log4net.LogManager.GetLogger(
                 System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private const string ServiceUserName = "ConsImporterService";
+        
 
         private Timer _timer;
         private CancellationTokenSource _cancellationTokenSource;
@@ -35,10 +35,64 @@ namespace ConsImporterService
         {
             StartImporter();
         }
-    
+        public void DebugRunOnce()
+        {
+            log.Info("Uruchomienie jednorazowe w trybie DEBUG.");
+
+            LoadConfiguration();
+
+            ExecuteImport();
+
+            log.Info("Zakończenie jednorazowego wykonania w trybie DEBUG.");
+        }
+
         protected override void OnStart(string[] args)
         {
-           StartImporter();
+            try
+            {
+                log.Info("Uruchamianie usługi ConsImporterService.");
+
+                LoadConfiguration();
+
+                _cancellationTokenSource =
+                    new CancellationTokenSource();
+
+                /*
+                 * W usłudze import uruchamiamy asynchronicznie,
+                 * żeby OnStart szybko się zakończył.
+                 */
+                StartImportExecution();
+
+                if (_intervalMinutes.HasValue)
+                {
+                    TimeSpan interval =
+                        TimeSpan.FromMinutes(_intervalMinutes.Value);
+
+                    _timer = new Timer(
+                        TimerCallback,
+                        null,
+                        interval,
+                        interval);
+
+                    log.Info(
+                        "Import będzie wykonywany cyklicznie co " +
+                        _intervalMinutes.Value +
+                        " minut.");
+                }
+                else
+                {
+                    log.Info(
+                        "Brak interwału. Import zostanie wykonany tylko raz.");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(
+                    "Błąd podczas uruchamiania usługi.",
+                    ex);
+
+                throw;
+            }
         }
 
 
@@ -270,7 +324,7 @@ namespace ConsImporterService
             try
             {
                 var importer =
-                    new ImportConsRequests(ServiceUserName);
+                    new ImportConsRequests();
 
                 ImportProcessResult result =
                     importer.Run(_overlapMinutes);
@@ -385,5 +439,16 @@ namespace ConsImporterService
 
             return parsedValue;
         }
+        private void LoadConfiguration()
+        {
+            _overlapMinutes = GetIntSetting(
+                "ConsImportOverlapMinutes",
+                defaultValue: 10,
+                minimumValue: 0);
+
+            _intervalMinutes = GetOptionalPositiveIntSetting(
+                "ConsImportIntervalMinutes");
+        }
+       
     }
 }

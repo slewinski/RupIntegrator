@@ -43,10 +43,11 @@
             this.rmKonfig = new Telerik.WinControls.UI.RadMenuItem();
             this.rmKonfigJobs = new Telerik.WinControls.UI.RadMenuItem();
             this.rmKontoMEP = new Telerik.WinControls.UI.RadMenuItem();
+            this.rmUserMgr = new Telerik.WinControls.UI.RadMenuItem();
+            this.rmIDBRebuild = new Telerik.WinControls.UI.RadMenuItem();
             this.rmiAbout = new Telerik.WinControls.UI.RadMenuItem();
             this.btLayout = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.rmUserMgr = new Telerik.WinControls.UI.RadMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgVResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgVResult.MasterTemplate)).BeginInit();
             this.panel1.SuspendLayout();
@@ -158,7 +159,8 @@
             this.rmKonfig,
             this.rmKonfigJobs,
             this.rmKontoMEP,
-            this.rmUserMgr});
+            this.rmUserMgr,
+            this.rmIDBRebuild});
             this.rmKonfiguracja.Name = "rmKonfiguracja";
             this.rmKonfiguracja.Text = "Konfiguracja";
             // 
@@ -179,6 +181,18 @@
             this.rmKontoMEP.Name = "rmKontoMEP";
             this.rmKontoMEP.Text = "Konto MEP";
             this.rmKontoMEP.Click += new System.EventHandler(this.rmKontoMEP_Click);
+            // 
+            // rmUserMgr
+            // 
+            this.rmUserMgr.Name = "rmUserMgr";
+            this.rmUserMgr.Text = "Zarządzanie użytkownikami";
+            this.rmUserMgr.Click += new System.EventHandler(this.rmUserMgr_Click);
+            // 
+            // rmIDBRebuild
+            // 
+            this.rmIDBRebuild.Name = "rmIDBRebuild";
+            this.rmIDBRebuild.Text = "Przebudowa bazy danych";
+            this.rmIDBRebuild.Click += new System.EventHandler(this.rmIDBRebuild_Click);
             // 
             // rmiAbout
             // 
@@ -206,12 +220,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1113, 329);
             this.panel2.TabIndex = 14;
-            // 
-            // rmUserMgr
-            // 
-            this.rmUserMgr.Name = "rmUserMgr";
-            this.rmUserMgr.Text = "Zarządzanie użytkownikami";
-            this.rmUserMgr.Click += new System.EventHandler(this.rmUserMgr_Click);
             // 
             // RupLoaderMain
             // 
@@ -253,6 +261,7 @@
         private Telerik.WinControls.UI.RadMenuItem rmPredykcja;
         private Telerik.WinControls.UI.RadMenuItem rmKontoMEP;
         private Telerik.WinControls.UI.RadMenuItem rmUserMgr;
+        private Telerik.WinControls.UI.RadMenuItem rmIDBRebuild;
     }
 }
 
