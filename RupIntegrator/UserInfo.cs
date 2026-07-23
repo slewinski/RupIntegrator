@@ -31,7 +31,7 @@ namespace KnsMigrator
         public static string fileName { get; set; }
         public static int grKsiag { get; set; }
         public static int tyOpExport { get; set; }
-        public static string dbversion = "3.7";
+        public static string dbversion = "3.7.1";
     }
 
 

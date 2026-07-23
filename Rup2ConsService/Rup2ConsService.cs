@@ -40,12 +40,9 @@ namespace Rup2ConsService
         {
             StartWorkers();
 
-            Console.WriteLine("Usługa działa w trybie konsolowym.");
-            Console.WriteLine("Naciśnij ENTER, aby zakończyć.");
-            Console.ReadLine();
-
-            StopWorkers();
+            Thread.Sleep(Timeout.Infinite);
         }
+
         /// <summary>
         /// Jednorazowo przetwarza wskazany rekord ConsKartaTransfer.
         /// Nie uruchamia pętli workerów.

@@ -506,6 +506,11 @@ namespace KnsMigrator
                     "  ALTER TABLE [dbo].[ConsKartaTransfer]  WITH CHECK ADD  CONSTRAINT [FK_ConsKartaTransfer_ConsJobItem] FOREIGN KEY([consJobItemId]) " +
                     " REFERENCES [dbo].[ConsJobItem] ([Id])  " +
                     " ALTER TABLE [dbo].[ConsKartaTransfer] CHECK CONSTRAINT [FK_ConsKartaTransfer_ConsJobItem] " +                 
+                  " END ",
+                // ver 3.7.1
+                    " IF NOT EXISTS (SELECT 1  FROM   INFORMATION_SCHEMA.COLUMNS WHERE  TABLE_NAME = 'ConsKartaTransfer' AND COLUMN_NAME = 'guidImport' AND TABLE_SCHEMA='DBO')  "+
+                  "   BEGIN " +
+                  "    ALTER TABLE dbo.ConsKartaTransfer ADD     guidImport uniqueidentifier NULL,  dWyslaniaCons datetime NULL " +
                   " END "
             };
 

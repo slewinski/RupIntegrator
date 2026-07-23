@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c4a819393e34767a23cddb178a8c2fe" Name="Diagram1" ZoomLevel="63">
+      <Diagram DiagramId="5c4a819393e34767a23cddb178a8c2fe" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="RupDBModel.Konfiguracja" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RupDBModel.ServiceEndpoint" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="RupDBModel.ConsExternalDBConnectionConfig" Width="1.5" PointX="3.375" PointY="3.75" />
         <EntityTypeShape EntityType="RupDBModel.ConsJobItem" Width="3.25" PointX="6.75" PointY="4" />
         <AssociationConnector Association="RupDBModel.FK_ConsJobItem_ConsExternalDBConnectionConfig" />
-        <EntityTypeShape EntityType="RupDBModel.ConsKartaTransfer" Width="2.875" PointX="10.75" PointY="3.875" />
-        <AssociationConnector Association="RupDBModel.FK_ConsKartaTransfer_ConsJobItem" />
         <EntityTypeShape EntityType="RupDBModel.User" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="RupDBModel.ConsKartaTransfer" Width="1.5" PointX="10.75" PointY="3.75" />
+        <AssociationConnector Association="RupDBModel.FK_ConsKartaTransfer_ConsJobItem" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -24,6 +24,8 @@ namespace RupDatabase
         public string payload { get; set; }
         public string hash { get; set; }
         public Nullable<int> consJobItemId { get; set; }
+        public Nullable<System.Guid> guidImport { get; set; }
+        public Nullable<System.DateTime> dWyslaniaCons { get; set; }
     
         public virtual ConsJobItem ConsJobItem { get; set; }
     }

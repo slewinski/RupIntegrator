@@ -34,8 +34,8 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
-[assembly: AssemblyVersion("3.7.*")]
-[assembly: AssemblyFileVersion("3.7.0")]
+[assembly: AssemblyVersion("3.7.1.*")]
+[assembly: AssemblyFileVersion("3.7.1")]
 //2.5.6 - nowy import odpisów
 //2.3.11 ksiegowanie sald z uwzględnieniem roku należności ( konto księgi głównej )
 // 3.3 - dostosowanie do nowej wersji usługi sieciowej

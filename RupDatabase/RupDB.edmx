@@ -51,6 +51,8 @@
           <Property Name="payload" Type="nvarchar(max)" />
           <Property Name="hash" Type="nvarchar" MaxLength="512" />
           <Property Name="consJobItemId" Type="int" />
+          <Property Name="guidImport" Type="uniqueidentifier" />
+          <Property Name="dWyslaniaCons" Type="datetime" />
         </EntityType>
         <EntityType Name="Konfiguracja">
           <Key>
@@ -208,12 +210,12 @@
             <End Role="ConsExternalDBConnectionConfig" EntitySet="ConsExternalDBConnectionConfig" />
             <End Role="ConsJobItem" EntitySet="ConsJobItem" />
           </AssociationSet>
+          <EntitySet Name="User" EntityType="RupDBModel.User" />
           <EntitySet Name="ConsKartaTransfer" EntityType="RupDBModel.ConsKartaTransfer" />
           <AssociationSet Name="FK_ConsKartaTransfer_ConsJobItem" Association="RupDBModel.FK_ConsKartaTransfer_ConsJobItem">
             <End Role="ConsJobItem" EntitySet="ConsJobItem" />
             <End Role="ConsKartaTransfer" EntitySet="ConsKartaTransfer" />
           </AssociationSet>
-          <EntitySet Name="User" EntityType="RupDBModel.User" />
         </EntityContainer>
         <EntityType Name="ServiceEndpoint">
           <Key>
@@ -271,34 +273,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ConsKartaTransfer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idKomunikatu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Int32" Nullable="false" />
-          <Property Name="idStronyWydzial" Type="Int32" />
-          <Property Name="idSprawyWydzial" Type="Int32" />
-          <Property Name="dImportu" Type="DateTime" Precision="3" />
-          <Property Name="trescOdpowiedzi" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="payload" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="hash" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="consJobItemId" Type="Int32" />
-          <NavigationProperty Name="ConsJobItem" Relationship="RupDBModel.FK_ConsKartaTransfer_ConsJobItem" FromRole="ConsKartaTransfer" ToRole="ConsJobItem" />
-        </EntityType>
-        <Association Name="FK_ConsKartaTransfer_ConsJobItem">
-          <End Type="RupDBModel.ConsJobItem" Role="ConsJobItem" Multiplicity="0..1" />
-          <End Type="RupDBModel.ConsKartaTransfer" Role="ConsKartaTransfer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ConsJobItem">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ConsKartaTransfer">
-              <PropertyRef Name="consJobItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -319,6 +293,36 @@
           <Property Name="MEPUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MEPPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ConsKartaTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idKomunikatu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="idStronyWydzial" Type="Int32" />
+          <Property Name="idSprawyWydzial" Type="Int32" />
+          <Property Name="dImportu" Type="DateTime" Precision="3" />
+          <Property Name="trescOdpowiedzi" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="payload" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hash" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="consJobItemId" Type="Int32" />
+          <Property Name="guidImport" Type="Guid" />
+          <Property Name="dWyslaniaCons" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ConsJobItem" Relationship="RupDBModel.FK_ConsKartaTransfer_ConsJobItem" FromRole="ConsKartaTransfer" ToRole="ConsJobItem" />
+        </EntityType>
+        <Association Name="FK_ConsKartaTransfer_ConsJobItem">
+          <End Type="RupDBModel.ConsJobItem" Role="ConsJobItem" Multiplicity="0..1" />
+          <End Type="RupDBModel.ConsKartaTransfer" Role="ConsKartaTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsJobItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsKartaTransfer">
+              <PropertyRef Name="consJobItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -407,22 +411,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ConsKartaTransfer">
-            <EntityTypeMapping TypeName="RupDBModel.ConsKartaTransfer">
-              <MappingFragment StoreEntitySet="ConsKartaTransfer">
-                <ScalarProperty Name="consJobItemId" ColumnName="consJobItemId" />
-                <ScalarProperty Name="hash" ColumnName="hash" />
-                <ScalarProperty Name="payload" ColumnName="payload" />
-                <ScalarProperty Name="trescOdpowiedzi" ColumnName="trescOdpowiedzi" />
-                <ScalarProperty Name="dImportu" ColumnName="dImportu" />
-                <ScalarProperty Name="idSprawyWydzial" ColumnName="idSprawyWydzial" />
-                <ScalarProperty Name="idStronyWydzial" ColumnName="idStronyWydzial" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="idKomunikatu" ColumnName="idKomunikatu" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="RupDBModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -440,6 +428,24 @@
                 <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="Pssword" ColumnName="Pssword" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsKartaTransfer">
+            <EntityTypeMapping TypeName="RupDBModel.ConsKartaTransfer">
+              <MappingFragment StoreEntitySet="ConsKartaTransfer">
+                <ScalarProperty Name="dWyslaniaCons" ColumnName="dWyslaniaCons" />
+                <ScalarProperty Name="guidImport" ColumnName="guidImport" />
+                <ScalarProperty Name="consJobItemId" ColumnName="consJobItemId" />
+                <ScalarProperty Name="hash" ColumnName="hash" />
+                <ScalarProperty Name="payload" ColumnName="payload" />
+                <ScalarProperty Name="trescOdpowiedzi" ColumnName="trescOdpowiedzi" />
+                <ScalarProperty Name="dImportu" ColumnName="dImportu" />
+                <ScalarProperty Name="idSprawyWydzial" ColumnName="idSprawyWydzial" />
+                <ScalarProperty Name="idStronyWydzial" ColumnName="idStronyWydzial" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="idKomunikatu" ColumnName="idKomunikatu" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

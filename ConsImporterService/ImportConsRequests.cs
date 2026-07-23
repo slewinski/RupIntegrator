@@ -336,7 +336,8 @@ namespace ConsImporterService
 
                         var transfer = new ConsKartaTransfer
                         {
-                            idKomunikatu = request.GUID,
+                            guidImport= new Guid( request.GUID),
+                            idKomunikatu = Guid.NewGuid().ToString(),
 
                             status = isDuplicate
                                 ? (int)ConsImportStatus.Duplicate
@@ -345,7 +346,7 @@ namespace ConsImporterService
                             idStronyWydzial = idStrony,
                             idSprawyWydzial = idSprawy,
 
-                            dImportu = null,
+                            dImportu = DateTime.Now,
 
                             trescOdpowiedzi = isDuplicate
                                 ? "Duplikat komunikatu. Wcześniejszy transfer Id=" +
@@ -355,6 +356,7 @@ namespace ConsImporterService
                             payload = payload,
                             hash = payloadHash,
                             consJobItemId = jobId
+
                         };
 
                         context.ConsKartaTransfer.Add(transfer);
@@ -867,8 +869,8 @@ namespace ConsImporterService
                         PartnerHandlowyRegon = S(row, "PartnerHandlowyRegon"),
                         PartnerHandlowyNip = S(row, "PartnerHandlowyNip"),
 
-                        PartnerHandlowyPanstwoUrodzenia = "PL",
-                        PartnerHandlowyObywatelstwo = "PL",
+                        PartnerHandlowyPanstwoUrodzenia = String.IsNullOrWhiteSpace(S(row, "PartnerHandlowyPanstwoUrodzenia"))?"PL" : S(row, "PartnerHandlowyPanstwoUrodzenia"),
+                        PartnerHandlowyObywatelstwo = String.IsNullOrWhiteSpace(S(row, "PartnerHandlowyObywatelstwo"))?"PL" : S(row, "PartnerHandlowyObywatelstwo"),
                         PartnerHandlowyInneObywatelstwa = S(row, "PartnerHandlowyInneObywatelstwa"),
                         PartnerHandlowyStatusZatrudnienia = S(row, "PartnerHandlowyStatusZatrudnienia"),
                         PartnerHandlowyZawod = S(row, "PartnerHandlowyZawod"),

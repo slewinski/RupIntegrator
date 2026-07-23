@@ -57,14 +57,7 @@ namespace Rup2ConsService
                     "Błąd uruchomienia aplikacji.",
                     ex);
 
-#if DEBUG
-                Console.WriteLine(ex);
-                Console.WriteLine();
-                Console.WriteLine(
-                    "Naciśnij ENTER, aby zakończyć.");
-
-                Console.ReadLine();
-#endif
+ 
 
                 return 1;
             }

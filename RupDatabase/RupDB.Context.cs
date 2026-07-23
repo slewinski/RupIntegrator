@@ -29,7 +29,7 @@ namespace RupDatabase
         public DbSet<ServiceEndpoint> ServiceEndpoint { get; set; }
         public DbSet<ConsExternalDBConnectionConfig> ConsExternalDBConnectionConfig { get; set; }
         public DbSet<ConsJobItem> ConsJobItem { get; set; }
-        public DbSet<ConsKartaTransfer> ConsKartaTransfer { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<ConsKartaTransfer> ConsKartaTransfer { get; set; }
     }
 }

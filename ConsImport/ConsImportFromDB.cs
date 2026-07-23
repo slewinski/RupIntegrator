@@ -134,7 +134,7 @@ namespace ConsImport
             };
 
             Func<DataRow, string, string> S = (row, name) =>
-                HasColumn(row, name) ?  Convert.ToString(row[name]) : String.Empty;
+                HasColumn(row, name) ?  Convert.ToString(row[name]).Trim() : String.Empty;
 
             Func<DataRow, string[], string> SAny = (row, names) =>
             {
@@ -328,7 +328,7 @@ namespace ConsImport
 
             Func<string, string> CountryCode = value =>
             {
-                value = Clean(value);
+                //value = Clean(value);
 
                 if (String.IsNullOrWhiteSpace(value))
                     return String.Empty;
@@ -347,7 +347,7 @@ namespace ConsImport
 
             Func<string, string> RegionCode = value =>
             {
-                value = Clean(value).ToLower();
+               value = Clean(value).ToLower();
 
                 if (String.IsNullOrWhiteSpace(value))
                     return String.Empty;
@@ -448,7 +448,7 @@ namespace ConsImport
                         PartnerHandlowyRegon = S(row, "PartnerHandlowyRegon"),
                         PartnerHandlowyNip = S(row, "PartnerHandlowyNip"),
 
-                        PartnerHandlowyPanstwoUrodzenia = "PL",
+                        PartnerHandlowyPanstwoUrodzenia =  "PL",
                         PartnerHandlowyObywatelstwo = "PL",
                         PartnerHandlowyInneObywatelstwa = S(row, "PartnerHandlowyInneObywatelstwa"),
                         PartnerHandlowyStatusZatrudnienia = S(row, "PartnerHandlowyStatusZatrudnienia"),
@@ -525,7 +525,7 @@ namespace ConsImport
                                           "PartnerHandlowyAdresyRegion",
                                           "PartnerHandlowyAdresyNumerRegion"
                                     }))
-                                    : "DSL"
+                                    : null//"DSL"
                             })
                             .ToArray();
                     }
