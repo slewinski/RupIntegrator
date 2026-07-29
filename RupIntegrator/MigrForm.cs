@@ -2742,7 +2742,7 @@ namespace KnsMigrator
 
                     }
                     if (!String.IsNullOrWhiteSpace(s))
-                        MessageBox.Show(s);
+                        MessageBox.Show(s+"\r\n.Jeśli komunikat jest merytoryczny i mówi o braku rekordu to połączenie jest prawidłowe.");
                     else
                         MessageBox.Show("Połączenie z systemem API CONS  przebiegło pomyślnie");
                     

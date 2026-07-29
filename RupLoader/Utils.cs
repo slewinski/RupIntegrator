@@ -1185,24 +1185,21 @@ namespace RupLoader
                 "  ALTER TABLE dbo.Konfiguracja ADD   SAPPwdExpPeriod int NULL " +
                 "  END ",
                 " Update Konfiguracja set SAPPwdExpPeriod = isnull(SAPPwdExpPeriod, 7) ",
-                  // ver 3.6
+           // ver 3.6 i 3.6.1
                 "  IF NOT EXISTS (SELECT 1  FROM   INFORMATION_SCHEMA.COLUMNS WHERE  TABLE_NAME = 'KnsKsiegi' AND COLUMN_NAME = 'ksGrzFPPMap' AND TABLE_SCHEMA='DBO')  "+
                 "  BEGIN " +
                 "   ALTER TABLE dbo.KnsKsiegi ADD ksGrzFPPMap int NULL " +
                 "  END ",
-                "  IF  (select count(*) from SAPKodyOpr where operacjaGlowna = 'N010' and kod = '0140') = 0  "+
+                "  update SAPKodyOpr set operacjaGlowna = 'N010' , kod = '0150',  oznaczenieOpGlownej = 'N0100150' , samoistna = '' where operacjaGlowna = 'N010' and kod = '0140' ",
+                "  update SAPKodyOpr set operacjaGlowna = 'N010' , kod = '0150' , oznaczenieOpGlownej = 'N0200150' , samoistna = '' where operacjaGlowna = 'N020' and kod = '0140' ",
+                "  IF  (select count(*) from SAPKodyOpr where operacjaGlowna = 'N010' and kod = '0150') = 0  "+
                 "  BEGIN " +
-                "   insert into SAPKodyOpr(kod, nazwa, grzywnakoszty, samoistna, operacjaGlowna, oznaczenieOpGlownej, id) values ( '0140','Nawiązka SP','g', '', 'N010',  'Przypis Nawiązka SP','N0100140') " +
+                "   insert into SAPKodyOpr(kod, nazwa, grzywnakoszty, samoistna, operacjaGlowna, oznaczenieOpGlownej, id , samoistna) values ( '0150','Nawiązka SP','g', '', 'N010',  'Przypis Nawiązka SP','N0100150', '') " +
                 "  END ",
-                "  IF  (select count(*) from SAPKodyOpr where operacjaGlowna = 'N020' and kod = '0140') = 0  "+
+                "  IF  (select count(*) from SAPKodyOpr where operacjaGlowna = 'N020' and kod = '0150') = 0  "+
                 "  BEGIN " +
-                "   insert into SAPKodyOpr(kod, nazwa, grzywnakoszty, samoistna, operacjaGlowna, oznaczenieOpGlownej, id) values ( '0140','Nawiązka SP','g', '', 'N020',  'Odpis Nawiązka SP','N0200140') " +
-                "  END ",
-                  // ver 3.7
-                " IF NOT EXISTS (SELECT NULL FROM [dbo].[ServiceEndpoint] WHERE [ServiceName] = 'ImportContentSystemData') BEGIN " +
-                    " INSERT [dbo].[ServiceEndpoint] ( [ServiceId], [ServiceName], [Endpoint]) VALUES (38, N'ImportContentSystemData', N'https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&senderService=ISMSender&receiverParty=&receiverService=&interface=ImportContentSystemDataOut&interfaceNamespace=urn:ms.gov.pl:ISM:ImportContentSystemData') "+
-                    " INSERT [dbo].[ServiceEndpoint] ( [ServiceId], [ServiceName], [Endpoint]) VALUES (39, N'GetStatusContentSystemData', N'https://sapwitl01.zsrk.ms.gov.pl:44300/XISOAPAdapter/MessageServlet?senderParty=&senderService=ISMSender&receiverParty=&receiverService=&interface=GetStatusContentSystemDataOut&interfaceNamespace=urn:ms.gov.pl:ISM:GetStatusContentSystemData') " +
-                " END "
+                "   insert into SAPKodyOpr(kod, nazwa, grzywnakoszty, samoistna, operacjaGlowna, oznaczenieOpGlownej, id , samoistna ) values ( '0150','Nawiązka SP','g', '', 'N020',  'Odpis Nawiązka SP','N0200150') " +
+                "  END "
 
 
             };
