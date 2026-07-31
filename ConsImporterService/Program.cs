@@ -1,4 +1,6 @@
-﻿using System;
+﻿using log4net.Config;
+using System;
+using System.IO;
 using System.ServiceProcess;
 
 namespace ConsImporterService
@@ -7,6 +9,9 @@ namespace ConsImporterService
     {
         private static void Main()
         {
+            ConfigureLog4Net();
+
+
 #if DEBUG
             try
             {
@@ -37,6 +42,22 @@ namespace ConsImporterService
                     new ConsImportService()
                 });
 #endif
+        }
+        private static void ConfigureLog4Net()
+        {
+            string configPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "log4net.config");
+
+            if (!File.Exists(configPath))
+            {
+                throw new FileNotFoundException(
+                    "Nie znaleziono pliku konfiguracji log4net.",
+                    configPath);
+            }
+
+            XmlConfigurator.ConfigureAndWatch(
+                new FileInfo(configPath));
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data.EntityClient;
 using System.Data.SqlClient;
 using System.ServiceModel;
+using System.Reflection;
 
 namespace KnsMigrator
 {
@@ -862,8 +863,157 @@ namespace KnsMigrator
     }
     
 
-    
-   }
+public sealed class WynikKomunikatow
+    {
+        public string Tresc { get; set; }
+        public bool CzyBlad { get; set; }
+    }
+
+    public static class KomunikatHelper
+    {
+        public static WynikKomunikatow PolaczKomunikaty<T>(
+            IEnumerable<T> komunikaty)
+        {
+            var pustyWynik = new WynikKomunikatow
+            {
+                Tresc = string.Empty,
+                CzyBlad = false
+            };
+
+            if (komunikaty == null)
+                return pustyWynik;
+
+            Type typKomunikatu = typeof(T);
+
+            PropertyInfo rodzajProperty =
+                typKomunikatu.GetProperty(
+                    "RodzajKomunikatu",
+                    BindingFlags.Public | BindingFlags.Instance);
+
+            PropertyInfo numerProperty =
+                typKomunikatu.GetProperty(
+                    "NumerKomunikatu",
+                    BindingFlags.Public | BindingFlags.Instance);
+
+            PropertyInfo trescProperty =
+                typKomunikatu.GetProperty(
+                    "Komunikat1",
+                    BindingFlags.Public | BindingFlags.Instance);
+
+            if (rodzajProperty == null ||
+                numerProperty == null ||
+                trescProperty == null)
+            {
+                throw new InvalidOperationException(
+                    "Typ " + typKomunikatu.FullName +
+                    " nie zawiera wymaganych właściwości: " +
+                    "RodzajKomunikatu, NumerKomunikatu, Komunikat1.");
+            }
+
+            var lista = komunikaty
+                .Where(x => !ReferenceEquals(x, null))
+                .Select((x, index) => new
+                {
+                    Rodzaj = PobierzStringBezpiecznie(rodzajProperty, x),
+                    Numer = PobierzStringBezpiecznie(numerProperty, x),
+                    Tresc = PobierzStringBezpiecznie(trescProperty, x),
+                    Kolejnosc = index
+                })
+                .ToList();
+
+            if (lista.Count == 0)
+                return pustyWynik;
+
+            bool czyBlad = lista.Any(x =>
+                string.Equals(
+                    x.Rodzaj,
+                    "E",
+                    StringComparison.OrdinalIgnoreCase));
+
+            var posortowane = lista
+                .OrderByDescending(x =>
+                    string.Equals(
+                        x.Rodzaj,
+                        "E",
+                        StringComparison.OrdinalIgnoreCase))
+                .ThenBy(x => x.Kolejnosc);
+
+            string trescWynikowa = string.Join(
+                Environment.NewLine,
+                posortowane
+                    .Select(x => FormatujKomunikat(
+                        x.Rodzaj,
+                        x.Numer,
+                        x.Tresc))
+                    .Where(x => !string.IsNullOrWhiteSpace(x)));
+
+            return new WynikKomunikatow
+            {
+                Tresc = trescWynikowa ?? string.Empty,
+                CzyBlad = czyBlad
+            };
+        }
+
+        private static string PobierzStringBezpiecznie<T>(
+            PropertyInfo property,
+            T obiekt)
+        {
+            if (property == null || ReferenceEquals(obiekt, null))
+                return string.Empty;
+
+            try
+            {
+                object wartosc = property.GetValue(obiekt, null);
+
+                return wartosc == null
+                    ? string.Empty
+                    : Convert.ToString(wartosc) ?? string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        private static string FormatujKomunikat(
+            string rodzaj,
+            string numer,
+            string tresc)
+        {
+            rodzaj = rodzaj == null
+                ? string.Empty
+                : rodzaj.Trim();
+
+            numer = numer == null
+                ? string.Empty
+                : numer.Trim();
+
+            tresc = tresc == null
+                ? string.Empty
+                : tresc.Trim();
+
+            var elementyNaglowka = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(rodzaj))
+                elementyNaglowka.Add(rodzaj);
+
+            if (!string.IsNullOrWhiteSpace(numer))
+                elementyNaglowka.Add(numer);
+
+            string naglowek = string.Join(" - ", elementyNaglowka);
+
+            if (string.IsNullOrWhiteSpace(naglowek))
+                return tresc;
+
+            if (string.IsNullOrWhiteSpace(tresc))
+                return naglowek;
+
+            return naglowek + ": " + tresc;
+        }
+    }
+
+
+}
         
         
     

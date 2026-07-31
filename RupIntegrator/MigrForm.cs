@@ -1135,11 +1135,11 @@ namespace KnsMigrator
                 if (!String.IsNullOrWhiteSpace(anspart_new.IDPartner))
                 {
                     row.Cells["SAPKontoPartnera"].Value = anspart_new.IDPartner;
-                    row.Cells["Diagnostyka"].Value = (anspart_new.Komunikaty != null && anspart_new.Komunikaty.GetUpperBound(0) >= 0 ? anspart_new.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                    row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(anspart_new.Komunikaty).Tresc + row.Cells["Diagnostyka"].Value;
                 }
                 else
                 {
-                    row.Cells["Diagnostyka"].Value = (anspart_new.Komunikaty != null && anspart_new.Komunikaty.GetUpperBound(0) >= 0 ? anspart_new.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                    row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(anspart_new.Komunikaty).Tresc + row.Cells["Diagnostyka"].Value;
                     row.Cells["SAPImportStatus"].Value = -1;
                     row.Cells["Blad"].Value = row.Cells["Blad"].Value as string + "; Błąd podczas zakładania dłużnika";
 
@@ -1916,21 +1916,22 @@ namespace KnsMigrator
                                     if (anssygn.Sygnatura.IDPrzedmiotuUmowy != null)
                                     {
                                         row.Cells["SAPPrzedmiotUmowy"].Value = anssygn.Sygnatura.IDPrzedmiotuUmowy;
-                                        row.Cells["Diagnostyka"].Value = (anssygn.Komunikaty != null && anssygn.Komunikaty.GetUpperBound(0) >= 0 ? anssygn.Komunikaty[0].Komunikat1 : "");
+                                        row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(anssygn.Komunikaty).Tresc;
                                     }
                                     else
                                     {   /******** tu zmiana ***********/
-
+                                        row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(anssygn.Komunikaty).Tresc + (row.Cells["Diagnostyka"].Value ?? "");
                                         ContractObjectQueryRequest sygnGetquery = setupGetSygnStruct(row, knf);
                                         ContractObjectQueryResponse getsygn = ZSRKRequestHelper.ZnajdzSygnature(sygnGetquery);
                                         if (getsygn == null)
                                         {
                                             
-                                            row.Cells["Diagnostyka"].Value = (row.Cells["Diagnostyka"] != null && row.Cells["Diagnostyka"].Value != null ? row.Cells["Diagnostyka"].Value : "") + "Błąd zakładania sygnatury podczas odczytu czy istnieje";
+                                            row.Cells["Diagnostyka"].Value =  (row.Cells["Diagnostyka"] != null && row.Cells["Diagnostyka"].Value != null ? row.Cells["Diagnostyka"].Value : "") + "Błąd zakładania sygnatury podczas odczytu czy istnieje";
                                             row.Cells["Blad"].Value = " Błąd podczas zakładania sygnatury "  + (row.Cells["Blad"] != null && row.Cells["Blad"].Value != null ? row.Cells["Blad"].Value : "");
                                             impStatus = -1;
                                             diagnostyka = " Bląd podczas zakładania sygnatury";
                                             row.Cells["SAPImportStatus"].Value = -1;
+                                            zapiszBlad((int)id, row.Cells["Diagnostyka"].Value?.ToString(),-1);
                                             continue;
                                         }
                                         if (getsygn.Sygnatura != null && getsygn.Sygnatura.Length == 1 && getsygn.Sygnatura[0].IDPrzedmiotuUmowy != null && getsygn.Sygnatura[0].OznaczeniePrzedmiotuUmowy.StartsWith(String.IsNullOrWhiteSpace(sygnGetquery.Sygnatura.SadFunkcjonalnyStanowiskoFinansowe) ? sygnGetquery.Sygnatura.JednostkaGospodarcza : sygnGetquery.Sygnatura.SadFunkcjonalnyStanowiskoFinansowe))
@@ -1945,21 +1946,23 @@ namespace KnsMigrator
                                                     impStatus = -1;
                                                     diagnostyka = row.Cells["Blad"].Value.ToString();
                                                     row.Cells["SAPImportStatus"].Value = -1;
+                                                    zapiszBlad((int)id, diagnostyka + (row.Cells["Diagnostyka"].Value?.ToString()), -1);
                                                     continue;
                                                 }
 
                                             }
                                             // jeśłi jestem sądem funkkcjonalnym a sygnatura |}
                                             row.Cells["SAPPrzedmiotUmowy"].Value = getsygn.Sygnatura[0].IDPrzedmiotuUmowy;
-                                            row.Cells["Diagnostyka"].Value = (getsygn.Komunikaty != null && anssygn.Komunikaty.GetUpperBound(0) >= 0 ? anssygn.Komunikaty[0].Komunikat1 : "") + (row.Cells["Diagnostyka"] != null ? row.Cells["Diagnostyka"].Value : "");
+                                            row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(getsygn.Komunikaty).Tresc + (row.Cells["Diagnostyka"] != null ? row.Cells["Diagnostyka"].Value : "");
                                         }
                                         else
                                         {
-                                            row.Cells["Diagnostyka"].Value = (anssygn.Komunikaty != null && anssygn.Komunikaty.GetUpperBound(0) >= 0 ? anssygn.Komunikaty[0].Komunikat1 : "") + (row.Cells["Diagnostyka"] != null && row.Cells["Diagnostyka"].Value != null ? row.Cells["Diagnostyka"].Value : "");
+                                            row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(anssygn.Komunikaty).Tresc  + (row.Cells["Diagnostyka"] != null && row.Cells["Diagnostyka"].Value != null ? row.Cells["Diagnostyka"].Value : "");
                                             row.Cells["Blad"].Value = (row.Cells["Blad"]!= null && row.Cells["Blad"].Value != null ? row.Cells["Blad"].Value as string :"") + "; Błąd podczas zakładania sygnatury ";
                                             impStatus = -1;
                                             diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
                                             row.Cells["SAPImportStatus"].Value = -1;
+                                            zapiszBlad((int)id, row.Cells["Diagnostyka"].Value?.ToString(), -1);
                                             continue;
                                         }
                                     }
@@ -2008,12 +2011,12 @@ namespace KnsMigrator
                                 if (anspart.IDPartner != null)
                                 {
                                     row.Cells["SAPKontoPartnera"].Value = anspart.IDPartner;
-                                    row.Cells["Diagnostyka"].Value = (anspart.Komunikaty != null && anspart.Komunikaty.GetUpperBound(0) >= 0 ? anspart.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                                    row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(anspart.Komunikaty).Tresc + row.Cells["Diagnostyka"].Value;
                                     diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
                                 }
                                 else
                                 {
-                                    row.Cells["Diagnostyka"].Value = (anspart.Komunikaty != null && anspart.Komunikaty.GetUpperBound(0) >= 0 ? anspart.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                                    row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(anspart.Komunikaty).Tresc  + row.Cells["Diagnostyka"].Value;
                                     row.Cells["Blad"].Value = row.Cells["Blad"].Value as string + "; Błąd podczas zakładania dłużnika";
                                     impStatus = -1;
                                     diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
@@ -2214,12 +2217,12 @@ namespace KnsMigrator
                                                 if (anspart_new.IDPartner != null)
                                                 {
                                                     row.Cells["SAPKontoPartnera"].Value = anspart_new.IDPartner;
-                                                    row.Cells["Diagnostyka"].Value = (anspart_new.Komunikaty != null && anspart_new.Komunikaty.GetUpperBound(0) >= 0 ? anspart_new.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                                                    row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(anspart_new.Komunikaty).Tresc + row.Cells["Diagnostyka"].Value;
                                                     diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
                                                 }
                                                 else
                                                 {
-                                                    row.Cells["Diagnostyka"].Value = (anspart_new.Komunikaty != null && anspart_new.Komunikaty.GetUpperBound(0) >= 0 ? anspart_new.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                                                    row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(anspart_new.Komunikaty).Tresc  + row.Cells["Diagnostyka"].Value;
                                                     row.Cells["Blad"].Value = row.Cells["Blad"].Value as string + "; Błąd podczas zakładania dłużnika";
                                                     diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
                                                     impStatus = -1;
@@ -2333,13 +2336,13 @@ namespace KnsMigrator
                                     if (ans.KontoUmowyIdentyfikacja.NumerKontaUmowy != null)
                                     {
                                         row.Cells["KontoUmowy"].Value = ans.KontoUmowyIdentyfikacja.NumerKontaUmowy;
-                                        row.Cells["Diagnostyka"].Value = (ans.Komunikaty != null && ans.Komunikaty.GetUpperBound(0) >= 0 ? ans.Komunikaty[0].Komunikat1 : "");
+                                        row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(ans.Komunikaty).Tresc;
                                         diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
                                         ;
                                     }
                                     else
                                     {
-                                        row.Cells["Diagnostyka"].Value = (ans.Komunikaty != null && ans.Komunikaty.GetUpperBound(0) >= 0 ? ans.Komunikaty[0].Komunikat1 : "");
+                                        row.Cells["Diagnostyka"].Value = KomunikatHelper.PolaczKomunikaty(ans.Komunikaty).Tresc;
                                         diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
                                         impStatus = -1;
                                         row.Cells["SAPImportStatus"].Value = -1;
@@ -2425,14 +2428,16 @@ namespace KnsMigrator
                             ContractAccountRelationCreateResponse ans1 = ZSRKRequestHelper.AktualizujKontoUmowy(kdl, row.Cells["SAPPrzedmiotUmowy"].Value.ToString());
                             if (ans1.Komunikaty != null)
                             {
-                                if (ans1.Komunikaty[0].RodzajKomunikatu == "E")
+                                WynikKomunikatow result = KomunikatHelper.PolaczKomunikaty(ans1.Komunikaty);
+
+                                if (result.CzyBlad)
                                 {
                                     string newpartner;
                                     newpartner = AddNewDl(row, knf);
                                     if (!String.IsNullOrWhiteSpace(newpartner)) goto addkdl;
 
 
-                                    row.Cells["Diagnostyka"].Value = (ans1.Komunikaty != null && ans1.Komunikaty.GetUpperBound(0) >= 0 ? ans1.Komunikaty[0].Komunikat1 : "");
+                                    row.Cells["Diagnostyka"].Value = result.Tresc;
                                     row.Cells["Blad"].Value = ";Założono konto umowy ale nie powiązano go z sygnaturą " + row.Cells["Blad"].Value;
                                     diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
                                     impStatus = -1;
@@ -2500,11 +2505,13 @@ namespace KnsMigrator
                                     DocumentCreateResponse ansdok = ZSRKRequestHelper.DodajPrzypis(adddok);
                                     if (ansdok != null)
                                     {
+                                        WynikKomunikatow result = KomunikatHelper.PolaczKomunikaty(ansdok.Komunikaty);
                                         if (!String.IsNullOrWhiteSpace(ansdok.IDDokument))
                                         {
-                                            if (ansdok.Komunikaty[0].RodzajKomunikatu == "E")
+
+                                            if (result.CzyBlad)
                                             {
-                                                row.Cells["Diagnostyka"].Value = (ansdok.Komunikaty != null && ansdok.Komunikaty.GetUpperBound(0) >= 0 ? ansdok.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                                                row.Cells["Diagnostyka"].Value = result.Tresc + row.Cells["Diagnostyka"].Value;
                                                 row.Cells["Blad"].Value = "Błąd eksportu dokumentu;" + row.Cells["Blad"].Value;
                                                 diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
                                                 impStatus = -1;
@@ -2516,14 +2523,14 @@ namespace KnsMigrator
                                             {
                                                 row.Cells["SAPDocId"].Value = ansdok.IDDokument;
                                                 docID = ansdok.IDDokument;
-                                                row.Cells["Diagnostyka"].Value = (ansdok.Komunikaty != null && ansdok.Komunikaty.GetUpperBound(0) >= 0 ? ansdok.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                                                row.Cells["Diagnostyka"].Value = result.Tresc + row.Cells["Diagnostyka"].Value;
                                                 diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
 
                                             }
                                         }
                                         else
                                         {
-                                            row.Cells["Diagnostyka"].Value = (ansdok.Komunikaty != null && ansdok.Komunikaty.GetUpperBound(0) >= 0 ? ansdok.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                                            row.Cells["Diagnostyka"].Value = result.Tresc + row.Cells["Diagnostyka"].Value;
                                             row.Cells["Blad"].Value = " Błąd eksportu dokumentu " + row.Cells["Blad"].Value;
                                             diagnostyka = row.Cells["Diagnostyka"].Value.ToString();
                                             impStatus = -1;
@@ -2573,6 +2580,22 @@ namespace KnsMigrator
                         return;
                     }
                 }
+            }
+
+
+
+        }
+
+        private void zapiszBlad(int dokId, string message, int status)
+        {
+            Dokument dok = thecontext.Dokument.Where(a => a.id == dokId).FirstOrDefault();
+            if (dok != null)
+            {
+                dok.SAPImportStatus = status;
+                dok.SAPImportInfo = message + dok.SAPImportInfo;
+                dok.SAPImportInfo = dok.SAPImportInfo.Truncate(255);
+               
+                thecontext.SaveChanges();
             }
 
 
@@ -2806,7 +2829,6 @@ namespace KnsMigrator
             }
         }
 
-
         private void ExportOdpis()
         {
             int Id;
@@ -2919,20 +2941,15 @@ namespace KnsMigrator
                                     log.Debug("Krok 2");
                                     {
                                         if (ansdok != null)
-                                        {
+                                        {   
+                                            WynikKomunikatow result = KomunikatHelper.PolaczKomunikaty(ansdok.Komunikaty);
                                             log.Debug("Krok 3");
                                             if (ansdok != null && ansdok.OdpisanieNaleznosciOdpowiedz != null && ansdok.OdpisanieNaleznosciOdpowiedz.NumerZaksiegowanegoDokumentu != null && ansdok.OdpisanieNaleznosciOdpowiedz.NumerZaksiegowanegoDokumentu.Trim().Length > 0)
                                             {
                                                 log.Debug("Krok 4");
                                                 row.Cells["SAPDocId"].Value = ansdok.OdpisanieNaleznosciOdpowiedz.NumerZaksiegowanegoDokumentu;
                                                 {
-                                                    string s = string.Empty;
-                                                    foreach (var k in ansdok.Komunikaty)
-                                                    {
-                                                        s += k.IDKomunikatu + " " + k.Komunikat1 + " " + k.RodzajKomunikatu;
-                                                    }
-                                                    row.Cells["Diagnostyka"].Value += s;
-
+                                                    row.Cells["Diagnostyka"].Value = result.Tresc+row.Cells["Diagnostyka"].Value;
                                                 }
                                                 log.Debug("Krok 5");
                                                 if (!String.IsNullOrWhiteSpace(ansdok.OdpisanieNaleznosciOdpowiedz.NumerDokumentuRozliczeniaOdpisu))
@@ -2947,7 +2964,7 @@ namespace KnsMigrator
                                             else
                                             {
                                                 log.Debug("Krok 6");
-                                                row.Cells["Diagnostyka"].Value = (ansdok.Komunikaty != null && ansdok.Komunikaty.GetUpperBound(0) >= 0 ? ansdok.Komunikaty[0].Komunikat1 : "") + row.Cells["Diagnostyka"].Value;
+                                                row.Cells["Diagnostyka"].Value = result.Tresc + row.Cells["Diagnostyka"].Value;
                                                 row.Cells["SAPImportStatus"].Value = -1;
                                                 row.Cells["Blad"].Value = ";Błąd eksportu dokumentu " + row.Cells["Blad"].Value;
 
@@ -3037,7 +3054,8 @@ namespace KnsMigrator
 
             ExportData(1);// eksport tylko danych podstawowywch 
         }
-     
+
+
 
         private void rmiRunOdpis_Click(object sender, EventArgs e)
         {
@@ -3761,7 +3779,7 @@ namespace KnsMigrator
                             }
                             else
                             {
-                                row.Cells["informacja"].Value = "Błąd podczas próby księgowania brak numeru dokumentu " + ansdok.Komunikaty[0].Komunikat1 + " " + ansdok.Komunikaty[0].NumerKomunikatu + " " + ansdok.Komunikaty[0].RodzajKomunikatu;
+                                row.Cells["informacja"].Value = "Błąd podczas próby księgowania brak numeru dokumentu " + KomunikatHelper.PolaczKomunikaty(ansdok.Komunikaty).Tresc;
                                 row.Cells["Status"].Value = -500;
 
                             }
@@ -4008,7 +4026,7 @@ namespace KnsMigrator
                             }
                             else
                             {
-                                row.Cells["informacja"].Value = "Błąd podczas próby księgowania odpisu brak numeru dokumentu " + ansdok.Komunikaty[0].Komunikat1 + " " + ansdok.Komunikaty[0].NumerKomunikatu + " " + ansdok.Komunikaty[0].RodzajKomunikatu;
+                                row.Cells["informacja"].Value = "Błąd podczas próby księgowania odpisu brak numeru dokumentu " + KomunikatHelper.PolaczKomunikaty(ansdok.Komunikaty).Tresc;
                                 row.Cells["Status"].Value = -500;
 
                             }

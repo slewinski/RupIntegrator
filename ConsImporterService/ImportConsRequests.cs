@@ -1,6 +1,6 @@
 ﻿// Ostateczna wersja po refaktoryzacji.
 // ConsImportFromDB.cs nie jest już wymagany – logika została przeniesiona tutaj.
-
+using System.IO.Compression;
 using Cons2RupModel;
 using ConsImport;
 using ConsInterfeces.Rup2ConsImportContentSystemData;
@@ -555,7 +555,7 @@ namespace ConsImporterService
             };
 
             Func<DataRow, string, string> S = (row, name) =>
-                HasColumn(row, name) ?  Convert.ToString(row[name]) : String.Empty;
+                HasColumn(row, name) ?  Convert.ToString(row[name]).Trim() : String.Empty;
 
             Func<DataRow, string[], string> SAny = (row, names) =>
             {
@@ -749,7 +749,7 @@ namespace ConsImporterService
 
             Func<string, string> CountryCode = value =>
             {
-                value = Clean(value);
+                //value = Clean(value);
 
                 if (String.IsNullOrWhiteSpace(value))
                     return String.Empty;
@@ -768,7 +768,7 @@ namespace ConsImporterService
 
             Func<string, string> RegionCode = value =>
             {
-                value = Clean(value).ToLower();
+               value = Clean(value).ToLower();
 
                 if (String.IsNullOrWhiteSpace(value))
                     return String.Empty;
@@ -811,29 +811,42 @@ namespace ConsImporterService
                     int idSprawy = group.Key.IdSprawy;
                     int idStrony = group.Key.IdStrony;
 
-                    DataRow orzeczenieRow = null;
+                    List<DataRow> orzeczenieRows = new List<DataRow>();
 
                     if (orzeczeniaTable != null)
                     {
-                        orzeczenieRow = orzeczeniaTable.AsEnumerable()
-                            .Where(o =>
-                                (!HasColumn(o, "id_sprawy") || I(o, "id_sprawy") == idSprawy) &&
-                                (!HasColumn(o, "id_strony") || I(o, "id_strony") == idStrony))
-                            .OrderByDescending(o => HasColumn(o, "d_orzecz") ? Convert.ToDateTime(o["d_orzecz"]) : DateTime.MinValue)
-                            .FirstOrDefault();
+                        orzeczenieRows = orzeczeniaTable
+                                        .AsEnumerable()
+                                        .Where(o =>
+                                            (!HasColumn(o, "id_sprawy") ||
+                                             I(o, "id_sprawy") == idSprawy) &&
+                                            (!HasColumn(o, "id_strony") ||
+                                             I(o, "id_strony") == idStrony))
+                                        .OrderBy(o =>
+                                            HasColumn(o, "d_orzecz") &&
+                                            o["d_orzecz"] != DBNull.Value
+                                                ? Convert.ToDateTime(o["d_orzecz"])
+                                                : DateTime.MinValue)
+                                        .ToList();
                     }
 
-                    string zalacznikNazwa = S(row, "ZalacznikNazwa");
-                    string zalacznikZawartosc = S(row, "ZalacznikZawartosc");
+                    string zalacznikNazwa = null;  //S(row, "ZalacznikNazwa");
+                    string zalacznikZawartosc = null;  //S(row, "ZalacznikZawartosc");
 
-                    if (orzeczenieRow != null)
+                    if (orzeczenieRows.Count > 0)
                     {
-                        string mswordBase64 = ToBase64(Utils.DecompressMsWord((byte[])orzeczenieRow["msword"]));
+                        zalacznikZawartosc = BuildZipBase64(
+                            orzeczenieRows,
+                            SafeAttachmentName);
 
-                        if (!String.IsNullOrWhiteSpace(mswordBase64))
+                        if (!String.IsNullOrWhiteSpace(zalacznikZawartosc))
                         {
-                            zalacznikZawartosc = mswordBase64;
-                            zalacznikNazwa = SafeAttachmentName(S(orzeczenieRow, "nazwa"));
+                            zalacznikNazwa =
+                                "orzeczenia_" +
+                                idSprawy +
+                                "_" +
+                                idStrony +
+                                ".gzip";
                         }
                     }
 
@@ -869,7 +882,7 @@ namespace ConsImporterService
                         PartnerHandlowyRegon = S(row, "PartnerHandlowyRegon"),
                         PartnerHandlowyNip = S(row, "PartnerHandlowyNip"),
 
-                        PartnerHandlowyPanstwoUrodzenia = String.IsNullOrWhiteSpace(S(row, "PartnerHandlowyPanstwoUrodzenia"))?"PL" : S(row, "PartnerHandlowyPanstwoUrodzenia"),
+                        PartnerHandlowyPanstwoUrodzenia =  S(row, "PartnerHandlowyPanstwoUrodzenia"),
                         PartnerHandlowyObywatelstwo = String.IsNullOrWhiteSpace(S(row, "PartnerHandlowyObywatelstwo"))?"PL" : S(row, "PartnerHandlowyObywatelstwo"),
                         PartnerHandlowyInneObywatelstwa = S(row, "PartnerHandlowyInneObywatelstwa"),
                         PartnerHandlowyStatusZatrudnienia = S(row, "PartnerHandlowyStatusZatrudnienia"),
@@ -946,7 +959,7 @@ namespace ConsImporterService
                                           "PartnerHandlowyAdresyRegion",
                                           "PartnerHandlowyAdresyNumerRegion"
                                     }))
-                                    : "DSL"
+                                    : null//"DSL"
                             })
                             .ToArray();
                     }
@@ -997,8 +1010,6 @@ namespace ConsImporterService
                         if (String.IsNullOrWhiteSpace(dokumentKraj))
                             dokumentKraj = "PL";
 
-                        if (String.IsNullOrWhiteSpace(dokumentRegion))
-                            dokumentRegion = "DSL";
 
                         partner.PartnerHandlowyDokumentTozsamosci = new[]
                         {
@@ -1361,6 +1372,197 @@ namespace ConsImporterService
                     }
 
             return result;
+        }
+
+        private static string MakeUniqueFileName( string fileName, HashSet<string> usedNames)
+                {
+                    if (usedNames.Add(fileName))
+                        return fileName;
+        
+                    string name = Path.GetFileNameWithoutExtension(fileName);
+                    string extension = Path.GetExtension(fileName);
+        
+                    int number = 2;
+        
+                    while (true)
+                    {
+                        string candidate =
+                            name + "_" + number + extension;
+        
+                        if (usedNames.Add(candidate))
+                            return candidate;
+        
+                        number++;
+                    }
+                }
+
+        private static byte[] GetDocumentContent(object value)
+                {
+                    if (value == null || value == DBNull.Value)
+                        return null;
+        
+                    if (value is byte[])
+                    {
+                        byte[] raw = (byte[])value;
+        
+                        try
+                        {
+                            byte[] decompressed =
+                                Utils.DecompressMsWord(raw);
+        
+                            if (decompressed != null &&
+                                decompressed.Length > 0)
+                            {
+                                return decompressed;
+                            }
+                        }
+                        catch
+                        {
+                            // Dane mogą już być nieskompresowanym dokumentem.
+                        }
+        
+                        return raw;
+                    }
+        
+                    string text = Convert.ToString(value);
+        
+                    if (String.IsNullOrWhiteSpace(text))
+                        return null;
+        
+                    try
+                    {
+                        return Convert.FromBase64String(
+                            text.Trim());
+                    }
+                    catch (FormatException ex)
+                    {
+                        throw new InvalidOperationException(
+                            "Zawartość dokumentu nie jest poprawnym Base64.",
+                            ex);
+                    }
+                }
+
+        private static string GetDocumentExtension( byte[] documentContent)
+                {
+                    if (documentContent == null ||
+                        documentContent.Length < 4)
+                    {
+                        return ".doc";
+                    }
+        
+                    // DOCX jest archiwum ZIP i zazwyczaj zaczyna się od PK 03 04.
+                    if (documentContent[0] == 0x50 &&
+                        documentContent[1] == 0x4B &&
+                        documentContent[2] == 0x03 &&
+                        documentContent[3] == 0x04)
+                    {
+                        return ".docx";
+                    }
+        
+                    // Stary binarny format Microsoft Word.
+                    if (documentContent.Length >= 8 &&
+                        documentContent[0] == 0xD0 &&
+                        documentContent[1] == 0xCF &&
+                        documentContent[2] == 0x11 &&
+                        documentContent[3] == 0xE0)
+                    {
+                        return ".doc";
+                    }
+        
+                    return ".doc";
+                }
+
+        private static string BuildZipBase64(
+   IEnumerable<DataRow> documentRows,
+   Func<string, string> safeAttachmentName)
+        {
+            if (documentRows == null)
+                return null;
+
+            using (var zipStream = new MemoryStream())
+            {
+                int documentNumber = 1;
+                int documentCount = 0;
+
+                var usedNames = new HashSet<string>(
+                    StringComparer.OrdinalIgnoreCase);
+
+                using (var archive = new ZipArchive(
+                    zipStream,
+                    ZipArchiveMode.Create,
+                    true))
+                {
+                    foreach (DataRow documentRow in documentRows)
+                    {
+                        if (documentRow == null ||
+                            documentRow.Table == null ||
+                            !documentRow.Table.Columns.Contains("msword") ||
+                            documentRow["msword"] == null ||
+                            documentRow["msword"] == DBNull.Value)
+                        {
+                            continue;
+                        }
+
+                        byte[] documentContent =
+                            GetDocumentContent(documentRow["msword"]);
+
+                        if (documentContent == null ||
+                            documentContent.Length == 0)
+                        {
+                            continue;
+                        }
+
+                        string sourceFileName = null;
+
+                        if (documentRow.Table.Columns.Contains("nazwa") &&
+                            documentRow["nazwa"] != DBNull.Value)
+                        {
+                            sourceFileName =
+                                Convert.ToString(documentRow["nazwa"]);
+                        }
+
+                        if (String.IsNullOrWhiteSpace(sourceFileName))
+                        {
+                            sourceFileName =
+                                "orzeczenie_" +
+                                documentNumber.ToString("000") +
+                                GetDocumentExtension(documentContent);
+                        }
+                        else
+                        {
+                            sourceFileName =
+                                safeAttachmentName(sourceFileName);
+                        }
+
+                        string uniqueFileName =
+                            MakeUniqueFileName(
+                                sourceFileName,
+                                usedNames);
+
+                        ZipArchiveEntry entry =
+                            archive.CreateEntry(
+                                uniqueFileName,
+                                CompressionLevel.Optimal);
+
+                        using (Stream entryStream = entry.Open())
+                        {
+                            entryStream.Write(
+                                documentContent,
+                                0,
+                                documentContent.Length);
+                        }
+
+                        documentNumber++;
+                        documentCount++;
+                    }
+                }
+
+                if (documentCount == 0)
+                    return null;
+
+                return Convert.ToBase64String(
+                    zipStream.ToArray());
+            }
         }
 
         private DataSet ExecuteStoredProcedure(ConsExternalDBConnectionConfig knf, DateTime odDnia, DateTime doDnia)

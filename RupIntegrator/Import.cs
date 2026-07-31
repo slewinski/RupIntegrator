@@ -2554,7 +2554,7 @@ Kwota
                             }
                             else if (knsks.czyFPP == 4) // nawiązka na rzecz Skarbu Państwa
                             {
-                                doc.OperacjaCzesciowa = "0140"; 
+                                doc.OperacjaCzesciowa = "0150"; 
 
                             }
                             else
@@ -3737,7 +3737,7 @@ Kwota
                                 else if (knsks.czyFPP == 2)
                                     doc.OperacjaCzesciowa = "0001";
                                 else if (knsks.czyFPP == 4)
-                                    doc.OperacjaCzesciowa = "0140";
+                                    doc.OperacjaCzesciowa = "0150";
                                 else
                                     switch (spr.SAPRodzajPrzedmiotuUmowy)
                                     {
@@ -6098,7 +6098,7 @@ Kwota
                             else if (ksiega.czyFPP == 4)
                             {
                                 doc.OperacjaGlowna = "N020";
-                                doc.OperacjaCzesciowa = "0140";
+                                doc.OperacjaCzesciowa = "0150";
                             }
                             else
                                 if (dtr["zrodlo"].ToString() == "przedawnienie")
@@ -6223,7 +6223,7 @@ Kwota
                             if (ksiega.czyFPP == 1)
                                 doc.OperacjaCzesciowa = (Konfig.typKns == 2) ? "0020" : "0021";
                             if (ksiega.czyFPP == 4)
-                                doc.OperacjaCzesciowa = "0140";
+                                doc.OperacjaCzesciowa = "0150";
                             doc.kwota = Convert.ToDecimal(dtr["grzywna_odpis"].ToString().Replace(".", ","), CultureInfo.GetCultureInfo("pl-PL"));
                             doc2Hash += doc.kwota.ToString();
                             doc.typFakt = "GO";

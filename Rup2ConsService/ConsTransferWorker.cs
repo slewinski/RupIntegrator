@@ -211,21 +211,29 @@ namespace Rup2ConsService
                     ImportContentSystemDataRequest request =
                         DeserializeRequest(transfer.payload);
 
+                    if ( transfer.guidImport!= null)
+                        request.GUID = transfer.guidImport.ToString();
+
+
+
                     if (request == null)
                         throw new InvalidOperationException("Nie udało się odtworzyć komunikatu z payload.");
 
-                    if (String.IsNullOrWhiteSpace(request.GUID))
-                        request.GUID = transfer.idKomunikatu;
-
+                    
                     string requestXml;
+                    string idKomunikatu = String.IsNullOrWhiteSpace(transfer.idKomunikatu) ? Guid.NewGuid().ToString() : transfer.idKomunikatu;
+
                     ImportContentSystemDataResponse response =
                         ConsWebServiceHelper.ImportData(
                             "ImportContentSystemData",
-                            request,
+                            request, idKomunikatu,
                             out requestXml);
 
                     if (response == null)
+                    {   log.Error("Transfer CONS do SAP zakończył się błędem. Id=" + transferId +
+                            ". SAP zwrócił pustą odpowiedź.");  
                         throw new InvalidOperationException("SAP zwrócił pustą odpowiedź.");
+                    }
                     string errorMessage;
                     string responseXml = SerializeResponse(response);
 
@@ -242,6 +250,8 @@ namespace Rup2ConsService
 
                         return;
                     }
+                    MarkAsDone(transferId, responseXml, idKomunikatu);
+
                 }
                 catch (Exception ex)
                 {
@@ -255,7 +265,9 @@ namespace Rup2ConsService
             }
         }
 
-        private static void MarkAsDone(int transferId, string responseXml)
+
+
+        private static void MarkAsDone(int transferId, string responseXml, string idKomunikatu)
         {
             using (var context = new RupDBEntities())
             {
@@ -268,6 +280,7 @@ namespace Rup2ConsService
                 transfer.status = (int)ConsImportStatus.Done;
                 transfer.dImportu = DateTime.Now;
                 transfer.trescOdpowiedzi = Truncate(responseXml, 4000);
+                transfer.idKomunikatu = idKomunikatu;
                 context.SaveChanges();
             }
         }

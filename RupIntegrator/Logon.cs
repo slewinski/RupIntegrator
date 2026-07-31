@@ -48,7 +48,7 @@ namespace KnsMigrator
 
                 if (role != 1)
                 {
-                    MessageBox.Show("Wersja bazy danych: \"" + dbversion + "\" jest niezgodna z wersją bazy danych systemu \"" + RunMode.dbversion + "\".\r\nNależy zalogować się na profilu administratora i wykonać operację przebudowy bazy danych.");
+                    MessageBox.Show("Wersja bazy danych: \"" + dbversion + "\" jest niezgodna z wersją bazy danych oczekiwaną przez aplikację \"" + RunMode.dbversion + "\".\r\nNależy zalogować się na profilu administratora i wykonać operację przebudowy bazy danych.");
                     Application.Exit();
                     return;
                 }

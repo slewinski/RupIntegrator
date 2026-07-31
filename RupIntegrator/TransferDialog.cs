@@ -44,7 +44,7 @@ namespace KnsMigrator
             string tmp;
             int i;
 
-            this.KsiegiDataSource.DataSource = this.Context.KnsKsiegi.Where(a=>a.czyFPP <= 2 || a.czyFPP == null).ToList();
+            this.KsiegiDataSource.DataSource = this.Context.KnsKsiegi.Where(a=>a.czyFPP <=2 || a.czyFPP ==4 ||  a.czyFPP == null).ToList();
             this.rgvKsiegi.DataSource = this.KsiegiDataSource; //.Mains;
 
             try

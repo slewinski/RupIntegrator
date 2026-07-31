@@ -21,6 +21,7 @@ using ConsInterfeces.Rup2ConsImportContentSystemData;
 using ConsInterfeces.Rup2ConsGetStatusContentSystemData;
 
 using System.Xml.Serialization;
+using System.Runtime.CompilerServices;
 
 namespace ConsImport
 {
@@ -134,6 +135,7 @@ namespace ConsImport
 
         private static string _stanowiskoFinansowe;
 
+        
         private static ConsInterfeces.Rup2ConsImportContentSystemData.Admin _adminImportData;
         private static ConsInterfeces.Rup2ConsGetStatusContentSystemData.Admin _adminGetStatusData;
 
@@ -270,7 +272,7 @@ namespace ConsImport
 
                 }
                 ;
-                _adminImportData.IDKomunikatu = (String.IsNullOrWhiteSpace(_applicationID) ? "RupInt" : _applicationID) + "_" + Guid.NewGuid();
+                _adminImportData.IDKomunikatu = Guid.NewGuid().ToString();
                 _adminImportData.UtworzonyData = DateTime.Today.ToString("yyyyMMdd");
                 _adminImportData.UtworzonyGodz = DateTime.Now.ToString("HHmm");
                 _adminImportData.Haslo = SignatureHelper.SignMessageId(_adminImportData.IDKomunikatu);
@@ -278,6 +280,33 @@ namespace ConsImport
                 return _adminImportData;
 
             }
+        }
+
+        private static
+    ConsInterfeces.Rup2ConsGetStatusContentSystemData.Admin
+    CreateGetStatusAdmin()
+        {
+            string idKomunikatu =
+                (String.IsNullOrWhiteSpace(_applicationID)
+                    ? "RupInt"
+                    : _applicationID)
+                + "_"
+                + Guid.NewGuid();
+
+            return new
+                ConsInterfeces.Rup2ConsGetStatusContentSystemData.Admin
+            {
+                Uzytkownik = _mEPUser,
+                IDSystemMerytorycznego =
+                    String.IsNullOrWhiteSpace(_applicationID)
+                        ? "RupInt"
+                        : _applicationID,
+                JednostkaGospodarcza = _jednostkaGospodarcza,
+                IDKomunikatu = idKomunikatu,
+                UtworzonyData = DateTime.Now.ToString("yyyyMMdd"),
+                UtworzonyGodz = DateTime.Now.ToString("HHmm"),
+                Haslo = SignatureHelper.SignMessageId(idKomunikatu)
+            };
         }
 
 
@@ -359,9 +388,24 @@ namespace ConsImport
 
         }
 
+        private static  ConsInterfeces.Rup2ConsImportContentSystemData.Admin CreateAdmin(string idKomunikatu)
+        {
+            return new ConsInterfeces.Rup2ConsImportContentSystemData.Admin
+            {
+                Uzytkownik = _mEPUser,
+                IDSystemMerytorycznego =
+                    String.IsNullOrWhiteSpace(_applicationID)
+                        ? "RupInt"
+                        : _applicationID,
+                JednostkaGospodarcza = _jednostkaGospodarcza,
+                IDKomunikatu = idKomunikatu,
+                UtworzonyData = DateTime.Today.ToString("yyyyMMdd"),
+                UtworzonyGodz = DateTime.Now.ToString("HHmm"),
+                Haslo = SignatureHelper.SignMessageId(idKomunikatu)
+            };
+        }
 
-
-        public static ImportContentSystemDataResponse ImportData(string MethodName, ConsInterfeces.Rup2ConsImportContentSystemData.ImportContentSystemDataRequest Args, out string request)
+        public static ImportContentSystemDataResponse ImportData(string MethodName, ConsInterfeces.Rup2ConsImportContentSystemData.ImportContentSystemDataRequest Args,string  IdKomunikatu, out string request)
         {
             string testPO = "0";
 
@@ -371,12 +415,11 @@ namespace ConsImport
             //    testPO = config.AppSettings.Settings["TestPO"].Value.ToString();
             //}
             //catch { }
-
             _errorMsg = string.Empty;
             KeyValuePair<string, string>? method = _serviceMapping.Where(a => a.Key == MethodName).FirstOrDefault();
             if (method == null)
             {
-                addErrMsg("Brak takiej metody " + MethodName);
+                log.Error("Brak takiej metody " + MethodName);
                 request = string.Empty;
                 return null;
             }
@@ -390,7 +433,8 @@ namespace ConsImport
             theClient.ClientCredentials.UserName.Password = _basicAuthPassword;
             var requestInterceptor = new InspectorBehavior();
             theClient.Endpoint.Behaviors.Add(requestInterceptor);
-            Args.Admin = _admin;
+            Args.Admin = CreateAdmin(IdKomunikatu);
+            //Args.Admin = _admin;
             try
             {
                 var serializer = new XmlSerializer(typeof(ImportContentSystemDataRequest));
@@ -405,7 +449,7 @@ namespace ConsImport
             }
             catch (Exception ex)
             {
-                addErrMsg("Błąd wywołania metody " + MethodName + " " + ex.Message);
+                log.Error("Błąd wywołania metody " + MethodName + " " + ex.Message, ex);
                 throw ex;
 
             }
@@ -417,7 +461,7 @@ namespace ConsImport
             KeyValuePair<string, string>? method = _serviceMapping.Where(a => a.Key == MethodName).FirstOrDefault();
             if (method == null)
             {
-                addErrMsg("Brak takiej metody " + MethodName);
+                log.Error("Brak takiej metody " + MethodName);
                 request = string.Empty;
                 return null;
             }
@@ -431,7 +475,7 @@ namespace ConsImport
             theClient.ClientCredentials.UserName.Password = _basicAuthPassword;
             var requestInterceptor = new InspectorBehavior();
             theClient.Endpoint.Behaviors.Add(requestInterceptor);
-            Args.Admin = _adminGetStatus;
+            Args.Admin = CreateGetStatusAdmin();
             try
             {
                 var serializer = new XmlSerializer(typeof(ConsInterfeces.Rup2ConsGetStatusContentSystemData.GetStatusContentSystemDataRequest));
@@ -445,7 +489,7 @@ namespace ConsImport
             catch (Exception ex)
             {
                 request = string.Empty;
-                addErrMsg("Błąd wywołania metody " + MethodName + " " + ex.Message);
+                log.Error("Błąd wywołania metody " + MethodName + " " + ex.Message, ex);
                 throw ex;
             }
         }

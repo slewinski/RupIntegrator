@@ -1191,7 +1191,7 @@ namespace RupLoader
                 "   ALTER TABLE dbo.KnsKsiegi ADD ksGrzFPPMap int NULL " +
                 "  END ",
                 "  update SAPKodyOpr set operacjaGlowna = 'N010' , kod = '0150',  oznaczenieOpGlownej = 'N0100150' , samoistna = '' where operacjaGlowna = 'N010' and kod = '0140' ",
-                "  update SAPKodyOpr set operacjaGlowna = 'N010' , kod = '0150' , oznaczenieOpGlownej = 'N0200150' , samoistna = '' where operacjaGlowna = 'N020' and kod = '0140' ",
+                "  update SAPKodyOpr set operacjaGlowna = 'N020' , kod = '0150' , oznaczenieOpGlownej = 'N0200150' , samoistna = '' where operacjaGlowna = 'N020' and kod = '0140' ",
                 "  IF  (select count(*) from SAPKodyOpr where operacjaGlowna = 'N010' and kod = '0150') = 0  "+
                 "  BEGIN " +
                 "   insert into SAPKodyOpr(kod, nazwa, grzywnakoszty, samoistna, operacjaGlowna, oznaczenieOpGlownej, id , samoistna) values ( '0150','Nawiązka SP','g', '', 'N010',  'Przypis Nawiązka SP','N0100150', '') " +
