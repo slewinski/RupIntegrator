@@ -448,8 +448,8 @@ namespace ConsImport
                         PartnerHandlowyRegon = S(row, "PartnerHandlowyRegon"),
                         PartnerHandlowyNip = S(row, "PartnerHandlowyNip"),
 
-                        PartnerHandlowyPanstwoUrodzenia = "PL",
-                        PartnerHandlowyObywatelstwo = "PL",
+                        PartnerHandlowyPanstwoUrodzenia = String.IsNullOrWhiteSpace(S(row, "PartnerHandlowyPanstwoUrodzenia")) ? "PL": S(row, "PartnerHandlowyPanstwoUrodzenia"),
+                        PartnerHandlowyObywatelstwo = String.IsNullOrWhiteSpace(S(row, "PartnerHandlowyObywatelstwo")) ? "PL" : S(row, "PartnerHandlowyObywatelstwo"),
                         PartnerHandlowyInneObywatelstwa = S(row, "PartnerHandlowyInneObywatelstwa"),
                         PartnerHandlowyStatusZatrudnienia = S(row, "PartnerHandlowyStatusZatrudnienia"),
                         PartnerHandlowyZawod = S(row, "PartnerHandlowyZawod"),
@@ -525,7 +525,7 @@ namespace ConsImport
                                           "PartnerHandlowyAdresyRegion",
                                           "PartnerHandlowyAdresyNumerRegion"
                                     }))
-                                    : "DSL"
+                                    : null//"DSL"
                             })
                             .ToArray();
                     }
@@ -576,8 +576,8 @@ namespace ConsImport
                         if (String.IsNullOrWhiteSpace(dokumentKraj))
                             dokumentKraj = "PL";
 
-                        if (String.IsNullOrWhiteSpace(dokumentRegion))
-                            dokumentRegion = "DSL";
+                        //if (String.IsNullOrWhiteSpace(dokumentRegion))
+                        //    dokumentRegion = "DSL";
 
                         partner.PartnerHandlowyDokumentTozsamosci = new[]
                         {

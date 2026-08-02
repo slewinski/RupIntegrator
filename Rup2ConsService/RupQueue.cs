@@ -57,7 +57,11 @@ namespace Rup2ConsService
                         log.Debug("Pętla po aktywnych połączeniach");
                         foreach (ConsExternalDBConnectionConfig dbConfig in dbConfigLst)
                         {
-
+                            if (!dbConfig.isActive == true)
+                            {
+                                log.Debug("Połączenie nieaktywne, pomijam");
+                                continue;
+                            }
                             ConsImportFromDB import = new ConsImportFromDB();
                             List<ConsImportData> lst = import.GetDataFromDB(dbConfig, new DateTime(2026, 1, 1), DateTime.Today.AddDays(1));
                             log.Debug("Znaleziono połączeń " + (lst != null ? lst.Count : 0).ToString());
@@ -67,7 +71,7 @@ namespace Rup2ConsService
 
                                 ConsKartaTransfer karta = new ConsKartaTransfer();
                                 karta.dImportu = DateTime.Now;
-                                karta.idKomunikatu = Guid.NewGuid().ToString();
+                                karta.idKomunikatu = item.importContentSystemDataRequest.GUID;
                                 karta.consJobItemId = job.Id;
                                 karta.idSprawyWydzial = item.IdSprawy;
                                 karta.idStronyWydzial = item.IdStrony;
