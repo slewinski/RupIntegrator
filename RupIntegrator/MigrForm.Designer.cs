@@ -435,6 +435,7 @@
             this.rgvSygnMap = new Telerik.WinControls.UI.RadGridView();
             this.rgvKsiegi = new Telerik.WinControls.UI.RadGridView();
             this.rgvKomornicy = new Telerik.WinControls.UI.RadGridView();
+            this.knsKomornikBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.radPageImports = new Telerik.WinControls.UI.RadPageViewPage();
             this.radSplitContainer6 = new Telerik.WinControls.UI.RadSplitContainer();
             this.splitPanel11 = new Telerik.WinControls.UI.SplitPanel();
@@ -473,10 +474,13 @@
             this.rbSaveImport = new Telerik.WinControls.UI.RadButton();
             this.splitPanel12 = new Telerik.WinControls.UI.SplitPanel();
             this.rgvTransfer = new Telerik.WinControls.UI.RadGridView();
+            this.transferBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.splitPanel13 = new Telerik.WinControls.UI.SplitPanel();
             this.rgvWplaty = new Telerik.WinControls.UI.RadGridView();
+            this.wplataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rgvDokumenty = new Telerik.WinControls.UI.RadGridView();
             this.rbClearFilters = new Telerik.WinControls.UI.RadButton();
+            this.dokumentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.radPageEkstrakcja = new Telerik.WinControls.UI.RadPageViewPage();
             this.radSplitContainer5 = new Telerik.WinControls.UI.RadSplitContainer();
             this.splitPanel9 = new Telerik.WinControls.UI.SplitPanel();
@@ -509,6 +513,7 @@
             this.rgvValidSaldo = new Telerik.WinControls.UI.RadGridView();
             this.rgvMasowe = new Telerik.WinControls.UI.RadGridView();
             this.rgvEkstrakcja = new Telerik.WinControls.UI.RadGridView();
+            this.ekstrakcjaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rgvSAPWplaty = new Telerik.WinControls.UI.RadGridView();
             this.radPageKonfig = new Telerik.WinControls.UI.RadPageViewPage();
             this.radSplitContainerKonfiguracja = new Telerik.WinControls.UI.RadSplitContainer();
@@ -519,6 +524,7 @@
             this.rPVKonfig = new Telerik.WinControls.UI.RadPageView();
             this.rpvJednostka = new Telerik.WinControls.UI.RadPageViewPage();
             this.rddStanFin = new Telerik.WinControls.UI.RadDropDownList();
+            this.MainBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.rddlJedGosp = new Telerik.WinControls.UI.RadDropDownList();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -545,7 +551,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.tbDniHasla = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.radGroupBox1 = new Telerik.WinControls.UI.RadGroupBox();
+            this.rgHasloBox = new Telerik.WinControls.UI.RadGroupBox();
             this.tbPwdWS = new System.Windows.Forms.TextBox();
             this.tbLoginWS = new System.Windows.Forms.TextBox();
             this.logonlab = new System.Windows.Forms.Label();
@@ -590,6 +596,7 @@
             this.rbManage = new Telerik.WinControls.UI.RadButton();
             this.rbAddAccount = new Telerik.WinControls.UI.RadButton();
             this.rgvUsers = new Telerik.WinControls.UI.RadGridView();
+            this.userBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.radPageBanki = new Telerik.WinControls.UI.RadPageViewPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
@@ -597,6 +604,7 @@
             this.rbAdd = new Telerik.WinControls.UI.RadButton();
             this.rbSaveBanki = new Telerik.WinControls.UI.RadButton();
             this.rgvBanki = new Telerik.WinControls.UI.RadGridView();
+            this.bankiKonfigBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btKonwWyc = new System.Windows.Forms.Button();
             this.radPageBIG = new Telerik.WinControls.UI.RadPageViewPage();
             this.splitContainerBigMain = new System.Windows.Forms.SplitContainer();
@@ -622,14 +630,6 @@
             this.rpBIG = new Telerik.WinControls.UI.RadPageViewPage();
             this.rb_BIG = new Telerik.WinControls.UI.RadButton();
             this.splitPanel4 = new Telerik.WinControls.UI.SplitPanel();
-            this.knsKomornikBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.transferBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.wplataBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dokumentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ekstrakcjaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.MainBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.bankiKonfigBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.knsMigratorEntitiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.knsKsiegiBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -671,6 +671,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rgvKsiegi.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvKomornicy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvKomornicy.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.knsKomornikBindingSource)).BeginInit();
             this.radPageImports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radSplitContainer6)).BeginInit();
             this.radSplitContainer6.SuspendLayout();
@@ -691,14 +692,17 @@
             this.splitPanel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rgvTransfer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvTransfer.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.transferBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitPanel13)).BeginInit();
             this.splitPanel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rgvWplaty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvWplaty.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wplataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvDokumenty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvDokumenty.MasterTemplate)).BeginInit();
             this.rgvDokumenty.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rbClearFilters)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dokumentBindingSource)).BeginInit();
             this.radPageEkstrakcja.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radSplitContainer5)).BeginInit();
             this.radSplitContainer5.SuspendLayout();
@@ -720,6 +724,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rgvMasowe.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvEkstrakcja)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvEkstrakcja.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ekstrakcjaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvSAPWplaty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvSAPWplaty.MasterTemplate)).BeginInit();
             this.radPageKonfig.SuspendLayout();
@@ -740,6 +745,7 @@
             this.rPVKonfig.SuspendLayout();
             this.rpvJednostka.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rddStanFin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rddlJedGosp)).BeginInit();
             this.rpvIntegracja.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox2)).BeginInit();
@@ -755,8 +761,8 @@
             this.splitContainer7.Panel1.SuspendLayout();
             this.splitContainer7.Panel2.SuspendLayout();
             this.splitContainer7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).BeginInit();
-            this.radGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rgHasloBox)).BeginInit();
+            this.rgHasloBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rbtTestPfx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rbtPfxPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btPfx)).BeginInit();
@@ -797,6 +803,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rbAddAccount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvUsers.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).BeginInit();
             this.radPageBanki.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -811,6 +818,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rbSaveBanki)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvBanki)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvBanki.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bankiKonfigBindingSource)).BeginInit();
             this.radPageBIG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBigMain)).BeginInit();
             this.splitContainerBigMain.Panel2.SuspendLayout();
@@ -837,14 +845,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.rb_BIG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitPanel4)).BeginInit();
             this.splitPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.knsKomornikBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.transferBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.wplataBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dokumentBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ekstrakcjaBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MainBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bankiKonfigBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.knsMigratorEntitiesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.knsKsiegiBindingSource)).BeginInit();
@@ -882,7 +882,7 @@
             // radPageSlowniki
             // 
             this.radPageSlowniki.Controls.Add(this.radSplitContainer3);
-            this.radPageSlowniki.ItemSize = new System.Drawing.SizeF(181F, 24F);
+            this.radPageSlowniki.ItemSize = new System.Drawing.SizeF(181F, 28F);
             this.radPageSlowniki.Location = new System.Drawing.Point(10, 37);
             this.radPageSlowniki.Name = "radPageSlowniki";
             this.radPageSlowniki.Size = new System.Drawing.Size(1262, 746);
@@ -1000,7 +1000,7 @@
             // radPageMapowanie
             // 
             this.radPageMapowanie.Controls.Add(this.radSplitContainer4);
-            this.radPageMapowanie.ItemSize = new System.Drawing.SizeF(181F, 24F);
+            this.radPageMapowanie.ItemSize = new System.Drawing.SizeF(181F, 28F);
             this.radPageMapowanie.Location = new System.Drawing.Point(10, 37);
             this.radPageMapowanie.Name = "radPageMapowanie";
             this.radPageMapowanie.Size = new System.Drawing.Size(1262, 746);
@@ -1341,10 +1341,14 @@
             this.rgvKomornicy.Visible = false;
             this.rgvKomornicy.Initialized += new System.EventHandler(this.rgvKomornicy_Initialized);
             // 
+            // knsKomornikBindingSource
+            // 
+            this.knsKomornikBindingSource.DataSource = typeof(KnsMigrator.KnsKomornik);
+            // 
             // radPageImports
             // 
             this.radPageImports.Controls.Add(this.radSplitContainer6);
-            this.radPageImports.ItemSize = new System.Drawing.SizeF(181F, 24F);
+            this.radPageImports.ItemSize = new System.Drawing.SizeF(181F, 28F);
             this.radPageImports.Location = new System.Drawing.Point(10, 37);
             this.radPageImports.Name = "radPageImports";
             this.radPageImports.Size = new System.Drawing.Size(1262, 746);
@@ -1764,6 +1768,10 @@
             this.rgvTransfer.DataBindingComplete += new Telerik.WinControls.UI.GridViewBindingCompleteEventHandler(this.rgvTransfer_DataBindingComplete);
             this.rgvTransfer.Initialized += new System.EventHandler(this.rgvTransfer_Initialized);
             // 
+            // transferBindingSource
+            // 
+            this.transferBindingSource.DataSource = typeof(KnsMigrator.Transfer);
+            // 
             // splitPanel13
             // 
             this.splitPanel13.Controls.Add(this.rgvWplaty);
@@ -1851,6 +1859,10 @@
             this.rgvWplaty.TabIndex = 1;
             this.rgvWplaty.Initialized += new System.EventHandler(this.rgvWplaty_Initialized);
             this.rgvWplaty.Click += new System.EventHandler(this.rmi_OdpisyWS_Click);
+            // 
+            // wplataBindingSource
+            // 
+            this.wplataBindingSource.DataSource = typeof(KnsMigrator.Wplata);
             // 
             // rgvDokumenty
             // 
@@ -2719,10 +2731,14 @@
             this.rbClearFilters.Text = "Czyść filtry";
             this.rbClearFilters.Click += new System.EventHandler(this.rbClearFilters_Click);
             // 
+            // dokumentBindingSource
+            // 
+            this.dokumentBindingSource.DataSource = typeof(KnsMigrator.Dokument);
+            // 
             // radPageEkstrakcja
             // 
             this.radPageEkstrakcja.Controls.Add(this.radSplitContainer5);
-            this.radPageEkstrakcja.ItemSize = new System.Drawing.SizeF(181F, 24F);
+            this.radPageEkstrakcja.ItemSize = new System.Drawing.SizeF(181F, 28F);
             this.radPageEkstrakcja.Location = new System.Drawing.Point(10, 37);
             this.radPageEkstrakcja.Name = "radPageEkstrakcja";
             this.radPageEkstrakcja.Size = new System.Drawing.Size(1262, 746);
@@ -2847,7 +2863,7 @@
             // 
             this.tbKarta.Location = new System.Drawing.Point(640, 5);
             this.tbKarta.Name = "tbKarta";
-            this.tbKarta.Size = new System.Drawing.Size(117, 22);
+            this.tbKarta.Size = new System.Drawing.Size(117, 20);
             this.tbKarta.TabIndex = 13;
             this.tbKarta.Visible = false;
             // 
@@ -2855,7 +2871,7 @@
             // 
             this.tbAll.Location = new System.Drawing.Point(555, 5);
             this.tbAll.Name = "tbAll";
-            this.tbAll.Size = new System.Drawing.Size(67, 22);
+            this.tbAll.Size = new System.Drawing.Size(67, 20);
             this.tbAll.TabIndex = 12;
             this.tbAll.Visible = false;
             // 
@@ -2863,7 +2879,7 @@
             // 
             this.tbCurrent.Location = new System.Drawing.Point(494, 5);
             this.tbCurrent.Name = "tbCurrent";
-            this.tbCurrent.Size = new System.Drawing.Size(54, 22);
+            this.tbCurrent.Size = new System.Drawing.Size(54, 20);
             this.tbCurrent.TabIndex = 11;
             this.tbCurrent.Visible = false;
             // 
@@ -3764,6 +3780,10 @@
             this.rgvEkstrakcja.Visible = false;
             this.rgvEkstrakcja.Initialized += new System.EventHandler(this.rgvEkstrakcja_Initialized);
             // 
+            // ekstrakcjaBindingSource
+            // 
+            this.ekstrakcjaBindingSource.DataSource = typeof(KnsMigrator.Ekstrakcja);
+            // 
             // rgvSAPWplaty
             // 
             this.rgvSAPWplaty.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -3869,10 +3889,10 @@
             // radPageKonfig
             // 
             this.radPageKonfig.Controls.Add(this.radSplitContainerKonfiguracja);
-            this.radPageKonfig.ItemSize = new System.Drawing.SizeF(181F, 24F);
-            this.radPageKonfig.Location = new System.Drawing.Point(10, 33);
+            this.radPageKonfig.ItemSize = new System.Drawing.SizeF(181F, 28F);
+            this.radPageKonfig.Location = new System.Drawing.Point(10, 37);
             this.radPageKonfig.Name = "radPageKonfig";
-            this.radPageKonfig.Size = new System.Drawing.Size(1262, 750);
+            this.radPageKonfig.Size = new System.Drawing.Size(1262, 746);
             this.radPageKonfig.Text = "Konfiguracja";
             // 
             // radSplitContainerKonfiguracja
@@ -3886,7 +3906,7 @@
             // 
             // 
             this.radSplitContainerKonfiguracja.RootElement.MinSize = new System.Drawing.Size(0, 0);
-            this.radSplitContainerKonfiguracja.Size = new System.Drawing.Size(1262, 750);
+            this.radSplitContainerKonfiguracja.Size = new System.Drawing.Size(1262, 746);
             this.radSplitContainerKonfiguracja.TabIndex = 1;
             this.radSplitContainerKonfiguracja.TabStop = false;
             this.radSplitContainerKonfiguracja.Initialized += new System.EventHandler(this.radSplitContainerKonfiguracja_Initialized);
@@ -3900,7 +3920,7 @@
             // 
             // 
             this.splitPanel15.RootElement.MinSize = new System.Drawing.Size(0, 0);
-            this.splitPanel15.Size = new System.Drawing.Size(1262, 750);
+            this.splitPanel15.Size = new System.Drawing.Size(1262, 746);
             this.splitPanel15.SizeInfo.AutoSizeScale = new System.Drawing.SizeF(0F, 0.437799F);
             this.splitPanel15.SizeInfo.SplitterCorrection = new System.Drawing.Size(0, 275);
             this.splitPanel15.TabIndex = 1;
@@ -3919,7 +3939,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1262, 750);
+            this.splitContainer1.Size = new System.Drawing.Size(1262, 746);
             this.splitContainer1.SplitterDistance = 653;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -3937,7 +3957,7 @@
             // splitContainer6.Panel2
             // 
             this.splitContainer6.Panel2.Controls.Add(this.rPVKonfig);
-            this.splitContainer6.Size = new System.Drawing.Size(653, 750);
+            this.splitContainer6.Size = new System.Drawing.Size(653, 746);
             this.splitContainer6.SplitterDistance = 25;
             this.splitContainer6.TabIndex = 22;
             // 
@@ -3961,8 +3981,8 @@
             this.rPVKonfig.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rPVKonfig.Location = new System.Drawing.Point(0, 0);
             this.rPVKonfig.Name = "rPVKonfig";
-            this.rPVKonfig.SelectedPage = this.rpvJednostka;
-            this.rPVKonfig.Size = new System.Drawing.Size(653, 721);
+            this.rPVKonfig.SelectedPage = this.rpvWS;
+            this.rPVKonfig.Size = new System.Drawing.Size(653, 717);
             this.rPVKonfig.TabIndex = 21;
             this.rPVKonfig.SelectedPageChanged += new System.EventHandler(this.rPVKonfig_SelectedPageChanged);
             // 
@@ -3972,10 +3992,10 @@
             this.rpvJednostka.Controls.Add(this.rddlJedGosp);
             this.rpvJednostka.Controls.Add(this.label10);
             this.rpvJednostka.Controls.Add(this.label11);
-            this.rpvJednostka.ItemSize = new System.Drawing.SizeF(87F, 24F);
-            this.rpvJednostka.Location = new System.Drawing.Point(10, 33);
+            this.rpvJednostka.ItemSize = new System.Drawing.SizeF(91F, 28F);
+            this.rpvJednostka.Location = new System.Drawing.Point(10, 37);
             this.rpvJednostka.Name = "rpvJednostka";
-            this.rpvJednostka.Size = new System.Drawing.Size(632, 677);
+            this.rpvJednostka.Size = new System.Drawing.Size(632, 669);
             this.rpvJednostka.Text = "Dane jednostki";
             // 
             // rddStanFin
@@ -3987,6 +4007,10 @@
             this.rddStanFin.Name = "rddStanFin";
             this.rddStanFin.Size = new System.Drawing.Size(393, 20);
             this.rddStanFin.TabIndex = 13;
+            // 
+            // MainBindingSource
+            // 
+            this.MainBindingSource.DataSource = typeof(KnsMigrator.KnsMigratorEntities);
             // 
             // rddlJedGosp
             // 
@@ -4019,7 +4043,7 @@
             // rpvIntegracja
             // 
             this.rpvIntegracja.Controls.Add(this.radGroupBox2);
-            this.rpvIntegracja.ItemSize = new System.Drawing.SizeF(151F, 24F);
+            this.rpvIntegracja.ItemSize = new System.Drawing.SizeF(155F, 28F);
             this.rpvIntegracja.Location = new System.Drawing.Point(10, 37);
             this.rpvIntegracja.Name = "rpvIntegracja";
             this.rpvIntegracja.Size = new System.Drawing.Size(632, 669);
@@ -4053,7 +4077,7 @@
             // 
             this.tbAlias.Location = new System.Drawing.Point(129, 68);
             this.tbAlias.Name = "tbAlias";
-            this.tbAlias.Size = new System.Drawing.Size(132, 22);
+            this.tbAlias.Size = new System.Drawing.Size(132, 20);
             this.tbAlias.TabIndex = 14;
             // 
             // label8
@@ -4079,7 +4103,7 @@
             this.tbPwd.Location = new System.Drawing.Point(123, 209);
             this.tbPwd.Name = "tbPwd";
             this.tbPwd.PasswordChar = '*';
-            this.tbPwd.Size = new System.Drawing.Size(123, 22);
+            this.tbPwd.Size = new System.Drawing.Size(123, 20);
             this.tbPwd.TabIndex = 11;
             this.tbPwd.UseSystemPasswordChar = true;
             // 
@@ -4087,7 +4111,7 @@
             // 
             this.tbUserId.Location = new System.Drawing.Point(123, 183);
             this.tbUserId.Name = "tbUserId";
-            this.tbUserId.Size = new System.Drawing.Size(123, 22);
+            this.tbUserId.Size = new System.Drawing.Size(123, 20);
             this.tbUserId.TabIndex = 10;
             // 
             // label6
@@ -4143,7 +4167,7 @@
             // 
             this.tbBazaDanych.Location = new System.Drawing.Point(128, 94);
             this.tbBazaDanych.Name = "tbBazaDanych";
-            this.tbBazaDanych.Size = new System.Drawing.Size(132, 22);
+            this.tbBazaDanych.Size = new System.Drawing.Size(132, 20);
             this.tbBazaDanych.TabIndex = 6;
             // 
             // label4
@@ -4159,7 +4183,7 @@
             // 
             this.tbServer.Location = new System.Drawing.Point(129, 40);
             this.tbServer.Name = "tbServer";
-            this.tbServer.Size = new System.Drawing.Size(132, 22);
+            this.tbServer.Size = new System.Drawing.Size(132, 20);
             this.tbServer.TabIndex = 4;
             // 
             // label3
@@ -4202,7 +4226,7 @@
             // rpvWS
             // 
             this.rpvWS.Controls.Add(this.splitContainer7);
-            this.rpvWS.ItemSize = new System.Drawing.SizeF(103F, 24F);
+            this.rpvWS.ItemSize = new System.Drawing.SizeF(107F, 28F);
             this.rpvWS.Location = new System.Drawing.Point(10, 37);
             this.rpvWS.Name = "rpvWS";
             this.rpvWS.Size = new System.Drawing.Size(632, 669);
@@ -4220,7 +4244,7 @@
             this.splitContainer7.Panel1.Controls.Add(this.label17);
             this.splitContainer7.Panel1.Controls.Add(this.tbDniHasla);
             this.splitContainer7.Panel1.Controls.Add(this.label16);
-            this.splitContainer7.Panel1.Controls.Add(this.radGroupBox1);
+            this.splitContainer7.Panel1.Controls.Add(this.rgHasloBox);
             this.splitContainer7.Panel1.Controls.Add(this.label15);
             this.splitContainer7.Panel1.Controls.Add(this.rbtTestPfx);
             this.splitContainer7.Panel1.Controls.Add(this.label1);
@@ -4248,7 +4272,7 @@
             // 
             this.tbDniHasla.Location = new System.Drawing.Point(268, 77);
             this.tbDniHasla.Name = "tbDniHasla";
-            this.tbDniHasla.Size = new System.Drawing.Size(41, 22);
+            this.tbDniHasla.Size = new System.Drawing.Size(41, 20);
             this.tbDniHasla.TabIndex = 6;
             // 
             // label16
@@ -4260,33 +4284,33 @@
             this.label16.TabIndex = 24;
             this.label16.Text = "Zapytaj o zmianę hasła  ZSRK na";
             // 
-            // radGroupBox1
+            // rgHasloBox
             // 
-            this.radGroupBox1.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-            this.radGroupBox1.Controls.Add(this.tbPwdWS);
-            this.radGroupBox1.Controls.Add(this.tbLoginWS);
-            this.radGroupBox1.Controls.Add(this.logonlab);
-            this.radGroupBox1.Controls.Add(this.pwdLabel);
-            this.radGroupBox1.HeaderText = "Autentykacja w Usłudze sieciowej ( Basic Authentication )";
-            this.radGroupBox1.Location = new System.Drawing.Point(95, 106);
-            this.radGroupBox1.Name = "radGroupBox1";
-            this.radGroupBox1.Size = new System.Drawing.Size(421, 88);
-            this.radGroupBox1.TabIndex = 23;
-            this.radGroupBox1.Text = "Autentykacja w Usłudze sieciowej ( Basic Authentication )";
+            this.rgHasloBox.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+            this.rgHasloBox.Controls.Add(this.tbPwdWS);
+            this.rgHasloBox.Controls.Add(this.tbLoginWS);
+            this.rgHasloBox.Controls.Add(this.logonlab);
+            this.rgHasloBox.Controls.Add(this.pwdLabel);
+            this.rgHasloBox.HeaderText = "Autentykacja w Usłudze sieciowej ( Basic Authentication )";
+            this.rgHasloBox.Location = new System.Drawing.Point(95, 106);
+            this.rgHasloBox.Name = "rgHasloBox";
+            this.rgHasloBox.Size = new System.Drawing.Size(421, 88);
+            this.rgHasloBox.TabIndex = 23;
+            this.rgHasloBox.Text = "Autentykacja w Usłudze sieciowej ( Basic Authentication )";
             // 
             // tbPwdWS
             // 
             this.tbPwdWS.Location = new System.Drawing.Point(175, 63);
             this.tbPwdWS.Name = "tbPwdWS";
             this.tbPwdWS.PasswordChar = '*';
-            this.tbPwdWS.Size = new System.Drawing.Size(142, 22);
+            this.tbPwdWS.Size = new System.Drawing.Size(142, 20);
             this.tbPwdWS.TabIndex = 3;
             // 
             // tbLoginWS
             // 
             this.tbLoginWS.Location = new System.Drawing.Point(175, 37);
             this.tbLoginWS.Name = "tbLoginWS";
-            this.tbLoginWS.Size = new System.Drawing.Size(142, 22);
+            this.tbLoginWS.Size = new System.Drawing.Size(142, 20);
             this.tbLoginWS.TabIndex = 2;
             // 
             // logonlab
@@ -4424,14 +4448,14 @@
             // 
             this.tbTo.Location = new System.Drawing.Point(151, 45);
             this.tbTo.Name = "tbTo";
-            this.tbTo.Size = new System.Drawing.Size(376, 22);
+            this.tbTo.Size = new System.Drawing.Size(376, 20);
             this.tbTo.TabIndex = 1;
             // 
             // tbFrom
             // 
             this.tbFrom.Location = new System.Drawing.Point(151, 19);
             this.tbFrom.Name = "tbFrom";
-            this.tbFrom.Size = new System.Drawing.Size(376, 22);
+            this.tbFrom.Size = new System.Drawing.Size(376, 20);
             this.tbFrom.TabIndex = 0;
             // 
             // splitContainer9
@@ -4492,7 +4516,7 @@
             // rpvSystemy
             // 
             this.rpvSystemy.Controls.Add(this.splitContainer10);
-            this.rpvSystemy.ItemSize = new System.Drawing.SizeF(129F, 24F);
+            this.rpvSystemy.ItemSize = new System.Drawing.SizeF(133F, 28F);
             this.rpvSystemy.Location = new System.Drawing.Point(10, 37);
             this.rpvSystemy.Name = "rpvSystemy";
             this.rpvSystemy.Size = new System.Drawing.Size(632, 669);
@@ -4600,7 +4624,7 @@
             this.rpvKonfigOther.Controls.Add(this.groupBox2);
             this.rpvKonfigOther.Controls.Add(this.dateStartImport);
             this.rpvKonfigOther.Controls.Add(this.cbSkipSadEmpty);
-            this.rpvKonfigOther.ItemSize = new System.Drawing.SizeF(116F, 24F);
+            this.rpvKonfigOther.ItemSize = new System.Drawing.SizeF(120F, 28F);
             this.rpvKonfigOther.Location = new System.Drawing.Point(10, 37);
             this.rpvKonfigOther.Name = "rpvKonfigOther";
             this.rpvKonfigOther.Size = new System.Drawing.Size(632, 669);
@@ -4620,7 +4644,7 @@
             this.dtpMiesPak.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpMiesPak.Location = new System.Drawing.Point(300, 112);
             this.dtpMiesPak.Name = "dtpMiesPak";
-            this.dtpMiesPak.Size = new System.Drawing.Size(94, 22);
+            this.dtpMiesPak.Size = new System.Drawing.Size(94, 20);
             this.dtpMiesPak.TabIndex = 20;
             this.dtpMiesPak.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
@@ -4685,7 +4709,7 @@
             this.dtpTerminWymag.Location = new System.Drawing.Point(253, 13);
             this.dtpTerminWymag.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dtpTerminWymag.Name = "dtpTerminWymag";
-            this.dtpTerminWymag.Size = new System.Drawing.Size(94, 22);
+            this.dtpTerminWymag.Size = new System.Drawing.Size(94, 20);
             this.dtpTerminWymag.TabIndex = 21;
             this.dtpTerminWymag.Value = new System.DateTime(2099, 12, 31, 0, 0, 0, 0);
             // 
@@ -4695,7 +4719,7 @@
             this.dateStartImport.Location = new System.Drawing.Point(338, 28);
             this.dateStartImport.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dateStartImport.Name = "dateStartImport";
-            this.dateStartImport.Size = new System.Drawing.Size(77, 22);
+            this.dateStartImport.Size = new System.Drawing.Size(77, 20);
             this.dateStartImport.TabIndex = 3;
             this.dateStartImport.Value = new System.DateTime(2014, 1, 1, 0, 0, 0, 0);
             // 
@@ -4712,7 +4736,7 @@
             // rpvDbUtrzymanie
             // 
             this.rpvDbUtrzymanie.Controls.Add(this.rbUpdateDB);
-            this.rpvDbUtrzymanie.ItemSize = new System.Drawing.SizeF(86F, 24F);
+            this.rpvDbUtrzymanie.ItemSize = new System.Drawing.SizeF(90F, 28F);
             this.rpvDbUtrzymanie.Location = new System.Drawing.Point(10, 37);
             this.rpvDbUtrzymanie.Name = "rpvDbUtrzymanie";
             this.rpvDbUtrzymanie.Size = new System.Drawing.Size(632, 669);
@@ -4743,8 +4767,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.rgvUsers);
-            this.splitContainer2.Size = new System.Drawing.Size(605, 750);
-            this.splitContainer2.SplitterDistance = 34;
+            this.splitContainer2.Size = new System.Drawing.Size(605, 746);
+            this.splitContainer2.SplitterDistance = 33;
             this.splitContainer2.TabIndex = 1;
             // 
             // rbDeleteAcc
@@ -4831,14 +4855,18 @@
             this.rgvUsers.MasterTemplate.ViewDefinition = tableViewDefinition17;
             this.rgvUsers.Name = "rgvUsers";
             this.rgvUsers.ReadOnly = true;
-            this.rgvUsers.Size = new System.Drawing.Size(605, 712);
+            this.rgvUsers.Size = new System.Drawing.Size(605, 709);
             this.rgvUsers.TabIndex = 0;
             this.rgvUsers.Initialized += new System.EventHandler(this.rgvUsers_Initialized);
+            // 
+            // userBindingSource1
+            // 
+            this.userBindingSource1.DataSource = typeof(KnsMigrator.User);
             // 
             // radPageBanki
             // 
             this.radPageBanki.Controls.Add(this.splitContainer3);
-            this.radPageBanki.ItemSize = new System.Drawing.SizeF(181F, 24F);
+            this.radPageBanki.ItemSize = new System.Drawing.SizeF(181F, 28F);
             this.radPageBanki.Location = new System.Drawing.Point(10, 41);
             this.radPageBanki.Name = "radPageBanki";
             this.radPageBanki.Size = new System.Drawing.Size(1121, 731);
@@ -4972,6 +5000,10 @@
             this.rgvBanki.TabIndex = 0;
             this.rgvBanki.CommandCellClick += new Telerik.WinControls.UI.CommandCellClickEventHandler(this.rgvBanki_CommandCellClick);
             // 
+            // bankiKonfigBindingSource
+            // 
+            this.bankiKonfigBindingSource.DataSource = typeof(KnsMigrator.BankiKonfig);
+            // 
             // btKonwWyc
             // 
             this.btKonwWyc.Location = new System.Drawing.Point(25, 45);
@@ -4985,7 +5017,7 @@
             // radPageBIG
             // 
             this.radPageBIG.Controls.Add(this.splitContainerBigMain);
-            this.radPageBIG.ItemSize = new System.Drawing.SizeF(181F, 24F);
+            this.radPageBIG.ItemSize = new System.Drawing.SizeF(181F, 28F);
             this.radPageBIG.Location = new System.Drawing.Point(10, 37);
             this.radPageBIG.Name = "radPageBIG";
             this.radPageBIG.Size = new System.Drawing.Size(1262, 746);
@@ -5115,7 +5147,7 @@
             // rpSlowniki
             // 
             this.rpSlowniki.Controls.Add(this.rlSlowniki);
-            this.rpSlowniki.ItemSize = new System.Drawing.SizeF(241F, 24F);
+            this.rpSlowniki.ItemSize = new System.Drawing.SizeF(243F, 32F);
             this.rpSlowniki.Location = new System.Drawing.Point(5, 31);
             this.rpSlowniki.Name = "rpSlowniki";
             this.rpSlowniki.Size = new System.Drawing.Size(231, 420);
@@ -5138,7 +5170,7 @@
             // rpKontoMEP
             // 
             this.rpKontoMEP.Controls.Add(this.rlKontoMEP);
-            this.rpKontoMEP.ItemSize = new System.Drawing.SizeF(241F, 24F);
+            this.rpKontoMEP.ItemSize = new System.Drawing.SizeF(243F, 32F);
             this.rpKontoMEP.Location = new System.Drawing.Point(5, 31);
             this.rpKontoMEP.Name = "rpKontoMEP";
             this.rpKontoMEP.Size = new System.Drawing.Size(231, 420);
@@ -5160,10 +5192,10 @@
             // rpMapowania
             // 
             this.rpMapowania.Controls.Add(this.rlMenuMapowania);
-            this.rpMapowania.ItemSize = new System.Drawing.SizeF(241F, 24F);
+            this.rpMapowania.ItemSize = new System.Drawing.SizeF(243F, 32F);
             this.rpMapowania.Location = new System.Drawing.Point(5, 31);
             this.rpMapowania.Name = "rpMapowania";
-            this.rpMapowania.Size = new System.Drawing.Size(231, 484);
+            this.rpMapowania.Size = new System.Drawing.Size(231, 420);
             this.rpMapowania.Text = "Mapowania";
             // 
             // rlMenuMapowania
@@ -5197,13 +5229,13 @@
             this.rlMenuMapowania.Items.Add(radListDataItem13);
             this.rlMenuMapowania.Location = new System.Drawing.Point(0, 0);
             this.rlMenuMapowania.Name = "rlMenuMapowania";
-            this.rlMenuMapowania.Size = new System.Drawing.Size(231, 484);
+            this.rlMenuMapowania.Size = new System.Drawing.Size(231, 420);
             this.rlMenuMapowania.TabIndex = 0;
             this.rlMenuMapowania.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.rlMenuMapowania_SelectedIndexChanged);
             // 
             // rpImporty
             // 
-            this.rpImporty.ItemSize = new System.Drawing.SizeF(241F, 24F);
+            this.rpImporty.ItemSize = new System.Drawing.SizeF(243F, 32F);
             this.rpImporty.Location = new System.Drawing.Point(5, 36);
             this.rpImporty.Name = "rpImporty";
             this.rpImporty.Size = new System.Drawing.Size(205, 407);
@@ -5211,7 +5243,7 @@
             // 
             // rpEkstrakcja
             // 
-            this.rpEkstrakcja.ItemSize = new System.Drawing.SizeF(241F, 24F);
+            this.rpEkstrakcja.ItemSize = new System.Drawing.SizeF(243F, 32F);
             this.rpEkstrakcja.Location = new System.Drawing.Point(5, 31);
             this.rpEkstrakcja.Name = "rpEkstrakcja";
             this.rpEkstrakcja.Size = new System.Drawing.Size(231, 451);
@@ -5219,7 +5251,7 @@
             // 
             // rpKonfig
             // 
-            this.rpKonfig.ItemSize = new System.Drawing.SizeF(241F, 24F);
+            this.rpKonfig.ItemSize = new System.Drawing.SizeF(243F, 32F);
             this.rpKonfig.Location = new System.Drawing.Point(5, 31);
             this.rpKonfig.Name = "rpKonfig";
             this.rpKonfig.Size = new System.Drawing.Size(231, 420);
@@ -5227,7 +5259,7 @@
             // 
             // rpBanki
             // 
-            this.rpBanki.ItemSize = new System.Drawing.SizeF(241F, 24F);
+            this.rpBanki.ItemSize = new System.Drawing.SizeF(243F, 32F);
             this.rpBanki.Location = new System.Drawing.Point(5, 36);
             this.rpBanki.Name = "rpBanki";
             this.rpBanki.Size = new System.Drawing.Size(205, 407);
@@ -5236,7 +5268,7 @@
             // rpBIG
             // 
             this.rpBIG.Controls.Add(this.rb_BIG);
-            this.rpBIG.ItemSize = new System.Drawing.SizeF(241F, 24F);
+            this.rpBIG.ItemSize = new System.Drawing.SizeF(243F, 32F);
             this.rpBIG.Location = new System.Drawing.Point(5, 31);
             this.rpBIG.Name = "rpBIG";
             this.rpBIG.Size = new System.Drawing.Size(231, 451);
@@ -5266,38 +5298,6 @@
             this.splitPanel4.SizeInfo.SplitterCorrection = new System.Drawing.Size(451, 0);
             this.splitPanel4.TabIndex = 1;
             this.splitPanel4.TabStop = false;
-            // 
-            // knsKomornikBindingSource
-            // 
-            this.knsKomornikBindingSource.DataSource = typeof(KnsMigrator.KnsKomornik);
-            // 
-            // transferBindingSource
-            // 
-            this.transferBindingSource.DataSource = typeof(KnsMigrator.Transfer);
-            // 
-            // wplataBindingSource
-            // 
-            this.wplataBindingSource.DataSource = typeof(KnsMigrator.Wplata);
-            // 
-            // dokumentBindingSource
-            // 
-            this.dokumentBindingSource.DataSource = typeof(KnsMigrator.Dokument);
-            // 
-            // ekstrakcjaBindingSource
-            // 
-            this.ekstrakcjaBindingSource.DataSource = typeof(KnsMigrator.Ekstrakcja);
-            // 
-            // MainBindingSource
-            // 
-            this.MainBindingSource.DataSource = typeof(KnsMigrator.KnsMigratorEntities);
-            // 
-            // userBindingSource1
-            // 
-            this.userBindingSource1.DataSource = typeof(KnsMigrator.User);
-            // 
-            // bankiKonfigBindingSource
-            // 
-            this.bankiKonfigBindingSource.DataSource = typeof(KnsMigrator.BankiKonfig);
             // 
             // knsMigratorEntitiesBindingSource
             // 
@@ -5365,6 +5365,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rgvKsiegi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvKomornicy.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvKomornicy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.knsKomornikBindingSource)).EndInit();
             this.radPageImports.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radSplitContainer6)).EndInit();
             this.radSplitContainer6.ResumeLayout(false);
@@ -5387,15 +5388,18 @@
             this.splitPanel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rgvTransfer.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvTransfer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.transferBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitPanel13)).EndInit();
             this.splitPanel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rgvWplaty.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvWplaty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wplataBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvDokumenty.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvDokumenty)).EndInit();
             this.rgvDokumenty.ResumeLayout(false);
             this.rgvDokumenty.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rbClearFilters)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dokumentBindingSource)).EndInit();
             this.radPageEkstrakcja.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radSplitContainer5)).EndInit();
             this.radSplitContainer5.ResumeLayout(false);
@@ -5418,6 +5422,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rgvMasowe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvEkstrakcja.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvEkstrakcja)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ekstrakcjaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvSAPWplaty.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvSAPWplaty)).EndInit();
             this.radPageKonfig.ResumeLayout(false);
@@ -5439,6 +5444,7 @@
             this.rpvJednostka.ResumeLayout(false);
             this.rpvJednostka.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rddStanFin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rddlJedGosp)).EndInit();
             this.rpvIntegracja.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radGroupBox2)).EndInit();
@@ -5457,9 +5463,9 @@
             this.splitContainer7.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
             this.splitContainer7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.radGroupBox1)).EndInit();
-            this.radGroupBox1.ResumeLayout(false);
-            this.radGroupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rgHasloBox)).EndInit();
+            this.rgHasloBox.ResumeLayout(false);
+            this.rgHasloBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rbtTestPfx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rbtPfxPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btPfx)).EndInit();
@@ -5503,6 +5509,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rbAddAccount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvUsers.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).EndInit();
             this.radPageBanki.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
@@ -5517,6 +5524,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rbSaveBanki)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvBanki.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvBanki)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bankiKonfigBindingSource)).EndInit();
             this.radPageBIG.ResumeLayout(false);
             this.splitContainerBigMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBigMain)).EndInit();
@@ -5544,14 +5552,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.rb_BIG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitPanel4)).EndInit();
             this.splitPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.knsKomornikBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.transferBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.wplataBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dokumentBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ekstrakcjaBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MainBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bankiKonfigBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.knsMigratorEntitiesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.knsKsiegiBindingSource)).EndInit();
@@ -5758,7 +5758,7 @@
         private Telerik.WinControls.UI.RadButton rbUpdateDB;
         private Telerik.WinControls.UI.RadButton rbtPfxPassword;
         private Telerik.WinControls.UI.RadButton rbtTestPfx;
-        private Telerik.WinControls.UI.RadGroupBox radGroupBox1;
+        private Telerik.WinControls.UI.RadGroupBox rgHasloBox;
         private Telerik.WinControls.UI.RadPageViewPage rpKontoMEP;
         private Telerik.WinControls.UI.RadListControl rlKontoMEP;
         private Telerik.WinControls.UI.RadGridView rgvMethods;

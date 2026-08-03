@@ -18,6 +18,7 @@ using RupIntegrator;
 using SapPOHelper;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -131,11 +132,20 @@ namespace KnsMigrator
 
         private void SetUserView(int role)
         {
+            rgHasloBox.Visible = false;
             if (role == 0)  // użytkownik
             {
                 this.rpvAdministracja.Pages["radPageKonfig"].Enabled = false;
                 this.rpvMenu.Pages["rpKonfig"].Enabled = false;
 
+                // Replace the single token "if (Appconfig)" with the following code where appropriate:
+
+                bool appconfig = GetAppSettingBool("SAP_PO_logowanie", false);
+                if (appconfig)
+                {
+                    rgHasloBox.Visible = true;  //
+                }
+               
             }
             else
             {
@@ -4411,6 +4421,36 @@ namespace KnsMigrator
         private void rgvConsSystems_Click(object sender, EventArgs e)
         {
 
+        }
+
+        // Inside the MigrForm class, add these helper methods (paste near other private helpers):
+
+        private string GetAppSetting(string key, string defaultValue = null)
+        {
+            try
+            {
+                var val = ConfigurationManager.AppSettings[key];
+                if (string.IsNullOrWhiteSpace(val))
+                    return defaultValue;
+                return val;
+            }
+            catch
+            {
+                return defaultValue;
+            }
+        }
+
+        private bool GetAppSettingBool(string key, bool defaultValue = false)
+        {
+            var v = GetAppSetting(key);
+            if (string.IsNullOrWhiteSpace(v))
+                return defaultValue;
+
+            v = v.Trim();
+            if (v.Equals("1", StringComparison.OrdinalIgnoreCase)) return true;
+            if (v.Equals("true", StringComparison.OrdinalIgnoreCase)) return true;
+            if (v.Equals("yes", StringComparison.OrdinalIgnoreCase)) return true;
+            return false;
         }
     }
 
