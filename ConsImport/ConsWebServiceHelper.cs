@@ -388,6 +388,11 @@ namespace ConsImport
             theClient.ClientCredentials.ClientCertificate.Certificate = _authCert;
             theClient.ClientCredentials.UserName.UserName = _basicAuthLogin;
             theClient.ClientCredentials.UserName.Password = _basicAuthPassword;
+            theClient.Endpoint.Binding.SendTimeout = new TimeSpan(0, 5, 0);
+            theClient.Endpoint.Binding.OpenTimeout = new TimeSpan(0, 2, 0);
+            theClient.Endpoint.Binding.ReceiveTimeout = new TimeSpan(0, 5, 0);
+
+
             var requestInterceptor = new InspectorBehavior();
             theClient.Endpoint.Behaviors.Add(requestInterceptor);
             Args.Admin = _admin;

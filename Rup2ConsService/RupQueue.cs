@@ -81,6 +81,8 @@ namespace Rup2ConsService
                                 db.ConsKartaTransfer.Add(karta);
                                 db.SaveChanges();
 
+                                log.Debug("Dodano kartę transferu do bazy danych, id: " + karta.Id.ToString());
+
                                 ImportContentSystemDataRequest request = new ImportContentSystemDataRequest();
                                 // docelowo powinno być ładowanie z xmla ConsKartaTransfer.payload
                                 request.DaneKartyDluznika = item.importContentSystemDataRequest.DaneKartyDluznika;
@@ -94,9 +96,12 @@ namespace Rup2ConsService
                                 //karta.payload = item.
                                 setSAPConnectionParamsCONS();
                                 string requestStr;
+                                log.Debug("Wywołanie webservice'u ImportContentSystemData");
                                 var result = ConsImport.ConsWebServiceHelper.ImportData("ImportContentSystemData", request, out requestStr);
+                                log.Debug("Zmiana statusu");
                                 karta.status = (int)ConsJobStatus.OnGoing;
                                 db.SaveChanges();
+                                log.Debug("Zapisanie odpowiedzi webservice'u");
 
                             }
 #if DEBUG
