@@ -25,6 +25,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
@@ -106,7 +107,8 @@ namespace KnsMigrator
 
                 }
                 Cursor.Current = Cursors.Default;
-
+                
+                
 
             }
 
@@ -1517,15 +1519,37 @@ namespace KnsMigrator
 
                 if (ans.DokumentPSCD != null && ans.DokumentPSCD.FirstOrDefault() != null)
                 {
+                    // SAP amounts use a decimal point, independently of Windows regional settings.
+                    const NumberStyles sapAmountStyles = NumberStyles.AllowLeadingWhite
+                        | NumberStyles.AllowTrailingWhite | NumberStyles.AllowLeadingSign
+                        | NumberStyles.AllowTrailingSign | NumberStyles.AllowDecimalPoint;
+                    int documentIndex = 0;
                     foreach (DokumentPSCD roz in ans.DokumentPSCD)
                     {
+                        documentIndex++;
+                        int positionIndex = 0;
                         foreach (PozycjaDokumentPH pozd in roz.PozycjaDokumentPH)
+                        {
+                            positionIndex++;
                             if (String.IsNullOrEmpty(pozd.PowodRozliczenia))
                             {
-                                kwtall += Convert.ToDecimal(pozd.Kwota.Replace(".", ","));
+                                decimal amount;
+                                if (!decimal.TryParse(pozd.Kwota, sapAmountStyles,
+                                    CultureInfo.InvariantCulture, out amount))
+                                {
+                                    log.ErrorFormat("Invalid SAP amount in canOdpis. ResponseDocument={0}, ResponsePosition={1}, IsNull={2}, Length={3}; expected decimal point '.', no group separators.",
+                                        documentIndex, positionIndex, pozd.Kwota == null,
+                                        pozd.Kwota == null ? 0 : pozd.Kwota.Length);
+                                    message = string.Format(CultureInfo.InvariantCulture,
+                                        "Nieprawidłowy format kwoty w odpowiedzi SAP (dokument {0}, pozycja {1}). Odpis nie został wysłany.",
+                                        documentIndex, positionIndex);
+                                    return -1;
+                                }
+                                kwtall += amount;
                                 //if (String.IsNullOrEmpty(roz.PozycjaDokumentPH.FirstOrDefault().roz.PozycjaCzesciowaWDokumencie))
                                 //        kwtfresh += roz.KwotaWWalucieKrajowej;
                             }
+                        }
 
                     }
 

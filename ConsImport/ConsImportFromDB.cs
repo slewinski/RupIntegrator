@@ -53,7 +53,7 @@ namespace ConsImport
             if (dset != null)
             {
                 log.Debug("Pobrano dane z bazy danych przy użyciu liczba wierszy " + dset.Tables[0].Rows.Count + " " + knf.sp_name + " dla przedziału " + odDnia.ToString() + " do " + doDnia.ToString());
-                return ProceedDataTable(dset);
+                return ProceedDataTable(dset,knf.typDB??0);
 
             }
             else
@@ -66,7 +66,7 @@ namespace ConsImport
 
 
 
-        private List<ConsImportData> ProceedDataTable(DataSet ds)
+        private List<ConsImportData> ProceedDataTable(DataSet ds, int typDB=0)
         {
 
             try
@@ -270,6 +270,7 @@ namespace ConsImport
 
                 Func<DataRow, string, string> AttachmentContent = (r, columnName) =>
                 {
+                   log.Debug("Pobieranie zawartości załącznika z kolumny " + columnName + "typ bazy =" + typDB.ToString());
                     if (!HasColumn(r, columnName))
                         return String.Empty;
 
@@ -284,7 +285,16 @@ namespace ConsImport
 
                         try
                         {
-                            return ToBase64(Utils.DecompressMsWord(raw));
+                            
+                            if (typDB == 0) // currenda
+                            {
+                                return ToBase64(Utils.DecompressMsWord(raw));
+                            }
+                            if (typDB == 1) // zeto
+                            {
+                                log.Debug("ZETO - zwracam base64 z raw");
+                                return ToBase64(raw);
+                            }   
                         }
                         catch
                         {
@@ -381,7 +391,7 @@ namespace ConsImport
                         default: return value.ToUpper();
                     }
                 };
-
+                log.Debug("Rozpoczynam przetwarzanie danych z DataSetu, typ bazy danych:   "+typDB.ToString());
                 using (RupDBEntities context = new RupDBEntities())
                 {
                     var groups = mainTable.AsEnumerable()
@@ -424,7 +434,11 @@ namespace ConsImport
                             if (orzeczenieRow != null)
                             {
                                 log.Debug("Są orzeczenia");
-                                string mswordBase64 = ToBase64(Utils.DecompressMsWord((byte[])orzeczenieRow["msword"]));
+                                string mswordBase64 = string.Empty;
+                                if (typDB==0) // currenda
+                                    mswordBase64 = ToBase64(Utils.DecompressMsWord((byte[])orzeczenieRow["msword"]));
+                                else if (typDB==1) // zeto    
+                                    mswordBase64 = ToBase64((byte[])orzeczenieRow["msword"]);
 
                                 if (!String.IsNullOrWhiteSpace(mswordBase64))
                                 {
@@ -618,7 +632,7 @@ namespace ConsImport
                       }
                   };
                         }
-                        var polaKonfigurowalne = BuildPolaKonfigurowalne(row, 10);
+                        var polaKonfigurowalne = BuildPolaKonfigurowalne(row, 20);
 
                         var dodatkoweZdarzenia = new List<PozycjaDaneZdarzenia>();
 
@@ -644,7 +658,7 @@ namespace ConsImport
                                         ListaDaneFinansowe = new PozycjaDaneFinansowe[0],
                                         ListaPlanRatalny = new PozycjaPlanRatalny[0],
                                         ListaParametryRat = new PozycjaParametryRat[0],
-                                        ListaPolaKonfigurowalne = BuildPolaKonfigurowalne(z, 14)
+                                        ListaPolaKonfigurowalne = BuildPolaKonfigurowalne(z, 20)
                                     };
                                 })
                                 .ToList();
@@ -657,9 +671,12 @@ namespace ConsImport
                             DaneDziennika = new DaneDziennika
                             {
                                 JednostkaGospodarcza = S(row, "DaneSygnaturyAktJednostkaGospodarcza"),
-                                StanowiskoFinansowe = S(row, "DaneSygnaturyAktStanowiskoFinansowe"),
+                                StanowiskoFinansowe = !String.IsNullOrWhiteSpace(S(row, "DaneKartyDluznikaJednostkaGospodarcza"))
+                                    ? S(row, "DaneKartyDluznikaJednostkaGospodarcza")
+                                    : S(row, "DaneSygnaturyAktJednostkaGospodarcza"),
                                 NumerWydzialuISekcji = S(row, "NumerWydzialuISekcji"),
-                                Repertorium = S(row, "Repertorium")
+                                Repertorium = S(row, "Repertorium"),
+                                
                             },
 
                             ListaDanePartneraBiznesowego = new[] { partner },

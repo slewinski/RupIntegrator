@@ -2554,7 +2554,7 @@ Kwota
                             }
                             else if (knsks.czyFPP == 4) // nawiązka na rzecz Skarbu Państwa
                             {
-                                doc.OperacjaCzesciowa = "0140"; 
+                                doc.OperacjaCzesciowa = "0150"; 
 
                             }
                             else
@@ -2780,7 +2780,7 @@ Kwota
                 WalidSaldo walsalk = new WalidSaldo();
                 walsalk.Klucz =  myId;
                 walsalk.KsiegaOpis = d.SAPDocId;
-                walsalk.KartaDl = d.Sprawa.Karta;
+                walsalk.KartaDl =  RemoveLeadingZerosAndTrim(d.Sprawa.Karta);
                 walsalk.Dluznik = d.Dluznik.Imie + " " + d.Dluznik.Nazwisko;
                 walsalk.Kwota  = d.kwota;
                 walsalk.OpCzesc = d.OperacjaCzesciowa;
@@ -2990,7 +2990,7 @@ Kwota
                         field = "Ksiega";
                         walsalk.Ksiega =  walsal.Ksiega = Convert.ToInt32(dtr["Ksiega"] == DBNull.Value ? 0 : dtr["Ksiega"]);
                         walsalk.KartaDl =  walsal.KartaDl = dtr["Oznaczenie konta umowy"].ToString().Trim();  // karta dłużnika
-
+                        walsalk.KartaDl = RemoveLeadingZerosAndTrim(walsalk.KartaDl);
 
                         knsks = Context.KnsKsiegi.Where(a => a.Id_Ksiegi == walsal.Ksiega).SingleOrDefault<KnsKsiegi>();
                         walsalk.KsiegaOpis = walsal.KsiegaOpis = knsks.nazwa;
@@ -3737,7 +3737,7 @@ Kwota
                                 else if (knsks.czyFPP == 2)
                                     doc.OperacjaCzesciowa = "0001";
                                 else if (knsks.czyFPP == 4)
-                                    doc.OperacjaCzesciowa = "0140";
+                                    doc.OperacjaCzesciowa = "0150";
                                 else
                                     switch (spr.SAPRodzajPrzedmiotuUmowy)
                                     {
@@ -6098,7 +6098,7 @@ Kwota
                             else if (ksiega.czyFPP == 4)
                             {
                                 doc.OperacjaGlowna = "N020";
-                                doc.OperacjaCzesciowa = "0140";
+                                doc.OperacjaCzesciowa = "0150";
                             }
                             else
                                 if (dtr["zrodlo"].ToString() == "przedawnienie")
@@ -6223,7 +6223,7 @@ Kwota
                             if (ksiega.czyFPP == 1)
                                 doc.OperacjaCzesciowa = (Konfig.typKns == 2) ? "0020" : "0021";
                             if (ksiega.czyFPP == 4)
-                                doc.OperacjaCzesciowa = "0140";
+                                doc.OperacjaCzesciowa = "0150";
                             doc.kwota = Convert.ToDecimal(dtr["grzywna_odpis"].ToString().Replace(".", ","), CultureInfo.GetCultureInfo("pl-PL"));
                             doc2Hash += doc.kwota.ToString();
                             doc.typFakt = "GO";
@@ -7303,6 +7303,15 @@ Kwota
 
 
 
+        }
+        private  string RemoveLeadingZerosAndTrim(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return null;
+
+            string trimmed = value.Trim();
+            string withoutZeros = trimmed.TrimStart('0');
+            return string.IsNullOrEmpty(withoutZeros) ? null : withoutZeros;
         }
     }
 }

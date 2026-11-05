@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace KnsMigrator
@@ -14,7 +15,7 @@ namespace KnsMigrator
         [STAThread]
         static void Main( string[] args)
         {
-            log.Info("App started");
+            log.Info("Uruchomiono aplikację KNS Migrator wersja" + Assembly.GetExecutingAssembly().GetName().Version.ToString());
             if (args.GetLength(0) > 0)
             {
 

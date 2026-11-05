@@ -219,6 +219,7 @@ namespace KnsMigrator
 
                                 kartadl = reader["Oznaczenie konta umowy"].ToString();
                                 if (String.IsNullOrWhiteSpace(kartadl)) continue;  // pomijamy puste karty dłużnika
+                                kartadl = RemoveLeadingZerosAndTrim(kartadl);
                                 dksiegowania = Convert.ToDateTime(reader["Data księgowania"]);
                                 dksiegowania = dksiegowania.Date;
                                 Decimal kwota = reader["Kwota transakcji"] as decimal? ?? default(decimal);
@@ -342,6 +343,8 @@ namespace KnsMigrator
                                 //if (!String.IsNullOrWhiteSpace(dokRozlicz)) continue;  // pomijamy części rozliczone
                                 kartadl = reader["Oznaczenie konta umowy"].ToString();
                                 if (String.IsNullOrWhiteSpace(kartadl)) continue;  // pomijamy puste karty dłużnika
+                                kartadl = RemoveLeadingZerosAndTrim(kartadl);
+
                                 dksiegowania = Convert.ToDateTime(reader["Data księgowania"]);
                                 dksiegowania = dksiegowania.Date;
                                 Decimal kwota = reader["Kwota transakcji"] as decimal? ?? default(decimal);
@@ -443,7 +446,15 @@ namespace KnsMigrator
             }
         }
 
+        private string RemoveLeadingZerosAndTrim(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return null;
 
+            string trimmed = value.Trim();
+            string withoutZeros = trimmed.TrimStart('0');
+            return string.IsNullOrEmpty(withoutZeros) ? null : withoutZeros;
+        }
 
     }
 }
