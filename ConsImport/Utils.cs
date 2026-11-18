@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -69,6 +70,38 @@ namespace ConsImport
             using (StringReader reader = new StringReader(xml))
             {
                 return (T)serializer.Deserialize(reader);
+            }
+        }
+
+        internal static byte[] CreateZipArchive(IEnumerable<KeyValuePair<string, byte[]>> documents)
+        {
+            using (var outputStream = new MemoryStream())
+            {
+                using (var zipStream = new ZipOutputStream(outputStream) { IsStreamOwner = false })
+                {
+                    var usedNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    foreach (var document in documents)
+                    {
+                        string entryName = document.Key;
+                        string nameWithoutExtension = Path.GetFileNameWithoutExtension(entryName);
+                        string extension = Path.GetExtension(entryName);
+                        int suffix = 2;
+                        while (!usedNames.Add(entryName))
+                        {
+                            entryName = nameWithoutExtension + "_" + suffix++ + extension;
+                        }
+
+                        zipStream.PutNextEntry(new ZipEntry(entryName)
+                        {
+                            IsUnicodeText = true,
+                            Size = document.Value.Length
+                        });
+                        zipStream.Write(document.Value, 0, document.Value.Length);
+                        zipStream.CloseEntry();
+                    }
+                }
+
+                return outputStream.ToArray();
             }
         }
 

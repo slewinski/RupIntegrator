@@ -411,16 +411,16 @@ namespace ConsImport
 
                         log.Debug("Dla kolejnych grup id sprawy "+ idSprawy.ToString() + ", id_strony " + idStrony.ToString());
 
-                        DataRow orzeczenieRow = null;
+                        var orzeczeniaRows = new List<DataRow>();
 
                         if (orzeczeniaTable != null)
                         {
-                            orzeczenieRow = orzeczeniaTable.AsEnumerable()
+                            orzeczeniaRows = orzeczeniaTable.AsEnumerable()
                                 .Where(o =>
                                     (!HasColumn(o, "id_sprawy") || I(o, "id_sprawy") == idSprawy) &&
                                     (!HasColumn(o, "id_strony") || I(o, "id_strony") == idStrony))
                                 .OrderByDescending(o => HasColumn(o, "d_orzecz") ? Convert.ToDateTime(o["d_orzecz"]) : DateTime.MinValue)
-                                .FirstOrDefault();
+                                .ToList();
 
                         }
                         else
@@ -431,23 +431,44 @@ namespace ConsImport
                         string zalacznikNazwa = S(row, "ZalacznikNazwa");
                         string zalacznikZawartosc = S(row, "ZalacznikZawartosc");
 
-                            if (orzeczenieRow != null)
+                        var dokumenty = new List<KeyValuePair<string, byte[]>>();
+                        foreach (DataRow orzeczenieRow in orzeczeniaRows)
+                        {
+                            if (!HasColumn(orzeczenieRow, "msword"))
                             {
-                                log.Debug("Są orzeczenia");
-                                string mswordBase64 = string.Empty;
-                                if (typDB==0) // currenda
-                                    mswordBase64 = ToBase64(Utils.DecompressMsWord((byte[])orzeczenieRow["msword"]));
-                                else if (typDB==1) // zeto    
-                                    mswordBase64 = ToBase64((byte[])orzeczenieRow["msword"]);
-
-                                if (!String.IsNullOrWhiteSpace(mswordBase64))
-                                {
-                                    zalacznikZawartosc = mswordBase64;
-                                    zalacznikNazwa = SafeAttachmentName(S(orzeczenieRow, "nazwa"));
-                                }
+                                log.Debug("Pomijam orzeczenie bez dokumentu msword");
+                                continue;
                             }
-                            else
-                                log.Debug("Brak orzeczeń do importu");
+
+                            byte[] content = null;
+                            if (typDB == 0) // currenda
+                                content = Utils.DecompressMsWord((byte[])orzeczenieRow["msword"]);
+                            else if (typDB == 1) // zeto
+                                content = (byte[])orzeczenieRow["msword"];
+
+                            if (content != null && content.Length > 0)
+                            {
+                                dokumenty.Add(new KeyValuePair<string, byte[]>(
+                                    SafeAttachmentName(S(orzeczenieRow, "nazwa")), content));
+                            }
+                        }
+
+                        if (dokumenty.Count == 1)
+                        {
+                            zalacznikNazwa = dokumenty[0].Key;
+                            zalacznikZawartosc = ToBase64(dokumenty[0].Value);
+                        }
+                        else if (dokumenty.Count > 1)
+                        {
+                            // Wymagany jest format ZIP, mimo rozszerzenia .gzip.
+                            zalacznikNazwa = String.Format("orzeczenia_{0}_{1}.gzip", idSprawy, idStrony);
+                            zalacznikZawartosc = ToBase64(Utils.CreateZipArchive(dokumenty));
+                            log.Debug("Spakowano orzeczenia do załącznika " + zalacznikNazwa + ": " + dokumenty.Count);
+                        }
+                        else
+                        {
+                            log.Debug("Brak dokumentów orzeczeń do importu");
+                        }
 
 
                         log.Debug("Sprawdzenie czy już taka karta była - kolumna ststus - tabela ConsKartaTransfer");
